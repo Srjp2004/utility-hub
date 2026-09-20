@@ -84,3 +84,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Preserved existing zero-denominator and domain validation behavior while making invalid browser/form values fail with a clear message instead of producing `NaN`/`Infinity` output.
 - Fresh source verification after the change: 39 functions, no duplicate function names, balanced braces, 2 object-URL creations with 2 corresponding revocations, and targeted finite-input guards present.
 - Browser-level execution remains pending.
+
+## 2026-09 - Functional audit: date, time and financial review
+- Re-fetched the shared calculator source and reviewed the remaining Priority 1 date/time and financial paths after the earlier validation hardening.
+- Confirmed finite-input checks are present for Discount, Interest, Compound Interest, Loan Payment, Tip & Bill Split, Date of Birth, Time Duration and Business Days calculations.
+- Confirmed Date of Birth, Date Difference and Business Days reject invalid parsed dates before calculation.
+- No additional source mutation was made in this bounded review because the inspected paths already contained the required guards.
+- Browser-level execution remains pending.
