@@ -83,3 +83,6 @@ Consider React/Next.js, backend services, database, authentication or APIs only 
 
 
 - Image-processing validation is intentionally bounded at the browser boundary: file size and output dimensions are checked before canvas allocation, and computed dimensions must be safe integers.
+
+
+- Browser image tools enforce both input file-size and decoded-dimension limits before canvas allocation; output format/quality inputs are allowlisted or range-checked.
