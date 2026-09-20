@@ -39,3 +39,16 @@ test("tool directory links resolve and directory SEO metadata is present", () =>
   assert.match(toolsPage, /<meta name="robots" content="index,follow"/, "tools.html must be indexable");
   assert.match(toolsPage, /<link rel="canonical" href="\/tools\.html">/, "tools.html must have a canonical");
 });
+
+
+test("homepage popular tool links resolve and avoid modal-only navigation", () => {
+  const home = fs.readFileSync("index.html", "utf8");
+  const toolsDir = path.join(process.cwd(), "tools");
+  const pages = new Set(fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html")));
+  const hrefs = [...home.matchAll(/href="(tools\/[^"]+\.html)"/g)].map((m) => m[1].slice("tools/".length));
+  assert.ok(hrefs.length >= 10, "homepage should expose crawlable popular tool links");
+  for (const page of hrefs) {
+    assert.ok(pages.has(page), "index.html links to missing tool page: " + page);
+  }
+  assert.doesNotMatch(home, /onclick="tool\('(convert|tip|bmi|date)'\)"/, "popular tools should navigate to dedicated pages");
+});
