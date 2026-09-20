@@ -1,3 +1,5 @@
+- Hardened image compression/conversion with validated quality, allowed output MIME types, and 1-16384 pixel dimension limits before canvas allocation.
+- Hardened Unix timestamp conversion by requiring safe integer timestamps and safe millisecond conversion before creating Date objects.
 # UtilityHub Changelog
 
 ## 2026-09-20
