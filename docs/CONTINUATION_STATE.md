@@ -160,3 +160,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - GitHub Actions run `35522798239` passed after the renderer-key assertion fix.
 - Node 22.x: success. Node 20.x: success. The full `node --test tests/*.test.js` suite now passes in CI.
 - The integration suite successfully validates all 27 tool pages plus the behavioral regression suite.
+
+### 2026-09-20 - Security header hardening
+- Audited `tool-pages.js` for common browser-side injection and unsafe execution primitives. No `eval`, `new Function`, `document.write`, `fetch`, `localStorage`, `sessionStorage`, or `Math.random` usage was found. Image processing uses browser-local Blob/object-URL flows, and password/random-number generation uses Web Crypto APIs.
+- Added deployment-level `Content-Security-Policy` and `Cross-Origin-Opener-Policy: same-origin` in `vercel.json`, while retaining existing MIME-sniffing, framing, referrer, and permissions policies.
+- CSP intentionally allows inline scripts/styles because the current app uses inline event handlers; it blocks plugin/object content, cross-origin connections, framing, and non-self script/style origins. Image `blob:` support is retained for local image processing.
+- Security header commit: `aa02494bbef8be415df2f1dd21d54ec90703db32`.
+- Fresh source re-fetch confirmed the deployed configuration file contains the intended headers. Runtime header verification will follow against the production URL once its canonical domain is established.
