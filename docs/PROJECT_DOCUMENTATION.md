@@ -75,3 +75,6 @@ Do not add paid AI APIs merely for appearance, mass-produce thin SEO pages, clai
 
 ## Future architecture triggers
 Consider React/Next.js, backend services, database, authentication or APIs only when requirements such as saved history, subscriptions, server-side processing, usage limits, teams, external APIs or advanced personalization justify them.
+
+## Cross-chat continuity
+`docs/CONTINUATION_STATE.md` is the durable handoff anchor for future chats and context limits. It records the current architecture, completed milestones, known limitations, engineering workflow and prioritized next work. Future UtilityHub sessions should re-fetch this file from `main` before continuing and should verify the live repository state rather than relying on stale chat context.
