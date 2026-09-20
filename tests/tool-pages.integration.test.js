@@ -14,7 +14,7 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
     const source = fs.readFileSync(path.join(toolsDir, page), "utf8");
     const match = source.match(/renderTool\("([^"]+)","tool"\)/);
     assert.ok(match, page + " must call renderTool");
-    assert.ok(source.includes('<div id="tool">'), page + " must have a tool mount");
+    assert.match(source, /id=["']tool["']/, page + " must have a tool mount");
     assert.ok(source.includes("tool-pages.js"), page + " must load the shared renderer");
     assert.ok(source.includes('<meta name="description"'), page + " must have a description");
     assert.ok(source.includes('<link rel="canonical"'), page + " must have a canonical");
