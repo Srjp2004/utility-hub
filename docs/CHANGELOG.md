@@ -72,3 +72,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Hardened Random Number and Aspect Ratio inputs to require safe integers.
 - Added a secure-randomness availability check to Password Generator and removed modulo bias from password character selection using rejection sampling.
 - Fresh source verification passed for the targeted functions, duplicate function detection and brace balance. Real browser execution remains pending.
+
+## 2026-09 - Tool directory integration repair
+- Re-fetched the current main branch during continuation and found the four newest tool cards had drifted back into the "Start with a task" section instead of the main searchable tool grid.
+- Moved those four cards back into the single `toolGrid` container so directory search and filtering cover all 27 published tools consistently.
+- Fresh source verification: 27 tool-card links, exactly one `toolGrid`, no `toolGridMore` wrapper, and the newest four cards are inside the main grid.
+- Browser-level QA remains pending.
