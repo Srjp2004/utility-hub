@@ -29,4 +29,19 @@
   <url><loc>/tools/password-generator.html</loc></url>
   <url><loc>/tools/time-duration-calculator.html</loc></url>
   <url><loc>/tools/business-days-calculator.html</loc></url>
+  <url>
+    <loc>/guides/percentage-calculator-guide.html</loc>
+  </url>
+  <url>
+    <loc>/guides/discount-calculator-guide.html</loc>
+  </url>
+  <url>
+    <loc>/guides/loan-payment-guide.html</loc>
+  </url>
+  <url>
+    <loc>/guides/image-compression-guide.html</loc>
+  </url>
+  <url>
+    <loc>/guides/json-formatting-guide.html</loc>
+  </url>
 </urlset>
