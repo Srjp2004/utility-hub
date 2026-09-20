@@ -86,3 +86,5 @@ Consider React/Next.js, backend services, database, authentication or APIs only 
 
 
 - Browser image tools enforce both input file-size and decoded-dimension limits before canvas allocation; output format/quality inputs are allowlisted or range-checked.
+
+- Automated verification: `.github/workflows/test.yml` runs the existing Node regression suite on main pushes and pull requests using Node 20.x and 22.x. This is a verification mechanism, not evidence that a workflow run has already passed.
