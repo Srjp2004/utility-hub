@@ -155,3 +155,8 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - This was a test-harness brittleness issue, not a production defect. Updated the integration assertion to accept either single or double quotes around the `tool` id.
 - Fix commit: `ff4c72080db0acf160661c82f9f52b89236acd80`.
 - New CI verification is required before proceeding.
+
+### 2026-09-20 - Integration suite verified green
+- GitHub Actions run `35522798239` passed after the renderer-key assertion fix.
+- Node 22.x: success. Node 20.x: success. The full `node --test tests/*.test.js` suite now passes in CI.
+- The integration suite successfully validates all 27 tool pages plus the behavioral regression suite.
