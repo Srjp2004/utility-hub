@@ -122,3 +122,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Removed stale duplicate renderer views for Random Number, Aspect Ratio, Unix Timestamp and Base64 tools so each tool type has one active view definition.
 - Extended the Unix Timestamp Converter with explicit Seconds, Milliseconds and Auto-detect input modes. The converter still rejects non-finite values and unsupported date ranges.
 - Re-fetched `tool-pages.js` after the change and verified the active renderer map contains the 27 expected tool types, with no duplicate function declarations.
+
+## 2026-09-20
+- Hardened the Random Number Generator range arithmetic against JavaScript Number precision issues at large safe-integer bounds.
+- The generator now performs range and rejection-sampling arithmetic with `BigInt` while retaining safe-integer input validation and the Web Crypto source.
+- Fresh source verification confirmed safe-integer guards, BigInt range arithmetic, rejection sampling, Web Crypto availability checks, and absence of `Math.random()` in the generator.
