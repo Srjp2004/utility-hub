@@ -184,3 +184,14 @@ test("break-even rejects negative cost inputs", () => {
   context.calcBreakEven();
   assert.equal(elements.result.textContent, "Enter valid costs. Selling price must be greater than variable cost.");
 });
+
+
+test("timestamp converter provides and uses an explicit input unit", () => {
+  const { context, elements } = loadTools({ ts: "1750000000", tsUnit: "seconds", result: "" });
+  context.timestampToDate();
+  assert.match(elements.result.textContent, /^2025-/);
+  elements.ts.value = "1750000000000";
+  elements.tsUnit.value = "milliseconds";
+  context.timestampToDate();
+  assert.match(elements.result.textContent, /^2025-/);
+});
