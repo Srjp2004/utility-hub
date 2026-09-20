@@ -1,0 +1,75 @@
+const test = require("node:test");
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const vm = require("node:vm");
+
+function loadTools(values) {
+  const elements = Object.fromEntries(Object.entries(values).map(([id, value]) => [id, { value, innerHTML: "", textContent: "" }]));
+  const context = { document: { getElementById: (id) => elements[id] }, console, Number, Math, Date, setTimeout, clearTimeout };
+  vm.createContext(context);
+  const source = fs.readFileSync("tool-pages.js", "utf8");
+  vm.runInContext(source, context, { filename: "tool-pages.js" });
+  return { context, elements };
+}
+
+test("percentage calculator handles normal input", () => {
+  const { context, elements } = loadTools({ part: "25", whole: "200", result: "" });
+  context.calcPercentage();
+  assert.match(elements.result.innerHTML, /12\.50%/);
+});
+
+test("percentage calculator rejects zero total", () => {
+  const { context, elements } = loadTools({ part: "25", whole: "0", result: "" });
+  context.calcPercentage();
+  assert.equal(elements.result.textContent, "Enter a valid total.");
+});
+
+test("discount calculator calculates sale price", () => {
+  const { context, elements } = loadTools({ price: "100", disc: "20", result: "" });
+  context.calcDiscount();
+  assert.match(elements.result.innerHTML, /80\.00/);
+  assert.match(elements.result.innerHTML, /20\.00/);
+});
+
+test("loan calculator handles zero interest", () => {
+  const { context, elements } = loadTools({ loanAmount: "1200", loanRate: "0", loanMonths: "12", result: "" });
+  context.calcLoan();
+  assert.match(elements.result.innerHTML, /100\.00 \/ month/);
+});
+
+test("compound interest calculates final balance", () => {
+  const { context, elements } = loadTools({ cp: "1000", cr: "12", cy: "1", cm: "12", result: "" });
+  context.calcCompound();
+  assert.match(elements.result.innerHTML, /Final balance: 1126\.83/);
+});
+
+test("break-even rejects non-positive contribution margin", () => {
+  const { context, elements } = loadTools({ fixed: "5000", sell: "30", variable: "30", result: "" });
+  context.calcBreakEven();
+  assert.equal(elements.result.textContent, "Selling price must be greater than variable cost.");
+});
+
+test("ROI handles a loss", () => {
+  const { context, elements } = loadTools({ inv: "1000", ret: "750", result: "" });
+  context.calcRoi();
+  assert.match(elements.result.innerHTML, /ROI: -25\.00%/);
+});
+
+test("text counter handles empty text", () => {
+  const { context, elements } = loadTools({ tc: "", result: "" });
+  context.calcText();
+  assert.match(elements.result.innerHTML, /0 words/);
+  assert.match(elements.result.innerHTML, /0 characters/);
+});
+
+test("unit converter converts kilometers to miles", () => {
+  const { context, elements } = loadTools({ uv: "1", uf: "km", ut: "mi", result: "" });
+  context.calcConvert();
+  assert.match(elements.result.innerHTML, /0\.6214/);
+});
+
+test("invalid JSON is reported instead of throwing", () => {
+  const { context, elements } = loadTools({ jsonInput: "{bad", result: "" });
+  context.formatJson();
+  assert.match(elements.result.textContent, /^Invalid JSON:/);
+});
