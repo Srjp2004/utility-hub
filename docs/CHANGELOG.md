@@ -91,3 +91,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Confirmed Date of Birth, Date Difference and Business Days reject invalid parsed dates before calculation.
 - No additional source mutation was made in this bounded review because the inspected paths already contained the required guards.
 - Browser-level execution remains pending.
+
+## 2026-09 - Functional audit: remaining date/time and discount guards
+- Re-checked the live `main` source and hardened Discount against non-finite numeric input.
+- Added invalid-date rejection to Age and Business Days calculations before date arithmetic.
+- Added explicit range/finite validation to Time Duration inputs before overnight-duration calculation.
+- Fresh re-fetch verification: 39 functions, zero duplicate function names, balanced braces, 2 object-URL creations with 2 corresponding revocations, and all targeted guards present.
+- Browser-level execution remains pending.
