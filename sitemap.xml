@@ -1,1 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>/</loc></url><url><loc>/about.html</loc></url><url><loc>/privacy.html</loc></url><url><loc>/terms.html</loc></url><url><loc>/contact.html</loc></url></urlset>
+<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>/</loc></url><url><loc>/about.html</loc></url><url><loc>/privacy.html</loc></url><url><loc>/terms.html</loc></url><url><loc>/contact.html</loc></url><url><loc>/tools.html</loc></url>
+<url><loc>/tools/percentage-calculator.html</loc></url>
+<url><loc>/tools/discount-calculator.html</loc></url>
+<url><loc>/tools/percentage-change-calculator.html</loc></url>
+<url><loc>/tools/loan-payment-calculator.html</loc></url>
+<url><loc>/tools/interest-calculator.html</loc></url>
+<url><loc>/tools/age-calculator.html</loc></url>
+</urlset>
