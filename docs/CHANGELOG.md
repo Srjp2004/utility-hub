@@ -1,3 +1,4 @@
+- Caught and corrected a syntax regression in the image converter declaration (`async async function`); immediate re-fetch confirmed the corrected declaration and absence of the duplicate token.
 - Added GitHub Actions regression workflow for Node 20.x and 22.x so `npm test` runs automatically on main pushes and pull requests.
 - Hardened image compression/conversion with validated quality, allowed output MIME types, and 1-16384 pixel dimension limits before canvas allocation.
 - Hardened Unix timestamp conversion by requiring safe integer timestamps and safe millisecond conversion before creating Date objects.
