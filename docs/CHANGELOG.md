@@ -78,3 +78,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Moved those four cards back into the single `toolGrid` container so directory search and filtering cover all 27 published tools consistently.
 - Fresh source verification: 27 tool-card links, exactly one `toolGrid`, no `toolGridMore` wrapper, and the newest four cards are inside the main grid.
 - Browser-level QA remains pending.
+
+## 2026-09 - Functional audit: finite-input hardening
+- Hardened Percentage, BMI, Date Difference, Profit Margin, ROI and Break-Even calculators against non-finite numeric input before calculations.
+- Preserved existing zero-denominator and domain validation behavior while making invalid browser/form values fail with a clear message instead of producing `NaN`/`Infinity` output.
+- Fresh source verification after the change: 39 functions, no duplicate function names, balanced braces, 2 object-URL creations with 2 corresponding revocations, and targeted finite-input guards present.
+- Browser-level execution remains pending.
