@@ -20,6 +20,7 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
     assert.ok(source.includes('<link rel="canonical"'), page + " must have a canonical");
     assert.ok(source.includes('<meta name="robots" content="index,follow"'), page + " must be indexable");
     assert.ok(sitemap.includes("tools/" + page), page + " must be in sitemap.xml");
-    assert.ok(renderer.includes(match[1] + ":"), page + " references an unknown renderer type");
+    const rendererKey = new RegExp("[\\\"\']?" + match[1] + "[\\\"\']?\\s*:");
+    assert.match(renderer, rendererKey, page + " references an unknown renderer type");
   }
 });
