@@ -1,3 +1,8 @@
+## 2026-09-20 - Directory SEO and integration coverage
+- Added indexable robots metadata, canonical metadata and social preview metadata to `tools.html`.
+- Strengthened the page integration test to tolerate normal whitespace in `renderTool(...)` calls.
+- Added regression checks that all directory tool links resolve to published tool pages and that directory SEO metadata remains present.
+
 ## 2026-09-20 - Security header hardening
 - Added CSP and Cross-Origin-Opener-Policy headers to the Vercel deployment configuration.
 - Audited common unsafe browser primitives in `tool-pages.js`; no `eval`, `new Function`, `document.write`, or network/storage APIs were found in the audited source.
