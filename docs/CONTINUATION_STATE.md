@@ -118,6 +118,7 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 ## Last verified state
 - Main branch is the integration target.
 - The 27-tool directory structure was freshly audited after the latest correction.
+- Percentage and Discount arithmetic overflow guards were added with regression tests for extreme finite inputs.
 - Shared tool-pages.js has been source-audited for duplicate functions, renderer dispatch, brace balance and object URL cleanup.
 - Browser-level verification remains outstanding.
 - This document is the durable handoff anchor for future chats.
