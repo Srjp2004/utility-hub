@@ -148,3 +148,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Updated `package.json` test script from the single regression file to `node --test tests/*.test.js`, so CI executes both behavioral regressions and page-level integration checks.
 - Commit sequence: `25dcf025f093361b4c49a10a9c310e6dca465980`, then `2d93323d1407ce974ed0a21cbfc24b2af8524d56`.
 - CI verification is pending for the new integration suite.
+
+### 2026-09-20 - CI failure diagnosis and test correction
+- Verified failed Actions run `35522449784` from its actual job log.
+- The behavioral suite passed 15/15; the new integration suite failed on the first page because the assertion expected one exact quote style for the `tool` mount attribute.
+- This was a test-harness brittleness issue, not a production defect. Updated the integration assertion to accept either single or double quotes around the `tool` id.
+- Fix commit: `ff4c72080db0acf160661c82f9f52b89236acd80`.
+- New CI verification is required before proceeding.
