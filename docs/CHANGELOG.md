@@ -98,3 +98,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Added explicit range/finite validation to Time Duration inputs before overnight-duration calculation.
 - Fresh re-fetch verification: 39 functions, zero duplicate function names, balanced braces, 2 object-URL creations with 2 corresponding revocations, and all targeted guards present.
 - Browser-level execution remains pending.
+
+## 2026-09 - Functional audit: developer utility pages
+- Re-fetched the shared renderer and the dedicated Percentage Change, Unit Converter, JSON Formatter, Password Generator, Random Number, Aspect Ratio, Unix Timestamp and Base64 pages.
+- Confirmed the dedicated pages dispatch to existing shared renderers and the inspected developer utilities contain explicit invalid-input handling where applicable.
+- Corrected one documentation-copy mismatch on the Password Generator page: the page now describes the actual length control rather than claiming selectable character sets that are not exposed by the UI.
+- No calculator logic was changed in this batch because the inspected implementations did not present a sufficiently clear defect requiring mutation.
+- Browser-level execution remains pending.
