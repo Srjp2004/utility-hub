@@ -15,7 +15,7 @@ function calcTip(){const b=n("bill"),t=n("tipRate"),p=n("people");if(b<0||t<0||p
 function calcBmi(){const h=n("cm")/100,w=n("kg");if(h<=0||w<=0){$("result").textContent="Enter positive height and weight.";return}$("result").innerHTML="<strong>"+(w/(h*h)).toFixed(1)+"</strong><br>BMI is a screening measure, not a diagnosis."}
 function calcDate(){const a=$("d1").value,b=$("d2").value;if(!a||!b){$("result").textContent="Enter both dates.";return}const start=new Date(a+"T00:00:00"),end=new Date(b+"T00:00:00");$("result").innerHTML="<strong>"+Math.abs(Math.round((end-start)/86400000))+" days</strong> between the selected dates."}
 
-function calcText(){const s=$("tc").value,words=s.trim()?s.trim().split(/\\s+/).length:0;$("result").innerHTML="<strong>"+words+" words</strong><br>"+s.length+" characters."}
+function calcText(){const s=$("tc").value,words=s.trim()?s.trim().split(/\s+/).length:0;$("result").innerHTML="<strong>"+words+" words</strong><br>"+s.length+" characters."}
 
 function calcCompound(){const p=n("cp"),r=n("cr")/100,y=n("cy"),m=n("cm");if(p<0||r<0||y<0||m<1){$("result").textContent="Enter valid values.";return}const a=p*Math.pow(1+r/m,m*y);$("result").innerHTML="<strong>Final balance: "+a.toFixed(2)+"</strong><br>Interest earned: "+(a-p).toFixed(2)}
 function calcMargin(){const rev=n("rev"),cost=n("cost");if(rev<=0||cost<0){$("result").textContent="Enter valid revenue and cost.";return}const profit=rev-cost;$("result").innerHTML="<strong>Profit: "+profit.toFixed(2)+"</strong><br>Profit margin: "+(profit/rev*100).toFixed(2)+"%<br>Markup on cost: "+(cost?profit/cost*100:0).toFixed(2)+"%"}
