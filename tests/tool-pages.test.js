@@ -177,3 +177,10 @@ test("profit margin reports undefined markup when cost is zero", () => {
   assert.match(elements.result.innerHTML, /Profit margin: 100\.00%/);
   assert.match(elements.result.innerHTML, /Markup on cost: undefined \(cost is zero\)/);
 });
+
+
+test("break-even rejects negative cost inputs", () => {
+  const { context, elements } = loadTools({ fixed: "5000", sell: "50", variable: "-10", result: "" });
+  context.calcBreakEven();
+  assert.equal(elements.result.textContent, "Enter valid costs. Selling price must be greater than variable cost.");
+});
