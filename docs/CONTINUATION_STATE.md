@@ -142,3 +142,9 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Verified GitHub Actions is executing `.github/workflows/test.yml`: recent run `35521794398` on commit `cc2cfdb...` completed with `failure` on both Node 20.x and 22.x. In each job, checkout and Node setup succeeded, while `Run regression tests` failed immediately. The available connector could not retrieve the job log body, so the exact npm-test error is not yet evidenced.
 
 - CI diagnosis: the Actions jobs fail at `npm test` itself, while checkout and Node setup succeed on both Node 20.x and 22.x. The test script is `node --test tests/tool-pages.test.js`. The connector exposes step-level failure but not the process stderr, so the exact failing assertion/loader error remains unresolved; no blind production patch was made.
+
+### 2026-09-20 - Integration test coverage expansion
+- Added `tests/tool-pages.integration.test.js` to verify the 27 tool pages are wired to the shared renderer, expose their mount point, include indexable metadata, and appear in `sitemap.xml`.
+- Updated `package.json` test script from the single regression file to `node --test tests/*.test.js`, so CI executes both behavioral regressions and page-level integration checks.
+- Commit sequence: `25dcf025f093361b4c49a10a9c310e6dca465980`, then `2d93323d1407ce974ed0a21cbfc24b2af8524d56`.
+- CI verification is pending for the new integration suite.
