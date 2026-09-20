@@ -163,3 +163,6 @@ Complete the remaining full functional audit in bounded batches, test representa
 - This keeps the current frontend stateless and horizontally scalable: requests do not require application servers, sessions, or a shared database.
 ## 2026-09-20
 - Hardened Percentage Change, Profit Margin, ROI, and Break-Even calculations against non-finite intermediate and final arithmetic results for extreme numeric inputs.
+## 2026-09-20
+- Repaired stale regression expectations in `tests/tool-pages.test.js` so they match the current calculator error contracts.
+- Added regression coverage for zero-original Percentage Change, inclusive weekday counting, and Unicode-safe Base64 round trips.
