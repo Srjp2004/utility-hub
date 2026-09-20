@@ -52,3 +52,7 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Audited the searchable tool directory structure after the 27-tool expansion.
 - Fixed the secondary tool-group wrapper so all tool cards live under the single `toolGrid` container used by search and category filtering.
 - Verified from the integrated GitHub state that the directory contains 27 tool cards, exactly one `toolGrid` container, and no `toolGridMore` wrapper.
+## 2026-09 - Functional audit: word counter repair
+- Completed source-level runtime wiring coverage for all 27 tool pages; each page's `renderTool(...)` type matches a registered shared renderer.
+- Found and repaired the Word & Character Counter whitespace regex so normal whitespace-separated text is counted correctly.
+- Verification remains source-level; real browser interaction and download behavior still require browser testing.
