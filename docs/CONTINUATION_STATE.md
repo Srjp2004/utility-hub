@@ -160,6 +160,11 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Node 22.x: success. Node 20.x: success. The full `node --test tests/*.test.js` suite now passes in CI.
 - The integration suite successfully validates all 27 tool pages plus the behavioral regression suite.
 
+### 2026-09-20 - Image resizer output consistency
+- Fixed the image-resizer download filename so it matches the encoded output format.
+- Added regression coverage for the MIME/extension mapping.
+- GitHub Actions run `35523720087` passed after the change.
+
 ### 2026-09-20 - Homepage navigation hardening
 - Replaced four homepage modal-only tool actions with direct dedicated-page links.
 - Added integration coverage for homepage link resolution and navigation behavior.
