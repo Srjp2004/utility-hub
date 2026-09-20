@@ -129,3 +129,7 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Image Resize hardening now requires the computed output height to be a safe integer before canvas allocation.
 
 - Image Compressor/Converter now validate decoded dimensions before canvas allocation; compressor quality and converter output MIME type are validated; Unix timestamp conversion rejects unsafe numeric values before Date construction.
+
+- Sitemap coverage was checked against the current 27-tool inventory; the four newest developer/utility pages (Random Number, Aspect Ratio, Unix Timestamp, Base64) are explicitly included.
+
+- Revenue architecture requirement: keep the core browser tools free while reserving non-blocking monetization surfaces for a measured rollout (ads, affiliate links, sponsored placements, premium utility packs/API). Monetization must not require uploading private local files or degrade core tool performance.
