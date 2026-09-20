@@ -10,3 +10,5 @@
 .link-card{text-decoration:none;color:inherit}
 .secondary{margin-left:8px}
 @media(max-width:600px){.tool-page{padding-top:45px}.tool-panel{padding:20px}.secondary{margin-left:0;margin-top:10px;display:inline-block}}
+
+.tool-search{max-width:680px;margin:22px auto 6px}.tool-search label{display:block;font-weight:650;margin-bottom:7px}.tool-search input{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#fff;font:inherit}.grid .card[hidden]{display:none}
