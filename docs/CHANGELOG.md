@@ -1,5 +1,11 @@
 # UtilityHub Changelog
 
+## 2026-09-20
+- Continued the verification-harness audit and found stale test assumptions in `tests/tool-pages.test.js`: Percentage Change expected an obsolete error string and the Loan test expected the older output wording.
+- Updated the Node VM test context to provide the standard Web APIs used by the Base64 implementation (`TextEncoder`, `TextDecoder`, `btoa`, and `atob`) instead of treating those browser APIs as missing application behavior.
+- Aligned the affected regression expectations with the current production contracts without changing production code.
+- Runtime execution of the full suite remains unverified in the available GitHub environment.
+
 This file records major implementation steps so future work can continue from documented state.
 
 ## 2026-09-20
