@@ -12,7 +12,7 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
 
   for (const page of pages) {
     const source = fs.readFileSync(path.join(toolsDir, page), "utf8");
-    const match = source.match(/renderTool\("([^"]+)","tool"\)/);
+    const match = source.match(/renderTool\(\s*"([^"]+)"\s*,\s*"tool"\s*\)/);
     assert.ok(match, page + " must call renderTool");
     assert.match(source, /id=["']tool["']/, page + " must have a tool mount");
     assert.ok(source.includes("tool-pages.js"), page + " must load the shared renderer");
@@ -23,4 +23,19 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
     const rendererKey = new RegExp("[\\\"\']?" + match[1] + "[\\\"\']?\\s*:");
     assert.match(renderer, rendererKey, page + " references an unknown renderer type");
   }
+});
+
+
+test("tool directory links resolve and directory SEO metadata is present", () => {
+  const toolsPage = fs.readFileSync("tools.html", "utf8");
+  const toolsDir = path.join(process.cwd(), "tools");
+  const pages = new Set(fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html")));
+  const links = [...toolsPage.matchAll(/href="(tools\/[^"]+\.html)"/g)].map((m) => m[1].slice("tools/".length));
+
+  assert.equal(new Set(links).size, links.length, "tools.html must not contain duplicate tool links");
+  for (const page of links) {
+    assert.ok(pages.has(page), "tools.html links to missing tool page: " + page);
+  }
+  assert.match(toolsPage, /<meta name="robots" content="index,follow"/, "tools.html must be indexable");
+  assert.match(toolsPage, /<link rel="canonical" href="\/tools\.html">/, "tools.html must have a canonical");
 });
