@@ -56,3 +56,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Completed source-level runtime wiring coverage for all 27 tool pages; each page's `renderTool(...)` type matches a registered shared renderer.
 - Found and repaired the Word & Character Counter whitespace regex so normal whitespace-separated text is counted correctly.
 - Verification remains source-level; real browser interaction and download behavior still require browser testing.
+
+## 2026-09 - Image utility input-path hardening
+- Hardened the shared image loader to accept a File directly as well as a file-input element.
+- This matches the current image tool callers and avoids relying on a `.files` property when a File object is passed.
+- Verified the updated loader source was written to `main`; browser execution remains pending.
