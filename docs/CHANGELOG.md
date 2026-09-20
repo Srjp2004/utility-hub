@@ -5,6 +5,8 @@ This file records major implementation steps so future work can continue from do
 ## 2026-09-20
 - Hardened Percentage and Discount calculators against arithmetic overflow from otherwise finite extreme inputs. Valid inputs that would produce Infinity now return an explicit reliability message instead of exposing invalid output.
 
+- Hardened Business Days calculation to use bounded week arithmetic instead of iterating every calendar day, preserving inclusive weekday semantics while avoiding unnecessary work on very large date ranges.
+
 
 ## 2026-09 - Product foundation
 - Created UtilityHub as a separate project from MachineMind and LeaseGuard.
