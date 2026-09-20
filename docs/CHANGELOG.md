@@ -1,9 +1,10 @@
 # UtilityHub Changelog
 
+This file records major implementation steps so future work can continue from documented state.
+
 ## 2026-09-20
 - Hardened Percentage and Discount calculators against arithmetic overflow from otherwise finite extreme inputs. Valid inputs that would produce Infinity now return an explicit reliability message instead of exposing invalid output.
 
-This file records major implementation steps so future work can continue from documented state.
 
 ## 2026-09 - Product foundation
 - Created UtilityHub as a separate project from MachineMind and LeaseGuard.
