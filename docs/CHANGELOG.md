@@ -1,3 +1,8 @@
+## 2026-09-20 - Homepage navigation hardening
+- Replaced four modal-only homepage tool actions with direct links to their dedicated pages: Unit Converter, Tip & Bill Split, BMI Calculator, and Date Difference.
+- This improves crawlability, accessibility, shareable URLs, and keeps the homepage aligned with the dedicated tool-page architecture.
+- Added an integration regression check for homepage tool-link resolution and prevention of modal-only navigation for these tools.
+
 ## 2026-09-20 - Directory SEO and integration coverage
 - Added indexable robots metadata, canonical metadata and social preview metadata to `tools.html`.
 - Strengthened the page integration test to tolerate normal whitespace in `renderTool(...)` calls.
