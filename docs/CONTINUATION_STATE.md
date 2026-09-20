@@ -125,3 +125,5 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Business Days calculation was hardened to use bounded week arithmetic while preserving inclusive weekday semantics.
 - Homepage `app.js` calculator path was hardened for finite numeric results, whole-number loan months/people, supported unit validation, and UTC-stable date parsing.
 - This document is the durable handoff anchor for future chats.
+
+- Image Resize hardening now requires the computed output height to be a safe integer before canvas allocation.
