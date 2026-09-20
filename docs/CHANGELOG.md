@@ -47,3 +47,8 @@ If a connector/tool limit prevents a complete audit, remaining checks are record
 
 ## Next milestone
 Complete the remaining full functional audit in bounded batches, test representative tools on real mobile and desktop browsers, improve high-intent tool-page UX/internal linking, establish analytics readiness, prepare legitimate monetization surfaces, then deploy and measure real user behavior.
+
+## 2026-09 - Functional directory audit
+- Audited the searchable tool directory structure after the 27-tool expansion.
+- Fixed the secondary tool-group wrapper so all tool cards live under the single `toolGrid` container used by search and category filtering.
+- Verified from the integrated GitHub state that the directory contains 27 tool cards, exactly one `toolGrid` container, and no `toolGridMore` wrapper.
