@@ -21,7 +21,7 @@ test("percentage calculator handles normal input", () => {
 test("percentage calculator rejects zero total", () => {
   const { context, elements } = loadTools({ part: "25", whole: "0", result: "" });
   context.calcPercentage();
-  assert.equal(elements.result.textContent, "Enter a valid total.");
+  assert.equal(elements.result.textContent, "Total must not be zero.");
 });
 
 test("discount calculator calculates sale price", () => {
@@ -46,7 +46,7 @@ test("compound interest calculates final balance", () => {
 test("break-even rejects non-positive contribution margin", () => {
   const { context, elements } = loadTools({ fixed: "5000", sell: "30", variable: "30", result: "" });
   context.calcBreakEven();
-  assert.equal(elements.result.textContent, "Selling price must be greater than variable cost.");
+  assert.equal(elements.result.textContent, "Enter valid costs. Selling price must be greater than variable cost.");
 });
 
 test("ROI handles a loss", () => {
@@ -72,4 +72,25 @@ test("invalid JSON is reported instead of throwing", () => {
   const { context, elements } = loadTools({ jsonInput: "{bad", result: "" });
   context.formatJson();
   assert.match(elements.result.textContent, /^Invalid JSON:/);
+});
+
+
+test("percentage change rejects zero original value", () => {
+  const { context, elements } = loadTools({ oldv: "0", newv: "10", result: "" });
+  context.calcChange();
+  assert.equal(elements.result.textContent, "Enter valid values. Original value must not be zero.");
+});
+
+test("business days counts weekdays inclusively", () => {
+  const { context, elements } = loadTools({ bdStart: "2026-09-14", bdEnd: "2026-09-18", result: "" });
+  context.calcBusinessDays();
+  assert.match(elements.result.innerHTML, /5 weekdays/);
+});
+
+test("base64 preserves Unicode text", () => {
+  const { context, elements } = loadTools({ b64: "✓ café", result: "" });
+  context.encodeBase64();
+  assert.equal(elements.result.textContent, "4pyTIGNhZsOp");
+  context.decodeBase64();
+  assert.equal(elements.result.textContent, "✓ café");
 });
