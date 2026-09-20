@@ -136,3 +136,7 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Tightened Aspect Ratio Calculator validation so width and height must be positive safe integers rather than silently rounding decimal inputs.
 - Removed unnecessary rounding from the GCD calculation and result, making invalid fractional input explicit instead of silently changing the user's values.
 - Fresh source verification confirmed positive safe-integer validation and direct GCD calculation.
+
+## 2026-09-20
+- Hardened Compound Interest Calculator against numeric overflow: after validating inputs, the calculator now rejects results that exceed JavaScript's finite numeric range instead of formatting `Infinity` as if it were a valid balance.
+- Fresh source verification confirmed finite-input validation, integer compounding frequency validation, the compound-interest formula, and the explicit overflow guard.
