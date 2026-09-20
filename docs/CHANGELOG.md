@@ -1,3 +1,4 @@
+- Verified the new GitHub Actions workflow is actually running. Latest run `35521794398` failed on both Node 20.x and 22.x at `Run regression tests`; checkout and Node setup succeeded. Job-log retrieval is unavailable through the current connector, so the exact npm-test failure remains unresolved.
 - Caught and corrected a syntax regression in the image converter declaration (`async async function`); immediate re-fetch confirmed the corrected declaration and absence of the duplicate token.
 - Added GitHub Actions regression workflow for Node 20.x and 22.x so `npm test` runs automatically on main pushes and pull requests.
 - Hardened image compression/conversion with validated quality, allowed output MIME types, and 1-16384 pixel dimension limits before canvas allocation.
