@@ -161,3 +161,5 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-09-20
 - Added Vercel response headers for a static, CDN-cacheable deployment: security hardening headers plus differentiated caching for immutable-style assets and HTML documents.
 - This keeps the current frontend stateless and horizontally scalable: requests do not require application servers, sessions, or a shared database.
+## 2026-09-20
+- Hardened Percentage Change, Profit Margin, ROI, and Break-Even calculations against non-finite intermediate and final arithmetic results for extreme numeric inputs.
