@@ -6,6 +6,8 @@
 - Aligned the affected regression expectations with the current production contracts without changing production code.
 - Runtime execution of the full suite remains unverified in the available GitHub environment.
 
+
+- Image Resize now rejects a computed output height unless it is a safe integer, preventing unsafe canvas dimension coercion for extreme aspect ratios.
 This file records major implementation steps so future work can continue from documented state.
 
 ## 2026-09-20
