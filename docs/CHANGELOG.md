@@ -153,3 +153,5 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-09-20
 - Fixed the tool-directory category filters so Percentage Change appears under Calculators and Random Number, Aspect Ratio, Unix Timestamp and Base64 appear under Text & developer tools.
 - Fresh source verification confirmed the directory still contains 27 unique tool links and the category-filter term sets now cover all published cards by their intended category.
+## 2026-09-20
+- Hardened Interest, Tip & Bill Split, and BMI calculations against non-finite arithmetic results so extreme numeric inputs return a clear reliability message instead of displaying Infinity/NaN.
