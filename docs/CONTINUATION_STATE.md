@@ -34,9 +34,8 @@ Make UtilityHub fully operational and functional before public launch. This mean
 ## Important known limitations
 1. Real browser/device QA is still pending. GitHub source inspection is not browser testing.
 2. Production domain is not yet known/configured. Never invent one.
-3. No GitHub Actions CI suite currently exists.
-4. Contact/support details must be finalized before public launch.
-5. Privacy/disclosure text must be updated if analytics, ads, affiliate tracking or other third-party services are enabled.
+3. Contact/support details must be finalized before public launch.
+4. Privacy/disclosure text must be updated if analytics, ads, affiliate tracking or other third-party services are enabled.
 
 ## Engineering workflow
 Inspect -> Plan -> Build -> Test -> Re-fetch -> Verify -> Document -> Continue.
@@ -135,7 +134,7 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 
 - Revenue architecture requirement: keep the core browser tools free while reserving non-blocking monetization surfaces for a measured rollout (ads, affiliate links, sponsored placements, premium utility packs/API). Monetization must not require uploading private local files or degrade core tool performance.
 
-- Added `.github/workflows/test.yml` to execute `npm test` automatically on pushes to `main` and pull requests targeting `main`, across Node 20.x and 22.x; workflow creation was re-fetched successfully, but GitHub Actions runtime status remains unverified through the available connector.
+- Added `.github/workflows/test.yml` to execute `npm test` automatically on pushes to `main` and pull requests targeting `main`, across Node 20.x and 22.x; current main runs have been verified green.
 
 - During the image audit, a duplicate `async` token was introduced in the `imageConvert` declaration while applying the hardening patch; this was caught by immediate source re-fetch verification and corrected in commit `cb45a5cd4a096c0a2a4f65d7796ac01ca9868d55`. Re-fetch confirms the declaration is now syntactically shaped as `async function imageConvert` and no `async async` remains.
 
@@ -160,6 +159,11 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - GitHub Actions run `35522798239` passed after the renderer-key assertion fix.
 - Node 22.x: success. Node 20.x: success. The full `node --test tests/*.test.js` suite now passes in CI.
 - The integration suite successfully validates all 27 tool pages plus the behavioral regression suite.
+
+### 2026-09-20 - Directory SEO hardening
+- Added robots, canonical and social preview metadata to `tools.html`.
+- Expanded the integration suite to verify directory links resolve to existing tool pages and tolerate whitespace in `renderTool(...)` markup.
+- Latest pre-change CI run `35522984204` passed on Node 20.x and Node 22.x.
 
 ### 2026-09-20 - Security header hardening
 - Audited `tool-pages.js` for common browser-side injection and unsafe execution primitives. No `eval`, `new Function`, `document.write`, `fetch`, `localStorage`, `sessionStorage`, or `Math.random` usage was found. Image processing uses browser-local Blob/object-URL flows, and password/random-number generation uses Web Crypto APIs.
