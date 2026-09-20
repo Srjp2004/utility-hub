@@ -1,1 +1,17 @@
-{"name":"UtilityHub","short_name":"UtilityHub","start_url":"/","display":"standalone","background_color":"#f7f8fc","theme_color":"#5b5bd6","description":"Free global calculators and productivity tools."}
+{
+  "name": "UtilityHub",
+  "short_name": "UtilityHub",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f8fc",
+  "theme_color": "#5b5bd6",
+  "description": "Free global calculators and productivity tools.",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
