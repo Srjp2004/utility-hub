@@ -158,3 +158,6 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-09-20
 - Made Date Difference and Business Days calculations timezone-stable by using UTC date construction and UTC day iteration.
 - Date Difference now reports the exact whole-day interval rather than rounding a potentially timezone-shifted duration.
+## 2026-09-20
+- Added Vercel response headers for a static, CDN-cacheable deployment: security hardening headers plus differentiated caching for immutable-style assets and HTML documents.
+- This keeps the current frontend stateless and horizontally scalable: requests do not require application servers, sessions, or a shared database.
