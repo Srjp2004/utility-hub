@@ -114,6 +114,13 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 5. Preserve all constraints above.
 6. Update this file whenever priorities, architecture, blockers or completed milestones materially change.
 
+## 2026-09-20 - Timestamp and break-even audit
+- Found and fixed a concrete Unix Timestamp Converter runtime defect: `timestampToDate()` reads `tsUnit`, but the timestamp renderer did not create that element. The renderer now provides an explicit Seconds, Milliseconds or Auto-detect selector.
+- Added regression coverage for timestamp conversion using both seconds and milliseconds input modes.
+- Tightened Break-Even validation to reject negative selling-price and variable-cost inputs, with regression coverage for negative variable cost.
+- Latest functional commits: `3679d56aef0aa9782ce55e9e946ca9d399fd7463` and `f52b52b80951a0fb7ab6609417a8fe823ea34409`, with tests in `2cb5792461a261b2680b0195543f8c3764ff4a45`.
+- CI verification for these new commits is pending; do not claim the new regression suite is green until GitHub Actions provides fresh evidence.
+
 ## Last verified state
 - 2026-09-20: Bounded calculator/date/developer audit re-fetched the live main renderer and found no additional production defect requiring mutation. The latest CI run 35524194229 is green on commit ea8bf4f453862f937f569fed902383f92538d2be.
 - 2026-09-20: The repository contains Vercel deployment configuration, but no production URL/live deployment evidence is recorded yet. Do not claim live operational deployment until a real URL is supplied or independently verified.
