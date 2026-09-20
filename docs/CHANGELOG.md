@@ -131,3 +131,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-09-20
 - Hardened Image Converter failure handling by checking for a usable Canvas 2D context before processing and validating that the browser returned the requested output MIME type before download.
 - Re-fetched `tool-pages.js` and verified the image-conversion guards alongside existing Base64 Unicode/error handling, JSON error handling, random BigInt arithmetic and single renderer-dispatch definition.
+
+## 2026-09-20
+- Tightened Aspect Ratio Calculator validation so width and height must be positive safe integers rather than silently rounding decimal inputs.
+- Removed unnecessary rounding from the GCD calculation and result, making invalid fractional input explicit instead of silently changing the user's values.
+- Fresh source verification confirmed positive safe-integer validation and direct GCD calculation.
