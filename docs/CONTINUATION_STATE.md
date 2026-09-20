@@ -115,6 +115,8 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 6. Update this file whenever priorities, architecture, blockers or completed milestones materially change.
 
 ## Last verified state
+- 2026-09-20: Bounded calculator/date/developer audit re-fetched the live main renderer and found no additional production defect requiring mutation. The latest CI run 35524194229 is green on commit ea8bf4f453862f937f569fed902383f92538d2be.
+- 2026-09-20: The repository contains Vercel deployment configuration, but no production URL/live deployment evidence is recorded yet. Do not claim live operational deployment until a real URL is supplied or independently verified.
 - Main branch is the integration target.
 - The 27-tool directory structure was freshly audited after the latest correction.
 - Percentage and Discount arithmetic overflow guards were added with regression tests for extreme finite inputs.
