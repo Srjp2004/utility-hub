@@ -150,3 +150,6 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Verified all 29 expected tool functions are declared exactly once in `tool-pages.js`.
 - Re-verified key reliability invariants for Loan, Compound Interest, Aspect Ratio, Random Number, Unix Timestamp, Base64 and Image processing paths.
 - No additional production-code mutation was required in this verification pass.
+## 2026-09-20
+- Fixed the tool-directory category filters so Percentage Change appears under Calculators and Random Number, Aspect Ratio, Unix Timestamp and Base64 appear under Text & developer tools.
+- Fresh source verification confirmed the directory still contains 27 unique tool links and the category-filter term sets now cover all published cards by their intended category.
