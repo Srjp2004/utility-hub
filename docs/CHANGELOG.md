@@ -116,3 +116,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Fixed a shared enhancement-layer compatibility bug in `tool-enhancements.js`: its global `loadImage` now accepts both File objects and file-input elements, matching the image utility callers.
 - Added a fail-safe check to the enhancement-layer password generator so it reports when the browser does not expose the Web Crypto random source instead of throwing.
 - Re-fetched the updated file and verified brace balance, image object-URL cleanup, File handling and password fallback source invariants.
+
+## 2026-09-20
+- Continued the functional-correctness audit of `tool-pages.js`.
+- Removed stale duplicate renderer views for Random Number, Aspect Ratio, Unix Timestamp and Base64 tools so each tool type has one active view definition.
+- Extended the Unix Timestamp Converter with explicit Seconds, Milliseconds and Auto-detect input modes. The converter still rejects non-finite values and unsupported date ranges.
+- Re-fetched `tool-pages.js` after the change and verified the active renderer map contains the 27 expected tool types, with no duplicate function declarations.
