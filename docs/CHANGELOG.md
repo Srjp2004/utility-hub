@@ -105,3 +105,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Corrected one documentation-copy mismatch on the Password Generator page: the page now describes the actual length control rather than claiming selectable character sets that are not exposed by the UI.
 - No calculator logic was changed in this batch because the inspected implementations did not present a sufficiently clear defect requiring mutation.
 - Browser-level execution remains pending.
+
+## 2026-09 - Functional audit: image processing safeguards
+- Hardened Image Resizer input validation to require a finite whole-number width from 1 to 16384 px and to reject output dimensions above the same practical browser-processing ceiling.
+- Added canvas-context availability checks to Image Resizer and Image Compressor so unsupported browser environments fail with a clear message instead of throwing on a missing rendering context.
+- Fresh source verification: 39 functions, zero duplicate function names, balanced braces, 2 object-URL creations with 2 corresponding revocations, and the new image safeguards are present.
+- Browser-level execution remains pending.
