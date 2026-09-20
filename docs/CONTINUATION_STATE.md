@@ -160,6 +160,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Node 22.x: success. Node 20.x: success. The full `node --test tests/*.test.js` suite now passes in CI.
 - The integration suite successfully validates all 27 tool pages plus the behavioral regression suite.
 
+### 2026-09-20 - Homepage navigation hardening
+- Replaced four homepage modal-only tool actions with direct dedicated-page links.
+- Added integration coverage for homepage link resolution and navigation behavior.
+
 ### 2026-09-20 - Directory SEO hardening
 - Added robots, canonical and social preview metadata to `tools.html`.
 - Expanded the integration suite to verify directory links resolve to existing tool pages and tolerate whitespace in `renderTool(...)` markup.
