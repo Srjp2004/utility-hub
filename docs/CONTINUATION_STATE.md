@@ -121,4 +121,5 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Percentage and Discount arithmetic overflow guards were added with regression tests for extreme finite inputs.
 - Shared tool-pages.js has been source-audited for duplicate functions, renderer dispatch, brace balance and object URL cleanup.
 - Browser-level verification remains outstanding.
+- Homepage `app.js` calculator path was hardened for finite numeric results, whole-number loan months/people, supported unit validation, and UTC-stable date parsing.
 - This document is the durable handoff anchor for future chats.
