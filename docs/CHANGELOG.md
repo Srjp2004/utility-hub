@@ -1,3 +1,8 @@
+## 2026-09-20 - Security header hardening
+- Added CSP and Cross-Origin-Opener-Policy headers to the Vercel deployment configuration.
+- Audited common unsafe browser primitives in `tool-pages.js`; no `eval`, `new Function`, `document.write`, or network/storage APIs were found in the audited source.
+- Retained browser-local image processing and Web Crypto random generation.
+
 ## 2026-09-20 - Integration CI repaired
 - Fixed brittle renderer-key detection in the 27-page integration suite.
 - Verified GitHub Actions run `35522798239`: Node 22.x and Node 20.x both passed the full `node --test tests/*.test.js` suite.
