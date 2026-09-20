@@ -61,3 +61,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Hardened the shared image loader to accept a File directly as well as a file-input element.
 - This matches the current image tool callers and avoids relying on a `.files` property when a File object is passed.
 - Verified the updated loader source was written to `main`; browser execution remains pending.
+
+## 2026-09 - Tool directory functional correction
+- Moved the four newest tool cards back inside the single `toolGrid` container used by search and category filtering.
+- This restores consistent filtering behavior across the full 27-tool directory.
+- Fresh source verification: one `toolGrid` container and 27 tool-card links.
