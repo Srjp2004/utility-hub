@@ -107,3 +107,10 @@ test("base64 preserves Unicode text", () => {
   context.decodeBase64();
   assert.equal(elements.result.textContent, "✓ café");
 });
+
+
+test("image resize chooses a filename extension matching the output MIME type", () => {
+  const source = require("node:fs").readFileSync("tool-pages.js", "utf8");
+  assert.match(source, /const outputType=f\.type==="image\/png"\?"image\/png":"image\/jpeg";const extension=outputType==="image\/png"\?"png":"jpg";/);
+  assert.match(source, /downloadBlob\(b,"resized\."\+extension\)/);
+});
