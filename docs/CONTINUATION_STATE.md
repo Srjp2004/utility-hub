@@ -127,3 +127,5 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - This document is the durable handoff anchor for future chats.
 
 - Image Resize hardening now requires the computed output height to be a safe integer before canvas allocation.
+
+- Image Compressor/Converter now validate decoded dimensions before canvas allocation; compressor quality and converter output MIME type are validated; Unix timestamp conversion rejects unsafe numeric values before Date construction.
