@@ -1,3 +1,8 @@
+## 2026-09-20 - Image resizer output consistency
+- Fixed the image resizer so the downloaded filename extension matches the actual output MIME type: PNG inputs produce `resized.png`, while non-PNG inputs produce `resized.jpg`.
+- Added a regression test covering the MIME/extension mapping.
+- GitHub Actions run 35523720087 passed after the change.
+
 ## 2026-09-20 - Homepage navigation hardening
 - Replaced four modal-only homepage tool actions with direct links to their dedicated pages: Unit Converter, Tip & Bill Split, BMI Calculator, and Date Difference.
 - This improves crawlability, accessibility, shareable URLs, and keeps the homepage aligned with the dedicated tool-page architecture.
