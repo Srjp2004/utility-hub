@@ -40,6 +40,14 @@
 - Hardened Unix timestamp conversion by requiring safe integer timestamps and safe millisecond conversion before creating Date objects.
 # UtilityHub Changelog
 
+## 2026-09-20 - Functional audit: calculator/date/developer batch
+- Re-fetched the current shared renderer from main and reviewed Loan, Interest, Unit Converter, Age, Percentage Change, Tip & Bill Split, BMI, Date Difference, Compound Interest, Profit Margin, ROI, Break-Even, Time Duration, Business Days, Random Number, Aspect Ratio, Unix Timestamp, Base64, JSON Formatter, Case Converter and Password Generator paths.
+- Confirmed the inspected paths contain explicit finite/domain validation and overflow/error handling where required; no additional production-code mutation was justified in this bounded batch.
+- Confirmed the latest zero-cost Profit Margin correction is present in main: a zero cost produces a 100% margin while markup on cost is reported as undefined rather than incorrectly reported as 0%.
+- GitHub Actions run 35524194229 completed successfully on commit ea8bf4f453862f937f569fed902383f92538d2be.
+- Deployment configuration remains Vercel-compatible, but the actual production URL and live browser/runtime deployment have not been established from the available GitHub evidence. They must be verified before claiming production operational status.
+
+
 ## 2026-09-20
 - Continued the verification-harness audit and found stale test assumptions in `tests/tool-pages.test.js`: Percentage Change expected an obsolete error string and the Loan test expected the older output wording.
 - Updated the Node VM test context to provide the standard Web APIs used by the Base64 implementation (`TextEncoder`, `TextDecoder`, `btoa`, and `atob`) instead of treating those browser APIs as missing application behavior.
