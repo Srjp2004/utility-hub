@@ -52,3 +52,15 @@ test("homepage popular tool links resolve and avoid modal-only navigation", () =
   }
   assert.doesNotMatch(home, /onclick="tool\('(convert|tip|bmi|date)'\)"/, "popular tools should navigate to dedicated pages");
 });
+test("sitemap contains only existing HTML pages", () => {
+  const sitemap = fs.readFileSync("sitemap.xml", "utf8");
+  const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  assert.equal(new Set(locs).size, locs.length, "sitemap must not contain duplicate URLs");
+  for (const loc of locs) {
+    assert.match(loc, /^\//, "sitemap paths must be root-relative until the production domain is configured");
+    const relative = loc.slice(1);
+    const target = relative === "" ? "index.html" : relative;
+    assert.ok(fs.existsSync(target), "sitemap points to missing file: " + loc);
+  }
+});
+
