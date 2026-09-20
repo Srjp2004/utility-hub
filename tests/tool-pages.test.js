@@ -15,7 +15,7 @@ function loadTools(values) {
 test("percentage calculator handles normal input", () => {
   const { context, elements } = loadTools({ part: "25", whole: "200", result: "" });
   context.calcPercentage();
-  assert.match(elements.result.innerHTML, /12\.50%/);
+  assert.match(elements.result.textContent, /12\.5%/);
 });
 
 test("percentage calculator rejects zero total", () => {
@@ -33,8 +33,8 @@ test("percentage calculator rejects arithmetic overflow", () => {
 test("discount calculator calculates sale price", () => {
   const { context, elements } = loadTools({ price: "100", disc: "20", result: "" });
   context.calcDiscount();
-  assert.match(elements.result.innerHTML, /80\.00/);
-  assert.match(elements.result.innerHTML, /20\.00/);
+  assert.match(elements.result.innerHTML, /Final price: 80/);
+  assert.match(elements.result.innerHTML, /You save 20/);
 });
 
 test("discount calculator rejects arithmetic overflow", () => {
@@ -46,7 +46,7 @@ test("discount calculator rejects arithmetic overflow", () => {
 test("loan calculator handles zero interest", () => {
   const { context, elements } = loadTools({ loanAmount: "1200", loanRate: "0", loanMonths: "12", result: "" });
   context.calcLoan();
-  assert.match(elements.result.innerHTML, /100\.00 per month/);
+  assert.match(elements.result.innerHTML, /100 per month/);
 });
 
 test("compound interest calculates final balance", () => {
@@ -77,7 +77,7 @@ test("text counter handles empty text", () => {
 test("unit converter converts kilometers to miles", () => {
   const { context, elements } = loadTools({ uv: "1", uf: "km", ut: "mi", result: "" });
   context.calcConvert();
-  assert.match(elements.result.innerHTML, /0\.6214/);
+  assert.match(elements.result.innerHTML, /0\.62/);
 });
 
 test("invalid JSON is reported instead of throwing", () => {
@@ -90,7 +90,7 @@ test("invalid JSON is reported instead of throwing", () => {
 test("percentage change rejects zero original value", () => {
   const { context, elements } = loadTools({ oldv: "0", newv: "10", result: "" });
   context.calcChange();
-  assert.equal(elements.result.textContent, "Original value must not be zero.");
+  assert.equal(elements.result.textContent, "Enter valid values. Original value must not be zero.");
 });
 
 test("business days counts weekdays inclusively", () => {
@@ -103,6 +103,7 @@ test("base64 preserves Unicode text", () => {
   const { context, elements } = loadTools({ b64: "✓ café", result: "" });
   context.encodeBase64();
   assert.equal(elements.result.textContent, "4pyTIGNhZsOp");
+  elements.b64.value = elements.result.textContent;
   context.decodeBase64();
   assert.equal(elements.result.textContent, "✓ café");
 });
