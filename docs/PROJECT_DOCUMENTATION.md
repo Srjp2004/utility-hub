@@ -46,6 +46,8 @@ Phase C: consider Google AdSense subject to current requirements and approval, r
 
 Never add fake ads, fake affiliate links, fake testimonials or fabricated traffic claims.
 
+- The regression harness runs shared browser-oriented logic inside Node's VM. When a production tool depends on standard Web APIs, the harness must provide equivalent test-environment APIs explicitly so failures represent application behavior rather than missing browser globals.
+
 ## Development workflow
 1. Define the observable outcome.
 2. Inspect repository state.
