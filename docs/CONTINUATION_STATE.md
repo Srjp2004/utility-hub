@@ -133,3 +133,5 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Sitemap coverage was checked against the current 27-tool inventory; the four newest developer/utility pages (Random Number, Aspect Ratio, Unix Timestamp, Base64) are explicitly included.
 
 - Revenue architecture requirement: keep the core browser tools free while reserving non-blocking monetization surfaces for a measured rollout (ads, affiliate links, sponsored placements, premium utility packs/API). Monetization must not require uploading private local files or degrade core tool performance.
+
+- Added `.github/workflows/test.yml` to execute `npm test` automatically on pushes to `main` and pull requests targeting `main`, across Node 20.x and 22.x; workflow creation was re-fetched successfully, but GitHub Actions runtime status remains unverified through the available connector.
