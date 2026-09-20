@@ -114,3 +114,11 @@ test("image resize chooses a filename extension matching the output MIME type", 
   assert.match(source, /const outputType=f\.type==="image\/png"\?"image\/png":"image\/jpeg";const extension=outputType==="image\/png"\?"png":"jpg";/);
   assert.match(source, /downloadBlob\(b,"resized\."\+extension\)/);
 });
+
+
+test("profit margin reports undefined markup when cost is zero", () => {
+  const { context, elements } = loadTools({ rev: "1000", cost: "0", result: "" });
+  context.calcMargin();
+  assert.match(elements.result.innerHTML, /Profit margin: 100\.00%/);
+  assert.match(elements.result.innerHTML, /Markup on cost: undefined \(cost is zero\)/);
+});
