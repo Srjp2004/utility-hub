@@ -24,14 +24,26 @@ test("percentage calculator rejects zero total", () => {
   assert.equal(elements.result.textContent, "Total must not be zero.");
 });
 
-test("percentage calculator rejects arithmetic overflow", () => {\n  const { context, elements } = loadTools({ part: "1.7976931348623157e308", whole: "5e-324", result: "" });\n  context.calcPercentage();\n  assert.equal(elements.result.textContent, "These values are too large for a reliable percentage.");\n});\n\ntest("discount calculator calculates sale price", () => {
+test("percentage calculator rejects arithmetic overflow", () => {
+  const { context, elements } = loadTools({ part: "1.7976931348623157e308", whole: "5e-324", result: "" });
+  context.calcPercentage();
+  assert.equal(elements.result.textContent, "These values are too large for a reliable percentage.");
+});
+
+test("discount calculator calculates sale price", () => {
   const { context, elements } = loadTools({ price: "100", disc: "20", result: "" });
   context.calcDiscount();
   assert.match(elements.result.innerHTML, /80\.00/);
   assert.match(elements.result.innerHTML, /20\.00/);
 });
 
-test("discount calculator rejects arithmetic overflow", () => {\n  const { context, elements } = loadTools({ price: "1.7976931348623157e308", disc: "99", result: "" });\n  context.calcDiscount();\n  assert.equal(elements.result.textContent, "These values are too large for a reliable discount result.");\n});\n\ntest("loan calculator handles zero interest", () => {
+test("discount calculator rejects arithmetic overflow", () => {
+  const { context, elements } = loadTools({ price: "1.7976931348623157e308", disc: "99", result: "" });
+  context.calcDiscount();
+  assert.equal(elements.result.textContent, "These values are too large for a reliable discount result.");
+});
+
+test("loan calculator handles zero interest", () => {
   const { context, elements } = loadTools({ loanAmount: "1200", loanRate: "0", loanMonths: "12", result: "" });
   context.calcLoan();
   assert.match(elements.result.innerHTML, /100\.00 \/ month/);
