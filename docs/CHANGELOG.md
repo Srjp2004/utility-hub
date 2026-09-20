@@ -111,3 +111,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Added canvas-context availability checks to Image Resizer and Image Compressor so unsupported browser environments fail with a clear message instead of throwing on a missing rendering context.
 - Fresh source verification: 39 functions, zero duplicate function names, balanced braces, 2 object-URL creations with 2 corresponding revocations, and the new image safeguards are present.
 - Browser-level execution remains pending.
+
+## 2026-09-20
+- Fixed a shared enhancement-layer compatibility bug in `tool-enhancements.js`: its global `loadImage` now accepts both File objects and file-input elements, matching the image utility callers.
+- Added a fail-safe check to the enhancement-layer password generator so it reports when the browser does not expose the Web Crypto random source instead of throwing.
+- Re-fetched the updated file and verified brace balance, image object-URL cleanup, File handling and password fallback source invariants.
