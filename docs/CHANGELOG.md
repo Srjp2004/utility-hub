@@ -1,3 +1,7 @@
+## 2026-09-20 - Integration CI repaired
+- Fixed brittle renderer-key detection in the 27-page integration suite.
+- Verified GitHub Actions run `35522798239`: Node 22.x and Node 20.x both passed the full `node --test tests/*.test.js` suite.
+
 ## 2026-09-20 - Integration verification expansion
 - Added a page-level integration suite covering all 27 tool pages, renderer wiring, required SEO metadata, indexability, and sitemap inclusion.
 - CI test command now runs every Node test file with `node --test tests/*.test.js`.
