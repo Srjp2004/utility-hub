@@ -2,7 +2,7 @@
 - Retrieved the failed GitHub Actions job log for run `35521794398` and identified six stale regression expectations. The application test command executed successfully; failures were assertion mismatches rather than a test-loader/runtime crash.
 - Updated `tests/tool-pages.test.js` to match current production output contracts for Percentage, Discount, Loan, Unit Converter and Percentage Change, and corrected the Base64 round-trip test to pass the encoded result into the decoder.
 - Commit: `47f6c048318629c868272905ff1a10f88ae714dc`.
-- GitHub Actions re-run is required before declaring CI green.
+- GitHub Actions verification completed successfully in run `35522219812`: both Node 22.x and Node 20.x jobs passed.
 
 - Verified the new GitHub Actions workflow is actually running. Latest run `35521794398` failed on both Node 20.x and 22.x at `Run regression tests`; checkout and Node setup succeeded. Job-log retrieval is unavailable through the current connector, so the exact npm-test failure remains unresolved.
 - Caught and corrected a syntax regression in the image converter declaration (`async async function`); immediate re-fetch confirmed the corrected declaration and absence of the duplicate token.
