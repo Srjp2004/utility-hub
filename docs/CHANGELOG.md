@@ -127,3 +127,7 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Hardened the Random Number Generator range arithmetic against JavaScript Number precision issues at large safe-integer bounds.
 - The generator now performs range and rejection-sampling arithmetic with `BigInt` while retaining safe-integer input validation and the Web Crypto source.
 - Fresh source verification confirmed safe-integer guards, BigInt range arithmetic, rejection sampling, Web Crypto availability checks, and absence of `Math.random()` in the generator.
+
+## 2026-09-20
+- Hardened Image Converter failure handling by checking for a usable Canvas 2D context before processing and validating that the browser returned the requested output MIME type before download.
+- Re-fetched `tool-pages.js` and verified the image-conversion guards alongside existing Base64 Unicode/error handling, JSON error handling, random BigInt arithmetic and single renderer-dispatch definition.
