@@ -1,3 +1,6 @@
+- 2026-09-20: Fixed a real Unix Timestamp Converter integration defect: the renderer expected a `tsUnit` control, but its rendered UI did not provide one, causing timestamp conversion to fail at runtime. Added an explicit Seconds/Milliseconds/Auto-detect selector and regression coverage for both seconds and milliseconds.
+- 2026-09-20: Tightened Break-Even Calculator validation so negative selling-price and variable-cost inputs are rejected as invalid cost data, with regression coverage for negative variable cost.
+
 ## 2026-09-20 - Image resizer output consistency
 - Fixed the image resizer so the downloaded filename extension matches the actual output MIME type: PNG inputs produce `resized.png`, while non-PNG inputs produce `resized.jpg`.
 - Added a regression test covering the MIME/extension mapping.
