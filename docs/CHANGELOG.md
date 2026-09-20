@@ -66,3 +66,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Moved the four newest tool cards back inside the single `toolGrid` container used by search and category filtering.
 - This restores consistent filtering behavior across the full 27-tool directory.
 - Fresh source verification: one `toolGrid` container and 27 tool-card links.
+## 2026-09 - Functional audit: validation and randomness hardening
+- Hardened Tip & Bill Split input validation to reject non-finite values and non-integer party counts.
+- Hardened Compound Interest validation to reject non-finite values and non-integer compounding frequencies.
+- Hardened Random Number and Aspect Ratio inputs to require safe integers.
+- Added a secure-randomness availability check to Password Generator and removed modulo bias from password character selection using rejection sampling.
+- Fresh source verification passed for the targeted functions, duplicate function detection and brace balance. Real browser execution remains pending.
