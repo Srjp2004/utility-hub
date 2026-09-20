@@ -116,6 +116,60 @@ test("image resize chooses a filename extension matching the output MIME type", 
 });
 
 
+test("image resize completes with a PNG output filename for PNG input", async () => {
+  class FakeFile { constructor() { this.size = 100; this.type = "image/png"; } }
+  class FakeImage {
+    constructor() { this.naturalWidth = 100; this.naturalHeight = 50; }
+    set src(_) { this.onload(); }
+  }
+  const elements = {
+    resizeFile: { files: [new FakeFile()] },
+    resizeWidth: { value: "200" },
+    result: { innerHTML: "", textContent: "" }
+  };
+  let downloadedName = "";
+  const context = {
+    document: {
+      getElementById: (id) => elements[id],
+      createElement: (tag) => tag === "canvas"
+        ? {
+            width: 0,
+            height: 0,
+            getContext: () => ({ drawImage() {} }),
+            toBlob: (cb) => cb({ size: 1, type: "image/png" })
+          }
+        : {
+            href: "",
+            download: "",
+            click() { downloadedName = this.download; },
+            remove() {}
+          }
+    },
+    console,
+    Number,
+    Math,
+    Date,
+    TextEncoder,
+    TextDecoder,
+    btoa,
+    atob,
+    setTimeout,
+    clearTimeout,
+    File: FakeFile,
+    Image: FakeImage,
+    URL: {
+      createObjectURL: () => "blob:fake",
+      revokeObjectURL() {}
+    }
+  };
+  vm.createContext(context);
+  const source = fs.readFileSync("tool-pages.js", "utf8");
+  vm.runInContext(source, context, { filename: "tool-pages.js" });
+  await context.imageResize();
+  assert.equal(downloadedName, "resized.png");
+  assert.match(elements.result.textContent, /Done: 200 x 100 px\./);
+});
+
 test("profit margin reports undefined markup when cost is zero", () => {
   const { context, elements } = loadTools({ rev: "1000", cost: "0", result: "" });
   context.calcMargin();
