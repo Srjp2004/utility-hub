@@ -39,5 +39,11 @@ Fresh GitHub reads and focused checks are used instead of trusting write-operati
 
 If a connector/tool limit prevents a complete audit, remaining checks are recorded as unverified rather than assumed to pass.
 
+## 2026-09 - Functional audit repair
+- Found and repaired two shared-directory/runtime wiring defects during the bounded functional audit: the tool directory contained duplicate `id="toolGrid"` values, and the four newer utility renderers referenced `el(...)` without a shared helper definition.
+- Updated the directory filter to collect all tool cards and assigned the secondary card group a unique ID.
+- Added the shared `el` alias used by the Random Number, Aspect Ratio, Unix Timestamp and Base64 utilities.
+- Structural verification after the repair is required before treating the audit as complete.
+
 ## Next milestone
 Complete the remaining full functional audit in bounded batches, test representative tools on real mobile and desktop browsers, improve high-intent tool-page UX/internal linking, establish analytics readiness, prepare legitimate monetization surfaces, then deploy and measure real user behavior.
