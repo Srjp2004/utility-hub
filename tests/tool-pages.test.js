@@ -5,7 +5,7 @@ const vm = require("node:vm");
 
 function loadTools(values) {
   const elements = Object.fromEntries(Object.entries(values).map(([id, value]) => [id, { value, innerHTML: "", textContent: "" }]));
-  const context = { document: { getElementById: (id) => elements[id] }, console, Number, Math, Date, setTimeout, clearTimeout };
+  const context = { document: { getElementById: (id) => elements[id] }, console, Number, Math, Date, TextEncoder, TextDecoder, btoa, atob, setTimeout, clearTimeout };
   vm.createContext(context);
   const source = fs.readFileSync("tool-pages.js", "utf8");
   vm.runInContext(source, context, { filename: "tool-pages.js" });
@@ -46,7 +46,7 @@ test("discount calculator rejects arithmetic overflow", () => {
 test("loan calculator handles zero interest", () => {
   const { context, elements } = loadTools({ loanAmount: "1200", loanRate: "0", loanMonths: "12", result: "" });
   context.calcLoan();
-  assert.match(elements.result.innerHTML, /100\.00 \/ month/);
+  assert.match(elements.result.innerHTML, /100\.00 per month/);
 });
 
 test("compound interest calculates final balance", () => {
@@ -90,7 +90,7 @@ test("invalid JSON is reported instead of throwing", () => {
 test("percentage change rejects zero original value", () => {
   const { context, elements } = loadTools({ oldv: "0", newv: "10", result: "" });
   context.calcChange();
-  assert.equal(elements.result.textContent, "Enter valid values. Original value must not be zero.");
+  assert.equal(elements.result.textContent, "Original value must not be zero.");
 });
 
 test("business days counts weekdays inclusively", () => {
