@@ -1,3 +1,8 @@
+## 2026-09-20 - Integration verification expansion
+- Added a page-level integration suite covering all 27 tool pages, renderer wiring, required SEO metadata, indexability, and sitemap inclusion.
+- CI test command now runs every Node test file with `node --test tests/*.test.js`.
+- CI verification of this expanded suite is pending.
+
 ## 2026-09-20
 - Retrieved the failed GitHub Actions job log for run `35521794398` and identified six stale regression expectations. The application test command executed successfully; failures were assertion mismatches rather than a test-loader/runtime crash.
 - Updated `tests/tool-pages.test.js` to match current production output contracts for Percentage, Discount, Loan, Unit Converter and Percentage Change, and corrected the Base64 round-trip test to pass the encoded result into the decoder.
