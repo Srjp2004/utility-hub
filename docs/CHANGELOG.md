@@ -140,3 +140,7 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-09-20
 - Hardened Compound Interest Calculator against numeric overflow: after validating inputs, the calculator now rejects results that exceed JavaScript's finite numeric range instead of formatting `Infinity` as if it were a valid balance.
 - Fresh source verification confirmed finite-input validation, integer compounding frequency validation, the compound-interest formula, and the explicit overflow guard.
+
+## 2026-09-20
+- Hardened Loan Payment Calculator against numeric overflow by rejecting non-finite monthly-payment or total-payment results instead of displaying invalid financial values.
+- Fresh source verification confirmed the existing positive-input validation and zero-rate handling remain intact, with the new finite-result guard applied after the loan formula.
