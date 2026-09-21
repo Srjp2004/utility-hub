@@ -70,7 +70,7 @@ Audit tool-pages.js in bounded batches for real edge cases:
 - Loan zero-interest and invalid-term handling
 - BMI unit/range handling
 - Date difference semantics and invalid dates
-- Unit converter supported-unit validation
+- Unit converter supported-unit validation (negative length/weight guard added; continue auditing remaining unit semantics)
 - Compound interest invalid values
 - Profit margin and ROI zero-denominator cases
 - Break-even zero contribution margin
