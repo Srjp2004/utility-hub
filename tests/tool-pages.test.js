@@ -247,3 +247,10 @@ test("Base64 rejects invalid UTF-8 instead of silently replacing bytes", () => {
   context.decodeBase64();
   assert.equal(elements.result.textContent, "Invalid Base64 input.");
 });
+
+
+test("timestamp converter rejects unsupported input units", () => {
+  const { context, elements } = loadTools({ ts: "1750000000", tsUnit: "weeks", result: "" });
+  context.timestampToDate();
+  assert.equal(elements.result.textContent, "Choose a supported timestamp unit.");
+});
