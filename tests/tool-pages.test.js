@@ -195,3 +195,34 @@ test("timestamp converter provides and uses an explicit input unit", () => {
   context.timestampToDate();
   assert.match(elements.result.textContent, /^2025-/);
 });
+
+
+test("QuotePulse analyzes a quote and detects document issues", () => {
+  const { context, elements } = loadTools({
+    quoteText: "Site visit $50\nLabour $480\nMaterials $620\nDeposit 60%\nTotal $1150\n12-month warranty",
+    result: "",
+    qpMessage: "",
+    tool: ""
+  });
+  context.analyzeQuote();
+  assert.match(elements.result.innerHTML, /Clarity score/);
+  assert.match(elements.result.innerHTML, /above 50%/);
+  assert.match(elements.qpMessage.innerHTML, /Negotiation message/);
+});
+
+test("QuotePulse flags a total mismatch", () => {
+  const { context, elements } = loadTools({
+    quoteText: "Labour $400\nMaterials $300\nTotal $900\nWarranty 12 months",
+    result: "",
+    qpMessage: "",
+    tool: ""
+  });
+  context.analyzeQuote();
+  assert.match(elements.result.innerHTML, /do not reconcile with the stated total/);
+});
+
+test("QuotePulse renderer is registered", () => {
+  const { context, elements } = loadTools({ tool: { innerHTML: "" } });
+  context.renderTool("quotePulse", "tool");
+  assert.match(elements.tool.innerHTML, /QuotePulse/);
+});
