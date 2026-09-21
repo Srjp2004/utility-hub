@@ -83,7 +83,7 @@ test("unit converter rejects negative physical quantities", () => {
 test("unit converter converts kilometers to miles", () => {
   const { context, elements } = loadTools({ uv: "1", uf: "km", ut: "mi", result: "" });
   context.calcConvert();
-  assert.match(elements.result.innerHTML, /0\\.62/);
+  assert.match(elements.result.innerHTML, /0\.62/);
 });
 
 test("invalid JSON is reported instead of throwing", () => {
