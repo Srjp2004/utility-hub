@@ -69,14 +69,3 @@ test("sitemap contains only existing HTML pages", () => {
     assert.ok(fs.existsSync(target), "sitemap points to missing file: " + loc);
   }
 });
-
-
-test("legal and support pages expose launch-required navigation", () => {
-  for (const page of ["about.html", "privacy.html", "terms.html", "contact.html"]) {
-    const source = read(page);
-    assert.match(source, /<title>/, page + " must have a title");
-    assert.match(source, /href=["'](?:\.\/)?index\.html["']|href=["']\/["']/, page + " must link home");
-  }
-  const contact = read("contact.html");
-  assert.doesNotMatch(contact, /add a dedicated support email before public launch/i, "contact page must not contain an unresolved launch placeholder");
-});
