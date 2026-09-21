@@ -27,7 +27,7 @@ UtilityHub is a global-first web application providing free calculators and prac
 This architecture is intentionally lightweight. A backend, database or framework migration should happen only when a demonstrated product requirement needs it.
 
 ## Current tool inventory
-The directory currently exposes 27 tool pages covering calculations, finance, dates, units, text, images, JSON, passwords, timestamps and developer utilities. The authoritative list is tools.html and the files under tools/.
+The directory currently exposes 28 tool pages covering calculations, finance, dates, units, text, images, JSON, passwords, timestamps, developer utilities and quote/estimate auditing. QuotePulse is a high-intent decision-support tool that checks quote-document consistency without making market-price claims. The authoritative list is tools.html and the files under tools/.
 
 ## Device compatibility
 styles.css contains responsive safeguards including mobile breakpoints, a 420px small-screen breakpoint, touch-friendly controls, 16px form controls, overflow protection, responsive grids, wrapping for long links and reduced-motion support.
