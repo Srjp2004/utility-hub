@@ -13,7 +13,7 @@
 Make UtilityHub fully operational and functional before public launch. This means every published tool must work for valid and invalid inputs, navigation/search must work, responsive behavior must be usable across device classes, SEO/deployment configuration must be correct, and real browser QA must be completed before claiming production readiness.
 
 ## Current inventory
-27 published tool pages. Authoritative directory: tools.html. Shared logic: tool-pages.js.
+28 published tool pages. Authoritative directory: tools.html. Shared logic: tool-pages.js.
 
 ## Completed foundations
 - 28-tool directory and shared renderer architecture
