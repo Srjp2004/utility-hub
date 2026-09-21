@@ -249,3 +249,5 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-09-21 - Timestamp input validation
 - Added an explicit allowlist for Unix timestamp input units before conversion.
 - Added regression coverage for unsupported timestamp units.
+
+- 2026-09-21: Hardened Unit Converter input validation so negative length and weight quantities are rejected while negative temperatures remain supported.
