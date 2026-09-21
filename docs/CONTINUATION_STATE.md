@@ -34,7 +34,7 @@ Make UtilityHub fully operational and functional before public launch. This mean
 ## Important known limitations
 1. Real browser/device QA is still pending. GitHub source inspection is not browser testing.
 2. Production domain is not yet known/configured. Never invent one.
-3. Contact/support details must be finalized before public launch.
+3. The Contact page now provides an operational GitHub issue/discussion support path; replace or supplement it with a dedicated support channel only if the production operation requires one.
 4. Privacy/disclosure text must be updated if analytics, ads, affiliate tracking or other third-party services are enabled.
 
 ## Engineering workflow
