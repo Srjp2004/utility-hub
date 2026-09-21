@@ -1,3 +1,5 @@
+- 2026-09-21: Added QuotePulse, a browser-local quote/estimate audit tool that checks arithmetic consistency, deposits, vague scope and missing terms, plus a negotiation-message generator and print/save-PDF flow. Added directory/homepage/sitemap integration and regression coverage. It deliberately avoids claiming market-price fairness.
+
 - 2026-09-20: Fixed a real Unix Timestamp Converter integration defect: the renderer expected a `tsUnit` control, but its rendered UI did not provide one, causing timestamp conversion to fail at runtime. Added an explicit Seconds/Milliseconds/Auto-detect selector and regression coverage for both seconds and milliseconds.
 - 2026-09-20: Tightened Break-Even Calculator validation so negative selling-price and variable-cost inputs are rejected as invalid cost data, with regression coverage for negative variable cost.
 
