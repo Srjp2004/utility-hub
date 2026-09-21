@@ -237,3 +237,7 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-09-21 - Base64 decoder hardening
 - Base64 decoding now uses fatal UTF-8 decoding so malformed byte sequences are rejected instead of silently replaced.
 - Added regression coverage for invalid UTF-8 Base64 input.
+
+## 2026-09-21 - Integration inventory correction
+- Updated the integration regression suite to expect the current 28 published tool pages after QuotePulse was added.
+- GitHub Actions had exposed the stale 27-page assertion; no production runtime defect was inferred from that failure.
