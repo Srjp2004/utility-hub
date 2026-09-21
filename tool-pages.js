@@ -133,7 +133,8 @@ function analyzeQuote(){
     ];
     msg.hidden=false;
     msg.innerHTML='<h3>Negotiation message</h3><p>Hi, thanks for the quote. Before I approve it, could you please confirm the following?</p><ol>'+questions.map(q=>'<li>'+esc(q)+'</li>').join("")+'</ol><p>Once I have those details, I can review the scope and payment terms clearly.</p><button type="button" onclick="copyQuoteMessage()">Copy message</button>';
-    msg.dataset.message="Hi, thanks for the quote. Before I approve it, could you please confirm the following?\n\n"+questions.map((q,i)=>(i+1)+". "+q).join("\n")+'\n\nOnce I have those details, I can review the scope and payment terms clearly.';
+    const messageText="Hi, thanks for the quote. Before I approve it, could you please confirm the following?\n\n"+questions.map((q,i)=>(i+1)+". "+q).join("\n")+"\n\nOnce I have those details, I can review the scope and payment terms clearly.";
+    if(msg.dataset) msg.dataset.message=messageText;
   }
 }
 function copyQuoteMessage(){
