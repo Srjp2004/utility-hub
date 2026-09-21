@@ -43,7 +43,7 @@ function timestampToDate(){const v=Number(el("ts").value),unit=el("tsUnit").valu
 function dateToTimestamp(){const v=el("dt").value,r=el("result");if(!v){r.textContent="Choose a date and time.";return}const d=new Date(v);if(Number.isNaN(d.getTime())){r.textContent="Enter a valid date and time.";return}r.textContent=Math.floor(d.getTime()/1000).toString()}
 function base64(){return '<h2>Base64 Encoder & Decoder</h2><div class="form"><label>Text<textarea id="b64" rows="7" placeholder="Enter text"></textarea></label><button type="button" onclick="encodeBase64()">Encode</button><button type="button" onclick="decodeBase64()">Decode</button></div><div id="result" class="result"></div>'}
 function encodeBase64(){const s=el("b64").value,r=el("result");try{const bytes=new TextEncoder().encode(s);let bin="";bytes.forEach(b=>bin+=String.fromCharCode(b));r.textContent=btoa(bin)}catch(e){r.textContent="Could not encode this text."}}
-function decodeBase64(){const s=el("b64").value.trim(),r=el("result");try{const bin=atob(s),bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));r.textContent=new TextDecoder().decode(bytes)}catch(e){r.textContent="Invalid Base64 input."}}
+function decodeBase64(){const s=el("b64").value.trim(),r=el("result");try{const bin=atob(s),bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));r.textContent=new TextDecoder("utf-8",{fatal:true}).decode(bytes)}catch(e){r.textContent="Invalid Base64 input."}}
 
 
 function quotePulseExample(){
