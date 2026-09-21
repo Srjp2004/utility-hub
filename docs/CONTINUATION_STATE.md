@@ -50,6 +50,18 @@ For each meaningful change:
 7. Update PROJECT_DOCUMENTATION.md for architectural decisions.
 8. Do not claim browser/runtime success unless it was actually tested.
 
+## 2026-09-21 - QuotePulse MVP integration
+- Added QuotePulse, a browser-local quote/estimate document checker for high-intent purchase and service decisions.
+- QuotePulse checks document-level signals including line-item arithmetic, stated-total mismatch, deposits/down-payments, vague scope language, warranty/guarantee coverage, change-order terms, cancellation/refund terms, tax/fee language, and duplicate-looking items.
+- Added a clarity score, negotiation-question generator, copy action, and browser print/save-PDF flow.
+- Deliberately does not claim market-price fairness, vendor trustworthiness, legal conclusions, or professional advice.
+- Added dedicated page `tools/quote-pulse.html`, homepage/directory integration, SEO metadata, sitemap entry, responsive styling, and regression coverage.
+- Added the detailed product/engineering specification at `docs/QUOTE_PULSE.md`.
+- QuotePulse implementation commit: `34571721c5b2da4e6edc93517df79d2b8377907f`.
+- Documentation commit: `b953a6e19a96a3cf0385310fcaef716ac7e56341`.
+- Fresh CI evidence for the QuotePulse implementation is still required. Do not claim the new QuotePulse suite is green until a GitHub Actions run associated with the implementation completes successfully.
+- Real browser/device QA remains pending.
+
 ## Next work queue
 ### Priority 1: functional correctness
 Audit tool-pages.js in bounded batches for real edge cases:
