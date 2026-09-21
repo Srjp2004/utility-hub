@@ -245,3 +245,7 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-09-21 - QuotePulse test-environment hardening
 - Guarded QuotePulse's optional message dataset before assigning test-only DOM state.
 - Root cause was the lightweight Node VM test DOM lacking HTMLElement dataset support; browser behavior remains unchanged.
+
+## 2026-09-21 - Timestamp input validation
+- Added an explicit allowlist for Unix timestamp input units before conversion.
+- Added regression coverage for unsupported timestamp units.
