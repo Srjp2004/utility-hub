@@ -240,3 +240,10 @@ test("QuotePulse detects missing commercial terms and keeps quote analysis local
   assert.match(elements.result.innerHTML, /Taxes or fees are not mentioned/);
   assert.match(elements.qpMessage.innerHTML, /Copy message/);
 });
+
+
+test("Base64 rejects invalid UTF-8 instead of silently replacing bytes", () => {
+  const { context, elements } = loadTools({ b64: "/w==", result: "" });
+  context.decodeBase64();
+  assert.equal(elements.result.textContent, "Invalid Base64 input.");
+});
