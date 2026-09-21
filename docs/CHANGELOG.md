@@ -241,3 +241,7 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-09-21 - Integration inventory correction
 - Updated the integration regression suite to expect the current 28 published tool pages after QuotePulse was added.
 - GitHub Actions had exposed the stale 27-page assertion; no production runtime defect was inferred from that failure.
+
+## 2026-09-21 - QuotePulse test-environment hardening
+- Guarded QuotePulse's optional message dataset before assigning test-only DOM state.
+- Root cause was the lightweight Node VM test DOM lacking HTMLElement dataset support; browser behavior remains unchanged.
