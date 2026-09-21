@@ -251,3 +251,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Added regression coverage for unsupported timestamp units.
 
 - 2026-09-21: Hardened Unit Converter input validation so negative length and weight quantities are rejected while negative temperatures remain supported.
+
+## 2026-09-21 - Unit converter regression assertion
+- Corrected a brittle regression-test regular expression that expected a literal backslash before the decimal point in the rendered kilometer-to-mile result.
+- The production converter was already returning the correct `0.62 MI` result; the failure was isolated to the test assertion.
+- Fresh CI verification is required for commit `8a390fdd1d4d11750eaf9c9f41bd20afee8137`.
