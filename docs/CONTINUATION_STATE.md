@@ -212,3 +212,14 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - CSP intentionally allows inline scripts/styles because the current app uses inline event handlers; it blocks plugin/object content, cross-origin connections, framing, and non-self script/style origins. Image `blob:` support is retained for local image processing.
 - Security header commit: `aa02494bbef8be415df2f1dd21d54ec90703db32`.
 - Fresh source re-fetch confirmed the deployed configuration file contains the intended headers. Runtime header verification will follow against the production URL once its canonical domain is established.
+
+## 2026-09-21 - Continuation verification checkpoint
+- Re-fetched the integrated `main` branch before continuing work.
+- Latest commit remains `e043a29d9809a566971b3cc0b5edd2d654f1500a`.
+- GitHub Actions run `35595398064` completed successfully on that commit.
+- The repository currently contains 28 tool pages, including QuotePulse, and the integration suite is configured for 28 pages.
+- Functional source review of percentage, discount, loan, interest, unit, percentage-change, tip, BMI, date, compound-interest, margin, ROI, break-even, duration, business-days, random-number, aspect-ratio and timestamp paths did not identify a concrete production defect that justifies an unverified mutation in this pass.
+- The sitemap intentionally remains root-relative because no verified production hostname is configured. Do not invent or substitute a hostname. Once the production domain is known, update sitemap, canonicals, Open Graph URLs and structured-data URLs together and verify them against the deployed site.
+- `robots.txt` is also intentionally root-relative until the production domain is established.
+- Real browser/device QA, live deployment verification, and final contact/support details remain launch gates. Automated CI does not prove those behaviors.
+- Next bounded work: integration/SEO consistency audit, then real deployment/browser QA when a production URL is available.
