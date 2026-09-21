@@ -17,6 +17,12 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
     assert.match(source, /id=["']tool["']/, page + " must have a tool mount");
     assert.ok(source.includes("tool-pages.js"), page + " must load the shared renderer");
     assert.ok(source.includes('<meta name="description"'), page + " must have a description");
+    assert.ok(source.includes('<meta property="og:type"'), page + " must have Open Graph type metadata");
+    assert.ok(source.includes('<meta property="og:title"'), page + " must have Open Graph title metadata");
+    assert.ok(source.includes('<meta property="og:description"'), page + " must have Open Graph description metadata");
+    assert.ok(source.includes('<meta name="twitter:card"'), page + " must have Twitter card metadata");
+    assert.ok(source.includes('<meta name="twitter:title"'), page + " must have Twitter title metadata");
+    assert.ok(source.includes('<meta name="twitter:description"'), page + " must have Twitter description metadata");
     assert.ok(source.includes('<link rel="canonical"'), page + " must have a canonical");
     assert.ok(source.includes('<meta name="robots" content="index,follow"'), page + " must be indexable");
     assert.ok(sitemap.includes("tools/" + page), page + " must be in sitemap.xml");
