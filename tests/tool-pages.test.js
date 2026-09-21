@@ -226,3 +226,17 @@ test("QuotePulse renderer is registered", () => {
   context.renderTool("quotePulse", "tool");
   assert.match(elements.tool.innerHTML, /QuotePulse/);
 });
+
+test("QuotePulse detects missing commercial terms and keeps quote analysis local", () => {
+  const { context, elements } = loadTools({
+    quoteText: "Labour $400\nMaterials $300\nTotal $700",
+    result: "",
+    qpMessage: ""
+  });
+  context.analyzeQuote();
+  assert.match(elements.result.innerHTML, /No warranty or guarantee language was detected/);
+  assert.match(elements.result.innerHTML, /No change-order rule was detected/);
+  assert.match(elements.result.innerHTML, /No cancellation or refund terms were detected/);
+  assert.match(elements.result.innerHTML, /Taxes or fees are not mentioned/);
+  assert.match(elements.qpMessage.innerHTML, /Copy message/);
+});
