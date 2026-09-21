@@ -62,6 +62,17 @@ For each meaningful change:
 - Fresh CI evidence for the QuotePulse implementation is still required. Do not claim the new QuotePulse suite is green until a GitHub Actions run associated with the implementation completes successfully.
 - Real browser/device QA remains pending.
 
+## 2026-09-21 - Current verified checkpoint
+- Latest main commit: `41411d9673febafabb06c011ba33a426126fadf4`.
+- GitHub Actions run `35595020711` completed successfully on that commit.
+- The preceding production-test correction commit `8a390fdd1d4d11750eaf9c9f41bd20afee8137` also has a successful GitHub Actions run `35595012549`.
+- The recent Unit Converter work was limited to negative length/weight validation plus regression-test corrections; temperature values remain allowed to be negative.
+- Current published inventory is 28 tool pages.
+- Browser/device QA remains the principal unverified launch gate. Source tests and CI do not prove real Android/iOS/desktop browser behavior.
+- No production domain/live deployment URL has been verified yet.
+- Revenue is an objective, not a guaranteed outcome. The monetization plan remains free core tools first, then measured ads/affiliate/premium/B2B surfaces after deployment, privacy disclosure, and real usage evidence.
+- Next bounded engineering focus: continue the functional edge-case audit, then integration/SEO consistency, then real browser/device QA and launch readiness.
+
 ## Next work queue
 ### Priority 1: functional correctness
 Audit tool-pages.js in bounded batches for real edge cases:
