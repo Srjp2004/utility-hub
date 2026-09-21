@@ -74,7 +74,7 @@ test("text counter handles empty text", () => {
   assert.match(elements.result.innerHTML, /0 characters/);
 });
 
-test("unit converter converts kilometers to miles", () => {
+test("unit converter rejects negative physical quantities", () => {\n  const { context, elements } = loadTools({ uv: "-5", uf: "kg", ut: "lb", result: "" });\n  context.calcConvert();\n  assert.equal(elements.result.textContent, "Length and weight values cannot be negative.");\n});\n\ntest("unit converter converts kilometers to miles", () => {
   const { context, elements } = loadTools({ uv: "1", uf: "km", ut: "mi", result: "" });
   context.calcConvert();
   assert.match(elements.result.innerHTML, /0\.62/);
