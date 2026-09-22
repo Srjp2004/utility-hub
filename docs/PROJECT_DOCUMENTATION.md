@@ -94,3 +94,8 @@ Consider React/Next.js, backend services, database, authentication or APIs only 
 - Vercel rejected the previous asset-header `source` patterns during deployment validation because the extension separators were escaped in the route patterns.
 - The configuration now uses Vercel-compatible asset/header source patterns without escaped extension separators. Security headers and the intended short HTML/static-asset cache policy are retained.
 - This is a deployment-configuration correction only; no application runtime logic was changed.
+
+
+## 2026-09-22 - SEO URL and search-scope decision
+- The currently verified deployed hostname is `utility-hub-ten.vercel.app`. Sitemap and robots URLs were made absolute against that hostname after direct browser verification. If a final custom production domain is adopted, sitemap, robots, canonicals, Open Graph URLs and structured-data URLs must be updated together.
+- Homepage search is intentionally scoped to the featured cards rather than silently pretending to search the complete directory. The homepage placeholder now states this scope; the full 28-tool inventory is available through the Tools directory search.
