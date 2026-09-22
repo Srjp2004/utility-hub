@@ -384,3 +384,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Defined bounded autonomous repair with diagnosis-before-repair, risk-based retry budgets and fresh retesting.
 - Defined disjoint ownership rules for parallel workers and a machine-readable evidence handoff contract.
 - Recorded the current limitation: repository control-plane contracts exist, but an actual worker/delegation runtime is still required before end-to-end autonomous execution can be claimed.
+
+
+## 2026-09-22 - Failure-driven CI/E2E repair
+- Fresh PR execution provided actionable evidence: browser E2E had 34 passing tests and one failing assertion because the deployed 404 page says `That page does not exist.` rather than `Page not found`.
+- DevSecOps dependency-review failed because GitHub Dependency Graph is not enabled for this repository; this is an unsupported repository capability, not a detected dependency vulnerability. The gate no longer invokes the unsupported action; dependency audit/SBOM and CodeQL remain active.
+- DevSecOps source-security header validation failed because shell quoting made the CSP grep assertion brittle. Replaced it with JSON-aware Node validation of required headers/directives.
+- Created focused repair branch `fix/ci-e2e-security-gates`; fresh rerun is required before considering the gates green.

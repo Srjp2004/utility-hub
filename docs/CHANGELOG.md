@@ -356,3 +356,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Defined bounded autonomous repair with diagnosis-before-repair, risk-based retry budgets and fresh retesting.
 - Defined disjoint ownership rules for parallel workers and a machine-readable evidence handoff contract.
 - Recorded the current limitation: repository control-plane contracts exist, but an actual worker/delegation runtime is still required before end-to-end autonomous execution can be claimed.
+
+
+## 2026-09-22 - Failure-driven CI/E2E repair
+- Aligned the 404 browser E2E assertion with the actual deployed 404 page text observed in CI.
+- Removed unsupported GitHub Dependency Review execution because the repository's Dependency Graph is disabled; retained npm audit, SBOM and CodeQL coverage.
+- Replaced brittle shell/grep security-header checks with JSON-aware validation of `vercel.json`.
+- Fresh CI/E2E rerun remains required.
