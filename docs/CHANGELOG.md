@@ -276,3 +276,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Corrected a brittle regression-test regular expression that expected a literal backslash before the decimal point in the rendered kilometer-to-mile result.
 - The production converter was already returning the correct `0.62 MI` result; the failure was isolated to the test assertion.
 - Fresh CI verification is required for commit `8a390fdd1d4d11750eaf9c9f41bd20afee8137`.
+
+
+## 2026-09-22 - SEO and homepage UX hardening
+- Published absolute sitemap URLs and an absolute sitemap location in robots.txt for the current verified Vercel deployment hostname.
+- Added consistent indexability, meta-description and canonical metadata to About, Privacy, Terms and Contact pages.
+- Clarified the homepage search placeholder to indicate that it searches the featured tools shown on the homepage; the full 28-tool inventory remains searchable from the Tools directory.
+- No application calculation logic was changed in this pass.
