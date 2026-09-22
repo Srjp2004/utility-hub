@@ -26,10 +26,11 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
     assert.ok(source.includes('<link rel="canonical"'), page + " must have a canonical");
     assert.ok(source.includes('<meta name="robots" content="index,follow"'), page + " must be indexable");
     assert.ok(sitemap.includes("tools/" + page), page + " must be in sitemap.xml");
-    const rendererKey = new RegExp("[\\\"']?" + match[1] + "[\\\"']?\\s*:");
+    const rendererKey = new RegExp("[\\\"\']?" + match[1] + "[\\\"\']?\\s*:");
     assert.match(renderer, rendererKey, page + " references an unknown renderer type");
   }
 });
+
 
 test("tool directory links resolve and directory SEO metadata is present", () => {
   const toolsPage = fs.readFileSync("tools.html", "utf8");
@@ -42,8 +43,9 @@ test("tool directory links resolve and directory SEO metadata is present", () =>
     assert.ok(pages.has(page), "tools.html links to missing tool page: " + page);
   }
   assert.match(toolsPage, /<meta name="robots" content="index,follow"/, "tools.html must be indexable");
-  assert.match(toolsPage, /<link rel="canonical" href="\\/tools\.html">/, "tools.html must have a canonical");
+  assert.match(toolsPage, /<link rel="canonical" href="\/tools\.html">/, "tools.html must have a canonical");
 });
+
 
 test("homepage popular tool links resolve and avoid modal-only navigation", () => {
   const home = fs.readFileSync("index.html", "utf8");
@@ -54,7 +56,7 @@ test("homepage popular tool links resolve and avoid modal-only navigation", () =
   for (const page of hrefs) {
     assert.ok(pages.has(page), "index.html links to missing tool page: " + page);
   }
-  assert.doesNotMatch(home, /onclick="tool\\('(convert|tip|bmi|date)'\\)"/, "popular tools should navigate to dedicated pages");
+  assert.doesNotMatch(home, /onclick="tool\('(convert|tip|bmi|date)'\)"/, "popular tools should navigate to dedicated pages");
 });
 
 test("sitemap contains unique valid URLs that map to existing HTML pages", () => {
