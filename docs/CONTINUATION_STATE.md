@@ -244,3 +244,13 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Current inventory remains 28 tool pages.
 - Deployment lookup does not provide a verified production deployment URL in the repository state. Therefore production browser/device behavior remains unverified.
 - Next concrete gate: obtain/verify a production deployment URL, then perform live browser/device smoke testing and production SEO/header checks. Do not treat CI as proof of visual, touch, download, canvas or mobile-runtime compatibility.
+
+
+## 2026-09-22 - Fresh release-readiness checkpoint
+- Re-fetched `main`; current HEAD is `fd94bbc24146925896a290d219154c88e08fbe08`.
+- Verified GitHub Actions run `35634837979` for that exact HEAD is completed with conclusion `success`.
+- The automated Node 20/22 test matrix is therefore fresh and green for the current HEAD.
+- Release/deployment inspection still shows no verified production deployment URL in repository deployment records.
+- No production mutation was made in this pass because live browser/device verification requires an actual deployed URL and changing working application logic without a reproducible defect would be speculative.
+- Current release classification remains `READY_NOT_PUBLISHED` at best: source/CI evidence is green, but production distribution and runtime behavior are not independently verified.
+- Next concrete gate: deploy the current HEAD through an authorized hosting path, then verify the deployed site from real browser boundaries before claiming fully operational status.
