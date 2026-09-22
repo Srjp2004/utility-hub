@@ -35,7 +35,7 @@ test("tool directory links resolve and directory SEO metadata is present", () =>
   const toolsPage = fs.readFileSync("tools.html", "utf8");
   const toolsDir = path.join(process.cwd(), "tools");
   const pages = new Set(fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html")));
-  const links = [...toolsPage.matchAll(/href="(tools\\/[^"]+\.html)"/g)].map((m) => m[1].slice("tools/".length));
+  const links = [...toolsPage.matchAll(/href="(tools\/[^"]+\.html)"/g)].map((m) => m[1].slice("tools/".length));
 
   assert.equal(new Set(links).size, links.length, "tools.html must not contain duplicate tool links");
   for (const page of links) {
@@ -49,7 +49,7 @@ test("homepage popular tool links resolve and avoid modal-only navigation", () =
   const home = fs.readFileSync("index.html", "utf8");
   const toolsDir = path.join(process.cwd(), "tools");
   const pages = new Set(fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html")));
-  const hrefs = [...home.matchAll(/href="(tools\\/[^"]+\.html)"/g)].map((m) => m[1].slice("tools/".length));
+  const hrefs = [...home.matchAll(/href="(tools\/[^"]+\.html)"/g)].map((m) => m[1].slice("tools/".length));
   assert.ok(hrefs.length >= 10, "homepage should expose crawlable popular tool links");
   for (const page of hrefs) {
     assert.ok(pages.has(page), "index.html links to missing tool page: " + page);
