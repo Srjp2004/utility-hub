@@ -1,4 +1,4 @@
-name: UtilityHub Engineering Security
+name: UtilityHub DevSecOps
 
 on:
   push:
@@ -6,15 +6,122 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: 41 3 * * 1
+    - cron: "41 3 * * 1"
   workflow_dispatch:
 
 permissions:
   contents: read
+  security-events: write
 
 jobs:
-  security:
+  dependency-audit:
+    name: Dependency audit
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+      - name: Verify lockfile install
+        run: npm ci
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+      - name: Generate dependency SBOM
+        run: npm sbom --sbom-format=cyclonedx > sbom.json
+      - name: Upload dependency SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: utility-hub-sbom-${{ github.run_id }}
+          path: sbom.json
+          if-no-files-found: error
+          retention-days: 30
+
+  codeql:
+    name: CodeQL SAST
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+      - name: Analyze with CodeQL
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"
+
+  dependency-review:
+    name: Dependency review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Review dependency changes
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: always
+
+  source-security:
+    name: Source security invariants
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check dangerous JavaScript primitives
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RInE --exclude-dir=.git --exclude-dir=node_modules --include='*.js' --include='*.mjs' --include='*.html'             -e '(^|[^[:alnum:]_])eval[[:space:]]*\('             -e 'new[[:space:]]+Function[[:space:]]*\('             -e 'document\.write[[:space:]]*\(' .; then
+            echo "Dangerous JavaScript primitive detected."
+            exit 1
+          fi
+      - name: Check repository for accidental private-key material
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RInE --exclude-dir=.git --exclude-dir=node_modules             -e '-----BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----'             -e 'AKIA[0-9A-Z]{16}'             -e 'gh[pousr]_[A-Za-z0-9_]{20,}' .; then
+            echo "Potential credential material detected in repository files."
+            exit 1
+          fi
+      - name: Validate security headers and CSP policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f vercel.json
+          grep -q '"Content-Security-Policy"' vercel.json
+          grep -q '"X-Content-Type-Options"' vercel.json
+          grep -q '"Referrer-Policy"' vercel.json
+          grep -q '"X-Frame-Options"' vercel.json
+          grep -q '"Permissions-Policy"' vercel.json
+          grep -q '"Cross-Origin-Opener-Policy"' vercel.json
+          grep -q '"object-src '"'"'none'"'"'' vercel.json
+          grep -q '"frame-ancestors '"'"'none'"'"'' vercel.json
+      - name: Validate dependency manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          node -e "const p=require('./package.json'); if(!p.name || !p.scripts?.test || !p.devDependencies?.['@playwright/test']) process.exit(1)"
+          test -f package-lock.json
+
+  security-e2e:
+    name: Security-focused browser checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,14 +131,8 @@ jobs:
           node-version: 22.x
           cache: npm
       - name: Install dependencies
-        run: npm install
-      - name: Dependency audit
-        run: npm audit --audit-level=high
-      - name: Check dangerous JavaScript primitives
-        shell: bash
-        run: |
-          set -euo pipefail
-          if grep -RInE --exclude-dir=.git --exclude-dir=node_modules --include='*.js' --include='*.mjs' --include='*.html'             -e '(^|[^[:alnum:]_])eval[[:space:]]*\('             -e 'new[[:space:]]+Function[[:space:]]*\('             -e 'document\.write[[:space:]]*\(' .; then
-            echo "Dangerous JavaScript primitive detected."
-            exit 1
-          fi
+        run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run browser E2E security coverage
+        run: npx playwright test --project=chromium --grep-invert "skip-security"
