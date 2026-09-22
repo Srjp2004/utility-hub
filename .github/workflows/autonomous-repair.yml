@@ -1,0 +1,93 @@
+name: UtilityHub Autonomous Repair
+
+on:
+  workflow_run:
+    workflows:
+      - UtilityHub Tests
+      - UtilityHub Browser E2E
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Failed GitHub Actions run ID to diagnose
+        required: true
+        type: string
+      request:
+        description: Optional additional repair context
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  diagnose-and-delegate:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create repair issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AUTOMATION_TOKEN: ${{ secrets.COPILOT_AUTOMATION_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          FAILED_RUN_ID: ${{ github.event.workflow_run.id }}
+          INPUT_RUN_ID: ${{ inputs.run_id }}
+          EXTRA_REQUEST: ${{ inputs.request }}
+        run: |
+          set -euo pipefail
+          RUN_ID="${FAILED_RUN_ID:-${INPUT_RUN_ID}}"
+          RUN_URL="https://github.com/${REPOSITORY}/actions/runs/${RUN_ID}"
+          TITLE="[autofix] Investigate failed engineering run ${RUN_ID}"
+
+          existing="$(gh issue list --repo "${REPOSITORY}" --state open --search "in:title ${TITLE}" --json number --jq '.[0].number // empty')"
+          if [ -n "${existing}" ]; then
+            number="${existing}"
+          else
+            cat > issue.md <<EOF
+          ## Autonomous engineering repair
+
+          A required UtilityHub engineering verification run failed.
+
+          Repository: ${REPOSITORY}
+          Run: ${RUN_URL}
+          Run ID: ${RUN_ID}
+
+          Required process:
+          Inspect the exact failing run and current main.
+          Determine whether the failure is an application defect, stale test, infrastructure problem, or environment problem.
+          Fix the root cause only when justified.
+          Add regression coverage for newly discovered application defects.
+          Run npm test and the full Playwright E2E suite.
+          Update required project documentation.
+          Open a focused pull request. Do not merge directly to main.
+
+          Additional request:
+          ${EXTRA_REQUEST:-None}
+          EOF
+            number="$(gh issue create --repo "${REPOSITORY}" --title "${TITLE}" --label "automation" --body-file issue.md | sed -n 's#.*/issues/##p')"
+          fi
+
+          if [ -z "${AUTOMATION_TOKEN}" ]; then
+            echo "COPILOT_AUTOMATION_TOKEN is not configured. Repair issue created for manual delegation."
+            exit 0
+          fi
+
+          python - <<'PY' > payload.json
+          import json, os
+          print(json.dumps({
+            "assignees":["copilot-swe-agent[bot]"],
+            "agent_assignment":{
+              "target_repo":os.environ["REPOSITORY"],
+              "base_branch":"main",
+              "custom_instructions":(
+                "Act as the UtilityHub autonomous repair engineer. Read .github/copilot-instructions.md and all durable project documentation first. "
+                "Diagnose the linked failing run using fresh evidence. Preserve scope. Fix root causes, add regression tests, run npm test and the full Playwright E2E suite, "
+                "review the diff, update required docs, and open a focused PR. Never weaken or delete tests. Never merge directly to main."
+              ),
+              "custom_agent":"",
+              "model":""
+            }
+          }))
+          PY
+          GH_TOKEN="${AUTOMATION_TOKEN}" gh api --method POST             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             "/repos/${REPOSITORY}/issues/${number}/assignees"             --input payload.json
