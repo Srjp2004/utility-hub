@@ -5,6 +5,7 @@ on:
     workflows:
       - UtilityHub Tests
       - UtilityHub Browser E2E
+      - UtilityHub DevSecOps
     types: [completed]
   workflow_dispatch:
     inputs:
@@ -65,7 +66,7 @@ jobs:
           Additional request:
           ${EXTRA_REQUEST:-None}
           EOF
-            number="$(gh issue create --repo "${REPOSITORY}" --title "${TITLE}" --label "automation" --body-file issue.md | sed -n 's#.*/issues/##p')"
+            number="$(gh issue create --repo "${REPOSITORY}" --title "${TITLE}" --body-file issue.md | sed -n 's#.*/issues/##p')"
           fi
 
           if [ -z "${AUTOMATION_TOKEN}" ]; then
