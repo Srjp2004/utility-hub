@@ -339,3 +339,12 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - The gate waits for required workflow runs, fails when a required run is missing, fails or times out, and emits a machine-readable engineering-gate-state.json artifact.
 - This provides a single release-engineering signal without granting automation permission to merge directly to main.
 - Fresh execution evidence is still required before treating the gate as operationally green.
+
+
+## 2026-09-22 - CI/DevSecOps failure-driven hardening
+- Fresh GitHub execution exposed an infrastructure/configuration failure: the E2E and DevSecOps workflows requested npm cache support while the repository has no committed package-lock.json, causing setup-node to fail before tests could execute.
+- Removed npm cache requirements and changed CI dependency installation to work with the repository's current lockfile-free package configuration.
+- Replaced brittle grep-based Vercel security-header assertions with JSON-aware Node validation of the configured security headers and CSP directives.
+- Autonomous repair now also observes DevSecOps failures.
+- Removed reliance on a non-existent automation issue label when creating autonomous repair issues, preventing the failure handler itself from failing before delegation.
+- Fresh reruns are required to establish whether the corrected pipelines pass.
