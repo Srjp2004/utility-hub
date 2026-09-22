@@ -379,6 +379,12 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - This contract is intentionally runtime-neutral: it can govern an available agent/delegation runtime without assuming a specific AI provider.
 
 
+## 2026-09-22 - Structured-data coverage hardening
+- Source audit identified four published tool pages without WebApplication JSON-LD: Base64 Encoder & Decoder, Random Number Generator, Aspect Ratio Calculator, and Unix Timestamp Converter.
+- Added consistent WebApplication structured data to those four pages and strengthened the integration contract to require structured data on every published tool page.
+- PR #63: `seo: complete structured data coverage for all tool pages`.
+- Fresh CI evidence is required before merge; no production readiness claim is made.
+
 ## 2026-09-22 - Agent-native SDLC orchestration plan
 - Added `docs/agent-sdlc/orchestrator-plan.md` defining the provider-neutral execution pipeline connecting intake, discovery, specification, planning, implementation, testing, security, independent verification, delivery, observation and learning.
 - Defined bounded autonomous repair with diagnosis-before-repair, risk-based retry budgets and fresh retesting.
