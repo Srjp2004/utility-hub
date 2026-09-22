@@ -63,8 +63,15 @@ test("sitemap contains only existing HTML pages", () => {
   const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   assert.equal(new Set(locs).size, locs.length, "sitemap must not contain duplicate URLs");
   for (const loc of locs) {
-    assert.match(loc, /^\//, "sitemap paths must be root-relative until the production domain is configured");
-    const relative = loc.slice(1);
+    let pathname;
+    try {
+      pathname = new URL(loc, "https://utility-hub.test").pathname;
+    } catch {
+      assert.fail("sitemap contains an invalid URL: " + loc);
+    }
+
+    assert.ok(pathname.startsWith("/"), "sitemap URLs must resolve to root-relative paths: " + loc);
+    const relative = pathname.slice(1);
     const target = relative === "" ? "index.html" : relative;
     assert.ok(fs.existsSync(target), "sitemap points to missing file: " + loc);
   }
