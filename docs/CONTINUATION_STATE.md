@@ -276,3 +276,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - GitHub's current commit status reports the Vercel check as `success` for that HEAD, providing fresh evidence that Vercel accepted the repaired configuration for deployment.
 - The Vercel status does not expose a verified public deployment URL through the available GitHub connector, so live runtime/browser verification is still pending.
 - No application-runtime change is justified at this point. Next gate is to open the latest Vercel deployment, obtain its actual Visit/production URL, and verify the live site and headers before updating canonical/sitemap URLs.
+
+## 2026-09-22 - Live mobile browser smoke verification
+- User-reported real-browser verification succeeded on the deployed UtilityHub URL `https://utility-hub-ten.vercel.app/`.
+- Smoke checks confirmed: homepage loads and identifies UtilityHub; Tools directory opens; Percentage Calculator returns 20% of 500 as 100; QuotePulse loads; and refreshing the homepage does not produce a Vercel 404.
+- This is direct browser-level evidence for a representative mobile smoke path, but it does not establish full Android/iOS/desktop/tablet compatibility or exhaustive tool correctness.
+- Production hostname remains an integration deployment URL rather than a confirmed final custom production domain. Canonical and sitemap absolute URLs remain intentionally relative until a final domain is established.
+- Next launch gate: broaden browser/device QA and verify representative image, developer, navigation, 404 and legal-page flows before calling production readiness complete.
