@@ -283,3 +283,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Added consistent indexability, meta-description and canonical metadata to About, Privacy, Terms and Contact pages.
 - Clarified the homepage search placeholder to indicate that it searches the featured tools shown on the homepage; the full 28-tool inventory remains searchable from the Tools directory.
 - No application calculation logic was changed in this pass.
+
+## 2026-09-22 - Autonomous browser E2E automation foundation
+- Added Playwright configuration for Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit.
+- Added a repository-local static HTTP server for deterministic browser testing without backend infrastructure.
+- Added E2E coverage for homepage health, directory search/filtering, all 28 tool-page mounts and browser-error detection, representative calculator behavior, keyboard interaction, 404 handling, refresh/history navigation and unexpected external requests.
+- Added `.github/workflows/e2e.yml` to run browser tests on pushes, pull requests, nightly schedule and manual dispatch, with failure artifacts.
+- E2E workflow execution is pending fresh GitHub Actions evidence; source-level setup is not treated as proof of browser success.
