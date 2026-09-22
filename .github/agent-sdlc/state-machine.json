@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "states": ["intake","discover","specify","plan","implement","test","secure","verify","deliver","observe","learn","blocked"],
+  "transitions": {
+    "intake":["discover","blocked"],
+    "discover":["specify","blocked"],
+    "specify":["plan","blocked"],
+    "plan":["implement","blocked"],
+    "implement":["test","blocked"],
+    "test":["secure","blocked"],
+    "secure":["verify","blocked"],
+    "verify":["deliver","implement","blocked"],
+    "deliver":["observe","blocked"],
+    "observe":["learn","blocked"],
+    "learn":["discover","intake","blocked"],
+    "blocked":["discover","intake"]
+  },
+  "evidenceRequired": {
+    "discover":["repository-state","documentation"],
+    "specify":["acceptance-criteria"],
+    "plan":["bounded-work-plan"],
+    "implement":["changed-files"],
+    "test":["fresh-test-results"],
+    "secure":["fresh-security-results"],
+    "verify":["independent-verification"],
+    "deliver":["approved-pr"],
+    "observe":["deployment-or-runtime-evidence"],
+    "learn":["post-delivery-observations"]
+  }
+}
