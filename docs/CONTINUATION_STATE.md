@@ -310,3 +310,11 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Temporary homepage search routing experiment was reverted immediately after review because it would redirect while users type unmatched partial queries. No such behavior remains in `app.js`.
 - A no-op directory commit was created during the implementation sequence; it made no content change and has no runtime effect.
 - Next gate: fresh CI/Vercel verification for the resulting main branch, then live browser checks for the changed SEO pages and homepage search wording.
+
+## 2026-09-22 - Autonomous browser E2E automation foundation
+- Added Playwright-based browser E2E infrastructure covering Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit profiles.
+- Added a local static HTTP server so E2E tests exercise the real multi-page site without introducing backend infrastructure.
+- Added automated page-health coverage for all 28 published tool pages, homepage errors, directory search/filtering, representative calculations, keyboard interaction, refresh/history navigation, 404 behavior and unexpected external network requests.
+- Added GitHub Actions workflow `.github/workflows/e2e.yml` for push, pull request, nightly and manual execution, with failure artifacts retained for diagnosis.
+- E2E source has been committed, but the new workflow has not yet produced fresh GitHub Actions evidence. Browser E2E remains unverified until the workflow completes.
+- The existing Node regression workflow and browser E2E workflow are intentionally separate so failures remain attributable to the relevant verification layer.
