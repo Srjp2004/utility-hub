@@ -59,7 +59,7 @@ test("homepage popular tool links resolve and avoid modal-only navigation", () =
 
 test("sitemap contains unique valid URLs that map to existing HTML pages", () => {
   const sitemap = fs.readFileSync("sitemap.xml", "utf8");
-  const locs = [...sitemap.matchAll(/<loc>([^<]+)<\\/loc>/g)].map((m) => m[1].trim());
+  const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
   assert.ok(locs.length > 0, "sitemap must contain at least one URL");
   assert.equal(new Set(locs).size, locs.length, "sitemap must not contain duplicate URLs");
 
