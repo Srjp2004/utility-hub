@@ -33,7 +33,7 @@ test.describe("UtilityHub page health",()=>{
   test("keyboard operation works",async({page})=>{
     await page.goto("/tools/percentage-calculator.html"); await page.locator("#part").fill("20"); await page.locator("#whole").fill("500"); await page.getByRole("button",{name:"Calculate"}).press("Enter"); await expect(page.locator("#result")).toContainText("4%");
   });
-  test("404 behavior is correct",async({page})=>{const response=await page.goto("/missing-utilityhub-e2e-route");expect(response.status()).toBe(404);await expect(page.locator("body")).toContainText("Page not found")});
+  test("404 behavior is correct",async({page})=>{const response=await page.goto("/missing-utilityhub-e2e-route");expect(response.status()).toBe(404);await expect(page.locator("body")).toContainText("That page does not exist.")});
   test("refresh and history navigation work",async({page})=>{
     await page.goto("/tools/quote-pulse.html"); await expect(page.locator("#quoteText")).toBeVisible(); await page.reload(); await expect(page.locator("#quoteText")).toBeVisible();
     await page.goto("/tools/percentage-calculator.html"); await page.goBack(); await expect(page).toHaveURL(/quote-pulse\.html/); await page.goForward(); await expect(page).toHaveURL(/percentage-calculator\.html/);
