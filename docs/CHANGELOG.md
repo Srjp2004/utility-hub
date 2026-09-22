@@ -343,3 +343,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Added `.github/agent-sdlc/mission-schema.json` defining required mission state, agent-result, evidence and delivery fields.
 - The SDLC control plane now has explicit transition/evidence contracts rather than relying only on prose policy.
 - This remains a governance/control-plane layer; no claim is made that an external autonomous agent runtime has been connected or that production delivery is autonomous.
+
+
+## 2026-09-22 - Agent execution contract
+- Added `.github/agent-sdlc/execution-contract.json` defining bounded worker isolation, evidence handoff, diagnosis-before-repair, fresh-retest requirements, retry-policy enforcement, and protected delivery semantics.
+- Agent results now have a machine-readable contract requiring mission identity, source SHA, status, changed files, evidence, blockers and recommendation.
+- This contract is intentionally runtime-neutral: it can govern an available agent/delegation runtime without assuming a specific AI provider.
