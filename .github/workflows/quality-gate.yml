@@ -32,10 +32,12 @@ jobs:
           SHA="${EVENT_SHA:-${INPUT_SHA}}"
           test -n "${SHA}"
 
+          # Map human-readable workflow names to their actual workflow filenames.
+          # Do not derive filenames from workflow display names.
           required=(
-            "UtilityHub Tests"
-            "UtilityHub Browser E2E"
-            "UtilityHub DevSecOps"
+            "UtilityHub Tests|test.yml"
+            "UtilityHub Browser E2E|e2e.yml"
+            "UtilityHub DevSecOps|engineering-security.yml"
           )
 
           deadline=$((SECONDS + 1800))
@@ -46,21 +48,22 @@ jobs:
             all_success=true
             : > gate-results.tsv
 
-            for workflow in "${required[@]}"; do
-              encoded="$(python -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$workflow")"
-              run="$(gh api "/repos/${REPOSITORY}/actions/workflows/${encoded}.yml/runs?head_sha=${SHA}&per_page=1" 2>/dev/null || true)"
+            for requirement in "${required[@]}"; do
+              workflow="${requirement%%|*}"
+              filename="${requirement##*|}"
+
+              run="$(gh api "/repos/${REPOSITORY}/actions/workflows/${filename}/runs?head_sha=${SHA}&per_page=1" 2>/dev/null || true)"
               status="$(printf '%s' "$run" | jq -r '.workflow_runs[0].status // "missing"')"
               conclusion="$(printf '%s' "$run" | jq -r '.workflow_runs[0].conclusion // "pending"')"
               url="$(printf '%s' "$run" | jq -r '.workflow_runs[0].html_url // ""')"
+              run_sha="$(printf '%s' "$run" | jq -r '.workflow_runs[0].head_sha // ""')"
 
-              if [ "$status" = "missing" ]; then
+              if [ "$status" = "missing" ] || [ "$run_sha" != "$SHA" ]; then
                 all_present=false
                 printf '%s\tmissing\tpending\t%s\n' "$workflow" "$url" >> gate-results.tsv
               else
                 printf '%s\t%s\t%s\t%s\n' "$workflow" "$status" "$conclusion" "$url" >> gate-results.tsv
-                if [ "$status" != "completed" ]; then
-                  all_success=false
-                elif [ "$conclusion" != "success" ]; then
+                if [ "$status" != "completed" ] || [ "$conclusion" != "success" ]; then
                   all_success=false
                 fi
               fi
@@ -78,19 +81,22 @@ jobs:
 
           if [ "$state" != "PASS" ]; then
             state="FAIL"
-            echo "Required engineering gates did not reach SUCCESS within 30 minutes."
+            echo "Required engineering gates did not reach SUCCESS for ${SHA} within 30 minutes."
             exit 1
           fi
 
           echo "All required engineering gates passed for ${SHA}."
       - name: Publish gate state
         if: always()
+        env:
+          SHA: ${{ github.event.pull_request.head.sha || inputs.sha }}
         run: |
+          set -euo pipefail
           cat > engineering-gate-state.json <<EOF
           {
             "schemaVersion": 1,
             "repository": "${{ github.repository }}",
-            "commit": "${{ github.event.pull_request.head.sha || inputs.sha }}",
+            "commit": "${SHA}",
             "workflow": "${{ github.workflow }}",
             "runId": "${{ github.run_id }}",
             "result": "${{ job.status }}",
