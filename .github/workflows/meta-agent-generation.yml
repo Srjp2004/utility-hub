@@ -1,0 +1,73 @@
+name: UtilityHub Meta-Agent Generation
+
+on:
+  workflow_dispatch:
+    inputs:
+      mission:
+        description: Engineering mission to decompose
+        required: true
+        type: string
+      risk:
+        description: Risk level
+        required: true
+        default: medium
+        type: choice
+        options: [low, medium, high, critical]
+      focus:
+        description: Specialist focus or all
+        required: false
+        default: all
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  generate:
+    name: Generate bounded agent mission pack
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate mission pack
+        env:
+          MISSION: ${{ inputs.mission }}
+          RISK: ${{ inputs.risk }}
+          FOCUS: ${{ inputs.focus }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, hashlib, datetime
+          catalog=json.loads(pathlib.Path(".github/meta-agent/agent-catalog.json").read_text())
+          mission=os.environ["MISSION"].strip()
+          if not mission: raise SystemExit("Mission must not be empty")
+          risk=os.environ["RISK"]; focus=os.environ["FOCUS"].strip() or "all"
+          digest=hashlib.sha256(mission.encode()).hexdigest()[:12]
+          roles=[]
+          for role in catalog["roles"]:
+              if role["required"] or focus=="all" or focus==role["id"]:
+                  roles.append({"agentId":f"{role['id']}-{digest}","role":role["id"],"mission":role["mission"]})
+          pack={"schemaVersion":1,"generatedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),"repository":os.environ["GITHUB_REPOSITORY"],"sourceSha":os.environ["GITHUB_SHA"],"missionId":digest,"risk":risk,"focus":focus,"mission":mission,"agents":roles,"orchestration":{"sequence":["discover","architecture-review","implementation","qa","security","independent-verification"],"parallelizable":["performance","seo","growth","monetization"],"stopConditions":["critical security finding","scope violation","unsupported completion claim","repeated verification failure"],"mergePolicy":"PR only; no direct main merge"}}
+          pathlib.Path("meta-agent-mission.json").write_text(json.dumps(pack,indent=2)+"\n")
+          pathlib.Path("meta-agent-mission.md").write_text("# UtilityHub Meta-Agent Mission Pack\n\n"+f"**Mission:** {mission}\n\n"+"## Agents\n"+"\n".join(f"- **{x['role']}**: {x['mission']}" for x in roles)+"\n")
+          PY
+      - name: Upload mission pack
+        uses: actions/upload-artifact@v4
+        with:
+          name: meta-agent-mission-${{ github.run_id }}
+          path: |
+            meta-agent-mission.json
+            meta-agent-mission.md
+          retention-days: 30
+      - name: Create orchestration issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MISSION: ${{ inputs.mission }}
+          RISK: ${{ inputs.risk }}
+        run: |
+          set -euo pipefail
+          key="$(printf '%s' "$MISSION" | sha256sum | cut -c1-12)"
+          existing="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title [meta-agent] $key" --json number --jq '.[0].number // empty')"
+          if [ -z "$existing" ]; then
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "[meta-agent] $key $RISK" --body-file meta-agent-mission.md
+          fi
