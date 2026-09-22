@@ -349,3 +349,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Added `.github/agent-sdlc/execution-contract.json` defining bounded worker isolation, evidence handoff, diagnosis-before-repair, fresh-retest requirements, retry-policy enforcement, and protected delivery semantics.
 - Agent results now have a machine-readable contract requiring mission identity, source SHA, status, changed files, evidence, blockers and recommendation.
 - This contract is intentionally runtime-neutral: it can govern an available agent/delegation runtime without assuming a specific AI provider.
+
+
+## 2026-09-22 - Agent-native SDLC orchestration plan
+- Added `docs/agent-sdlc/orchestrator-plan.md` defining the provider-neutral execution pipeline connecting intake, discovery, specification, planning, implementation, testing, security, independent verification, delivery, observation and learning.
+- Defined bounded autonomous repair with diagnosis-before-repair, risk-based retry budgets and fresh retesting.
+- Defined disjoint ownership rules for parallel workers and a machine-readable evidence handoff contract.
+- Recorded the current limitation: repository control-plane contracts exist, but an actual worker/delegation runtime is still required before end-to-end autonomous execution can be claimed.
