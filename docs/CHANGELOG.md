@@ -336,3 +336,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Added `.github/workflows/agent-sdlc.yml` to intake a software-engineering mission, validate risk, create an immutable mission state, retain evidence artifacts and create a traceability issue.
 - Delivery remains PR-based and protected; this control plane does not grant autonomous agents unrestricted merge or production authority.
 - The workflow is an orchestration/control-plane foundation. Actual autonomous implementation requires an available agent execution/delegation runtime and fresh workflow evidence.
+
+
+## 2026-09-22 - Agent-native SDLC contract hardening
+- Added `.github/agent-sdlc/state-machine.json` with explicit lifecycle states, allowed transitions and evidence requirements.
+- Added `.github/agent-sdlc/mission-schema.json` defining required mission state, agent-result, evidence and delivery fields.
+- The SDLC control plane now has explicit transition/evidence contracts rather than relying only on prose policy.
+- This remains a governance/control-plane layer; no claim is made that an external autonomous agent runtime has been connected or that production delivery is autonomous.
