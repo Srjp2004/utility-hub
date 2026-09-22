@@ -1,0 +1,63 @@
+name: UtilityHub Agent-Native SDLC
+
+on:
+  workflow_dispatch:
+    inputs:
+      mission:
+        description: Software engineering mission
+        required: true
+        type: string
+      risk:
+        description: Risk level
+        required: true
+        default: medium
+        type: choice
+        options: [low, medium, high, critical]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  intake:
+    name: Intake and generate SDLC state
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate and create mission state
+        env:
+          MISSION: ${{ inputs.mission }}
+          RISK: ${{ inputs.risk }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, hashlib, datetime
+          policy=json.loads(pathlib.Path('.github/agent-sdlc/policy.json').read_text())
+          mission=os.environ['MISSION'].strip(); risk=os.environ['RISK']
+          if not mission: raise SystemExit('Mission must not be empty')
+          if risk not in policy['riskLevels']: raise SystemExit('Invalid risk')
+          mid=hashlib.sha256((mission+'\n'+os.environ['GITHUB_SHA']).encode()).hexdigest()[:16]
+          state={'schemaVersion':1,'missionId':mid,'mission':mission,'risk':risk,'repository':os.environ['GITHUB_REPOSITORY'],'sourceSha':os.environ['GITHUB_SHA'],'state':'intake','retryBudget':policy['riskLevels'][risk]['maxRetries'],'acceptanceCriteria':policy['invariants'],'evidence':[],'blockers':[],'decisionLog':[{'state':'intake','at':datetime.datetime.now(datetime.timezone.utc).isoformat()}]}
+          pathlib.Path('sdlc-state.json').write_text(json.dumps(state,indent=2)+'\n')
+          pathlib.Path('sdlc-state.md').write_text('# Agent-Native SDLC Mission\n\n'+f'- Mission ID: `{mid}`\n- Risk: `{risk}`\n- Source SHA: `{os.environ["GITHUB_SHA"]}`\n- State: `intake`\n\n## Mission\n'+mission+'\n')
+          PY
+      - name: Upload durable mission state
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-sdlc-${{ github.run_id }}
+          path: |
+            sdlc-state.json
+            sdlc-state.md
+          retention-days: 30
+      - name: Create traceability issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MISSION: ${{ inputs.mission }}
+          RISK: ${{ inputs.risk }}
+        run: |
+          set -euo pipefail
+          key="$(printf '%s' "$MISSION" | sha256sum | cut -c1-16)"
+          existing="$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title [agent-sdlc] $key" --json number --jq '.[0].number // empty')"
+          if [ -z "$existing" ]; then
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "[agent-sdlc] $key $RISK" --body "Mission: $MISSION\nRisk: $RISK\nSource SHA: $GITHUB_SHA\n\nLifecycle: intake -> discover -> specify -> plan -> implement -> test -> secure -> verify -> deliver -> observe -> learn.\n\nMerge and production remain protected actions."
+          fi
