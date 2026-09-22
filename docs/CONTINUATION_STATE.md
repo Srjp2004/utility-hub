@@ -300,3 +300,13 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 5. CI maintenance: GitHub Actions reported a Node 20 deprecation warning because GitHub-hosted action internals are moving to Node 24. The project test matrix explicitly requests Node 20.x and 22.x. This is not currently a functional failure, but the CI configuration should be revisited before it becomes an operational problem.
 
 - No production/runtime code was changed during this audit. The next engineering pass should address the confirmed SEO/UX findings first, then broaden real-device browser QA.
+
+
+## 2026-09-22 - SEO/UX hardening implementation checkpoint
+- Implemented the confirmed low-risk SEO and UX fixes from the expert release audit.
+- `robots.txt` now points to an absolute sitemap URL on the verified deployment hostname, and all sitemap `<loc>` values are absolute URLs.
+- About, Privacy, Terms and Contact now have meta descriptions, explicit index/follow metadata and canonicals.
+- Homepage search scope is now explicit in the placeholder; no speculative full-directory client-side search implementation was added.
+- Temporary homepage search routing experiment was reverted immediately after review because it would redirect while users type unmatched partial queries. No such behavior remains in `app.js`.
+- A no-op directory commit was created during the implementation sequence; it made no content change and has no runtime effect.
+- Next gate: fresh CI/Vercel verification for the resulting main branch, then live browser checks for the changed SEO pages and homepage search wording.
