@@ -43,3 +43,69 @@ test("browser-local tool makes no external requests",async({page})=>{
   const external=[]; page.on("request",r=>{const u=new URL(r.url());if(!["127.0.0.1","localhost"].includes(u.hostname))external.push(r.url())});
   await page.goto("/tools/quote-pulse.html",{waitUntil:"networkidle"}); await expect(page.locator("#quoteText")).toBeVisible(); expect(external).toEqual([]);
 });
+
+
+test.describe("UtilityHub functional smoke matrix",()=>{
+  const cases=[
+    ["percentage-calculator.html","#part","20","#whole","500","Calculate","4%"],
+    ["percentage-change-calculator.html","#oldv","100","#newv","125","Calculate","25.00%"],
+    ["discount-calculator.html","#price","100","#disc","20","Calculate","80"],
+    ["loan-payment-calculator.html","#loanAmount","1200","#loanRate","0","#loanMonths","12","Calculate","100"],
+    ["interest-calculator.html","#principal","1000","#rate","10","#years","2","Calculate","200"],
+    ["compound-interest-calculator.html","#cp","1000","#cr","12","#cy","1","#cm","12","Calculate","1126.83"],
+    ["profit-margin-calculator.html","#rev","1000","#cost","700","Calculate","30.00%"],
+    ["roi-calculator.html","#inv","1000","#ret","1250","Calculate","25.00%"],
+    ["break-even-calculator.html","#fixed","5000","#sell","50","#variable","30","Calculate","250.00 units"],
+    ["tip-calculator.html","#bill","100","#tipRate","15","#people","2","Calculate","57.50"],
+    ["bmi-calculator.html","#kg","70","#cm","175","Calculate","22.9"],
+    ["date-difference-calculator.html","#d1","2026-09-14","#d2","2026-09-18","Calculate","4 days"],
+    ["unit-converter.html","#uv","1","Convert","0.62"],
+    ["word-counter.html","#tc","hello world","Count","2 words"],
+    ["json-formatter.html","#jsonInput","{\"a\":1}","Format & Validate","Valid JSON"],
+    ["case-converter.html","#caseInput","hello world","Convert","Converted."],
+    ["time-duration-calculator.html","#startTime","23:00","#endTime","01:30","Calculate","2h 30m"],
+    ["business-days-calculator.html","#bdStart","2026-09-14","#bdEnd","2026-09-18","Calculate","5 weekdays"],
+    ["random-number-generator.html","#rndMin","5","#rndMax","5","Generate","5"],
+    ["aspect-ratio-calculator.html","#arw","1920","#arh","1080","Calculate","16:9"],
+    ["unix-timestamp-calculator.html","#ts","1750000000","Convert timestamp","2025-06-15"],
+    ["base64-encoder-decoder.html","#b64","✓ café","Encode","4pyTIGNhZsOp"],
+    ["quote-pulse.html","#quoteText","Labour $480\\nMaterials $620\\nTotal $1100\\n12-month warranty","Analyze quote","Quote clarity"]
+  ];
+
+  test("core tools execute representative user flows",async({page})=>{
+    for(const item of cases){
+      const [path,...ops]=item;
+      await page.goto("/tools/"+path,{waitUntil:"networkidle"});
+      if(path==="unit-converter.html"){
+        await page.locator("#uv").fill("1");
+        await page.locator("#uf").selectOption("km");
+        await page.locator("#ut").selectOption("mi");
+        await page.getByRole("button",{name:"Convert"}).click();
+        await expect(page.locator("#result")).toContainText("0.62");
+        continue;
+      }
+      if(path==="base64-encoder-decoder.html"){
+        await page.locator("#b64").fill(ops[1]);
+        await page.getByRole("button",{name:ops[2]}).click();
+        await expect(page.locator("#result")).toContainText(ops[3]);
+        continue;
+      }
+      if(path==="quote-pulse.html"){
+        await page.locator("#quoteText").fill(ops[1]);
+        await page.getByRole("button",{name:ops[2]}).click();
+        await expect(page.locator("#result")).toContainText(ops[3]);
+        continue;
+      }
+      let i=0;
+      while(i<ops.length){
+        const key=ops[i++];
+        if(key==="Calculate"||key==="Generate"||key==="Count"||key==="Format & Validate"||key==="Convert"||key==="Analyze quote"){
+          await page.getByRole("button",{name:key}).click();
+          await expect(page.locator("#result")).toContainText(ops[i]);
+          break;
+        }
+        await page.locator(key).fill(ops[i++]);
+      }
+    }
+  });
+});
