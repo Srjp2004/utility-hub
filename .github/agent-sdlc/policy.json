@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "lifecycle": ["intake","discover","specify","plan","implement","test","secure","verify","deliver","observe","learn"],
+  "riskLevels": {
+    "low": {"maxRetries": 2, "humanApprovalRequiredFor": ["production"]},
+    "medium": {"maxRetries": 2, "humanApprovalRequiredFor": ["production","security-policy-change"]},
+    "high": {"maxRetries": 1, "humanApprovalRequiredFor": ["merge","production","security-policy-change"]},
+    "critical": {"maxRetries": 0, "humanApprovalRequiredFor": ["all-delivery-actions"]}
+  },
+  "invariants": [
+    "Never weaken or delete tests to obtain green CI",
+    "Never claim verification without fresh evidence",
+    "Never bypass security gates",
+    "Never modify unrelated product scope",
+    "Never directly merge to main",
+    "Production certification requires live production evidence",
+    "Stop after retry budget is exhausted"
+  ]
+}
