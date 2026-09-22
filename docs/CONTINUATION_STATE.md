@@ -318,3 +318,11 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Added GitHub Actions workflow `.github/workflows/e2e.yml` for push, pull request, nightly and manual execution, with failure artifacts retained for diagnosis.
 - E2E source has been committed, but the new workflow has not yet produced fresh GitHub Actions evidence. Browser E2E remains unverified until the workflow completes.
 - The existing Node regression workflow and browser E2E workflow are intentionally separate so failures remain attributable to the relevant verification layer.
+
+## 2026-09-22 - Autonomous engineering system
+- Added repository-level autonomous engineering instructions at .github/copilot-instructions.md.
+- Added autonomous repair orchestration that reacts to failed Node regression or browser E2E workflows, creates a diagnostic issue, and can delegate the issue to GitHub Copilot cloud agent when COPILOT_AUTOMATION_TOKEN is configured.
+- Added autonomous task orchestration through workflow dispatch or an autonomous-engineering issue label.
+- Added a scheduled/push/PR security workflow for dependency audit and dangerous JavaScript primitive detection.
+- Added docs/AUTONOMOUS_ENGINEERING.md documenting lifecycle, safety gates, activation requirements and limitations.
+- Automation is intentionally PR-gated: agents must produce focused PRs and cannot directly merge to main. Real-device and production verification remain explicit release gates.
