@@ -290,3 +290,11 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Added E2E coverage for homepage health, directory search/filtering, all 28 tool-page mounts and browser-error detection, representative calculator behavior, keyboard interaction, 404 handling, refresh/history navigation and unexpected external requests.
 - Added `.github/workflows/e2e.yml` to run browser tests on pushes, pull requests, nightly schedule and manual dispatch, with failure artifacts.
 - E2E workflow execution is pending fresh GitHub Actions evidence; source-level setup is not treated as proof of browser success.
+
+## 2026-09-22 - Autonomous engineering system
+- Added repository-level autonomous engineering instructions at .github/copilot-instructions.md.
+- Added autonomous repair orchestration that reacts to failed Node regression or browser E2E workflows, creates a diagnostic issue, and can delegate the issue to GitHub Copilot cloud agent when COPILOT_AUTOMATION_TOKEN is configured.
+- Added autonomous task orchestration through workflow dispatch or an autonomous-engineering issue label.
+- Added a scheduled/push/PR security workflow for dependency audit and dangerous JavaScript primitive detection.
+- Added docs/AUTONOMOUS_ENGINEERING.md documenting lifecycle, safety gates, activation requirements and limitations.
+- Automation is intentionally PR-gated: agents must produce focused PRs and cannot directly merge to main. Real-device and production verification remain explicit release gates.
