@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "roles": [
+    {"id":"architect","mission":"architecture, scope, dependency and change-impact analysis","required":true},
+    {"id":"implementer","mission":"smallest coherent implementation with regression coverage","required":true},
+    {"id":"qa","mission":"unit, integration, E2E, accessibility and regression verification","required":true},
+    {"id":"security","mission":"threat modeling, SAST, dependency, secrets, headers and privacy review","required":true},
+    {"id":"performance","mission":"performance, resource, bundle and browser-runtime risk review","required":false},
+    {"id":"seo","mission":"crawlability, metadata, structured data and internal-link quality","required":false},
+    {"id":"growth","mission":"ethical acquisition, activation, retention and search-intent analysis","required":false},
+    {"id":"monetization","mission":"privacy-compatible ads, affiliate, premium and conversion opportunities","required":false},
+    {"id":"verifier","mission":"independent final evidence review; reject unsupported completion claims","required":true}
+  ],
+  "rules": {
+    "independentVerification": true,
+    "noDirectMainMerge": true,
+    "noTestWeakening": true,
+    "preserveUnrelatedChanges": true,
+    "productionCertificationRequiresLiveEvidence": true
+  }
+}
