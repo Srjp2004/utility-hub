@@ -99,3 +99,11 @@ Consider React/Next.js, backend services, database, authentication or APIs only 
 ## 2026-09-22 - SEO URL and search-scope decision
 - The currently verified deployed hostname is `utility-hub-ten.vercel.app`. Sitemap and robots URLs were made absolute against that hostname after direct browser verification. If a final custom production domain is adopted, sitemap, robots, canonicals, Open Graph URLs and structured-data URLs must be updated together.
 - Homepage search is intentionally scoped to the featured cards rather than silently pretending to search the complete directory. The homepage placeholder now states this scope; the full 28-tool inventory is available through the Tools directory search.
+
+## 2026-09-22 - Autonomous engineering system
+- Added repository-level autonomous engineering instructions at .github/copilot-instructions.md.
+- Added autonomous repair orchestration that reacts to failed Node regression or browser E2E workflows, creates a diagnostic issue, and can delegate the issue to GitHub Copilot cloud agent when COPILOT_AUTOMATION_TOKEN is configured.
+- Added autonomous task orchestration through workflow dispatch or an autonomous-engineering issue label.
+- Added a scheduled/push/PR security workflow for dependency audit and dangerous JavaScript primitive detection.
+- Added docs/AUTONOMOUS_ENGINEERING.md documenting lifecycle, safety gates, activation requirements and limitations.
+- Automation is intentionally PR-gated: agents must produce focused PRs and cannot directly merge to main. Real-device and production verification remain explicit release gates.
