@@ -1,0 +1,56 @@
+name: UtilityHub Browser E2E
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    name: E2E - ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - chromium
+          - firefox
+          - webkit
+          - mobile-chromium
+          - mobile-webkit
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install browser
+        run: npx playwright install --with-deps ${{ matrix.project == 'chromium' && 'chromium' || matrix.project == 'firefox' && 'firefox' || matrix.project == 'webkit' && 'webkit' || matrix.project == 'mobile-chromium' && 'chromium' || 'webkit' }}
+
+      - name: Run browser E2E
+        run: npx playwright test --project=${{ matrix.project }}
+
+      - name: Upload Playwright artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-${{ matrix.project }}-${{ github.run_id }}
+          path: |
+            test-results/
+            playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14
