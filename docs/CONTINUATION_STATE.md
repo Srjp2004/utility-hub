@@ -283,3 +283,20 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - This is direct browser-level evidence for a representative mobile smoke path, but it does not establish full Android/iOS/desktop/tablet compatibility or exhaustive tool correctness.
 - Production hostname remains an integration deployment URL rather than a confirmed final custom production domain. Canonical and sitemap absolute URLs remain intentionally relative until a final domain is established.
 - Next launch gate: broaden browser/device QA and verify representative image, developer, navigation, 404 and legal-page flows before calling production readiness complete.
+
+
+## 2026-09-22 - Expert release audit findings
+- Fresh repository inspection confirmed 28 tool-directory entries, 28 corresponding tool URLs in the sitemap, no duplicate sitemap entries, and one active renderer declaration per inspected tool page.
+- Fresh shared-JavaScript audit found 42 function declarations with no duplicate names. No `eval`, `new Function` in production code, `document.write`, `fetch`, `Math.random`, `localStorage`, or `sessionStorage` usage was found in the shared site/tool scripts. Password and random-number generation use Web Crypto. Image object URL creation/revocation is balanced in the inspected shared renderer.
+- Latest known green GitHub Actions run `35595020711` completed successfully on Node 20.x and 22.x and reported 31 passing tests, zero failures. Current `tool-pages.js` and `tests/tool-pages.test.js` are unchanged relative to that tested code state; current exact HEAD still lacks a directly exposed push-triggered Actions result through the available connector, so this is strong inherited CI evidence rather than exact-HEAD CI proof.
+- Current Vercel status for HEAD `ed1357fafd3566f0e0f96e20570a3759cea5a306` is `success`.
+- User-confirmed mobile browser smoke test remains verified on `https://utility-hub-ten.vercel.app/`: homepage, Tools directory, Percentage Calculator (20% of 500 = 100), QuotePulse, and homepage refresh all worked.
+
+### Verified release findings requiring attention
+1. SEO blocker: `robots.txt` uses a relative `Sitemap: /sitemap.xml`, while the Sitemap protocol requires the sitemap URL in robots.txt to be fully qualified. The XML sitemap also uses relative `<loc>` values; the Sitemap protocol requires each location URL to begin with the protocol. Source evidence: `robots.txt` and `sitemap.xml`. Official references: sitemaps.org protocol and Google robots.txt specification.
+2. SEO consistency gap: `about.html`, `privacy.html`, `terms.html`, and `contact.html` are indexable and included in the sitemap but currently lack meta descriptions, canonical links, and explicit robots metadata, unlike the tool/guide pages.
+3. UX/functional scope mismatch: the homepage input says `Search calculators and tools...` but `app.js` filters only the 11 cards rendered in the homepage `#grid`. The full 28-tool inventory is only searchable from `tools.html`. Either the homepage wording should be narrowed to featured tools or the search should cover/redirect to the full directory.
+4. Security hardening: the current CSP allows `script-src 'unsafe-inline'` because inline event handlers/scripts are used. No direct XSS sink was identified in the inspected user-input paths because dynamic quote/password output is escaped, but removing inline script/event-handler reliance would materially strengthen CSP later.
+5. CI maintenance: GitHub Actions reported a Node 20 deprecation warning because GitHub-hosted action internals are moving to Node 24. The project test matrix explicitly requests Node 20.x and 22.x. This is not currently a functional failure, but the CI configuration should be revisited before it becomes an operational problem.
+
+- No production/runtime code was changed during this audit. The next engineering pass should address the confirmed SEO/UX findings first, then broaden real-device browser QA.
