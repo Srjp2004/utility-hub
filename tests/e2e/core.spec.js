@@ -67,7 +67,7 @@ test.describe("UtilityHub functional smoke matrix",()=>{
     ["business-days-calculator.html","#bdStart","2026-09-14","#bdEnd","2026-09-18","Calculate","5 weekdays"],
     ["random-number-generator.html","#rndMin","5","#rndMax","5","Generate","5"],
     ["aspect-ratio-calculator.html","#arw","1920","#arh","1080","Calculate","16:9"],
-    ["unix-timestamp-calculator.html","#ts","1750000000","Convert timestamp","2025-06-15"],
+    ["unix-timestamp-converter.html","#ts","1750000000","Convert timestamp","2025-06-15"],
     ["base64-encoder-decoder.html","#b64","✓ café","Encode","4pyTIGNhZsOp"],
     ["quote-pulse.html","#quoteText","Labour $480\\nMaterials $620\\nTotal $1100\\n12-month warranty","Analyze quote","Quote clarity"]
   ];
