@@ -254,3 +254,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - No production mutation was made in this pass because live browser/device verification requires an actual deployed URL and changing working application logic without a reproducible defect would be speculative.
 - Current release classification remains `READY_NOT_PUBLISHED` at best: source/CI evidence is green, but production distribution and runtime behavior are not independently verified.
 - Next concrete gate: deploy the current HEAD through an authorized hosting path, then verify the deployed site from real browser boundaries before claiming fully operational status.
+
+
+## 2026-09-22 - Vercel deployment failure confirmed
+- The supplied deployment URL `https://utility-hub-tau.vercel.app/` was opened by the user and returned Vercel `404 DEPLOYMENT_NOT_FOUND` with error reference `bom1::nbpbr-1790062299863-fdb5ce38f3d0`.
+- This is fresh runtime evidence that the supplied deployment hostname is not currently serving the UtilityHub application. It does not by itself establish whether the Vercel project was deleted, the deployment was removed, the hostname is stale, or the GitHub project is disconnected from Vercel.
+- Repository source remains unchanged because no application defect has been reproduced. The next operational gate is to restore or create an authorized Vercel deployment from the current `main` branch, then verify the resulting deployment URL and real browser behavior.
+- Until that occurs, UtilityHub remains `READY_NOT_PUBLISHED` at best and must not be described as fully operational in production.
