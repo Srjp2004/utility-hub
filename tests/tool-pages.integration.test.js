@@ -23,6 +23,7 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
     assert.ok(source.includes('<meta name="twitter:card"'), page + " must have Twitter card metadata");
     assert.ok(source.includes('<meta name="twitter:title"'), page + " must have Twitter title metadata");
     assert.ok(source.includes('<meta name="twitter:description"'), page + " must have Twitter description metadata");
+    assert.match(source, /<script type="application\\/ld\\+json">[\\s\\S]*<\\/script>/, page + " must have WebApplication structured data");
     assert.ok(source.includes('<link rel="canonical"'), page + " must have a canonical");
     assert.ok(source.includes('<meta name="robots" content="index,follow"'), page + " must be indexable");
     assert.ok(sitemap.includes("tools/" + page), page + " must be in sitemap.xml");
