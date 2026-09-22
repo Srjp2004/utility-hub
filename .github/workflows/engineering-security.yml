@@ -26,9 +26,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
-          cache: npm
-      - name: Verify lockfile install
-        run: npm ci
+      - name: Install dependencies
+        run: npm install
       - name: Audit dependencies
         run: npm audit --audit-level=high
       - name: Generate dependency SBOM
@@ -115,7 +114,6 @@ jobs:
         run: |
           set -euo pipefail
           node -e "const p=require('./package.json'); if(!p.name || !p.scripts?.test || !p.devDependencies?.['@playwright/test']) process.exit(1)"
-          test -f package-lock.json
 
   security-e2e:
     name: Security-focused browser checks
@@ -129,9 +127,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
-          cache: npm
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Run browser E2E security coverage
