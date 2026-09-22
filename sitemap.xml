@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>/</loc></url>
-  <url><loc>/about.html</loc></url>
-  <url><loc>/privacy.html</loc></url>
-  <url><loc>/terms.html</loc></url>
-  <url><loc>/contact.html</loc></url>
-  <url><loc>/tools.html</loc></url>
-  <url><loc>/tools/percentage-calculator.html</loc></url>
-  <url><loc>/tools/discount-calculator.html</loc></url>
-  <url><loc>/tools/percentage-change-calculator.html</loc></url>
-  <url><loc>/tools/loan-payment-calculator.html</loc></url>
-  <url><loc>/tools/interest-calculator.html</loc></url>
-  <url><loc>/tools/age-calculator.html</loc></url>
-  <url><loc>/tools/compound-interest-calculator.html</loc></url>
-  <url><loc>/tools/profit-margin-calculator.html</loc></url>
-  <url><loc>/tools/roi-calculator.html</loc></url>
-  <url><loc>/tools/break-even-calculator.html</loc></url>
-  <url><loc>/tools/tip-calculator.html</loc></url>
-  <url><loc>/tools/bmi-calculator.html</loc></url>
-  <url><loc>/tools/date-difference-calculator.html</loc></url>
-  <url><loc>/tools/unit-converter.html</loc></url>
-  <url><loc>/tools/word-counter.html</loc></url>
-  <url><loc>/tools/image-compressor.html</loc></url>
-  <url><loc>/tools/image-resizer.html</loc></url>
-  <url><loc>/tools/image-converter.html</loc></url>
-  <url><loc>/tools/json-formatter.html</loc></url>
-  <url><loc>/tools/case-converter.html</loc></url>
-  <url><loc>/tools/password-generator.html</loc></url>
-  <url><loc>/tools/time-duration-calculator.html</loc></url>
-  <url><loc>/tools/business-days-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/about.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/privacy.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/terms.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/contact.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/percentage-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/discount-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/percentage-change-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/loan-payment-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/interest-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/age-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/compound-interest-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/profit-margin-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/roi-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/break-even-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/tip-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/bmi-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/date-difference-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/unit-converter.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/word-counter.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/image-compressor.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/image-resizer.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/image-converter.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/json-formatter.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/case-converter.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/password-generator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/time-duration-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/business-days-calculator.html</loc></url>
   <url>
-    <loc>/guides/percentage-calculator-guide.html</loc>
+    <loc>https://utility-hub-ten.vercel.app/guides/percentage-calculator-guide.html</loc>
   </url>
   <url>
-    <loc>/guides/discount-calculator-guide.html</loc>
+    <loc>https://utility-hub-ten.vercel.app/guides/discount-calculator-guide.html</loc>
   </url>
   <url>
-    <loc>/guides/loan-payment-guide.html</loc>
+    <loc>https://utility-hub-ten.vercel.app/guides/loan-payment-guide.html</loc>
   </url>
   <url>
-    <loc>/guides/image-compression-guide.html</loc>
+    <loc>https://utility-hub-ten.vercel.app/guides/image-compression-guide.html</loc>
   </url>
   <url>
-    <loc>/guides/json-formatting-guide.html</loc>
+    <loc>https://utility-hub-ten.vercel.app/guides/json-formatting-guide.html</loc>
   </url>
-  <url><loc>/tools/random-number-generator.html</loc></url>
-  <url><loc>/tools/aspect-ratio-calculator.html</loc></url>
-  <url><loc>/tools/unix-timestamp-converter.html</loc></url>
-  <url><loc>/tools/base64-encoder-decoder.html</loc></url>
-  <url><loc>/tools/quote-pulse.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/random-number-generator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/aspect-ratio-calculator.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/unix-timestamp-converter.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/base64-encoder-decoder.html</loc></url>
+  <url><loc>https://utility-hub-ten.vercel.app/tools/quote-pulse.html</loc></url>
 </urlset>
