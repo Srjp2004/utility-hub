@@ -356,3 +356,11 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Generated mission packs include risk, mission identity, source SHA, orchestration sequence, parallelizable reviews and stop conditions.
 - Mission packs are retained as workflow artifacts and a traceable GitHub issue is created for execution tracking.
 - The system does not claim agent execution merely from generation; actual multi-agent execution requires an available agent runtime/delegation mechanism.
+
+
+## 2026-09-22 - Agent-Native SDLC control plane
+- Added `.github/agent-sdlc/policy.json` defining lifecycle states, risk-based retry budgets and human approval boundaries.
+- Added `.github/agent-sdlc/README.md` documenting the controlled agent-native SDLC state machine and evidence contract.
+- Added `.github/workflows/agent-sdlc.yml` to intake a software-engineering mission, validate risk, create an immutable mission state, retain evidence artifacts and create a traceability issue.
+- Delivery remains PR-based and protected; this control plane does not grant autonomous agents unrestricted merge or production authority.
+- The workflow is an orchestration/control-plane foundation. Actual autonomous implementation requires an available agent execution/delegation runtime and fresh workflow evidence.
