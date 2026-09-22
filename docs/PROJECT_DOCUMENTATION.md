@@ -88,3 +88,9 @@ Consider React/Next.js, backend services, database, authentication or APIs only 
 - Browser image tools enforce both input file-size and decoded-dimension limits before canvas allocation; output format/quality inputs are allowlisted or range-checked.
 
 - Automated verification: `.github/workflows/test.yml` runs the existing Node regression suite on main pushes and pull requests using Node 20.x and 22.x. This is a verification mechanism, not evidence that a workflow run has already passed.
+
+
+## 2026-09-22 - Vercel configuration decision
+- Vercel rejected the previous asset-header `source` patterns during deployment validation because the extension separators were escaped in the route patterns.
+- The configuration now uses Vercel-compatible asset/header source patterns without escaped extension separators. Security headers and the intended short HTML/static-asset cache policy are retained.
+- This is a deployment-configuration correction only; no application runtime logic was changed.
