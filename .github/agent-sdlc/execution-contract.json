@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Bounded execution contract for agent-native software development",
+  "execution": {
+    "requiredInputs": ["missionId","sourceSha","risk","acceptanceCriteria"],
+    "workerIsolation": "one bounded worker mission per role",
+    "changeIsolation": "focused branch or PR; preserve unrelated changes",
+    "evidenceHandoff": "machine-readable result plus immutable workflow artifact",
+    "verification": "independent verifier must consume worker evidence and fresh CI/security results",
+    "repair": {
+      "trigger": ["test-failure","e2e-failure","security-finding","verification-failure"],
+      "requiresDiagnosis": true,
+      "requiresFreshRetest": true,
+      "maxAttemptsFromPolicy": true
+    },
+    "delivery": {
+      "artifact": "focused-pr",
+      "directMainMerge": false,
+      "productionRelease": "protected-action"
+    }
+  },
+  "agentResultContract": {
+    "required": ["agentId","role","missionId","sourceSha","status","changedFiles","evidence","blockers","recommendation"],
+    "statusValues": ["completed","blocked","failed"]
+  }
+}
