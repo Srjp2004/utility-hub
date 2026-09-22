@@ -58,19 +58,23 @@ test("homepage popular tool links resolve and avoid modal-only navigation", () =
   }
   assert.doesNotMatch(home, /onclick="tool\('(convert|tip|bmi|date)'\)"/, "popular tools should navigate to dedicated pages");
 });
-test("sitemap contains only existing HTML pages", () => {
+test("sitemap contains unique valid URLs that map to existing HTML pages", () => {
   const sitemap = fs.readFileSync("sitemap.xml", "utf8");
-  const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
+  assert.ok(locs.length > 0, "sitemap must contain at least one URL");
   assert.equal(new Set(locs).size, locs.length, "sitemap must not contain duplicate URLs");
+
   for (const loc of locs) {
-    let pathname;
+    let parsed;
     try {
-      pathname = new URL(loc, "https://utility-hub.test").pathname;
+      parsed = new URL(loc, "https://utility-hub.test");
     } catch {
       assert.fail("sitemap contains an invalid URL: " + loc);
     }
 
-    assert.ok(pathname.startsWith("/"), "sitemap URLs must resolve to root-relative paths: " + loc);
+    assert.ok(parsed.protocol === "https:" || parsed.protocol === "http:", "sitemap URL must use HTTP(S): " + loc);
+    const pathname = decodeURIComponent(parsed.pathname);
+    assert.ok(pathname.startsWith("/"), "sitemap URL must resolve to an absolute path: " + loc);
     const relative = pathname.slice(1);
     const target = relative === "" ? "index.html" : relative;
     assert.ok(fs.existsSync(target), "sitemap points to missing file: " + loc);
