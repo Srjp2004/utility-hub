@@ -133,3 +133,7 @@ Consider React/Next.js, backend services, database, authentication or APIs only 
 - Defined bounded autonomous repair with diagnosis-before-repair, risk-based retry budgets and fresh retesting.
 - Defined disjoint ownership rules for parallel workers and a machine-readable evidence handoff contract.
 - Recorded the current limitation: repository control-plane contracts exist, but an actual worker/delegation runtime is still required before end-to-end autonomous execution can be claimed.
+
+
+### Structured-data consistency
+The SEO contract now requires WebApplication JSON-LD on every published tool page. PR #63 completes the four-page gap identified by the source audit and adds an integration-test invariant to prevent regression.
