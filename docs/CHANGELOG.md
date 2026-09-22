@@ -1,3 +1,9 @@
+## 2026-09-22 - Vercel configuration repair
+- Fixed the confirmed Vercel deployment failure caused by invalid `vercel.json` asset-header source patterns.
+- Replaced escaped extension separators with Vercel-compatible header source patterns while preserving the security headers and intended HTML/static-asset caching policy.
+- Commit `99b09cf9404c4b8f4d4e1e2cf8685927246d5883` contains the configuration repair.
+- Fresh Vercel deployment verification is still required; GitHub source correction alone does not prove production deployment success.
+
 ## 2026-09-21 - Verification and support-path documentation
 - Re-fetched main and confirmed the latest completed CI run `35633476786` is successful on commit `09ea478f2b0f0b5e5c26477b87bb2ba2f7a73334`.
 - Re-ran the launch-readiness source audit of the shared renderer and integration-test contract; no new concrete source defect was established that justified a speculative production mutation.
