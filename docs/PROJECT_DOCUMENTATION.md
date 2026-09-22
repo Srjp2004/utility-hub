@@ -107,3 +107,9 @@ Consider React/Next.js, backend services, database, authentication or APIs only 
 - Added a scheduled/push/PR security workflow for dependency audit and dangerous JavaScript primitive detection.
 - Added docs/AUTONOMOUS_ENGINEERING.md documenting lifecycle, safety gates, activation requirements and limitations.
 - Automation is intentionally PR-gated: agents must produce focused PRs and cannot directly merge to main. Real-device and production verification remain explicit release gates.
+
+
+## 2026-09-22 - DevSecOps automation expansion
+- Expanded the security workflow into a DevSecOps gate covering dependency installation/audit, CycloneDX SBOM generation and artifact retention, CodeQL JavaScript/TypeScript SAST, pull-request dependency review, source security invariants, credential-pattern detection, security-header/CSP invariants, manifest/lockfile validation, and Chromium security-focused browser checks.
+- Security automation uses least-privilege job permissions and keeps repository contents read-only except the CodeQL security-events permission and dependency-review PR commenting.
+- Fresh workflow execution evidence is still required; implementation of the automation is not treated as proof that security checks pass.
