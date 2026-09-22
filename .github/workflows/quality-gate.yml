@@ -1,0 +1,107 @@
+name: UtilityHub Quality Gate
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: Commit SHA to evaluate
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+  checks: read
+  pull-requests: read
+
+jobs:
+  gate:
+    name: Aggregate engineering gates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Evaluate required workflow runs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          EVENT_SHA: ${{ github.event.pull_request.head.sha }}
+          INPUT_SHA: ${{ inputs.sha }}
+        run: |
+          set -euo pipefail
+          SHA="${EVENT_SHA:-${INPUT_SHA}}"
+          test -n "${SHA}"
+
+          required=(
+            "UtilityHub Tests"
+            "UtilityHub Browser E2E"
+            "UtilityHub DevSecOps"
+          )
+
+          deadline=$((SECONDS + 1800))
+          state="BLOCKED"
+
+          while [ "$SECONDS" -lt "$deadline" ]; do
+            all_present=true
+            all_success=true
+            : > gate-results.tsv
+
+            for workflow in "${required[@]}"; do
+              encoded="$(python -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$workflow")"
+              run="$(gh api "/repos/${REPOSITORY}/actions/workflows/${encoded}.yml/runs?head_sha=${SHA}&per_page=1" 2>/dev/null || true)"
+              status="$(printf '%s' "$run" | jq -r '.workflow_runs[0].status // "missing"')"
+              conclusion="$(printf '%s' "$run" | jq -r '.workflow_runs[0].conclusion // "pending"')"
+              url="$(printf '%s' "$run" | jq -r '.workflow_runs[0].html_url // ""')"
+
+              if [ "$status" = "missing" ]; then
+                all_present=false
+                printf '%s\tmissing\tpending\t%s\n' "$workflow" "$url" >> gate-results.tsv
+              else
+                printf '%s\t%s\t%s\t%s\n' "$workflow" "$status" "$conclusion" "$url" >> gate-results.tsv
+                if [ "$status" != "completed" ]; then
+                  all_success=false
+                elif [ "$conclusion" != "success" ]; then
+                  all_success=false
+                fi
+              fi
+            done
+
+            cat gate-results.tsv
+
+            if [ "$all_present" = true ] && [ "$all_success" = true ]; then
+              state="PASS"
+              break
+            fi
+
+            sleep 20
+          done
+
+          if [ "$state" != "PASS" ]; then
+            state="FAIL"
+            echo "Required engineering gates did not reach SUCCESS within 30 minutes."
+            exit 1
+          fi
+
+          echo "All required engineering gates passed for ${SHA}."
+      - name: Publish gate state
+        if: always()
+        run: |
+          cat > engineering-gate-state.json <<EOF
+          {
+            "schemaVersion": 1,
+            "repository": "${{ github.repository }}",
+            "commit": "${{ github.event.pull_request.head.sha || inputs.sha }}",
+            "workflow": "${{ github.workflow }}",
+            "runId": "${{ github.run_id }}",
+            "result": "${{ job.status }}",
+            "verifiedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+      - name: Upload engineering gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: engineering-gate-${{ github.run_id }}
+          path: engineering-gate-state.json
+          if-no-files-found: error
+          retention-days: 30
