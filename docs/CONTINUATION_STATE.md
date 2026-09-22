@@ -332,3 +332,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Expanded the security workflow into a DevSecOps gate covering dependency installation/audit, CycloneDX SBOM generation and artifact retention, CodeQL JavaScript/TypeScript SAST, pull-request dependency review, source security invariants, credential-pattern detection, security-header/CSP invariants, manifest/lockfile validation, and Chromium security-focused browser checks.
 - Security automation uses least-privilege job permissions and keeps repository contents read-only except the CodeQL security-events permission and dependency-review PR commenting.
 - Fresh workflow execution evidence is still required; implementation of the automation is not treated as proof that security checks pass.
+
+
+## 2026-09-22 - Engineering quality gate
+- Added .github/workflows/quality-gate.yml as an aggregate PR/dispatch gate for the UtilityHub Tests, UtilityHub Browser E2E and UtilityHub DevSecOps workflows on the same commit SHA.
+- The gate waits for required workflow runs, fails when a required run is missing, fails or times out, and emits a machine-readable engineering-gate-state.json artifact.
+- This provides a single release-engineering signal without granting automation permission to merge directly to main.
+- Fresh execution evidence is still required before treating the gate as operationally green.
