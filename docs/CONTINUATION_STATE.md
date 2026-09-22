@@ -261,3 +261,12 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - This is fresh runtime evidence that the supplied deployment hostname is not currently serving the UtilityHub application. It does not by itself establish whether the Vercel project was deleted, the deployment was removed, the hostname is stale, or the GitHub project is disconnected from Vercel.
 - Repository source remains unchanged because no application defect has been reproduced. The next operational gate is to restore or create an authorized Vercel deployment from the current `main` branch, then verify the resulting deployment URL and real browser behavior.
 - Until that occurs, UtilityHub remains `READY_NOT_PUBLISHED` at best and must not be described as fully operational in production.
+
+
+## 2026-09-22 - Vercel configuration repair checkpoint
+- Fresh user-provided Vercel build evidence identified the concrete deployment failure: `Invalid vercel.json file provided`.
+- Root cause isolated to the asset/header `source` patterns using escaped extension separators. The patterns were replaced with Vercel-compatible forms while retaining security headers and intended caching behavior.
+- Current source HEAD after the repair/documentation commits is `3539832131ae398f75f1cbb713c4e0f6dd1684b6`.
+- Re-fetched `vercel.json` from `main`; it parses as valid JSON and contains the repaired patterns.
+- GitHub Actions has not yet produced a run for the newest documentation commit, so automated CI verification of this exact HEAD is pending.
+- Next concrete gate: trigger/observe the Vercel deployment from the repaired `main`, confirm the build succeeds, then verify the resulting production URL in a real browser.
