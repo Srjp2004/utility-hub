@@ -356,3 +356,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Defined bounded autonomous repair with diagnosis-before-repair, risk-based retry budgets and fresh retesting.
 - Defined disjoint ownership rules for parallel workers and a machine-readable evidence handoff contract.
 - Recorded the current limitation: repository control-plane contracts exist, but an actual worker/delegation runtime is still required before end-to-end autonomous execution can be claimed.
+
+
+## 2026-09-22 - Structured-data coverage hardening
+- Added WebApplication JSON-LD to Base64 Encoder & Decoder, Random Number Generator, Aspect Ratio Calculator, and Unix Timestamp Converter.
+- Strengthened `tests/tool-pages.integration.test.js` so published tool pages require structured data.
+- Opened PR #63; merge remains gated on fresh CI evidence.
