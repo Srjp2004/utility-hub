@@ -270,3 +270,9 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Re-fetched `vercel.json` from `main`; it parses as valid JSON and contains the repaired patterns.
 - GitHub Actions has not yet produced a run for the newest documentation commit, so automated CI verification of this exact HEAD is pending.
 - Next concrete gate: trigger/observe the Vercel deployment from the repaired `main`, confirm the build succeeds, then verify the resulting production URL in a real browser.
+
+## 2026-09-22 - Vercel integration status checkpoint
+- Re-fetched current `main` after the Vercel configuration repair. HEAD is `759e5eec37bd5fb21abaa6e3c7ea5a5cb1be5b37`.
+- GitHub's current commit status reports the Vercel check as `success` for that HEAD, providing fresh evidence that Vercel accepted the repaired configuration for deployment.
+- The Vercel status does not expose a verified public deployment URL through the available GitHub connector, so live runtime/browser verification is still pending.
+- No application-runtime change is justified at this point. Next gate is to open the latest Vercel deployment, obtain its actual Visit/production URL, and verify the live site and headers before updating canonical/sitemap URLs.
