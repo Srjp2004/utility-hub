@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "required": ["missionId","mission","repository","sourceSha","risk","state","retryBudget","acceptanceCriteria","evidence","blockers","decisionLog"],
+  "evidenceItem": ["type","source","timestamp","status"],
+  "agentResult": ["agentId","role","scope","changedFiles","tests","securityFindings","blockers","recommendation"],
+  "deliveryRules": {
+    "requiredChecks": ["test","e2e","devsecops","independent-verification"],
+    "allowedDelivery": ["focused-pr"],
+    "forbiddenDelivery": ["direct-main-merge"],
+    "humanApprovalTriggers": ["production","security-policy-change","high-risk","critical-risk"]
+  }
+}
