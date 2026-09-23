@@ -100,7 +100,7 @@ test.describe("UtilityHub functional smoke matrix",()=>{
         await page.locator("#ts").fill(ops[1]);
         await page.locator("#tsUnit").selectOption("seconds");
         await page.getByRole("button",{name:"Convert timestamp"}).click();
-        await expect(page.locator("#result")).toContainText(ops[2]);
+        await expect(page.locator("#result")).toContainText(ops[3]);
         continue;
       }
       let i=0;
