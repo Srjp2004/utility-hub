@@ -118,3 +118,22 @@ test("tool pages use CSP-compatible external bootstrap scripts", () => {
     assert.equal(source.includes("<script>renderTool("), false, page + " must not use an inline renderTool bootstrap");
   }
 });
+test("tool bootstrap has exactly one mapping per published page", () => {
+  const toolsDir = path.join(process.cwd(), "tools");
+  const pages = fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html")).sort();
+  const bootstrap = fs.readFileSync("tool-page-init.js", "utf8");
+  const entries = [...bootstrap.matchAll(/"([^"]+\.html)"\s*:\s*"([^"]+)"/g)];
+  assert.equal(entries.length, pages.length, "tool bootstrap mapping count must match published page count");
+  assert.deepEqual(entries.map((m) => m[1]).sort(), pages, "tool bootstrap must map exactly the published pages");
+  const rendererNames = entries.map((m) => m[2]);
+  assert.equal(new Set(rendererNames).size, rendererNames.length, "each published page must map to a distinct renderer type");
+});
+
+test("every mapped renderer is registered in the shared renderer", () => {
+  const renderer = fs.readFileSync("tool-pages.js", "utf8");
+  const bootstrap = fs.readFileSync("tool-page-init.js", "utf8");
+  const entries = [...bootstrap.matchAll(/"([^"]+\.html)"\s*:\s*"([^"]+)"/g)];
+  for (const [, page, rendererName] of entries) {
+    assert.match(renderer, new RegExp(rendererName + "\\s*:"), page + " must reference a registered renderer view");
+  }
+});
