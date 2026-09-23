@@ -113,6 +113,6 @@ test("tool pages use CSP-compatible external bootstrap scripts", () => {
   for (const page of pages) {
     const source = fs.readFileSync(path.join(toolsDir, page), "utf8");
     assert.ok(source.includes('<script src="../tool-page-init.js"'), page + " must load the external tool bootstrap");
-    assert.doesNotMatch(source, /<script>\\s*.*renderTool\\(/s, page + " must not use an inline renderTool bootstrap");
+    assert.equal(source.includes("<script>renderTool("), false, page + " must not use an inline renderTool bootstrap");
   }
 });
