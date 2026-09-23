@@ -127,12 +127,12 @@ test.describe("UtilityHub exhaustive interaction smoke",()=>{
       await page.goto("/tools/"+pageName,{waitUntil:"networkidle"});
       const button=page.locator("#tool button").first();
       await expect(button).toBeVisible();
-      const fileInput = page.locator("#tool input[type="file"]").first();
+      const fileInput = page.locator('#tool input[type="file"]').first();
       if(await fileInput.count()){
         const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=","base64");
         await fileInput.setInputFiles({name:"utilityhub-e2e.png",mimeType:"image/png",buffer:png});
       }
-      const primaryInput = page.locator("#tool textarea, #tool input[type="text"], #tool input[type="number"], #tool input[type="date"], #tool input[type="time"], #tool input[type="datetime-local"]").first();
+      const primaryInput = page.locator('#tool textarea, #tool input[type="text"], #tool input[type="number"], #tool input[type="date"], #tool input[type="time"], #tool input[type="datetime-local"]').first();
       if(await primaryInput.count()){
         const currentValue = await primaryInput.inputValue();
         const inputType = await primaryInput.getAttribute("type");
