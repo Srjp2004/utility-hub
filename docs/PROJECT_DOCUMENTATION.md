@@ -1,3 +1,9 @@
+### 2026-09-23 - QuotePulse duration regression merged
+- Merged PR #97 into main at merge commit `296c0c2716ed3e8a2d4bf23cc39521829d985bed`.
+- QuotePulse now excludes duration-like and quantity-like numeric lines from monetary line-item detection.
+- Regression coverage verifies that a `12-month warranty` is not treated as a monetary line item.
+- Pre-merge Tests, Browser E2E, DevSecOps and Quality Gate evidence was green on the PR head.
+- Post-merge deployment verification remains pending while Vercel status is pending.
 # UtilityHub Project Documentation
 
 ## Purpose
