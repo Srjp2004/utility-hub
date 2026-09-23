@@ -152,3 +152,11 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - The consolidated change intentionally does not alter calculator algorithms, add paid services, add a backend, or weaken existing tests.
 - Fresh CI evidence for corrected PR #92 commit `02b4fe7a7c0190d6c284dce05eb2f4da924f6bff`: Tests, Browser E2E, DevSecOps and Quality Gate all passed. This verifies the repository/CI acceptance gates for that commit; physical-device and live-production verification remain separate launch gates.
 \n\n## 2026-09-23 - PR #103 verification and documentation checkpoint\n- PR #103 merged the expanded functional regression suite at `afcf75672d4d6a0acddbabae8dac330f5a4616bb`; production runtime code was unchanged.\n- Exact-merge-commit GitHub Actions evidence is fresh and green: Tests `35892642427`, Browser E2E `35892642438`, and DevSecOps `35892642521`.\n- Browser E2E covered Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit. DevSecOps covered dependency audit/SBOM, CodeQL, source security invariants and security-focused browser checks.\n- Vercel reports `success` with deployment completed for the exact merge commit.\n- These checks establish CI/deployment evidence only; real Android/iOS/desktop/tablet certification and independent live-runtime verification remain separate launch gates.\n- PR #102 is retained open for traceability but should be superseded by a documentation update based on current main rather than merged unchanged.\n
+
+## 2026-09-24 - Exhaustive primary-flow E2E coverage
+- PR #109 merged at `2e27aa54cbc533443ee715ca1509d103a27d1978`.
+- The new test exercises the primary interaction path for all 28 published tools across Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit.
+- The harness uses valid type-aware seed inputs and a minimal PNG fixture for file-input tools, and records page/console errors while requiring observable result output.
+- Failure handling followed diagnosis-before-repair. The observed failures were test-harness defects, so production code was not modified.
+- Fresh final PR evidence: Browser E2E `35904335988`, DevSecOps `35904336097`, Tests `35904336039`, and Quality Gate `35904336016` all passed.
+- Post-merge verification remains required on the new main SHA. Vercel build-rate-limit status does not establish deployment success.
