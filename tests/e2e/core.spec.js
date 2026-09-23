@@ -145,10 +145,10 @@ test.describe("UtilityHub exhaustive interaction smoke",()=>{
         }
       }
       if(pageName==="base64-encoder-decoder.html") await page.locator("#b64").fill("UtilityHub E2E");
-      await button.click();
-      await expect(result).toHaveText(/\S/, {timeout:5000});
       const result=page.locator("#result");
+      await button.click();
       await expect(result).toBeVisible();
+      await expect(result).toHaveText(/\S/, {timeout:5000});
       const resultText=(await result.innerText()).trim();
       if(!resultText) failures.push(pageName+": primary action produced no result");
       if(errors.length) failures.push(pageName+": "+errors.join(" | "));
