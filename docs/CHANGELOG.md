@@ -401,3 +401,12 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Added bounded regression tests for fractional loan terms, incompatible unit families, zero-revenue profit margin, zero initial ROI investment, invalid Date Difference input, and invalid Business Days input.
 - Test-only change; no production runtime code was modified.
 - Fresh CI verification is required on the new branch/PR before this coverage can be treated as integrated evidence.
+
+
+## 2026-09-24 - PR #109 exhaustive browser interaction coverage
+- Merged PR #109 into `main` at `2e27aa54cbc533443ee715ca1509d103a27d1978`.
+- Added exhaustive primary-flow browser coverage for all 28 published tools across Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit.
+- Added valid type-specific input seeding and a minimal image fixture, with visible non-empty result and page/console error assertions.
+- Evidence-driven APR-style repairs corrected two E2E harness defects without production runtime changes.
+- Final pre-merge verification was green: Tests `35904336039`, Browser E2E `35904335988`, DevSecOps `35904336097`, Quality Gate `35904336016`.
+- Post-merge workflow verification is pending. Vercel build-rate-limit remains a platform/account limitation.
