@@ -13,8 +13,9 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
 
   for (const page of pages) {
     const source = fs.readFileSync(path.join(toolsDir, page), "utf8");
-    const match = source.match(/renderTool\(\s*"([^"]+)"\s*,\s*"tool"\s*\)/);
-    assert.ok(match, page + " must call renderTool");
+    const mapping = new RegExp('"'+page+'"\\s*:\\s*"([^"]+)"');
+    const match = bootstrap.match(mapping);
+    assert.ok(match, page + " must have an external renderTool mapping");
     assert.match(source, /id=["']tool["']/, page + " must have a tool mount");
     assert.ok(source.includes("tool-pages.js"), page + " must load the shared renderer");
     assert.ok(source.includes('<meta name="description"'), page + " must have a description");
