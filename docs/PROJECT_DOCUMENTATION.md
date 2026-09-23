@@ -160,3 +160,9 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Failure handling followed diagnosis-before-repair. The observed failures were test-harness defects, so production code was not modified.
 - Fresh final PR evidence: Browser E2E `35904335988`, DevSecOps `35904336097`, Tests `35904336039`, and Quality Gate `35904336016` all passed.
 - Post-merge verification remains required on the new main SHA. Vercel build-rate-limit status does not establish deployment success.
+## 2026-09-24 - Deep security hardening audit
+- Completed a repository-wide security review covering application JavaScript, HTML, deployment policy, GitHub Actions automation, credential-pattern exposure, dangerous browser primitives, external-network behavior and workflow permissions.
+- No suspicious executable/network primitives or obvious credential material were found in the searched production/repository paths. Existing DevSecOps controls already enforce dangerous-primitive and credential-pattern checks, security headers/CSP validation, CodeQL, dependency audit and SBOM generation.
+- Hardened autonomous repair workflow credential handling so COPILOT_AUTOMATION_TOKEN is not injected into the repair-issue step. Automatic Copilot delegation is now restricted to explicit workflow dispatch or failed workflows whose head branch is main. Non-main PR failures create a diagnostic issue without receiving the automation credential.
+- Hardened deployment headers with HSTS and same-origin Cross-Origin-Resource-Policy and removed unnecessary CSP style-src unsafe-inline.
+- No production application algorithm was changed by this security patch. Full CI, E2E, DevSecOps and independent verification remain required before merge.
