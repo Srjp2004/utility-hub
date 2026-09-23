@@ -69,6 +69,14 @@ jobs:
             number="$(gh issue create --repo "${REPOSITORY}" --title "${TITLE}" --body-file issue.md | sed -n 's#.*/issues/##p')"
           fi
 
+          # Never expose the optional Copilot automation credential to a repair
+          # triggered by an untrusted pull-request workflow. workflow_run executes in
+          # the default-branch security context, so only main-branch failures may auto-delegate.
+          if [ "${github.event.workflow_run.head_branch:-}" != "main" ] && [ "${github.event_name}" != "workflow_dispatch" ]; then
+            echo "Repair issue created; automatic agent delegation is disabled for non-main workflow failures."
+            exit 0
+          fi
+
           if [ -z "${AUTOMATION_TOKEN}" ]; then
             echo "COPILOT_AUTOMATION_TOKEN is not configured. Repair issue created for manual delegation."
             exit 0
