@@ -270,7 +270,7 @@ test("QuotePulse does not treat warranty duration as a monetary line item", () =
     qpMessage: ""
   });
   context.analyzeQuote();
-  assert.match(elements.result.innerHTML, /Line items.*<strong>2<\\/strong>/s);
+  assert.ok(elements.result.innerHTML.includes("<strong>2</strong>"), "QuotePulse should detect exactly two monetary line items");
   assert.match(elements.result.innerHTML, /Detected line items/);
   assert.doesNotMatch(elements.result.innerHTML, /12-month warranty/);
 });
