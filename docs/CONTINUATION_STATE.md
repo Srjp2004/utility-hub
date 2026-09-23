@@ -1,3 +1,10 @@
+## 2026-09-23 - PR #97 merged and re-verified
+- PR #97 (QuotePulse duration regression fix) was explicitly approved and merged into main.
+- Merge commit: `296c0c2716ed3e8a2d4bf23cc39521829d985bed`.
+- The change excludes duration-like and quantity-like numeric lines from QuotePulse monetary line-item detection and adds regression coverage for a `12-month warranty` line.
+- Pre-merge Tests, Browser E2E, DevSecOps and Quality Gate were green on head `53b7753dbb6a1594299f48a2a8c503ac362b8819`.
+- Immediately after merge, Vercel reports the merge commit status as pending. This is deployment-in-progress evidence, not deployment success.
+- Broad real-device/browser QA remains a release gate.
 # UtilityHub Continuation State
 
 > Durable handoff document for continuing UtilityHub across chats, sessions and context limits.
