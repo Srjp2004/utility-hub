@@ -273,3 +273,149 @@ test("QuotePulse does not treat warranty duration as a monetary line item", () =
   assert.match(elements.result.innerHTML, /Detected line items/);
   assert.doesNotMatch(elements.result.innerHTML, /12-month warranty/);
 });
+
+
+test("interest calculator reports simple and compound interest", () => {
+  const { context, elements } = loadTools({ principal: "1000", rate: "10", years: "2", result: "" });
+  context.calcInterest();
+  assert.match(elements.result.innerHTML, /Simple interest: 200/);
+  assert.match(elements.result.innerHTML, /Compound interest: 210/);
+});
+
+test("interest calculator rejects negative inputs", () => {
+  const { context, elements } = loadTools({ principal: "-1", rate: "10", years: "2", result: "" });
+  context.calcInterest();
+  assert.equal(elements.result.textContent, "Enter valid non-negative values.");
+});
+
+test("age calculator rejects a future date", () => {
+  const { context, elements } = loadTools({ dob: "2999-01-01", result: "" });
+  context.calcAge();
+  assert.equal(elements.result.textContent, "Date of birth cannot be in the future.");
+});
+
+test("tip calculator splits the total between people", () => {
+  const { context, elements } = loadTools({ bill: "100", tipRate: "20", people: "4", result: "" });
+  context.calcTip();
+  assert.match(elements.result.innerHTML, /30.00 per person/);
+  assert.match(elements.result.innerHTML, /Tip: 20.00/);
+});
+
+test("tip calculator rejects fractional people", () => {
+  const { context, elements } = loadTools({ bill: "100", tipRate: "20", people: "2.5", result: "" });
+  context.calcTip();
+  assert.equal(elements.result.textContent, "Enter a valid bill, non-negative tip, and whole number of people.");
+});
+
+test("BMI calculator handles a standard input", () => {
+  const { context, elements } = loadTools({ kg: "70", cm: "175", result: "" });
+  context.calcBmi();
+  assert.match(elements.result.innerHTML, /22.9/);
+});
+
+test("BMI calculator rejects zero height", () => {
+  const { context, elements } = loadTools({ kg: "70", cm: "0", result: "" });
+  context.calcBmi();
+  assert.equal(elements.result.textContent, "Enter positive height and weight.");
+});
+
+test("date difference is absolute and timezone-stable", () => {
+  const { context, elements } = loadTools({ d1: "2026-09-20", d2: "2026-09-14", result: "" });
+  context.calcDate();
+  assert.match(elements.result.innerHTML, /6 days/);
+});
+
+test("text counter handles repeated whitespace", () => {
+  const { context, elements } = loadTools({ tc: "  one\n\n two\tthree  ", result: "" });
+  context.calcText();
+  assert.match(elements.result.innerHTML, /3 words/);
+  assert.match(elements.result.innerHTML, /19 characters/);
+});
+
+test("compound interest rejects fractional compounding frequency", () => {
+  const { context, elements } = loadTools({ cp: "1000", cr: "8", cy: "1", cm: "2.5", result: "" });
+  context.calcCompound();
+  assert.equal(elements.result.textContent, "Enter valid values.");
+});
+
+test("time duration handles overnight intervals", () => {
+  const { context, elements } = loadTools({ startTime: "23:30", endTime: "01:15", result: "" });
+  context.calcDuration();
+  assert.match(elements.result.innerHTML, /1h 45m/);
+});
+
+test("time duration rejects malformed time values", () => {
+  const { context, elements } = loadTools({ startTime: "25:00", endTime: "01:00", result: "" });
+  context.calcDuration();
+  assert.equal(elements.result.textContent, "Enter valid times.");
+});
+
+test("business days swaps reversed dates and remains inclusive", () => {
+  const { context, elements } = loadTools({ bdStart: "2026-09-18", bdEnd: "2026-09-14", result: "" });
+  context.calcBusinessDays();
+  assert.match(elements.result.innerHTML, /5 weekdays/);
+});
+
+test("aspect ratio reduces dimensions by their greatest common divisor", () => {
+  const { context, elements } = loadTools({ arw: "1920", arh: "1080", result: "" });
+  context.calcAspect();
+  assert.match(elements.result.innerHTML, /16:9/);
+});
+
+test("aspect ratio rejects fractional dimensions", () => {
+  const { context, elements } = loadTools({ arw: "1920.5", arh: "1080", result: "" });
+  context.calcAspect();
+  assert.equal(elements.result.textContent, "Enter positive whole-number width and height.");
+});
+
+test("date to timestamp converts Unix epoch correctly", () => {
+  const { context, elements } = loadTools({ dt: "1970-01-01T00:00", result: "" });
+  context.dateToTimestamp();
+  assert.equal(elements.result.textContent, "0");
+});
+
+test("case converter changes text using the selected mode", () => {
+  const { context, elements } = loadTools({ caseInput: "hello world", caseType: "upper", result: "" });
+  context.convertCase();
+  assert.equal(elements.caseInput.value, "HELLO WORLD");
+  assert.equal(elements.result.textContent, "Converted.");
+});
+
+test("JSON formatter pretty-prints valid JSON", () => {
+  const { context, elements } = loadTools({ jsonInput: "{\"a\":1}", result: "" });
+  context.formatJson();
+  assert.equal(elements.result.textContent, "Valid JSON.");
+  assert.equal(elements.jsonInput.value, '{\n  "a": 1\n}');
+});
+
+test("random number generator respects an inclusive mocked crypto result", () => {
+  const elements = { rndMin: { value: "10" }, rndMax: { value: "12" }, result: { innerHTML: "", textContent: "" } };
+  const crypto = { getRandomValues(buffer) { buffer[0] = 2; } };
+  const context = {
+    document: { getElementById: (id) => elements[id], addEventListener: () => {} },
+    console, Number, Math, Date, TextEncoder, TextDecoder, btoa, atob, setTimeout, clearTimeout,
+    BigInt, Uint32Array, crypto,
+    window: { crypto }
+  };
+  vm.createContext(context);
+  const source = fs.readFileSync("tool-pages.js", "utf8");
+  vm.runInContext(source, context, { filename: "tool-pages.js" });
+  context.generateRandom();
+  assert.equal(elements.result.innerHTML, "<strong>12</strong>");
+});
+
+test("random number generator rejects ranges larger than the supported limit", () => {
+  const elements = { rndMin: { value: "0" }, rndMax: { value: "4294967296" }, result: { innerHTML: "", textContent: "" } };
+  const crypto = { getRandomValues() {} };
+  const context = {
+    document: { getElementById: (id) => elements[id], addEventListener: () => {} },
+    console, Number, Math, Date, TextEncoder, TextDecoder, btoa, atob, setTimeout, clearTimeout,
+    BigInt, Uint32Array, crypto,
+    window: { crypto }
+  };
+  vm.createContext(context);
+  const source = fs.readFileSync("tool-pages.js", "utf8");
+  vm.runInContext(source, context, { filename: "tool-pages.js" });
+  context.generateRandom();
+  assert.equal(elements.result.textContent, "Use a range of up to 4,294,967,296 possible integers.");
+});
