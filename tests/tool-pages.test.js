@@ -419,3 +419,40 @@ test("random number generator rejects ranges larger than the supported limit", (
   context.generateRandom();
   assert.equal(elements.result.textContent, "Use a range of up to 4,294,967,296 possible integers.");
 });
+
+
+test("loan calculator rejects fractional month terms", () => {
+  const { context, elements } = loadTools({ loanAmount: "1200", loanRate: "5", loanMonths: "12.5", result: "" });
+  context.calcLoan();
+  assert.match(elements.result.textContent, /whole number of months/);
+});
+
+test("unit converter rejects incompatible unit families", () => {
+  const { context, elements } = loadTools({ uv: "10", uf: "km", ut: "kg", result: "" });
+  context.calcConvert();
+  assert.equal(elements.result.textContent, "Choose compatible units.");
+});
+
+test("profit margin rejects zero revenue", () => {
+  const { context, elements } = loadTools({ rev: "0", cost: "100", result: "" });
+  context.calcMargin();
+  assert.match(elements.result.textContent, /valid/);
+});
+
+test("ROI rejects zero initial investment", () => {
+  const { context, elements } = loadTools({ inv: "0", ret: "100", result: "" });
+  context.calcRoi();
+  assert.match(elements.result.textContent, /valid/);
+});
+
+test("date difference rejects invalid calendar dates", () => {
+  const { context, elements } = loadTools({ d1: "not-a-date", d2: "2026-09-20", result: "" });
+  context.calcDate();
+  assert.match(elements.result.textContent, /valid/);
+});
+
+test("business days rejects invalid calendar dates", () => {
+  const { context, elements } = loadTools({ bdStart: "not-a-date", bdEnd: "2026-09-20", result: "" });
+  context.calcBusinessDays();
+  assert.match(elements.result.textContent, /valid/);
+});
