@@ -81,3 +81,16 @@ test("sitemap contains unique valid URLs that map to existing HTML pages", () =>
     assert.ok(fs.existsSync(target), "sitemap points to missing file: " + loc);
   }
 });
+
+test("production UI code contains no inline event handlers", () => {
+  const productionFiles = [
+    "index.html",
+    "app.js",
+    "tool-pages.js",
+    ...fs.readdirSync(path.join(process.cwd(), "tools")).filter((name) => name.endsWith(".html")).map((name) => path.join("tools", name))
+  ];
+  for (const file of productionFiles) {
+    const source = fs.readFileSync(file, "utf8");
+    assert.doesNotMatch(source, /\bon[a-z]+\s*=\s*["']/i, file + " must not contain inline event handlers");
+  }
+});
