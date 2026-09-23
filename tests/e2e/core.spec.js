@@ -127,6 +127,12 @@ test.describe("UtilityHub exhaustive interaction smoke",()=>{
       await page.goto("/tools/"+pageName,{waitUntil:"networkidle"});
       const button=page.locator("#tool button").first();
       await expect(button).toBeVisible();
+      const primaryInput = page.locator("#tool textarea, #tool input[type=\"text\"], #tool input[type=\"number\"]").first();
+      if(await primaryInput.count()){
+        const currentValue = await primaryInput.inputValue();
+        if(!currentValue) await primaryInput.fill("test");
+      }
+      if(pageName==="base64-encoder-decoder.html") await page.locator("#b64").fill("UtilityHub E2E");
       await button.click();
       await page.waitForTimeout(100);
       const result=page.locator("#result");
