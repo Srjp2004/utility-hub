@@ -426,3 +426,13 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Added test-only coverage for remaining high-value validation gaps identified in the bounded functional audit: fractional loan terms, incompatible unit families, zero-revenue profit margin, zero initial ROI investment, and invalid dates for Date Difference and Business Days.
 - No production runtime code changed.
 - Integrated CI evidence is pending for the new branch/PR.
+
+
+## 2026-09-24 - PR #109 exhaustive primary-flow E2E milestone
+- PR #109 was merged into main at `2e27aa54cbc533443ee715ca1509d103a27d1978`.
+- Added an exhaustive interaction smoke test covering all 28 published tool pages. Each page is opened, its primary action is exercised, the result area is checked for observable output, and page/console errors are collected.
+- Evidence-driven APR-style repair corrected two test-harness defects: invalid numeric input seeding and result-locator initialization ordering. No production runtime code was changed for these failures.
+- Final pre-merge verification on head `b7b906d64391c5a15e3327502710918e809012f1` passed Tests, Browser E2E across Chromium/Firefox/WebKit/mobile Chromium/mobile WebKit, DevSecOps and Quality Gate.
+- Post-merge workflow runs for the new main SHA are not yet exposed. Pre-merge evidence must not be represented as post-merge evidence.
+- Vercel reported a `build-rate-limit` failure on the PR head. Treat this as a platform/account limitation, not application-code failure or deployment success.
+- Continue with deeper per-tool boundary/error testing, accessibility, physical-device QA and live deployment verification.
