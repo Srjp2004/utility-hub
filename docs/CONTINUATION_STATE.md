@@ -399,3 +399,18 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - DevSecOps dependency-review failed because GitHub Dependency Graph is not enabled for this repository; this is an unsupported repository capability, not a detected dependency vulnerability. The gate no longer invokes the unsupported action; dependency audit/SBOM and CodeQL remain active.
 - DevSecOps source-security header validation failed because shell quoting made the CSP grep assertion brittle. Replaced it with JSON-aware Node validation of required headers/directives.
 - Created focused repair branch `fix/ci-e2e-security-gates`; fresh rerun is required before considering the gates green.
+
+
+## 2026-09-23 - Consolidated responsive/CSP verification checkpoint
+- Re-fetched current `main` at `f10550037dd345686329a578e9d2a54193785063` before implementation.
+- Reviewed PR #90 and PR #91 and confirmed both were based on the older `3bf920...` baseline. Their relevant work was consolidated onto current main in PR #92, branch `ui/consolidated-main-20260923`.
+- Consolidated scope: external CSP-compatible `tools-directory.js`, responsive/adaptive safeguards, homepage search accessibility labeling, focus-visible/reduced-motion polish, and the corresponding integration regression.
+- A first PR #92 test run failed before test execution because the newly added regression used an invalid JavaScript regular-expression literal. The failure was diagnosed from the actual GitHub Actions log, not blindly retried. The regression was rewritten using a direct string assertion plus existing safe pattern checks.
+- Fresh verification on corrected commit `02b4fe7a7c0190d6c284dce05eb2f4da924f6bff`: UtilityHub Tests passed on Node 20.x and 22.x (run `35828517791`); Browser E2E passed on Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit (run `35828517703`); DevSecOps passed including CodeQL, source security invariants, dependency audit/SBOM and security-focused browser checks (run `35828517769`); Quality Gate passed (run `35828517799`).
+- These are CI/emulated browser results; they do not replace physical Android/iOS/device QA or live production verification.
+- PR #92 remains open and intentionally unmerged pending explicit human approval. Do not merge automatically.
+
+## Branch/PR cleanup checkpoint
+- PRs #90 and #91 are superseded by the consolidated PR #92.
+- The GitHub connector available to this session does not expose a branch-delete operation. Do not simulate deletion by moving branch refs. After PR #92 is merged, manually delete the obsolete branches `fix/responsive-csp-directory-20260923` and `ui/visual-polish-20260923` from GitHub, unless another unique use for them is identified.
+- Keep `main` as the sole integration baseline and use one focused feature branch/PR at a time for future UtilityHub changes.
