@@ -10,3 +10,25 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}img,canvas,video{max-width:10
 .quote-actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.quote-actions .secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
 .quote-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}.quote-metric{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}.quote-metric span,.quote-metric small{display:block;color:var(--muted);font-size:12px}.quote-metric strong{display:block;font-size:24px;margin:3px 0}.quote-list{display:grid;gap:8px;margin:10px 0 18px}.quote-row{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid var(--line);padding:8px 0}.quote-flag{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:11px;padding:11px;margin:8px 0;background:#fff}.quote-flag strong{min-width:58px}.quote-flag.risk{border-left:4px solid #b42318}.quote-flag.watch{border-left:4px solid #b54708}.quote-good{border:1px solid var(--line);border-radius:11px;padding:12px;background:#fff;margin:10px 0}.quote-example{margin:8px 0}.quote-example button{background:#fff;color:var(--ink);border:1px solid var(--line)}
 @media(max-width:850px){.quote-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.quote-grid{grid-template-columns:1fr}.quote-actions button{width:100%}.quote-row{align-items:flex-start;flex-direction:column;gap:4px}}
+
+/* Responsive adaptive layout safeguards */
+@media(max-width:900px){
+  header{padding-left:16px;padding-right:16px}
+  nav{gap:16px}
+  .hero{padding-top:64px}
+}
+@media(max-width:600px){
+  .hero h1{letter-spacing:-.035em}
+  .hero p:not(.eyebrow){font-size:17px}
+  .tool-panel{overflow-x:auto}
+  .tool-panel table{min-width:520px}
+  .quote-actions{flex-direction:column}
+  .quote-actions button,.quote-actions a{width:100%;margin-left:0}
+}
+@media(max-width:420px){
+  .hero h1{line-height:1.05}
+  .card{min-height:190px}
+  .section h2{font-size:28px}
+  .tool-page h1{font-size:clamp(1.9rem,10vw,2.6rem)}
+  .result{overflow-wrap:anywhere}
+}
