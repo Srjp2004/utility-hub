@@ -117,3 +117,42 @@ test.describe("UtilityHub functional smoke matrix",()=>{
     }
   });
 });
+test.describe("UtilityHub exhaustive interaction smoke",()=>{
+  test("every published tool executes its primary button flow without browser errors",async({page})=>{
+    const failures=[];
+    for(const pageName of toolPages){
+      const errors=[];
+      page.on("pageerror",e=>errors.push(String(e)));
+      page.on("console",m=>{if(m.type()==="error")errors.push(m.text())});
+      await page.goto("/tools/"+pageName,{waitUntil:"networkidle"});
+      const button=page.locator("#tool button").first();
+      await expect(button).toBeVisible();
+      const fileInput = page.locator('#tool input[type="file"]').first();
+      if(await fileInput.count()){
+        const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=","base64");
+        await fileInput.setInputFiles({name:"utilityhub-e2e.png",mimeType:"image/png",buffer:png});
+      }
+      const primaryInput = page.locator('#tool textarea, #tool input[type="text"], #tool input[type="number"], #tool input[type="date"], #tool input[type="time"], #tool input[type="datetime-local"]').first();
+      if(await primaryInput.count()){
+        const currentValue = await primaryInput.inputValue();
+        const inputType = await primaryInput.getAttribute("type");
+        if(!currentValue){
+          if(inputType==="number") await primaryInput.fill("1");
+          else if(inputType==="date") await primaryInput.fill("2020-01-01");
+          else if(inputType==="time") await primaryInput.fill("09:00");
+          else if(inputType==="datetime-local") await primaryInput.fill("2020-01-01T09:00");
+          else await primaryInput.fill("test");
+        }
+      }
+      if(pageName==="base64-encoder-decoder.html") await page.locator("#b64").fill("UtilityHub E2E");
+      const result=page.locator("#result");
+      await button.click();
+      await expect(result).toBeVisible();
+      await expect(result).toHaveText(/\S/, {timeout:5000});
+      const resultText=(await result.innerText()).trim();
+      if(!resultText) failures.push(pageName+": primary action produced no result");
+      if(errors.length) failures.push(pageName+": "+errors.join(" | "));
+    }
+    expect(failures,failures.join("\n")).toEqual([]);
+  });
+});
