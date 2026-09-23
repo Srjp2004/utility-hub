@@ -399,3 +399,13 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - DevSecOps dependency-review failed because GitHub Dependency Graph is not enabled for this repository; this is an unsupported repository capability, not a detected dependency vulnerability. The gate no longer invokes the unsupported action; dependency audit/SBOM and CodeQL remain active.
 - DevSecOps source-security header validation failed because shell quoting made the CSP grep assertion brittle. Replaced it with JSON-aware Node validation of required headers/directives.
 - Created focused repair branch `fix/ci-e2e-security-gates`; fresh rerun is required before considering the gates green.
+
+
+## 2026-09-23 - QuotePulse parser regression checkpoint
+- Bounded functional audit found and repaired a concrete QuotePulse false-positive: duration text such as `12-month warranty` could be counted as a monetary line item.
+- Repair is limited to QuotePulse amount extraction. Duration units and explicit quantity words are now excluded from monetary line-item candidates.
+- Added regression test and diagnosed an initial test-harness syntax failure from the actual GitHub Actions log before repairing it.
+- Corrected commit: `ca337a9c5a66bc177a2702aa8f857c9a6d1c7e41`.
+- Fresh CI: Tests #242, Browser E2E #92, DevSecOps #82 and Quality Gate #33 all passed for the corrected commit.
+- PR #95 is open and not merged. Do not merge without explicit user approval.
+- Next functional audit should continue with concrete edge cases from the Priority 1 queue, avoiding speculative changes.
