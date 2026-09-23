@@ -137,3 +137,11 @@ Consider React/Next.js, backend services, database, authentication or APIs only 
 
 ### CI gate repair
 The current engineering gates are being repaired from fresh failure evidence rather than blind retries. The 404 E2E assertion now matches the actual 404 page, unsupported Dependency Review is removed from the active gate, and Vercel security-header validation is parsed as JSON to avoid shell-quoting false failures.
+
+
+## 2026-09-23 - Responsive/CSP consolidation decision
+- The Tools directory filter/search logic is now designed to load from external `tools-directory.js`, allowing the deployment CSP to keep `script-src 'self'` without requiring an inline directory script.
+- Responsive behavior remains CSS-first and browser-native. The consolidated UI work adds adaptive header/navigation behavior, small-screen typography/card/result safeguards, touch-friendly controls, focus-visible states and reduced-motion handling without introducing a framework or backend.
+- Homepage featured-tool search now has an explicit accessible label and `type="search"` semantics; its scope remains the featured cards rather than the full directory.
+- The consolidated change intentionally does not alter calculator algorithms, add paid services, add a backend, or weaken existing tests.
+- Fresh CI evidence for corrected PR #92 commit `02b4fe7a7c0190d6c284dce05eb2f4da924f6bff`: Tests, Browser E2E, DevSecOps and Quality Gate all passed. This verifies the repository/CI acceptance gates for that commit; physical-device and live-production verification remain separate launch gates.
