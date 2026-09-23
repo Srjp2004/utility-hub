@@ -31,17 +31,19 @@ Make UtilityHub fully operational and functional before public launch. This mean
 - Project documentation in docs/
 - No fake monetization, fake traffic, fake testimonials or fabricated provider approval
 
-## 2026-09-23 - CSP hardening merged
-- PR #85 was merged into main as commit `c7e8bfc9cb53ffc679938f9e682b64144a96c18b` after fresh PR-head evidence showed UtilityHub Tests, Browser E2E, DevSecOps and Quality Gate all successful.
-- Production UI inline event handlers were migrated to delegated `data-action` handling, an integration regression now rejects inline HTML event-handler attributes in production UI files, and Vercel CSP now uses `script-src 'self'` instead of `script-src 'self' 'unsafe-inline'`.
-- The merge commit currently reports a successful Vercel status check. Post-merge GitHub Actions runs are not yet reported for this merge commit, so CI on the merged commit must be re-fetched before claiming post-merge workflow success.
-- Real browser/device QA remains a separate launch gate; CI browser emulation is not physical-device verification.
+## 2026-09-23 - Current main launch checkpoint
+- PR #85 CSP hardening is merged at `c7e8bfc9cb53ffc679938f9e682b64144a96c18b`; PR #88 documentation checkpoint is merged at `3bf920083dfa15d8ba17bb0314648f7cc349534b`.
+- Fresh post-merge GitHub Actions evidence for main commit `3bf920083dfa15d8ba17bb0314648f7cc349534b`: UtilityHub Tests, UtilityHub Browser E2E and UtilityHub DevSecOps all completed successfully (runs `35822475291`, `35822475247`, `35822475268` respectively).
+- Vercel reports a successful deployment status for the current main commit.
+- The currently verified deployment hostname recorded by project documentation is `utility-hub-ten.vercel.app`. A user-reported mobile smoke check has previously confirmed the homepage, Tools directory, Percentage Calculator (20% of 500 = 100), QuotePulse, and homepage refresh on that deployment.
+- The current source still requires broader real-device/browser certification before production readiness can be claimed; CI browser emulation and a limited user smoke check do not establish complete Android/iOS/desktop coverage.
+- Revenue remains an objective, not a guaranteed outcome. No traffic, revenue, ad approval, affiliate relationship or conversion claim is considered verified without direct evidence.
 
 ## Important known limitations
-1. Real browser/device QA is still pending. GitHub source inspection is not browser testing.
-2. Production domain is not yet known/configured. Never invent one.
-3. The Contact page now provides an operational GitHub issue/discussion support path; replace or supplement it with a dedicated support channel only if the production operation requires one.
-4. Privacy/disclosure text must be updated if analytics, ads, affiliate tracking or other third-party services are enabled.
+1. Broad real browser/device QA is still incomplete: Android Chrome, iOS Safari, tablet and desktop coverage remain to be exercised beyond the existing CI/user smoke evidence.
+2. `utility-hub-ten.vercel.app` is the currently recorded deployment hostname; a custom production domain is optional and must update sitemap/robots/canonicals/OG/structured data together if introduced.
+3. The Contact page provides an operational GitHub issue/discussion support path; a dedicated support channel can be added later if required.
+4. Privacy/disclosure text must be updated before enabling analytics, ads, affiliate tracking or other third-party services.
 
 ## Engineering workflow
 Inspect -> Plan -> Build -> Test -> Re-fetch -> Verify -> Document -> Continue.
@@ -79,7 +81,7 @@ For each meaningful change:
 - Revenue is an objective, not a guaranteed outcome. The monetization plan remains free core tools first, then measured ads/affiliate/premium/B2B surfaces after deployment, privacy disclosure, and real usage evidence.
 - Next bounded engineering focus: continue the functional edge-case audit, then integration/SEO consistency, then real browser/device QA and launch readiness.
 
-## Next work queue
+## 2026-09-23 - Next execution priority\n- Treat the current main commit and fresh CI evidence above as the verified engineering baseline.\n- Finish any remaining high-value functional regression gaps only when a concrete defect or missing acceptance test is identified.\n- Then complete launch evidence: broad browser/device QA, production robots/sitemap/canonical checks, and privacy/disclosure readiness before enabling monetization.\n\n## Next work queue
 ### Priority 1: functional correctness
 Audit tool-pages.js in bounded batches for real edge cases:
 - Percentage and percentage-change zero/division cases
