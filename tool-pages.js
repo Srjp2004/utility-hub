@@ -74,7 +74,9 @@ function analyzeQuote(){
       const value=Number(m[1].replace(/,/g,""));
       const hasPercent=/%/.test(line.slice(Math.max(0,m.index-8), Math.min(line.length,m.index+m[0].length+8)));
       const dateLike=/\b20\d{2}[-/]\d{1,2}[-/]\d{1,2}\b/.test(line);
-      if(Number.isFinite(value)&&value>=0&&!hasPercent&&!dateLike&&!isTotal&&!isDeposit){
+      const durationLike=/\b\d+(?:\.\d+)?\s*(?:second|seconds|sec|secs|minute|minutes|min|mins|hour|hours|hr|hrs|day|days|week|weeks|month|months|year|years)\b/i.test(line);
+      const quantityLike=/\b\d+(?:\.\d+)?\s*(?:item|items|unit|units|piece|pieces|pcs|qty|quantity)\b/i.test(line);
+      if(Number.isFinite(value)&&value>=0&&!hasPercent&&!dateLike&&!durationLike&&!quantityLike&&!isTotal&&!isDeposit){
         let label=line.slice(0,m.index).replace(/[-:|•]+\s*$/,"").trim();
         label=label.replace(/^(item|description|service|line)\s*[:#-]?\s*/i,"").trim();
         if(label.length>1) lineItems.push({label,value});
