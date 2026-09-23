@@ -118,3 +118,25 @@ test.describe("UtilityHub functional smoke matrix",()=>{
   });
 });
 \n\ntest.describe("UtilityHub exhaustive interaction smoke",()=>{\n  test("every published tool executes its primary button flow without browser errors",async({page})=>{\n    const failures=[];\n    for(const pageName of toolPages){\n      const errors=[];\n      page.on("pageerror",e=>errors.push(String(e)));\n      page.on("console",m=>{if(m.type()==="error")errors.push(m.text())});\n      await page.goto("/tools/"+pageName,{waitUntil:"networkidle"});\n      const button=page.locator("#tool button").first();\n      await expect(button).toBeVisible();\n      await button.click();\n      await page.waitForTimeout(100);\n      const result=page.locator("#result");\n      await expect(result).toBeVisible();\n      const resultText=(await result.innerText()).trim();\n      if(!resultText) failures.push(pageName+": primary action produced no result");\n      if(errors.length) failures.push(pageName+": "+errors.join(" | "));\n    }\n    expect(failures,failures.join("\\n")).toEqual([]);\n  });\n});\n
+
+test.describe("UtilityHub exhaustive interaction smoke",()=>{
+  test("every published tool executes its primary button flow without browser errors",async({page})=>{
+    const failures=[];
+    for(const pageName of toolPages){
+      const errors=[];
+      page.on("pageerror",e=>errors.push(String(e)));
+      page.on("console",m=>{if(m.type()==="error")errors.push(m.text())});
+      await page.goto("/tools/"+pageName,{waitUntil:"networkidle"});
+      const button=page.locator("#tool button").first();
+      await expect(button).toBeVisible();
+      await button.click();
+      await page.waitForTimeout(100);
+      const result=page.locator("#result");
+      await expect(result).toBeVisible();
+      const resultText=(await result.innerText()).trim();
+      if(!resultText) failures.push(pageName+": primary action produced no result");
+      if(errors.length) failures.push(pageName+": "+errors.join(" | "));
+    }
+    expect(failures,failures.join("\n")).toEqual([]);
+  });
+});
