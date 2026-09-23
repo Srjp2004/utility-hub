@@ -103,3 +103,16 @@ test("tools directory script is CSP-compatible and externally loaded", () => {
   assert.doesNotMatch(toolsPage, /\\bon[a-z]+\\s*=\\s*["']/i);
   assert.ok(fs.existsSync("tools-directory.js"));
 });
+
+
+test("tool pages use CSP-compatible external bootstrap scripts", () => {
+  const toolsDir = path.join(process.cwd(), "tools");
+  const pages = fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html"));
+  const bootstrap = fs.readFileSync("tool-page-init.js", "utf8");
+  assert.ok(bootstrap.includes("window.location.pathname"), "tool bootstrap must select the page from the current pathname");
+  for (const page of pages) {
+    const source = fs.readFileSync(path.join(toolsDir, page), "utf8");
+    assert.ok(source.includes('<script src="../tool-page-init.js"'), page + " must load the external tool bootstrap");
+    assert.doesNotMatch(source, /<script>\\s*.*renderTool\\(/s, page + " must not use an inline renderTool bootstrap");
+  }
+});
