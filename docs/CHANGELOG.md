@@ -1,3 +1,9 @@
+## 2026-09-23 - QuotePulse duration regression fix merged
+- Merged PR #97 into main at `296c0c2716ed3e8a2d4bf23cc39521829d985bed`.
+- QuotePulse no longer counts duration-like or quantity-like numeric text as monetary quote line items.
+- Added regression coverage for a `12-month warranty` false-positive case.
+- Pre-merge Tests, Browser E2E, DevSecOps and Quality Gate were green on the PR head.
+- Vercel deployment verification for the merge commit remains pending at the time of this entry.
 ## 2026-09-23 - Post-merge launch checkpoint
 - PR #88 is merged into main at commit `3bf920083dfa15d8ba17bb0314648f7cc349534b`, following PR #85 CSP hardening at `c7e8bfc9cb53ffc679938f9e682b64144a96c18b`.
 - Fresh push-triggered CI on the current main commit is green for UtilityHub Tests (`35822475291`), UtilityHub Browser E2E (`35822475247`) and UtilityHub DevSecOps (`35822475268`).
