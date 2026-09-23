@@ -8,6 +8,7 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
   const pages = fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html")).sort();
   const sitemap = fs.readFileSync("sitemap.xml", "utf8");
   const renderer = fs.readFileSync("tool-pages.js", "utf8");
+  const bootstrap = fs.readFileSync("tool-page-init.js", "utf8");
   assert.equal(pages.length, 28);
 
   for (const page of pages) {
