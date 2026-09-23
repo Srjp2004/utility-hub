@@ -1,3 +1,12 @@
+## 2026-09-23 - PR #98 merged and post-merge verification
+- PR #98 (CSP-compatible tool page bootstrap) was explicitly approved and merged into `main`.
+- Merge commit: `c3ce6240aa3827abafd301ec80d5ba45123f6c71`.
+- The change moves all 28 tool-page initialization calls from inline `renderTool(...)` scripts to the external `tool-page-init.js` bootstrap, preserving the strong `script-src 'self'` CSP instead of weakening it with `unsafe-inline`.
+- Fresh post-merge GitHub Actions evidence for the exact main commit: UtilityHub Tests run `35889627554` succeeded; UtilityHub DevSecOps run `35889627729` succeeded; UtilityHub Browser E2E run `35889627655` succeeded.
+- GitHub's current combined commit status for the exact main commit reports Vercel `success`.
+- The deployment target is recorded as `utility-hub-ten.vercel.app`. Independent access from the current execution environment is unavailable, so live browser/runtime verification is not claimed here; the user previously completed a mobile smoke check on this hostname.
+- Broad real-device/browser QA remains a release gate.
+
 ## 2026-09-23 - PR #97 merged and re-verified
 - PR #97 (QuotePulse duration regression fix) was explicitly approved and merged into main.
 - Merge commit: `296c0c2716ed3e8a2d4bf23cc39521829d985bed`.
