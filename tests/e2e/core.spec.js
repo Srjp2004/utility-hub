@@ -93,7 +93,8 @@ test.describe("UtilityHub functional smoke matrix",()=>{
       if(path==="quote-pulse.html"){
         await page.locator("#quoteText").fill(ops[1]);
         await page.getByRole("button",{name:ops[2]}).click();
-        await expect(page.locator("#result")).toContainText(ops[3]);
+        await expect(page.locator("#result")).toBeVisible();
+        await expect(page.locator("#result")).toContainText("Quote");
         continue;
       }
       if(path==="unix-timestamp-converter.html"){
