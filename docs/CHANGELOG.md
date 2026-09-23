@@ -1,3 +1,8 @@
+## 2026-09-23 - CSP inline-script hardening
+- Migrated the remaining production UI inline event handlers in `index.html`, `app.js` and `tool-pages.js` to delegated `data-action` handlers.
+- Added an integration regression that rejects inline HTML event-handler attributes across production UI files.
+- Tightened `vercel.json` CSP from `script-src 'self' 'unsafe-inline'` to `script-src 'self'`.
+- This is a focused security hardening change; browser/runtime verification is required before merge and no production readiness claim is made from source inspection alone.
 ## 2026-09-22 - Vercel configuration repair
 - Fixed the confirmed Vercel deployment failure caused by invalid `vercel.json` asset-header source patterns.
 - Replaced escaped extension separators with Vercel-compatible header source patterns while preserving the security headers and intended HTML/static-asset caching policy.

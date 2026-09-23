@@ -31,6 +31,11 @@ Make UtilityHub fully operational and functional before public launch. This mean
 - Project documentation in docs/
 - No fake monetization, fake traffic, fake testimonials or fabricated provider approval
 
+## 2026-09-23 - CSP hardening in progress
+- Current main still contains inline event-handler code and therefore retains `script-src 'unsafe-inline'` in `vercel.json`.
+- A focused branch `security/csp-hardening-current-main-20260923` has migrated production UI handlers to delegated `data-action` events, added an integration regression against inline handlers, and tightened CSP to `script-src 'self'`.
+- Merge is gated on fresh CI/browser evidence; the branch is not part of main until verified and approved.
+
 ## Important known limitations
 1. Real browser/device QA is still pending. GitHub source inspection is not browser testing.
 2. Production domain is not yet known/configured. Never invent one.
