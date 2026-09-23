@@ -540,6 +540,6 @@ test("password generator clamps requested length to supported bounds", () => {
   vm.createContext(context);
   vm.runInContext(fs.readFileSync("tool-pages.js", "utf8"), context, { filename: "tool-pages.js" });
   context.generatePassword();
-  const generated = elements.result.innerHTML.match(/<strong>(.*?)<\\/strong>/)?.[1] || "";
+  const generated = elements.result.innerHTML.replace(/<[^>]+>/g, "");
   assert.equal(generated.length, 128);
 });
