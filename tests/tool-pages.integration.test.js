@@ -99,7 +99,7 @@ test("production UI code contains no inline event handlers", () => {
 test("tools directory script is CSP-compatible and externally loaded", () => {
   const toolsPage = fs.readFileSync("tools.html", "utf8");
   assert.ok(toolsPage.includes('<script src="tools-directory.js"></script>'));
-  assert.doesNotMatch(toolsPage, /<script>[^]*toolSearch[^]*<\\/script>/);
+  assert.equal(toolsPage.includes("<script>"), false);
   assert.doesNotMatch(toolsPage, /\\bon[a-z]+\\s*=\\s*["']/i);
   assert.ok(fs.existsSync("tools-directory.js"));
 });
