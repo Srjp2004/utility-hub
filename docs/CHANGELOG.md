@@ -396,3 +396,11 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Corrected commit `02b4fe7a7c0190d6c284dce05eb2f4da924f6bff`.
 - Fresh evidence: Tests run `35828517791` passed on Node 20.x and 22.x; Browser E2E run `35828517703` passed on Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit; DevSecOps run `35828517769` passed; Quality Gate run `35828517799` passed.
 - PR #92 remains unmerged pending explicit approval.
+
+
+## 2026-09-23 - PR #98 merged: CSP-compatible tool bootstrap
+- Merged PR #98 at `c3ce6240aa3827abafd301ec80d5ba45123f6c71`.
+- Replaced inline tool-page `renderTool(...)` initialization across all 28 published tool pages with the external `tool-page-init.js` bootstrap.
+- Kept the strong `script-src 'self'` CSP intact rather than adding `unsafe-inline`.
+- Post-merge exact-commit verification: Tests run `35889627554` passed; Browser E2E run `35889627655` passed across Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit; DevSecOps run `35889627729` passed; GitHub Vercel status is `success`.
+- Live browser access from the current execution environment is unavailable, so production runtime behavior remains independently unverified here. Existing user mobile smoke evidence is retained as separate evidence.
