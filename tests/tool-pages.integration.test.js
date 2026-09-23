@@ -132,8 +132,9 @@ test("tool bootstrap has exactly one mapping per published page", () => {
 test("every mapped renderer is registered in the shared renderer", () => {
   const renderer = fs.readFileSync("tool-pages.js", "utf8");
   const bootstrap = fs.readFileSync("tool-page-init.js", "utf8");
-  const entries = [...bootstrap.matchAll(/"([^"]+\.html)"\s*:\s*"([^"]+)"/g)];
+  const entries = [...bootstrap.matchAll(/"([^"]+\\.html)"\\s*:\\s*"([^"]+)"/g)];
   for (const [, page, rendererName] of entries) {
-    assert.match(renderer, new RegExp(rendererName + "\\s*:"), page + " must reference a registered renderer view");
+    const escaped = rendererName.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&");
+    assert.match(renderer, new RegExp("\\b" + escaped + "\\s*:"), page + " must reference a registered renderer view");
   }
 });
