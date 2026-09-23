@@ -1,3 +1,8 @@
+## 2026-09-23 - CSP hardening merged
+- Merged PR #85 into `main` as commit `c7e8bfc9cb53ffc679938f9e682b64144a96c18b`.
+- Removed remaining production inline event handlers in favor of delegated `data-action` events, added regression coverage preventing inline HTML event-handler attributes, and tightened Vercel CSP to `script-src 'self'`.
+- PR-head verification had fresh success for UtilityHub Tests, Browser E2E, DevSecOps and Quality Gate. The merge commit currently reports a successful Vercel status; post-merge GitHub Actions evidence remains to be re-fetched.
+
 ## 2026-09-23 - CSP inline-script hardening
 - Migrated the remaining production UI inline event handlers in `index.html`, `app.js` and `tool-pages.js` to delegated `data-action` handlers.
 - Added an integration regression that rejects inline HTML event-handler attributes across production UI files.

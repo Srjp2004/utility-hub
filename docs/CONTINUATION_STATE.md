@@ -31,10 +31,11 @@ Make UtilityHub fully operational and functional before public launch. This mean
 - Project documentation in docs/
 - No fake monetization, fake traffic, fake testimonials or fabricated provider approval
 
-## 2026-09-23 - CSP hardening in progress
-- Current main still contains inline event-handler code and therefore retains `script-src 'unsafe-inline'` in `vercel.json`.
-- A focused branch `security/csp-hardening-current-main-20260923` has migrated production UI handlers to delegated `data-action` events, added an integration regression against inline handlers, and tightened CSP to `script-src 'self'`.
-- Merge is gated on fresh CI/browser evidence; the branch is not part of main until verified and approved.
+## 2026-09-23 - CSP hardening merged
+- PR #85 was merged into main as commit `c7e8bfc9cb53ffc679938f9e682b64144a96c18b` after fresh PR-head evidence showed UtilityHub Tests, Browser E2E, DevSecOps and Quality Gate all successful.
+- Production UI inline event handlers were migrated to delegated `data-action` handling, an integration regression now rejects inline HTML event-handler attributes in production UI files, and Vercel CSP now uses `script-src 'self'` instead of `script-src 'self' 'unsafe-inline'`.
+- The merge commit currently reports a successful Vercel status check. Post-merge GitHub Actions runs are not yet reported for this merge commit, so CI on the merged commit must be re-fetched before claiming post-merge workflow success.
+- Real browser/device QA remains a separate launch gate; CI browser emulation is not physical-device verification.
 
 ## Important known limitations
 1. Real browser/device QA is still pending. GitHub source inspection is not browser testing.
