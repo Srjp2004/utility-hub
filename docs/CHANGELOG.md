@@ -380,3 +380,13 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Removed unsupported GitHub Dependency Review execution because the repository's Dependency Graph is disabled; retained npm audit, SBOM and CodeQL coverage.
 - Replaced brittle shell/grep security-header checks with JSON-aware validation of `vercel.json`.
 - Fresh CI/E2E rerun remains required.
+
+
+## 2026-09-23 - Consolidated responsive/CSP hardening and verification
+- Created PR #92 from the current `main` baseline rather than merging the stale PR #90/#91 branches.
+- Consolidated the reviewed responsive/CSP directory changes: `tools-directory.js` external loading, adaptive breakpoints/overflow safeguards, accessible homepage featured-tool search labeling, focus-visible states, reduced-motion behavior and restrained interaction polish.
+- Added an integration regression requiring the external directory script and preventing an inline Tools-directory script.
+- First PR #92 CI execution exposed a real test-harness syntax defect in the new regression. GitHub job logs showed `SyntaxError: Invalid regular expression flags` before the integration suite loaded; this was diagnosed and repaired by replacing brittle regex matching with a direct string assertion.
+- Corrected commit `02b4fe7a7c0190d6c284dce05eb2f4da924f6bff`.
+- Fresh evidence: Tests run `35828517791` passed on Node 20.x and 22.x; Browser E2E run `35828517703` passed on Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit; DevSecOps run `35828517769` passed; Quality Gate run `35828517799` passed.
+- PR #92 remains unmerged pending explicit approval.
