@@ -380,3 +380,13 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Removed unsupported GitHub Dependency Review execution because the repository's Dependency Graph is disabled; retained npm audit, SBOM and CodeQL coverage.
 - Replaced brittle shell/grep security-header checks with JSON-aware validation of `vercel.json`.
 - Fresh CI/E2E rerun remains required.
+
+
+## 2026-09-23 - QuotePulse duration false-positive fix
+- During the bounded QuotePulse audit, identified a concrete parser defect: numeric duration phrases such as `12-month warranty` could be considered monetary line items.
+- Fixed amount detection to exclude duration and explicit quantity phrases while preserving monetary line-item detection.
+- Added regression coverage for the `12-month warranty` case.
+- The first CI run exposed a syntax error in the newly added test regex before the test suite loaded. The GitHub Actions log was inspected, the assertion was rewritten using a direct string check, and the corrected run passed.
+- Corrected commit: `ca337a9c5a66bc177a2702aa8f857c9a6d1c7e41`.
+- Fresh evidence: UtilityHub Tests run `35829442858`, Browser E2E run `35829442849`, DevSecOps run `35829442906`, and Quality Gate run `35829442896` all succeeded.
+- PR #95 remains open and intentionally unmerged pending explicit human approval.
