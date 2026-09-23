@@ -137,6 +137,7 @@ test("image resize completes with a PNG output filename for PNG input", async ()
   const context = {
     document: {
       getElementById: (id) => elements[id],
+      addEventListener: () => {},
       body: { appendChild() {} },
       createElement: (tag) => tag === "canvas"
         ? {
