@@ -329,7 +329,7 @@ test("text counter handles repeated whitespace", () => {
   const { context, elements } = loadTools({ tc: "  one\n\n two\tthree  ", result: "" });
   context.calcText();
   assert.match(elements.result.innerHTML, /3 words/);
-  assert.match(elements.result.innerHTML, /17 characters/);
+  assert.match(elements.result.innerHTML, /19 characters/);
 });
 
 test("compound interest rejects fractional compounding frequency", () => {
@@ -384,7 +384,8 @@ test("case converter changes text using the selected mode", () => {
 test("JSON formatter pretty-prints valid JSON", () => {
   const { context, elements } = loadTools({ jsonInput: "{\"a\":1}", result: "" });
   context.formatJson();
-  assert.match(elements.result.textContent, /"a": 1/);
+  assert.equal(elements.result.textContent, "Valid JSON.");
+  assert.equal(elements.jsonInput.value, '{\n  "a": 1\n}');
 });
 
 test("random number generator respects an inclusive mocked crypto result", () => {
