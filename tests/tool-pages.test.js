@@ -261,3 +261,16 @@ test("timestamp converter rejects unsupported input units", () => {
   context.timestampToDate();
   assert.equal(elements.result.textContent, "Choose a supported timestamp unit.");
 });
+
+
+test("QuotePulse does not treat warranty duration as a monetary line item", () => {
+  const { context, elements } = loadTools({
+    quoteText: "Labour $400\nMaterials $300\nTotal $700\n12-month warranty",
+    result: "",
+    qpMessage: ""
+  });
+  context.analyzeQuote();
+  assert.match(elements.result.innerHTML, /Line items.*<strong>2<\\/strong>/s);
+  assert.match(elements.result.innerHTML, /Detected line items/);
+  assert.doesNotMatch(elements.result.innerHTML, /12-month warranty/);
+});
