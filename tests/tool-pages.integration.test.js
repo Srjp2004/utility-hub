@@ -8,12 +8,14 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
   const pages = fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html")).sort();
   const sitemap = fs.readFileSync("sitemap.xml", "utf8");
   const renderer = fs.readFileSync("tool-pages.js", "utf8");
+  const bootstrap = fs.readFileSync("tool-page-init.js", "utf8");
   assert.equal(pages.length, 28);
 
   for (const page of pages) {
     const source = fs.readFileSync(path.join(toolsDir, page), "utf8");
-    const match = source.match(/renderTool\(\s*"([^"]+)"\s*,\s*"tool"\s*\)/);
-    assert.ok(match, page + " must call renderTool");
+    const mapping = new RegExp('"'+page+'"\\s*:\\s*"([^"]+)"');
+    const match = bootstrap.match(mapping);
+    assert.ok(match, page + " must have an external renderTool mapping");
     assert.match(source, /id=["']tool["']/, page + " must have a tool mount");
     assert.ok(source.includes("tool-pages.js"), page + " must load the shared renderer");
     assert.ok(source.includes('<meta name="description"'), page + " must have a description");
@@ -102,4 +104,17 @@ test("tools directory script is CSP-compatible and externally loaded", () => {
   assert.equal(toolsPage.includes("<script>"), false);
   assert.doesNotMatch(toolsPage, /\\bon[a-z]+\\s*=\\s*["']/i);
   assert.ok(fs.existsSync("tools-directory.js"));
+});
+
+
+test("tool pages use CSP-compatible external bootstrap scripts", () => {
+  const toolsDir = path.join(process.cwd(), "tools");
+  const pages = fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html"));
+  const bootstrap = fs.readFileSync("tool-page-init.js", "utf8");
+  assert.ok(bootstrap.includes("window.location.pathname"), "tool bootstrap must select the page from the current pathname");
+  for (const page of pages) {
+    const source = fs.readFileSync(path.join(toolsDir, page), "utf8");
+    assert.ok(source.includes('<script src="../tool-page-init.js"'), page + " must load the external tool bootstrap");
+    assert.equal(source.includes("<script>renderTool("), false, page + " must not use an inline renderTool bootstrap");
+  }
 });
