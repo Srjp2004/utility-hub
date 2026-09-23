@@ -151,3 +151,11 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Homepage featured-tool search now has an explicit accessible label and `type="search"` semantics; its scope remains the featured cards rather than the full directory.
 - The consolidated change intentionally does not alter calculator algorithms, add paid services, add a backend, or weaken existing tests.
 - Fresh CI evidence for corrected PR #92 commit `02b4fe7a7c0190d6c284dce05eb2f4da924f6bff`: Tests, Browser E2E, DevSecOps and Quality Gate all passed. This verifies the repository/CI acceptance gates for that commit; physical-device and live-production verification remain separate launch gates.
+
+
+## 2026-09-23 - CSP-compatible tool bootstrap integrated
+- PR #98 was merged into `main` at `c3ce6240aa3827abafd301ec80d5ba45123f6c71`.
+- All 28 published tool pages now initialize through the external `tool-page-init.js` bootstrap rather than inline `renderTool(...)` scripts.
+- This preserves the deployment CSP's `script-src 'self'` policy and avoids weakening the security boundary with `unsafe-inline`.
+- Exact-commit post-merge evidence is green for the Node regression matrix, Browser E2E matrix, and DevSecOps checks. Vercel's GitHub status is also `success` for the exact main commit.
+- This does not replace physical device testing or independent live-browser verification.
