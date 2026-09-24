@@ -125,6 +125,15 @@ test("ROI handles a loss", () => {
   assert.match(elements.result.innerHTML, /ROI: -25\.00%/);
 });
 
+test("BMI calculator provides category, scale and healthy-range weight", () => {
+  const { context, elements } = loadTools({ kg: "70", cm: "175", result: "" });
+  context.calcBmi();
+  assert.match(elements.result.innerHTML, /22\.9/);
+  assert.match(elements.result.innerHTML, /Healthy weight/);
+  assert.match(elements.result.innerHTML, /bmi-track/);
+  assert.match(elements.result.innerHTML, /56\.7-76\.3 kg/);
+});
+
 test("text counter handles empty text", () => {
   const { context, elements } = loadTools({ tc: "", result: "" });
   context.calcText();
@@ -261,6 +270,13 @@ test("timestamp converter provides and uses an explicit input unit", () => {
   assert.match(elements.result.textContent, /^2025-/);
 });
 
+
+test("QuotePulse example action populates a reproducible quote", () => {
+  const { context, elements } = loadTools({ quoteText: "", result: "" });
+  context.quotePulseExample();
+  assert.match(elements.quoteText.value, /Site visit \$50/);
+  assert.match(elements.quoteText.value, /Total \$1150/);
+});
 
 test("QuotePulse analyzes a quote and detects document issues", () => {
   const { context, elements } = loadTools({
