@@ -434,6 +434,12 @@ test("random number generator rejects ranges larger than the supported limit", (
 });
 
 
+test("loan calculator rejects unsafe month counts", () => {
+  const { context, elements } = loadTools({ loanAmount: "1200", loanRate: "5", loanMonths: "9007199254740992", result: "" });
+  context.calcLoan();
+  assert.match(elements.result.textContent, /whole number of months/);
+});
+
 test("loan calculator rejects fractional month terms", () => {
   const { context, elements } = loadTools({ loanAmount: "1200", loanRate: "5", loanMonths: "12.5", result: "" });
   context.calcLoan();
