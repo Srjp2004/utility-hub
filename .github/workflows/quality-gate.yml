@@ -3,6 +3,8 @@ name: UtilityHub Quality Gate
 on:
   pull_request:
     branches: ["main"]
+  push:
+    branches: ["security/**"]
   workflow_dispatch:
     inputs:
       sha:
@@ -25,7 +27,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
-          EVENT_SHA: ${{ github.event.pull_request.head.sha }}
+          EVENT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           INPUT_SHA: ${{ inputs.sha }}
         run: |
           set -euo pipefail
@@ -89,7 +91,7 @@ jobs:
       - name: Publish gate state
         if: always()
         env:
-          SHA: ${{ github.event.pull_request.head.sha || inputs.sha }}
+          SHA: ${{ github.event.pull_request.head.sha || inputs.sha || github.sha }}
         run: |
           set -euo pipefail
           cat > engineering-gate-state.json <<EOF
