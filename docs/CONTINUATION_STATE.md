@@ -444,3 +444,12 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Repository searches found no package lifecycle scripts such as preinstall, install, postinstall or prepare, and no embedded credential/key patterns or suspicious executable/network primitives in the searched paths.
 - Existing DevSecOps automation runs npm audit, generates a CycloneDX SBOM, runs CodeQL and source-security invariants. These controls provide evidence against known dependency vulnerabilities but do not by themselves prove a package is free of malicious behavior.
 - No evidence of a malicious package was found in the repository manifest itself. Live registry/package provenance and exact resolved transitive dependency versions require a fresh CI-generated dependency tree/SBOM for definitive verification.
+
+
+## 2026-09-24 - Final security hardening rebuilt on current main
+- Rebuilt the security hardening on the current main baseline after the earlier security branch diverged from main.
+- Isolated secret-backed Copilot delegation from issue creation so untrusted issue/workflow inputs are processed without exposing COPILOT_AUTOMATION_TOKEN.
+- Replaced shell heredoc interpolation of untrusted task/request text with environment-to-Python file generation.
+- Restricted repair delegation after failed workflow runs to failed runs whose head branch is main, while preserving explicit workflow dispatch.
+- Added HSTS and Cross-Origin-Resource-Policy and removed CSP style-src unsafe-inline after source inspection established no inline style requirement.
+- PR #127 exact-head verification passed Tests, Browser E2E, DevSecOps and Quality Gate before merge. Live production headers remain unverified until deployment.
