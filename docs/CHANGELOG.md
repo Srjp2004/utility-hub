@@ -1,3 +1,8 @@
+## 2026-09-24 - Percentage Change empty-input validation
+- Mathematical audit found that Percentage Change still used direct Number() parsing, so an empty new-value field became zero instead of being treated as missing input.
+- Reused the shared numeric parser and added a focused regression test.
+- Bounded validation-only correction; fresh CI, E2E, security and quality evidence is required before merge.
+
 ## 2026-09-24 - Strict calendar-date validation
 - Functional audit found that JavaScript Date parsing can normalize impossible calendar dates such as February 30 instead of rejecting them.
 - Added a shared strict ISO calendar-date parser and applied it to Date Difference, Business Days and Age Calculator.
