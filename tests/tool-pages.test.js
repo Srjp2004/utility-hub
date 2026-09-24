@@ -456,3 +456,90 @@ test("business days rejects invalid calendar dates", () => {
   context.calcBusinessDays();
   assert.match(elements.result.textContent, /valid/);
 });
+
+
+test("discount calculator rejects negative price and out-of-range discount", () => {
+  const { context, elements } = loadTools({ price: "-1", disc: "20", result: "" });
+  context.calcDiscount();
+  assert.equal(elements.result.textContent, "Enter a valid price and discount from 0 to 100%.");
+  elements.price.value = "100";
+  elements.disc.value = "100.1";
+  context.calcDiscount();
+  assert.equal(elements.result.textContent, "Enter a valid price and discount from 0 to 100%.");
+});
+
+test("loan calculator rejects negative rate and non-positive amount", () => {
+  const { context, elements } = loadTools({ loanAmount: "1000", loanRate: "-1", loanMonths: "12", result: "" });
+  context.calcLoan();
+  assert.match(elements.result.textContent, /positive loan amount/);
+  elements.loanRate.value = "5";
+  elements.loanAmount.value = "0";
+  context.calcLoan();
+  assert.match(elements.result.textContent, /positive loan amount/);
+});
+
+test("age calculator rejects malformed birth dates", () => {
+  const { context, elements } = loadTools({ dob: "not-a-date", result: "" });
+  context.calcAge();
+  assert.equal(elements.result.textContent, "Enter a valid date of birth.");
+});
+
+test("time duration returns zero for equal times", () => {
+  const { context, elements } = loadTools({ startTime: "10:30", endTime: "10:30", result: "" });
+  context.calcDuration();
+  assert.equal(elements.result.innerHTML, "<strong>0h 0m</strong>");
+});
+
+test("business days returns zero for a weekend-only interval", () => {
+  const { context, elements } = loadTools({ bdStart: "2026-09-19", bdEnd: "2026-09-20", result: "" });
+  context.calcBusinessDays();
+  assert.match(elements.result.innerHTML, /0 weekdays/);
+});
+
+test("random number generator accepts a single-value range", () => {
+  const elements = { rndMin: { value: "7" }, rndMax: { value: "7" }, result: { innerHTML: "", textContent: "" } };
+  const crypto = { getRandomValues(buffer) { buffer[0] = 0; } };
+  const context = { document: { getElementById: id => elements[id], addEventListener: () => {} }, console, Number, Math, Date, TextEncoder, TextDecoder, btoa, atob, setTimeout, clearTimeout, BigInt, Uint32Array, crypto, window: { crypto } };
+  vm.createContext(context);
+  vm.runInContext(fs.readFileSync("tool-pages.js", "utf8"), context, { filename: "tool-pages.js" });
+  context.generateRandom();
+  assert.equal(elements.result.innerHTML, "<strong>7</strong>");
+});
+
+test("aspect ratio rejects zero and negative dimensions", () => {
+  const { context, elements } = loadTools({ arw: "0", arh: "1080", result: "" });
+  context.calcAspect();
+  assert.equal(elements.result.textContent, "Enter positive whole-number width and height.");
+  elements.arw.value = "-1920";
+  context.calcAspect();
+  assert.equal(elements.result.textContent, "Enter positive whole-number width and height.");
+});
+
+test("timestamp converter rejects unsafe timestamps", () => {
+  const { context, elements } = loadTools({ ts: "9007199254740992", tsUnit: "seconds", result: "" });
+  context.timestampToDate();
+  assert.equal(elements.result.textContent, "Enter a whole-number timestamp within the supported safe range.");
+});
+
+test("date-to-timestamp rejects missing input", () => {
+  const { context, elements } = loadTools({ dt: "", result: "" });
+  context.dateToTimestamp();
+  assert.equal(elements.result.textContent, "Choose a date and time.");
+});
+
+test("base64 encoder handles empty text without throwing", () => {
+  const { context, elements } = loadTools({ b64: "", result: "" });
+  context.encodeBase64();
+  assert.equal(elements.result.textContent, "");
+});
+
+test("password generator clamps requested length to supported bounds", () => {
+  const elements = { pwLength: { value: "1000" }, result: { innerHTML: "", textContent: "" } };
+  const crypto = { getRandomValues(buffer) { buffer[0] = 0; } };
+  const context = { document: { getElementById: id => elements[id], addEventListener: () => {} }, console, Number, Math, Date, TextEncoder, TextDecoder, btoa, atob, setTimeout, clearTimeout, Uint32Array, crypto, window: { crypto } };
+  vm.createContext(context);
+  vm.runInContext(fs.readFileSync("tool-pages.js", "utf8"), context, { filename: "tool-pages.js" });
+  context.generatePassword();
+  const generated = elements.result.innerHTML.replace("<strong>", "").replace("</strong>", "").split("<br>")[0];
+  assert.equal(generated.length, 128);
+});
