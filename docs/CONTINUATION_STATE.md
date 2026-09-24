@@ -428,7 +428,9 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Integrated CI evidence is pending for the new branch/PR.
 
 
-## 2026-09-24 - PR #109 exhaustive primary-flow E2E milestone
+## 2026-09-24
+- Security follow-up: fresh source review found three dynamically generated inline `onclick` handlers in `tool-enhancements.js`. Replaced them with delegated `data-action="copyToolResult"` handling on branch `security/csp-inline-handler-remediation-20260924`; this restores consistency with the CSP `script-src 'self'` policy. Regression verification is pending on the PR head.
+ - PR #109 exhaustive primary-flow E2E milestone
 - PR #109 was merged into main at `2e27aa54cbc533443ee715ca1509d103a27d1978`.
 - Added an exhaustive interaction smoke test covering all 28 published tool pages. Each page is opened, its primary action is exercised, the result area is checked for observable output, and page/console errors are collected.
 - Evidence-driven APR-style repair corrected two test-harness defects: invalid numeric input seeding and result-locator initialization ordering. No production runtime code was changed for these failures.
