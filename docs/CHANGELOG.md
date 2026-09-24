@@ -416,3 +416,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Fixed autonomous-repair credential exposure by separating repair-issue creation from Copilot delegation and restricting secret-backed delegation to main-branch workflow failures or explicit trusted dispatch.
 - Strengthened Vercel security headers with HSTS and same-origin Cross-Origin-Resource-Policy and removed style-src unsafe-inline.
 - Security findings and remediation are intentionally recorded before CI verification; no claim of complete security or live-production safety is made until the patch is deployed and runtime headers are verified.
+
+
+## 2026-09-24 - CI automation security hardening
+- Restricted issue-triggered autonomous engineering from secret-backed agent delegation.
+- Explicit workflow dispatch remains the controlled entry point for credential-backed engineering-agent delegation.
+- Documented the finding as part of the ongoing security/threat-hunting review.
