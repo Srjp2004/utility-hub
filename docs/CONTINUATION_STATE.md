@@ -466,3 +466,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Manual QA confirmed four defect classes: empty Value silently becomes `0%`; incomplete scientific notation (`e`, `1e`, `1e+`, `1e-`, uppercase variants) becomes `0%`; exact negative-zero results render as `-0%`; and `1e999 / 10` is not surfaced as invalid/overflow.
 - PR #130 contains the bounded production fix and regression tests for the first three classes. The finite-result guard addresses overflow/Infinity once the input is parsed as a finite number.
 - Do not merge or claim the fix as verified until fresh GitHub Actions evidence exists for the PR head.
+
+## 2026-09-24 - Clean validation branch checkpoint
+- Re-fetched all continuation documents, README, repository metadata, current main state and PR #138 before continuing.
+- Current main baseline at continuation start: `9739f96beb5096fd25cf0c9574237af6c040b333`.
+- PR #138 was diverged from current main by 3 commits, so it was not merged. A clean branch `fix/date-percentage-validation-clean-20260924` was created directly from current main.
+- The clean branch contains only the remaining validation corrections: shared empty/whitespace numeric-input rejection, strict ISO date validation for Age/Date Difference/Business Days, and Percentage Change empty-new-value handling, with focused regressions.
+- Fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence remains mandatory before merge.

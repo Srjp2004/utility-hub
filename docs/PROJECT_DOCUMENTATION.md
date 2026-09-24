@@ -175,3 +175,8 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Re-checked production HTML and shared JavaScript for inline `<style>`, `style=` attributes, and CSSOM string setters. No inline style blocks or style attributes were found; the remaining runtime `element.style.display` assignment uses a directly set CSS property, which does not require `unsafe-inline` under CSP.
 - Removed `style-src 'unsafe-inline'` from the Vercel CSP and strengthened the DevSecOps invariant to require HSTS, CORP, and the absence of `unsafe-inline`.
 - This correction does not change calculator/tool algorithms. Fresh CI verification is required on the PR head.
+
+## 2026-09-24 - Validation carry-forward architecture decision
+- Remaining functional validation corrections are carried from stale stacked branches onto a clean current-main branch.
+- Scope is limited to shared numeric-input validation, strict ISO calendar dates, and Percentage Change empty-input handling.
+- Already-integrated Unicode and safe-integer hardening is not duplicated.
