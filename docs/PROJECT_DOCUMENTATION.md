@@ -166,3 +166,9 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Hardened autonomous repair workflow credential handling so COPILOT_AUTOMATION_TOKEN is not injected into the repair-issue step. Automatic Copilot delegation is now restricted to explicit workflow dispatch or failed workflows whose head branch is main. Non-main PR failures create a diagnostic issue without receiving the automation credential.
 - Hardened deployment headers with HSTS and same-origin Cross-Origin-Resource-Policy and removed unnecessary CSP style-src unsafe-inline.
 - No production application algorithm was changed by this security patch. Full CI, E2E, DevSecOps and independent verification remain required before merge.
+
+
+## 2026-09-24 - Follow-up CI automation threat review
+- Re-inspected autonomous engineering automation for secret exposure through issue-triggered execution.
+- Hardened issue-triggered autonomous engineering so it creates/updates traceability only and cannot use the Copilot automation credential. Secret-backed agent delegation now requires explicit workflow dispatch.
+- This complements the autonomous-repair hardening that restricts secret-backed repair delegation to trusted main-branch failures or explicit trusted dispatch.
