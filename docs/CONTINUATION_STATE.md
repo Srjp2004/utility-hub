@@ -436,3 +436,11 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Post-merge workflow runs for the new main SHA are not yet exposed. Pre-merge evidence must not be represented as post-merge evidence.
 - Vercel reported a `build-rate-limit` failure on the PR head. Treat this as a platform/account limitation, not application-code failure or deployment success.
 - Continue with deeper per-tool boundary/error testing, accessibility, physical-device QA and live deployment verification.
+
+## 2026-09-24 - Package and supply-chain security review
+- Reviewed the dependency manifest and repository package surface for suspicious or malicious packages and install-time behavior.
+- The project currently declares one npm development dependency: @playwright/test with range ^1.55.0. No production npm dependencies are declared.
+- No package-lock.json, pnpm-lock.yaml or yarn.lock is committed. CI therefore performs a fresh npm dependency resolution rather than a lockfile-pinned install; this is a supply-chain reproducibility risk and should be addressed before treating the dependency chain as maximally hardened.
+- Repository searches found no package lifecycle scripts such as preinstall, install, postinstall or prepare, and no embedded credential/key patterns or suspicious executable/network primitives in the searched paths.
+- Existing DevSecOps automation runs npm audit, generates a CycloneDX SBOM, runs CodeQL and source-security invariants. These controls provide evidence against known dependency vulnerabilities but do not by themselves prove a package is free of malicious behavior.
+- No evidence of a malicious package was found in the repository manifest itself. Live registry/package provenance and exact resolved transitive dependency versions require a fresh CI-generated dependency tree/SBOM for definitive verification.
