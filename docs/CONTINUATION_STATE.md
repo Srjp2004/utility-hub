@@ -462,3 +462,7 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Re-checked production HTML and shared JavaScript for inline `<style>`, `style=` attributes, and CSSOM string setters. No inline style blocks or style attributes were found; the remaining runtime `element.style.display` assignment uses a directly set CSS property, which does not require `unsafe-inline` under CSP.
 - Removed `style-src 'unsafe-inline'` from the Vercel CSP and strengthened the DevSecOps invariant to require HSTS, CORP, and the absence of `unsafe-inline`.
 - This correction does not change calculator/tool algorithms. Fresh CI verification is required on the PR head.
+## 2026-09-24 - Percentage calculator defect repair in progress
+- Manual QA confirmed four defect classes: empty Value silently becomes `0%`; incomplete scientific notation (`e`, `1e`, `1e+`, `1e-`, uppercase variants) becomes `0%`; exact negative-zero results render as `-0%`; and `1e999 / 10` is not surfaced as invalid/overflow.
+- PR #130 contains the bounded production fix and regression tests for the first three classes. The finite-result guard addresses overflow/Infinity once the input is parsed as a finite number.
+- Do not merge or claim the fix as verified until fresh GitHub Actions evidence exists for the PR head.
