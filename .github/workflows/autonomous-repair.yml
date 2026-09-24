@@ -82,7 +82,7 @@ PY
           GH_TOKEN: ${{ secrets.COPILOT_AUTOMATION_TOKEN }}
           REPOSITORY: ${{ github.repository }}
           ISSUE_NUMBER: ${{ steps.issue.outputs.number }}
-          BASE_BRANCH: ${{ inputs.base_branch || 'main' }}
+          BASE_BRANCH: main
         run: |
           set -euo pipefail
           if [ -z "${GH_TOKEN}" ]; then
