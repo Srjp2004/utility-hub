@@ -1,3 +1,9 @@
+## 2026-09-24 - Empty numeric input hardening
+- Functional audit identified a shared validation gap: the numeric helper converted an empty browser input to numeric zero, causing empty fields to be treated as valid zero values in multiple calculators.
+- Updated the shared numeric parser to return `NaN` for empty/whitespace-only inputs, so existing calculator validation paths reject missing required numbers without changing intentional zero-value behavior.
+- Added focused regression coverage across percentage, discount, loan, interest, unit conversion, tip, BMI, compound interest, margin, ROI and break-even calculators.
+- This is a bounded input-validation correction based on direct source inspection; fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence is required before merge.
+
 ## 2026-09-23 - QuotePulse duration regression fix merged
 - Merged PR #97 into main at `296c0c2716ed3e8a2d4bf23cc39521829d985bed`.
 - QuotePulse no longer counts duration-like or quantity-like numeric text as monetary quote line items.

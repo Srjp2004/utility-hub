@@ -12,6 +12,27 @@ function loadTools(values) {
   return { context, elements };
 }
 
+test("numeric calculators reject empty inputs", () => {
+  const cases = [
+    [{ part: "", whole: "200", result: "" }, "calcPercentage", "Enter valid numbers."],
+    [{ price: "", disc: "20", result: "" }, "calcDiscount", "Enter a valid price and discount from 0 to 100%."],
+    [{ loanAmount: "", loanRate: "7.5", loanMonths: "60", result: "" }, "calcLoan", "Enter a positive loan amount, non-negative rate, and whole number of months."],
+    [{ principal: "", rate: "8", years: "3", result: "" }, "calcInterest", "Enter valid non-negative values."],
+    [{ uv: "", uf: "km", ut: "mi", result: "" }, "calcConvert", "Enter a valid number."],
+    [{ bill: "", tipRate: "15", people: "2", result: "" }, "calcTip", "Enter a valid bill, non-negative tip, and whole number of people."],
+    [{ kg: "", cm: "175", result: "" }, "calcBmi", "Enter positive height and weight."],
+    [{ cp: "", cr: "8", cy: "5", cm: "12", result: "" }, "calcCompound", "Enter valid values."],
+    [{ rev: "", cost: "700", result: "" }, "calcMargin", "Enter valid revenue and cost."],
+    [{ inv: "", ret: "1250", result: "" }, "calcRoi", "Enter valid values."],
+    [{ fixed: "", sell: "50", variable: "30", result: "" }, "calcBreakEven", "Enter valid costs. Selling price must be greater than variable cost."]
+  ];
+  for (const [values, fn, expected] of cases) {
+    const { context, elements } = loadTools(values);
+    context[fn]();
+    assert.equal(elements.result.textContent, expected);
+  }
+});
+
 test("percentage calculator handles normal input", () => {
   const { context, elements } = loadTools({ part: "25", whole: "200", result: "" });
   context.calcPercentage();
