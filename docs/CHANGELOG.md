@@ -1,3 +1,9 @@
+## 2026-09-24 - Unicode text counting correction
+- Corrected Word & Character Counter to count Unicode code points rather than UTF-16 code units.
+- Characters such as emoji are now counted as one character.
+- Added regression coverage for `😀 café`.
+- Fresh CI gates required before merge.
+
 ## 2026-09-24 - Strict calendar-date validation
 - Functional audit found that JavaScript Date parsing can normalize impossible calendar dates such as February 30 instead of rejecting them.
 - Added a shared strict ISO calendar-date parser and applied it to Date Difference, Business Days and Age Calculator.
