@@ -1,3 +1,9 @@
+## 2026-09-24 - Financial integer-domain hardening
+- Mathematical audit confirmed Loan Payment and Tip & Bill Split require exact integer domains for month and people counts.
+- Enforced Number.isSafeInteger for both fields to prevent unsafe IEEE-754 integers from entering financial calculations.
+- Added focused regression tests for values above Number.MAX_SAFE_INTEGER.
+- This bounded correction requires fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence before merge.
+
 ## 2026-09-24 - Empty numeric input hardening
 - Functional audit identified a shared validation gap: the numeric helper converted an empty browser input to numeric zero, causing empty fields to be treated as valid zero values in multiple calculators.
 - Updated the shared numeric parser to return `NaN` for empty/whitespace-only inputs, so existing calculator validation paths reject missing required numbers without changing intentional zero-value behavior.
