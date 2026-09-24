@@ -1,3 +1,10 @@
+## 2026-09-25 - Existing tool quality wave: QuotePulse and BMI
+- Upgraded the existing QuotePulse report presentation and browser print/save-PDF formatting. No new tool was created.
+- Added a reproducible QuotePulse example loader and clearer report structure.
+- Upgraded the existing BMI Calculator with an adult-category indicator, visual scale marker, standard healthy-range weight estimate for the entered height, responsive inputs and clearer limitations.
+- Added focused regression coverage for both upgrades.
+- Remaining published tools stay in the systematic audit queue.
+
 ## 2026-09-24 - Clean current-main validation carry-forward
 - Rebuilt the remaining validation corrections on the actual current `main` baseline after PR #138 was found diverged by 3 commits.
 - Carried only concrete fixes for empty required numeric inputs, strict ISO calendar-date validation, and Percentage Change empty-new-value handling.
