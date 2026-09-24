@@ -45,28 +45,35 @@ jobs:
           if [ -n "${existing}" ]; then
             number="${existing}"
           else
-            cat > issue.md <<EOF
-          ## Autonomous engineering repair
+            RUN_ID="${FAILED_RUN_ID:-${INPUT_RUN_ID}}"
+          export RUN_ID
+          python - <<'PY' > issue.md
+          import os
+          repository = os.environ["REPOSITORY"]
+          run_id = os.environ["RUN_ID"]
+          extra = os.environ.get("EXTRA_REQUEST") or "None"
+          print("""## Autonomous engineering repair
 
-          A required UtilityHub engineering verification run failed.
+A required UtilityHub engineering verification run failed.
 
-          Repository: ${REPOSITORY}
-          Run: ${RUN_URL}
-          Run ID: ${RUN_ID}
+Repository: {repository}
+Run: https://github.com/{repository}/actions/runs/{run_id}
+Run ID: {run_id}
 
-          Required process:
-          Inspect the exact failing run and current main.
-          Determine whether the failure is an application defect, stale test, infrastructure problem, or environment problem.
-          Fix the root cause only when justified.
-          Add regression coverage for newly discovered application defects.
-          Run npm test and the full Playwright E2E suite.
-          Update required project documentation.
-          Open a focused pull request. Do not merge directly to main.
+Required process:
+Inspect the exact failing run and current main.
+Determine whether the failure is an application defect, stale test, infrastructure problem, or environment problem.
+Fix the root cause only when justified.
+Add regression coverage for newly discovered application defects.
+Run npm test and the full Playwright E2E suite.
+Update required project documentation.
+Open a focused pull request. Do not merge directly to main.
 
-          Additional request:
-          ${EXTRA_REQUEST:-None}
-          EOF
-            number="$(gh issue create --repo "${REPOSITORY}" --title "${TITLE}" --body-file issue.md | sed -n 's#.*/issues/##p')"
+Additional request:
+{extra}
+""".format(repository=repository, run_id=run_id, extra=extra))
+          PY
+          number="$(gh issue create --repo "${REPOSITORY}" --title "${TITLE}" --body-file issue.md | sed -n 's#.*/issues/##p')"
           fi
           printf 'number=%s\n' "${number}" >> "${GITHUB_OUTPUT}"
 
