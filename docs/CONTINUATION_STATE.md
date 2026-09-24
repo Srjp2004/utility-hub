@@ -454,3 +454,9 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Follow-up threat hunting identified an additional CI risk in autonomous workflow issue/task generation: untrusted workflow inputs were interpolated into unquoted shell heredocs before being written to files. This created a potential command-injection path on a GitHub-hosted runner.
 - Hardened both .github/workflows/autonomous-repair.yml and .github/workflows/autonomous-engineering.yml to pass untrusted values through environment variables into Python-generated files rather than shell-interpolating them.
 - No application runtime code was changed. Full Tests, Browser E2E, DevSecOps and Quality Gate verification is required on the final security PR head before merge.
+
+
+## 2026-09-24 - Security hardening verification checkpoint
+- Re-inspected PR #125 after follow-up workflow hardening. Found and repaired malformed YAML introduced during the shell-injection remediation in autonomous-repair.yml and autonomous-engineering.yml.
+- Final security branch requires fresh workflow execution before merge. Do not treat absent checks as success.
+- Threat model now explicitly covers workflow-input shell injection, automation-token exposure, issue-triggered delegation, repository write permissions, and browser security headers.
