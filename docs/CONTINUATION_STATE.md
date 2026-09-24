@@ -442,3 +442,9 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Identified and repaired a real CI security issue in .github/workflows/autonomous-repair.yml: the optional COPILOT_AUTOMATION_TOKEN was exposed as a step environment variable before a branch guard, and the guard itself referenced an invalid shell variable form. The repair isolates the credential to a separately conditioned delegation step and permits automatic delegation only for main-branch workflow failures or explicit trusted workflow dispatch.
 - Strengthened vercel.json with HSTS and Cross-Origin-Resource-Policy: same-origin and removed style-src unsafe-inline from CSP after source inspection found no inline style attributes/elements requiring it.
 - These changes are on security/deep-hardening-20260924 and require full CI/DevSecOps/E2E verification before merge. Security review does not establish that the live deployment is secure until deployed headers and runtime behavior are freshly verified.
+
+
+## 2026-09-24 - Follow-up CI automation threat review
+- Re-inspected the autonomous engineering workflow after the package/supply-chain review.
+- Found a second secret-boundary weakness: issue-event execution could enter the agent delegation job and expose the optional automation credential before the delegation decision. The workflow has been hardened so issue-triggered automation performs traceability only; secret-backed agent delegation is reserved for explicit workflow dispatch.
+- This prevents untrusted issue content from directly reaching the automation credential path. Full CI/DevSecOps verification is required before merge.
