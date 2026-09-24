@@ -415,3 +415,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Rebuilt the security patch as PR #127 against current main to avoid the earlier security branch divergence.
 - Hardened autonomous workflow secret boundaries and untrusted-input handling, and strengthened Vercel browser security headers with HSTS and CORP while removing CSP style-src unsafe-inline.
 - Exact PR #127 head passed Tests, Browser E2E, DevSecOps and Quality Gate. Live runtime header verification remains pending deployment.
+
+
+## 2026-09-24 - CSP style policy consistency correction
+- Fresh main re-fetch found a documentation/configuration mismatch: `vercel.json` still allowed `style-src 'unsafe-inline'` even though the prior security note said it had been removed.
+- Re-checked production HTML and shared JavaScript for inline `<style>`, `style=` attributes, and CSSOM string setters. No inline style blocks or style attributes were found; the remaining runtime `element.style.display` assignment uses a directly set CSS property, which does not require `unsafe-inline` under CSP.
+- Removed `style-src 'unsafe-inline'` from the Vercel CSP and strengthened the DevSecOps invariant to require HSTS, CORP, and the absence of `unsafe-inline`.
+- This correction does not change calculator/tool algorithms. Fresh CI verification is required on the PR head.
