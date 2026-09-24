@@ -475,3 +475,12 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Security PR #125 remains the focused security change set. It must receive fresh CI evidence on its exact final head before merge.
 - No evidence-based malicious/suspicious production package was identified, so no legitimate package was deleted merely to reduce package count.
 - Revenue remains a measurable objective, not a guaranteed result. Monetization must follow deployment, privacy/disclosure readiness and provider requirements.
+
+
+## 2026-09-24 - Final security-branch verification
+- Diagnosed missing PR-triggered verification on the security branch. The repository produced no required PR workflow runs for the earlier security head, so verification was not treated as passed.
+- Added narrowly scoped `push` verification for `security/**` to Tests, Browser E2E, DevSecOps and Quality Gate, with Quality Gate using `github.sha` for push-triggered evaluation. This preserves main-branch and pull-request gates while providing exact-head evidence for the security branch.
+- Final security head: `33fd8611bd5ca1abed8062470207b78820b44531`.
+- Fresh exact-head evidence: Tests `35964919716` passed on Node 20/22; Browser E2E `35964919759` passed Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit; DevSecOps `35964919696` passed dependency audit/SBOM, CodeQL, source security invariants and browser security checks; Quality Gate `35964919695` passed.
+- Autonomous workflow runs on this push had zero runnable jobs because their event conditions intentionally exclude ordinary pushes; their failure state is not used as a required engineering gate.
+- Vercel preview deployment for the security branch is Ready, but live production runtime/security headers remain unverified until the hardened configuration is deployed to the production target.
