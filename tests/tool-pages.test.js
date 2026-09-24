@@ -343,6 +343,19 @@ test("date difference is absolute and timezone-stable", () => {
   assert.match(elements.result.innerHTML, /6 days/);
 });
 
+test("tip calculator rejects unsafe people counts", () => {
+  const { context, elements } = loadTools({ bill: "100", tipRate: "20", people: "9007199254740992", result: "" });
+  context.calcTip();
+  assert.equal(elements.result.textContent, "Enter a valid bill, non-negative tip, and whole number of people.");
+});
+
+test("text counter counts Unicode code points as characters", () => {
+  const { context, elements } = loadTools({ tc: "😀 café", result: "" });
+  context.calcText();
+  assert.match(elements.result.innerHTML, /2 words/);
+  assert.match(elements.result.innerHTML, /6 characters/);
+});
+
 test("text counter handles repeated whitespace", () => {
   const { context, elements } = loadTools({ tc: "  one\n\n two\tthree  ", result: "" });
   context.calcText();
@@ -438,6 +451,12 @@ test("random number generator rejects ranges larger than the supported limit", (
   assert.equal(elements.result.textContent, "Use a range of up to 4,294,967,296 possible integers.");
 });
 
+
+test("loan calculator rejects unsafe month counts", () => {
+  const { context, elements } = loadTools({ loanAmount: "1200", loanRate: "5", loanMonths: "9007199254740992", result: "" });
+  context.calcLoan();
+  assert.match(elements.result.textContent, /whole number of months/);
+});
 
 test("loan calculator rejects fractional month terms", () => {
   const { context, elements } = loadTools({ loanAmount: "1200", loanRate: "5", loanMonths: "12.5", result: "" });
