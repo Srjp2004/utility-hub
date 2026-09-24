@@ -45,14 +45,13 @@ jobs:
           if [ -n "${existing}" ]; then
             number="${existing}"
           else
-            RUN_ID="${FAILED_RUN_ID:-${INPUT_RUN_ID}}"
-          export RUN_ID
-          python - <<'PY' > issue.md
-          import os
-          repository = os.environ["REPOSITORY"]
-          run_id = os.environ["RUN_ID"]
-          extra = os.environ.get("EXTRA_REQUEST") or "None"
-          print("""## Autonomous engineering repair
+            export RUN_ID
+            python - <<'PY' > issue.md
+import os
+repository = os.environ["REPOSITORY"]
+run_id = os.environ["RUN_ID"]
+extra = os.environ.get("EXTRA_REQUEST") or "None"
+print("""## Autonomous engineering repair
 
 A required UtilityHub engineering verification run failed.
 
@@ -72,8 +71,8 @@ Open a focused pull request. Do not merge directly to main.
 Additional request:
 {extra}
 """.format(repository=repository, run_id=run_id, extra=extra))
-          PY
-          number="$(gh issue create --repo "${REPOSITORY}" --title "${TITLE}" --body-file issue.md | sed -n 's#.*/issues/##p')"
+PY
+            number="$(gh issue create --repo "${REPOSITORY}" --title "${TITLE}" --body-file issue.md | sed -n 's#.*/issues/##p')"
           fi
           printf 'number=%s\n' "${number}" >> "${GITHUB_OUTPUT}"
 
