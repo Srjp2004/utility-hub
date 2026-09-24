@@ -23,57 +23,73 @@ permissions:
   issues: write
 
 jobs:
-  diagnose-and-delegate:
+  diagnose:
     if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'failure'
     runs-on: ubuntu-latest
+    outputs:
+      issue_number: ${{ steps.create_issue.outputs.issue_number }}
     steps:
-      - name: Create repair issue
+      - id: create_issue
+        name: Create repair issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AUTOMATION_TOKEN: ${{ secrets.COPILOT_AUTOMATION_TOKEN }}
           REPOSITORY: ${{ github.repository }}
           FAILED_RUN_ID: ${{ github.event.workflow_run.id }}
           INPUT_RUN_ID: ${{ inputs.run_id }}
           EXTRA_REQUEST: ${{ inputs.request }}
         run: |
           set -euo pipefail
-          RUN_ID="${FAILED_RUN_ID:-${INPUT_RUN_ID}}"
-          RUN_URL="https://github.com/${REPOSITORY}/actions/runs/${RUN_ID}"
-          TITLE="[autofix] Investigate failed engineering run ${RUN_ID}"
-
+          export RUN_ID="${FAILED_RUN_ID:-${INPUT_RUN_ID}}"
+          export RUN_URL="https://github.com/${REPOSITORY}/actions/runs/${RUN_ID}"
+          export TITLE="[autofix] Investigate failed engineering run ${RUN_ID}"
           existing="$(gh issue list --repo "${REPOSITORY}" --state open --search "in:title ${TITLE}" --json number --jq '.[0].number // empty')"
           if [ -n "${existing}" ]; then
-            number="${existing}"
-          else
-            cat > issue.md <<EOF
-          ## Autonomous engineering repair
-
-          A required UtilityHub engineering verification run failed.
-
-          Repository: ${REPOSITORY}
-          Run: ${RUN_URL}
-          Run ID: ${RUN_ID}
-
-          Required process:
-          Inspect the exact failing run and current main.
-          Determine whether the failure is an application defect, stale test, infrastructure problem, or environment problem.
-          Fix the root cause only when justified.
-          Add regression coverage for newly discovered application defects.
-          Run npm test and the full Playwright E2E suite.
-          Update required project documentation.
-          Open a focused pull request. Do not merge directly to main.
-
-          Additional request:
-          ${EXTRA_REQUEST:-None}
-          EOF
-            number="$(gh issue create --repo "${REPOSITORY}" --title "${TITLE}" --body-file issue.md | sed -n 's#.*/issues/##p')"
-          fi
-
-          if [ -z "${AUTOMATION_TOKEN}" ]; then
-            echo "COPILOT_AUTOMATION_TOKEN is not configured. Repair issue created for manual delegation."
+            echo "issue_number=${existing}" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          python - <<'PY' > issue.md
+          import os
+          print(f"""## Autonomous engineering repair
 
+A required UtilityHub engineering verification run failed.
+
+Repository: {os.environ["REPOSITORY"]}
+Run: {os.environ["RUN_URL"]}
+Run ID: {os.environ["RUN_ID"]}
+
+Required process:
+Inspect the exact failing run and current main.
+Determine whether the failure is an application defect, stale test, infrastructure problem, or environment problem.
+Fix the root cause only when justified.
+Add regression coverage for newly discovered application defects.
+Run npm test and the full Playwright E2E suite.
+Update required project documentation.
+Open a focused pull request. Do not merge directly to main.
+
+Additional request:
+{os.environ.get("EXTRA_REQUEST") or "None"}
+""")
+          PY
+          number="$(gh issue create --repo "${REPOSITORY}" --title "${TITLE}" --body-file issue.md | sed -n 's#.*/issues/##p')"
+          echo "issue_number=${number}" >> "$GITHUB_OUTPUT"
+
+  delegate:
+    needs: diagnose
+    if: needs.diagnose.result == 'success' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delegate only from trusted trigger
+        env:
+          GH_TOKEN: ${{ secrets.COPILOT_AUTOMATION_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ needs.diagnose.outputs.issue_number }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "COPILOT_AUTOMATION_TOKEN is not configured; manual delegation remains available."
+            exit 0
+          fi
+          export REPOSITORY ISSUE_NUMBER
           python - <<'PY' > payload.json
           import json, os
           print(json.dumps({
@@ -81,14 +97,10 @@ jobs:
             "agent_assignment":{
               "target_repo":os.environ["REPOSITORY"],
               "base_branch":"main",
-              "custom_instructions":(
-                "Act as the UtilityHub autonomous repair engineer. Read .github/copilot-instructions.md and all durable project documentation first. "
-                "Diagnose the linked failing run using fresh evidence. Preserve scope. Fix root causes, add regression tests, run npm test and the full Playwright E2E suite, "
-                "review the diff, update required docs, and open a focused PR. Never weaken or delete tests. Never merge directly to main."
-              ),
+              "custom_instructions":"Act as the UtilityHub autonomous repair engineer. Read .github/copilot-instructions.md and durable project documentation first. Diagnose using fresh evidence, preserve scope, fix root causes only, add regression tests, run npm test and full Playwright E2E, review the diff, update docs, and open a focused PR. Never weaken/delete tests or merge directly to main.",
               "custom_agent":"",
               "model":""
             }
           }))
           PY
-          GH_TOKEN="${AUTOMATION_TOKEN}" gh api --method POST             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             "/repos/${REPOSITORY}/issues/${number}/assignees"             --input payload.json
+          gh api --method POST -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" "/repos/${REPOSITORY}/issues/${ISSUE_NUMBER}/assignees" --input payload.json

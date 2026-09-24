@@ -410,3 +410,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Evidence-driven APR-style repairs corrected two E2E harness defects without production runtime changes.
 - Final pre-merge verification was green: Tests `35904336039`, Browser E2E `35904335988`, DevSecOps `35904336097`, Quality Gate `35904336016`.
 - Post-merge workflow verification is pending. Vercel build-rate-limit remains a platform/account limitation.
+
+## 2026-09-24 - Security hardening rebuilt from current main
+- Rebuilt the security patch as PR #127 against current main to avoid the earlier security branch divergence.
+- Hardened autonomous workflow secret boundaries and untrusted-input handling, and strengthened Vercel browser security headers with HSTS and CORP while removing CSP style-src unsafe-inline.
+- Exact PR #127 head passed Tests, Browser E2E, DevSecOps and Quality Gate. Live runtime header verification remains pending deployment.
