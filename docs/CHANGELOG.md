@@ -1,3 +1,9 @@
+## 2026-09-24 - Clean current-main validation carry-forward
+- Rebuilt the remaining validation corrections on the actual current `main` baseline after PR #138 was found diverged by 3 commits.
+- Carried only concrete fixes for empty required numeric inputs, strict ISO calendar-date validation, and Percentage Change empty-new-value handling.
+- Existing Unicode and safe-integer fixes already integrated into main were intentionally not duplicated.
+- Fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence is required before merge.
+
 ## 2026-09-23 - QuotePulse duration regression fix merged
 - Merged PR #97 into main at `296c0c2716ed3e8a2d4bf23cc39521829d985bed`.
 - QuotePulse no longer counts duration-like or quantity-like numeric text as monetary quote line items.
