@@ -160,3 +160,9 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Failure handling followed diagnosis-before-repair. The observed failures were test-harness defects, so production code was not modified.
 - Fresh final PR evidence: Browser E2E `35904335988`, DevSecOps `35904336097`, Tests `35904336039`, and Quality Gate `35904336016` all passed.
 - Post-merge verification remains required on the new main SHA. Vercel build-rate-limit status does not establish deployment success.
+
+## 2026-09-24 - Security hardening decision
+- Reapplied the justified automation trust-boundary and browser-header hardening directly on current main rather than merging the previously divergent security branch.
+- Autonomous repair/engineering workflows now keep secret-backed delegation in a separate trusted job and avoid shell interpolation of untrusted task/request content.
+- Production header policy now includes HSTS and CORP same-origin and no longer permits CSP style-src unsafe-inline.
+- PR #127 was verified on its exact head with the complete Tests, Browser E2E, DevSecOps and Quality Gate suite before any merge decision. No production algorithm changes were introduced.
