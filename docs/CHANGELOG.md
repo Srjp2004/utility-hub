@@ -424,3 +424,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Documented the finding as part of the ongoing security/threat-hunting review.
 
 - Security: hardened autonomous GitHub Actions task/issue generation against shell interpolation of untrusted workflow inputs; no production runtime changes.
+
+
+## 2026-09-24 - Security branch verification
+- Diagnosed the missing required PR workflow runs on the security branch rather than treating absent checks as success.
+- Added scoped `security/**` push verification to the existing Tests, Browser E2E, DevSecOps and Quality Gate workflows; main and pull-request verification paths remain intact.
+- Final security head `33fd8611bd8062470207b78820b44531` was verified with Tests `35964919716`, Browser E2E `35964919759`, DevSecOps `35964919696`, and Quality Gate `35964919695`, all successful.
+- Live production security verification remains pending deployment of the hardened configuration.
