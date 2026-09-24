@@ -172,3 +172,6 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Re-inspected autonomous engineering automation for secret exposure through issue-triggered execution.
 - Hardened issue-triggered autonomous engineering so it creates/updates traceability only and cannot use the Copilot automation credential. Secret-backed agent delegation now requires explicit workflow dispatch.
 - This complements the autonomous-repair hardening that restricts secret-backed repair delegation to trusted main-branch failures or explicit trusted dispatch.
+
+### 2026-09-24 - Autonomous workflow injection hardening
+Follow-up threat hunting found unquoted shell-heredoc interpolation of untrusted workflow inputs in autonomous repair/engineering workflows. Both workflows now pass inputs through environment variables into Python-generated files, removing the identified command-injection path. Full CI and security verification remains mandatory before merge.
