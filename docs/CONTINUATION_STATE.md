@@ -460,3 +460,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Re-inspected PR #125 after follow-up workflow hardening. Found and repaired malformed YAML introduced during the shell-injection remediation in autonomous-repair.yml and autonomous-engineering.yml.
 - Final security branch requires fresh workflow execution before merge. Do not treat absent checks as success.
 - Threat model now explicitly covers workflow-input shell injection, automation-token exposure, issue-triggered delegation, repository write permissions, and browser security headers.
+
+
+## 2026-09-24 - Security cleanup verification checkpoint
+- Reconfirmed main dependency surface: only @playwright/test is declared and it is a development dependency; no production npm dependencies or install lifecycle scripts are declared.
+- No lockfile is currently committed, so exact transitive dependency resolution remains a supply-chain hardening gap. This is not evidence of a malicious package.
+- Reconfirmed the security PR contains HSTS, CORP and strict CSP hardening, but it remains unmerged pending fresh CI evidence on its final head.
+- No suspicious or malicious package/code finding was established by the repository inspection performed in this checkpoint. Legitimate test/CI infrastructure is not being deleted without evidence-based justification.
