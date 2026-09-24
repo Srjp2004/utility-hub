@@ -1,3 +1,15 @@
+test("loan calculator rejects unsafe integer month terms", () => {
+  const { context, elements } = loadTools({ loanAmount: "1000", loanRate: "5", loanMonths: "9007199254740992", result: "" });
+  context.calcLoan();
+  assert.equal(elements.result.textContent, "Enter a positive loan amount, non-negative rate, and whole number of months.");
+});
+
+test("tip calculator rejects unsafe integer people counts", () => {
+  const { context, elements } = loadTools({ bill: "100", tipRate: "20", people: "9007199254740992", result: "" });
+  context.calcTip();
+  assert.equal(elements.result.textContent, "Enter a valid bill, non-negative tip, and whole number of people.");
+});
+
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
