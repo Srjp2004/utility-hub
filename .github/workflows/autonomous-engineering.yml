@@ -38,21 +38,26 @@ jobs:
             number="${ISSUE_NUMBER}"
           else
             base="${INPUT_BASE:-main}"
-            cat > task.md <<EOF
-          ## Autonomous engineering task
+            export TASK INPUT_BASE
+            python - <<'PY' > task.md
+            import os
+            task = os.environ.get("TASK") or ""
+            base = os.environ.get("INPUT_BASE") or "main"
+            print("""## Autonomous engineering task
 
-          ${TASK}
+{task}
 
-          Acceptance process:
-          Follow .github/copilot-instructions.md.
-          Inspect current main and project documentation before changing code.
-          Implement the smallest coherent solution.
-          Add or update regression tests.
-          Run npm test and the full Playwright E2E suite.
-          Update required documentation.
-          Open a focused pull request against ${base}.
-          Do not merge directly to main.
-          EOF
+Acceptance process:
+Follow .github/copilot-instructions.md.
+Inspect current main and project documentation before changing code.
+Implement the smallest coherent solution.
+Add or update regression tests.
+Run npm test and the full Playwright E2E suite.
+Update required documentation.
+Open a focused pull request against {base}.
+Do not merge directly to main.
+""".format(task=task, base=base))
+            PY
             number="$(gh issue create --repo "${REPOSITORY}" --title "[autonomous] ${TASK}" --label "autonomous-engineering" --body-file task.md | sed -n 's#.*/issues/##p')"
           fi
 
