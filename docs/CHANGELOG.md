@@ -1,3 +1,14 @@
+## 2026-09-24 - Percentage Change empty-input validation
+- Mathematical audit found that Percentage Change still used direct Number() parsing, so an empty new-value field became zero instead of being treated as missing input.
+- Reused the shared numeric parser and added a focused regression test.
+- Bounded validation-only correction; fresh CI, E2E, security and quality evidence is required before merge.
+
+## 2026-09-24 - Strict calendar-date validation
+- Functional audit found that JavaScript Date parsing can normalize impossible calendar dates such as February 30 instead of rejecting them.
+- Added a shared strict ISO calendar-date parser and applied it to Date Difference, Business Days and Age Calculator.
+- Added regression coverage for an impossible 2026-02-30 date.
+- This is a bounded correctness fix; fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence is required before merge.
+
 ## 2026-09-24 - Empty numeric input hardening
 - Functional audit identified a shared validation gap: the numeric helper converted an empty browser input to numeric zero, causing empty fields to be treated as valid zero values in multiple calculators.
 - Updated the shared numeric parser to return `NaN` for empty/whitespace-only inputs, so existing calculator validation paths reject missing required numbers without changing intentional zero-value behavior.
