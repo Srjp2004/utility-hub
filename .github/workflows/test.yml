@@ -2,7 +2,7 @@ name: UtilityHub Tests
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "security/**"]
   pull_request:
     branches: ["main"]
 
