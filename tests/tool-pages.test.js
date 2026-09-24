@@ -345,7 +345,7 @@ test("text counter handles repeated whitespace", () => {
   assert.match(elements.result.innerHTML, /19 characters/);
 });
 
-test("compound interest rejects fractional compounding frequency", () => {
+test("compound interest rejects unsafe compounding frequency", () => {\n  const { context, elements } = loadTools({ cp: "1000", cr: "8", cy: "1", cm: "9007199254740992", result: "" });\n  context.calcCompound();\n  assert.equal(elements.result.textContent, "Enter valid values.");\n});\n\ntest("compound interest rejects fractional compounding frequency", () => {
   const { context, elements } = loadTools({ cp: "1000", cr: "8", cy: "1", cm: "2.5", result: "" });
   context.calcCompound();
   assert.equal(elements.result.textContent, "Enter valid values.");
