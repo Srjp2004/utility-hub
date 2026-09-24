@@ -92,10 +92,12 @@ jobs:
           const config = JSON.parse(fs.readFileSync("vercel.json", "utf8"));
           const headers = config.headers?.flatMap((entry) => entry.headers || []) || [];
           const values = new Map(headers.map((header) => [header.key, header.value]));
-          for (const key of ["Content-Security-Policy","X-Content-Type-Options","Referrer-Policy","X-Frame-Options","Permissions-Policy","Cross-Origin-Opener-Policy"]) {
+          for (const key of ["Content-Security-Policy","X-Content-Type-Options","Referrer-Policy","X-Frame-Options","Permissions-Policy","Cross-Origin-Opener-Policy","Cross-Origin-Resource-Policy","Strict-Transport-Security"]) {
             if (!values.get(key)) throw new Error("Missing security header: " + key);
           }
           const csp = values.get("Content-Security-Policy");
+          if (csp.includes("'unsafe-inline'")) throw new Error("CSP must not allow unsafe-inline.");
+          if (!/style-src\s+'self'(?:\s|;|$)/.test(csp)) throw new Error("CSP must keep style-src restricted to self.");
           for (const directive of ["object-src 'none'","frame-ancestors 'none'"]) {
             if (!csp.includes(directive)) throw new Error("Missing CSP directive: " + directive);
           }

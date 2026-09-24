@@ -453,3 +453,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Restricted repair delegation after failed workflow runs to failed runs whose head branch is main, while preserving explicit workflow dispatch.
 - Added HSTS and Cross-Origin-Resource-Policy and removed CSP style-src unsafe-inline after source inspection established no inline style requirement.
 - PR #127 exact-head verification passed Tests, Browser E2E, DevSecOps and Quality Gate before merge. Live production headers remain unverified until deployment.
+
+
+## 2026-09-24 - CSP style policy consistency correction
+- Fresh main re-fetch found a documentation/configuration mismatch: `vercel.json` still allowed `style-src 'unsafe-inline'` even though the prior security note said it had been removed.
+- Re-checked production HTML and shared JavaScript for inline `<style>`, `style=` attributes, and CSSOM string setters. No inline style blocks or style attributes were found; the remaining runtime `element.style.display` assignment uses a directly set CSS property, which does not require `unsafe-inline` under CSP.
+- Removed `style-src 'unsafe-inline'` from the Vercel CSP and strengthened the DevSecOps invariant to require HSTS, CORP, and the absence of `unsafe-inline`.
+- This correction does not change calculator/tool algorithms. Fresh CI verification is required on the PR head.

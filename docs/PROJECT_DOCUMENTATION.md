@@ -166,3 +166,10 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Autonomous repair/engineering workflows now keep secret-backed delegation in a separate trusted job and avoid shell interpolation of untrusted task/request content.
 - Production header policy now includes HSTS and CORP same-origin and no longer permits CSP style-src unsafe-inline.
 - PR #127 was verified on its exact head with the complete Tests, Browser E2E, DevSecOps and Quality Gate suite before any merge decision. No production algorithm changes were introduced.
+
+
+## 2026-09-24 - CSP style policy consistency correction
+- Fresh main re-fetch found a documentation/configuration mismatch: `vercel.json` still allowed `style-src 'unsafe-inline'` even though the prior security note said it had been removed.
+- Re-checked production HTML and shared JavaScript for inline `<style>`, `style=` attributes, and CSSOM string setters. No inline style blocks or style attributes were found; the remaining runtime `element.style.display` assignment uses a directly set CSS property, which does not require `unsafe-inline` under CSP.
+- Removed `style-src 'unsafe-inline'` from the Vercel CSP and strengthened the DevSecOps invariant to require HSTS, CORP, and the absence of `unsafe-inline`.
+- This correction does not change calculator/tool algorithms. Fresh CI verification is required on the PR head.
