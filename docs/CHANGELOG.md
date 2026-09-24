@@ -424,3 +424,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Re-checked production HTML and shared JavaScript for inline `<style>`, `style=` attributes, and CSSOM string setters. No inline style blocks or style attributes were found; the remaining runtime `element.style.display` assignment uses a directly set CSS property, which does not require `unsafe-inline` under CSP.
 - Removed `style-src 'unsafe-inline'` from the Vercel CSP and strengthened the DevSecOps invariant to require HSTS, CORP, and the absence of `unsafe-inline`.
 - This correction does not change calculator/tool algorithms. Fresh CI verification is required on the PR head.
+## 2026-09-24 - Percentage calculator validation hardening
+- Reproduced and isolated malformed numeric-input handling in the Percentage Calculator: empty Value and incomplete scientific notation such as `e`, `1e`, `1e+`, and `1e-` could be coerced to zero by `Number()` and produce `0%` instead of validation feedback.
+- Reproduced negative-zero output for zero-valued numerator/denominator combinations such as `0 / -80 -> -0%`.
+- Hardened the calculator to reject empty/non-finite numeric input and normalize an exact zero result to `0%`.
+- Added regression coverage for empty input, malformed scientific notation, and negative zero.
+- PR #130: `fix: harden percentage calculator input validation`. Fresh CI verification remains required before merge.

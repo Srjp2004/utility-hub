@@ -24,6 +24,24 @@ test("percentage calculator rejects zero total", () => {
   assert.equal(elements.result.textContent, "Total must not be zero.");
 });
 
+test("percentage calculator rejects empty input", () => {
+  const { context, elements } = loadTools({ part: "", whole: "80", result: "" });
+  context.calcPercentage();
+  assert.equal(elements.result.textContent, "Enter valid numbers.");
+});
+
+test("percentage calculator rejects malformed scientific notation", () => {
+  const { context, elements } = loadTools({ part: "1e", whole: "80", result: "" });
+  context.calcPercentage();
+  assert.equal(elements.result.textContent, "Enter valid numbers.");
+});
+
+test("percentage calculator normalizes negative zero", () => {
+  const { context, elements } = loadTools({ part: "0", whole: "-80", result: "" });
+  context.calcPercentage();
+  assert.equal(elements.result.textContent, "0%");
+});
+
 test("percentage calculator rejects arithmetic overflow", () => {
   const { context, elements } = loadTools({ part: "1.7976931348623157e308", whole: "5e-324", result: "" });
   context.calcPercentage();
