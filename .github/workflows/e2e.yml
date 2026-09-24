@@ -2,7 +2,7 @@ name: UtilityHub Browser E2E
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "security/**"]
   pull_request:
     branches: ["main"]
   schedule:
