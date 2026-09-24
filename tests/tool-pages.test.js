@@ -1,3 +1,9 @@
+test("percentage change rejects an empty new value", () => {
+  const { context, elements } = loadTools({ oldv: "100", newv: "", result: "" });
+  context.calcChange();
+  assert.equal(elements.result.textContent, "Enter valid values. Original value must not be zero.");
+});
+
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
