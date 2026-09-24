@@ -1,3 +1,10 @@
+## 2026-09-25 - Existing-tool quality wave started
+- User requested improvement, updating and testing of every existing tool, specifically citing QuotePulse output/PDF formatting and BMI simplicity.
+- User explicitly instructed: do not create a new tool. This wave modifies existing published tools and shared UI only.
+- Completed first bounded wave: QuotePulse report/print presentation and BMI visualization/interpretation.
+- Next: systematic audit and upgrade of all remaining published tools, followed by full regression, browser E2E, accessibility, responsive and security verification.
+- Completion is not claimed until fresh verification evidence exists for each meaningful wave.
+
 ## 2026-09-23 - PR #97 merged and re-verified
 - PR #97 (QuotePulse duration regression fix) was explicitly approved and merged into main.
 - Merge commit: `296c0c2716ed3e8a2d4bf23cc39521829d985bed`.
