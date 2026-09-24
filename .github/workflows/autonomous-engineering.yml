@@ -40,10 +40,10 @@ jobs:
             base="${INPUT_BASE:-main}"
             export TASK INPUT_BASE
             python - <<'PY' > task.md
-            import os
-            task = os.environ.get("TASK") or ""
-            base = os.environ.get("INPUT_BASE") or "main"
-            print("""## Autonomous engineering task
+import os
+task = os.environ.get("TASK") or ""
+base = os.environ.get("INPUT_BASE") or "main"
+print("""## Autonomous engineering task
 
 {task}
 
@@ -57,7 +57,7 @@ Update required documentation.
 Open a focused pull request against {base}.
 Do not merge directly to main.
 """.format(task=task, base=base))
-            PY
+PY
             number="$(gh issue create --repo "${REPOSITORY}" --title "[autonomous] ${TASK}" --label "autonomous-engineering" --body-file task.md | sed -n 's#.*/issues/##p')"
           fi
 
