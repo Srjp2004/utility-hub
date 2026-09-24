@@ -1,3 +1,9 @@
+test("percentage change rejects an empty new value", () => {
+  const { context, elements } = loadTools({ oldv: "100", newv: "", result: "" });
+  context.calcChange();
+  assert.equal(elements.result.textContent, "Enter valid values. Original value must not be zero.");
+});
+
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
@@ -588,4 +594,17 @@ test("password generator clamps requested length to supported bounds", () => {
   context.generatePassword();
   const generated = elements.result.innerHTML.replace("<strong>", "").replace("</strong>", "").split("<br>")[0];
   assert.equal(generated.length, 128);
+});
+
+test("date calculators reject impossible calendar dates", () => {
+  const invalid = "2026-02-30";
+  for (const [values, fn] of [
+    [{ d1: invalid, d2: "2026-03-01", result: "" }, "calcDate"],
+    [{ bdStart: invalid, bdEnd: "2026-03-01", result: "" }, "calcBusinessDays"],
+    [{ dob: invalid, result: "" }, "calcAge"]
+  ]) {
+    const { context, elements } = loadTools(values);
+    context[fn]();
+    assert.match(elements.result.textContent, /valid/);
+  }
 });
