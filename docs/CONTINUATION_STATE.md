@@ -448,3 +448,9 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Re-inspected the autonomous engineering workflow after the package/supply-chain review.
 - Found a second secret-boundary weakness: issue-event execution could enter the agent delegation job and expose the optional automation credential before the delegation decision. The workflow has been hardened so issue-triggered automation performs traceability only; secret-backed agent delegation is reserved for explicit workflow dispatch.
 - This prevents untrusted issue content from directly reaching the automation credential path. Full CI/DevSecOps verification is required before merge.
+
+
+## 2026-09-24 - Autonomous workflow command-injection hardening
+- Follow-up threat hunting identified an additional CI risk in autonomous workflow issue/task generation: untrusted workflow inputs were interpolated into unquoted shell heredocs before being written to files. This created a potential command-injection path on a GitHub-hosted runner.
+- Hardened both .github/workflows/autonomous-repair.yml and .github/workflows/autonomous-engineering.yml to pass untrusted values through environment variables into Python-generated files rather than shell-interpolating them.
+- No application runtime code was changed. Full Tests, Browser E2E, DevSecOps and Quality Gate verification is required on the final security PR head before merge.
