@@ -175,3 +175,10 @@ The current engineering gates are being repaired from fresh failure evidence rat
 
 ### 2026-09-24 - Autonomous workflow injection hardening
 Follow-up threat hunting found unquoted shell-heredoc interpolation of untrusted workflow inputs in autonomous repair/engineering workflows. Both workflows now pass inputs through environment variables into Python-generated files, removing the identified command-injection path. Full CI and security verification remains mandatory before merge.
+
+
+## 2026-09-24 - Final security-branch verification
+- Diagnosed the absence of required PR-triggered workflow runs on the security hardening branch and did not treat missing checks as success.
+- Added scoped `security/**` push verification to the existing Tests, Browser E2E, DevSecOps and Quality Gate workflows. The Quality Gate accepts `github.sha` for push-triggered verification while retaining the normal pull-request SHA path.
+- Exact final security head `33fd8611bd0b3...` was verified fresh by Tests `35964919716`, Browser E2E `35964919759`, DevSecOps `35964919696`, and Quality Gate `35964919695`, all successful. Browser E2E covered Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit. DevSecOps covered dependency audit/SBOM, CodeQL, source security invariants and security browser checks.
+- This evidence establishes CI verification for the security branch commit. It does not establish live production security until the hardened `vercel.json` headers are deployed and inspected at runtime.
