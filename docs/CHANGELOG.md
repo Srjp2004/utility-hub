@@ -403,7 +403,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Fresh CI verification is required on the new branch/PR before this coverage can be treated as integrated evidence.
 
 
-## 2026-09-24 - PR #109 exhaustive browser interaction coverage
+## 2026-09-24
+- Security follow-up: removed remaining dynamically generated inline `onclick` handlers from `tool-enhancements.js` so the deployed CSP `script-src 'self'` policy remains effective for password/JSON/case copy actions. Delegated `data-action` handling preserves the behavior without inline script execution.
+ - PR #109 exhaustive browser interaction coverage
 - Merged PR #109 into `main` at `2e27aa54cbc533443ee715ca1509d103a27d1978`.
 - Added exhaustive primary-flow browser coverage for all 28 published tools across Chromium, Firefox, WebKit, mobile Chromium and mobile WebKit.
 - Added valid type-specific input seeding and a minimal image fixture, with visible non-empty result and page/console error assertions.
