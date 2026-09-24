@@ -1,3 +1,9 @@
+## 2026-09-24 - Strict calendar-date validation
+- Functional audit found that JavaScript Date parsing can normalize impossible calendar dates such as February 30 instead of rejecting them.
+- Added a shared strict ISO calendar-date parser and applied it to Date Difference, Business Days and Age Calculator.
+- Added regression coverage for an impossible 2026-02-30 date.
+- This is a bounded correctness fix; fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence is required before merge.
+
 ## 2026-09-24 - Empty numeric input hardening
 - Functional audit identified a shared validation gap: the numeric helper converted an empty browser input to numeric zero, causing empty fields to be treated as valid zero values in multiple calculators.
 - Updated the shared numeric parser to return `NaN` for empty/whitespace-only inputs, so existing calculator validation paths reject missing required numbers without changing intentional zero-value behavior.
