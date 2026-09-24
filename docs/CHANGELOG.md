@@ -422,3 +422,5 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Restricted issue-triggered autonomous engineering from secret-backed agent delegation.
 - Explicit workflow dispatch remains the controlled entry point for credential-backed engineering-agent delegation.
 - Documented the finding as part of the ongoing security/threat-hunting review.
+
+- Security: hardened autonomous GitHub Actions task/issue generation against shell interpolation of untrusted workflow inputs; no production runtime changes.
