@@ -193,3 +193,7 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - `sitemap.xml` contains 39 indexable URLs, including all 28 published tool pages, and `robots.txt` points to the absolute sitemap URL on this hostname.
 - `utility-hub-tau.vercel.app` is not the authoritative production hostname and must not be used for current canonical, sitemap, robots, analytics, or monetization configuration.
 - Physical-device/browser certification and live runtime SEO/security-header verification remain separate release gates.
+
+
+## 2026-09-25 - SEO metadata integrity
+- Published tool pages are expected to expose one canonical metadata set per social metadata field. The integration suite now guards against duplicate Open Graph and Twitter metadata, preventing accidental head duplication from being treated as valid SEO markup.
