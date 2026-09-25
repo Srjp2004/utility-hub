@@ -1,3 +1,8 @@
+## 2026-09-25 - Clean-codebase refactor
+- Removed the retired homepage modal calculator implementation after dedicated tool-page navigation made it unreachable.
+- Reduced app.js to its active homepage search responsibility and removed the unused tool-enhancements.js module.
+- Removed dead modal markup/CSS and added regression guards for the cleaned architecture.
+
 ## 2026-09-25 - Existing tool quality wave: QuotePulse and BMI
 - Upgraded the existing QuotePulse report presentation and browser print/save-PDF formatting. No new tool was created.
 - Added a reproducible QuotePulse example loader and clearer report structure.
