@@ -197,3 +197,9 @@ The current engineering gates are being repaired from fresh failure evidence rat
 
 ## 2026-09-25 - SEO metadata integrity
 - Published tool pages are expected to expose one canonical metadata set per social metadata field. The integration suite now guards against duplicate Open Graph and Twitter metadata. The 2026-09-25 audit found and removed duplicate social metadata on the Loan Payment, Compound Interest and Discount pages, preventing accidental head duplication from being treated as valid SEO markup.
+
+
+## 2026-09-25 - Post-merge verification checkpoint
+- PR #147 merged to `main` as `f25279e5a0a580f4919bfaf188f637f757ad2d95` after fresh PR-head Tests, Browser E2E, DevSecOps and Quality Gate success.
+- Post-merge push verification completed successfully for Tests, Browser E2E and DevSecOps on the merge commit.
+- The current Vercel status is a provider-side free-plan deployment-rate-limit failure (`api-deployments-free-per-day`). This is deployment evidence, not an application build/test failure. The existing verified deployment remains the runtime reference until Vercel permits a new deployment.
