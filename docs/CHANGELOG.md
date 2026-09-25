@@ -443,3 +443,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Hardened the calculator to reject empty/non-finite numeric input and normalize an exact zero result to `0%`.
 - Added regression coverage for empty input, malformed scientific notation, and negative zero.
 - PR #130: `fix: harden percentage calculator input validation`. Fresh CI verification remains required before merge.
+
+
+## 2026-09-25 - Percentage Change HTML structure regression guard
+- Added an integration regression asserting that the Percentage Change page closes its main content section before the Related Tools heading.
+- This protects the HTML structure correction found during the existing-tool SEO/accessibility audit.
