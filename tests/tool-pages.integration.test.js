@@ -154,3 +154,6 @@ test("percentage change page closes its main content section before Related Tool
   assert.ok(relatedSection > 0, "Related Tools must be inside its own content section");
   assert.match(source.slice(0, relatedSection), /<\/section>\s*$/);
 });
+
+
+test("homepage has no retired modal implementation", () => {\n  const home = fs.readFileSync("index.html", "utf8");\n  assert.doesNotMatch(home, /id=["\']modal["\']/);\n  assert.doesNotMatch(home, /data-action=["\']closeTool["\']/);\n  assert.doesNotMatch(fs.readFileSync("app.js", "utf8"), /function\\s+(?:tool|closeTool|calcPercentage|calcDiscount|calcLoan)/);\n  assert.equal(fs.existsSync("tool-enhancements.js"), false);\n});\n
