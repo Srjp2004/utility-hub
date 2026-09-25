@@ -497,3 +497,11 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - robots.txt uses the fully qualified sitemap URL on the authoritative production hostname.
 - The earlier `utility-hub-tau.vercel.app` deployment failure is historical evidence only and is not the production domain.
 - Next bounded gates: fresh exact-HEAD CI/deployment evidence when exposed, broader physical-device/browser QA, live robots/sitemap/canonical/header verification, then monetization readiness.
+
+
+## 2026-09-25 - Percentage Change HTML structure regression guard
+- Corrected the missing closing `</section>` before Related Tools on the Percentage Change page.
+- Added an integration regression assertion for the section boundary.
+- Branch recreated from current main to avoid stale-base merge risk.
+
+- Diagnosed PR #145 test failure: the regression assertion incorrectly expected the closing tag immediately before the Related Tools heading; corrected it to assert the closing tag before the Related Tools section itself. No production logic changed.

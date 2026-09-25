@@ -138,3 +138,13 @@ test("every mapped renderer is registered in the shared renderer", () => {
     assert.match(renderer, new RegExp("\\b" + escaped + "\\s*:"), page + " must reference a registered renderer view");
   }
 });
+
+
+test("percentage change page closes its main content section before Related Tools", () => {
+  const source = fs.readFileSync(path.join("tools", "percentage-change-calculator.html"), "utf8");
+  const related = source.indexOf('<h2>Related tools</h2>');
+  assert.ok(related > 0, "percentage change page must have Related Tools");
+  const relatedSection = source.lastIndexOf('<section class="content-section">', related);
+  assert.ok(relatedSection > 0, "Related Tools must be inside its own content section");
+  assert.match(source.slice(0, relatedSection), /<\/section>\s*$/);
+});
