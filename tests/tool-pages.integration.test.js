@@ -154,3 +154,21 @@ test("percentage change page closes its main content section before Related Tool
   assert.ok(relatedSection > 0, "Related Tools must be inside its own content section");
   assert.match(source.slice(0, relatedSection), /<\/section>\s*$/);
 });
+
+
+test("homepage has no retired modal implementation", () => {
+  const home = fs.readFileSync("index.html", "utf8");
+  assert.doesNotMatch(home, /id=["']modal["']/);
+  assert.doesNotMatch(home, /data-action=["']closeTool["']/);
+  assert.doesNotMatch(fs.readFileSync("app.js", "utf8"), /function\s+(?:tool|closeTool|calcPercentage|calcDiscount|calcLoan)/);
+  assert.equal(fs.existsSync("tool-enhancements.js"), false);
+});
+
+test("published tool pages do not reference removed tool-enhancements module", () => {
+  const toolsDir = path.join(process.cwd(), "tools");
+  const pages = fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html")).sort();
+  for (const page of pages) {
+    const source = fs.readFileSync(path.join(toolsDir, page), "utf8");
+    assert.doesNotMatch(source, /tool-enhancements\\.js/, page + " must not reference the deleted tool-enhancements module");
+  }
+});

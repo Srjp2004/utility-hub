@@ -29,7 +29,7 @@ UtilityHub is a global-first web application providing free calculators and prac
 - Static HTML pages
 - Shared CSS in styles.css
 - Shared browser-side JavaScript in tool-pages.js
-- app.js for site-level JavaScript where required
+- app.js for homepage search behavior
 - No required backend for the current MVP
 - PWA manifest in manifest.webmanifest
 - SEO files: robots.txt, sitemap.xml, canonical metadata and structured data
@@ -203,3 +203,15 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - PR #147 merged to `main` as `f25279e5a0a580f4919bfaf188f637f757ad2d95` after fresh PR-head Tests, Browser E2E, DevSecOps and Quality Gate success.
 - Post-merge push verification completed successfully for Tests, Browser E2E and DevSecOps on the merge commit.
 - The current Vercel status is a provider-side free-plan deployment-rate-limit failure (`api-deployments-free-per-day`). This is deployment evidence, not an application build/test failure. The existing verified deployment remains the runtime reference until Vercel permits a new deployment.
+
+
+## 2026-09-25 - Clean-codebase refactor
+- Removed the retired homepage modal calculator implementation after dedicated tool-page navigation made it unreachable.
+- Reduced app.js to its active homepage search responsibility and removed the unused tool-enhancements.js module.
+- Removed corresponding dead modal markup and CSS while preserving shared form/result styles used by published tools.
+- Added regression guards so the retired implementation cannot silently return.
+
+## 2026-09-25 - PR #149 verification repair
+- The clean-codebase refactor correctly retired `tool-enhancements.js`, but six existing tool pages retained stale script references to that deleted module.
+- This was a real browser/runtime integration defect exposed by fresh CI, not a reason to restore duplicate code.
+- The bounded repair removes only the stale references and adds a repository-wide integration regression guard.
