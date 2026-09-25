@@ -443,3 +443,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Hardened the calculator to reject empty/non-finite numeric input and normalize an exact zero result to `0%`.
 - Added regression coverage for empty input, malformed scientific notation, and negative zero.
 - PR #130: `fix: harden percentage calculator input validation`. Fresh CI verification remains required before merge.
+
+
+## 2026-09-25 - Production SEO domain consistency correction
+- Audited the current main SEO surface and found `sitemap.xml` and `robots.txt` still referenced the retired `utility-hub-ten.vercel.app` hostname while the current production hostname is `utility-hub-tau.vercel.app`.
+- Updated both files on branch `fix/seo-sitemap-production-domain-20260925` to reference the current production hostname consistently.
+- No tool runtime logic was changed. Fresh CI and deployment verification are required before merge.
