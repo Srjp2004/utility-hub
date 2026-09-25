@@ -33,7 +33,7 @@ The first version is a lightweight static site with browser-side calculations an
 
 ## Deployment
 
-The site can be deployed to Vercel, Netlify or GitHub Pages. Add the final production domain to canonical URLs and the sitemap before launch.
+The authoritative production hostname for the current deployment is `https://utility-hub-ten.vercel.app`. Canonical URLs and the sitemap are configured for this hostname.
 
 
 ## Project documentation
