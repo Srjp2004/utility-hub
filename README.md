@@ -53,3 +53,10 @@ Before public launch, the remaining work is to complete bounded functional audit
 ### Documentation rule
 
 Every meaningful future implementation change should update `docs/CHANGELOG.md`. Architectural decisions should also update `docs/PROJECT_DOCUMENTATION.md`. Testing/deployment procedure changes should update `docs/DEVELOPMENT.md`.
+
+
+## 2026-09-25 - Production deployment documentation checkpoint
+- Authoritative production hostname: `https://utility-hub-ten.vercel.app`.
+- Current sitemap and robots.txt use this hostname.
+- Historical references to `utility-hub-tau.vercel.app` describe an earlier failed/stale deployment and are retained only as historical evidence in the continuation log.
+- Production readiness still requires broader physical-device/browser certification and live verification of SEO/security headers; repository CI alone does not establish those gates.
