@@ -191,5 +191,5 @@ The current engineering gates are being repaired from fresh failure evidence rat
 ## 2026-09-25 - Production hostname continuity checkpoint
 - The authoritative UtilityHub production hostname is `https://utility-hub-ten.vercel.app`.
 - `sitemap.xml` contains 39 indexable URLs, including all 28 published tool pages, and `robots.txt` points to the absolute sitemap URL on this hostname.
-- `utility-hub-tau.vercel.app` is historical deployment evidence only and must not be used as the production hostname.
+- `utility-hub-tau.vercel.app` is not the authoritative production hostname and must not be used for current canonical, sitemap, robots, analytics, or monetization configuration.
 - Physical-device/browser certification and live runtime SEO/security-header verification remain separate release gates.
