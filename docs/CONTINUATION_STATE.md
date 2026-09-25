@@ -505,3 +505,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Branch recreated from current main to avoid stale-base merge risk.
 
 - Diagnosed PR #145 test failure: the regression assertion incorrectly expected the closing tag immediately before the Related Tools heading; corrected it to assert the closing tag before the Related Tools section itself. No production logic changed.
+
+
+## 2026-09-25 - Loan Payment metadata audit repair in progress
+- Repository audit identified duplicate social metadata on the Loan Payment Calculator page.
+- Repair branch: `fix/loan-metadata-duplicates-20260925`.
+- Production logic is unchanged. Regression coverage now enforces exactly one OG type/title/description and one Twitter card/title/description per published tool page.
+- Fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence on the final branch head is required before merge.
