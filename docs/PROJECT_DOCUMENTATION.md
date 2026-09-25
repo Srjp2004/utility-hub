@@ -215,3 +215,12 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - The clean-codebase refactor correctly retired `tool-enhancements.js`, but six existing tool pages retained stale script references to that deleted module.
 - This was a real browser/runtime integration defect exposed by fresh CI, not a reason to restore duplicate code.
 - The bounded repair removes only the stale references and adds a repository-wide integration regression guard.
+
+## 2026-09-25 - Current engineering verification checkpoint
+- Main is currently at `df69d7fed16c9a1963a15dc4ac0cb91a0ea1c2c6` after merging PR #149, which removed the retired homepage modal calculator implementation and its unused module while preserving active tool behavior.
+- The PR repair removed six stale references to the deleted `tool-enhancements.js` module and added a repository-wide regression guard.
+- Fresh post-merge evidence: Tests, Browser E2E and DevSecOps all passed on main.
+- Vercel's commit check is successful for this merge commit. Direct production HTTP/browser verification remains separately required before making a complete live-runtime claim.
+- Historical autonomous workflow failures are recorded as unresolved observability/infrastructure evidence only because the available connector exposes no jobs/logs and the workflow source is not present on current main. No speculative workflow rewrite is justified.
+- UtilityHub remains a static browser-first 28-tool platform with no required backend, database or paid AI dependency.
+- Clean-code requirement: no dead code, duplicated implementations, speculative abstractions or cleanup that weakens functionality/tests.
