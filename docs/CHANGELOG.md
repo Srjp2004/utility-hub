@@ -452,8 +452,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - No application runtime logic was changed.
 
 
-## 2026-09-25 - Loan Payment metadata deduplication
+## 2026-09-25 - Tool social metadata deduplication
 - SEO/integration audit found duplicate Open Graph and Twitter head metadata on three existing tool pages: Loan Payment, Compound Interest and Discount.
 - Removed the duplicate social metadata blocks without changing calculator logic.
 - Strengthened `tests/tool-pages.integration.test.js` so every published tool page must contain exactly one OG type/title/description and exactly one Twitter card/title/description tag.
 - This is a bounded existing-tool SEO correctness fix; no new tool was created.
+- PR #147 merged to main as `f25279e5a0a580f4919bfaf188f637f757ad2d95`. PR-head Tests, Browser E2E, DevSecOps and Quality Gate were green; post-merge main Tests, Browser E2E and DevSecOps also completed successfully.
+- Vercel currently reports the free-plan deployment rate limit (`api-deployments-free-per-day`), so no new production deployment is claimed from this merge.

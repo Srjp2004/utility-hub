@@ -509,6 +509,7 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 
 ## 2026-09-25 - Loan Payment metadata audit repair in progress
 - Repository audit identified duplicate social metadata on the Loan Payment, Compound Interest and Discount Calculator pages.
-- Repair branch: `fix/loan-metadata-duplicates-20260925`.
-- Production logic is unchanged. Regression coverage now enforces exactly one OG type/title/description and one Twitter card/title/description per published tool page.
-- Fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence on the final branch head is required before merge.
+- Repair branch `fix/loan-metadata-duplicates-20260925` was merged to main as `f25279e5a0a580f4919bfaf188f637f757ad2d95`.
+- Production logic is unchanged. The integration suite enforces exactly one OG type/title/description and one Twitter card/title/description per published tool page.
+- Fresh PR-head evidence was green: Tests 20.x/22.x, Browser E2E across Chromium/Firefox/WebKit/mobile Chromium/mobile WebKit, DevSecOps, and Quality Gate.
+- Fresh post-merge main evidence is green for Tests and Browser E2E plus DevSecOps. Vercel deployment remains blocked by the provider's free-plan deployment rate limit, so the previous live deployment remains the verified runtime until a new deployment can be created.
