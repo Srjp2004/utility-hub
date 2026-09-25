@@ -20,6 +20,12 @@ test("all tool pages are wired, indexable, and listed in the sitemap", () => {
     assert.ok(source.includes("tool-pages.js"), page + " must load the shared renderer");
     assert.ok(source.includes('<meta name="description"'), page + " must have a description");
     assert.ok(source.includes('<meta property="og:type"'), page + " must have Open Graph type metadata");
+    assert.equal((source.match(/<meta property="og:type"/g) || []).length, 1, page + " must have exactly one Open Graph type metadata tag");
+    assert.equal((source.match(/<meta property="og:title"/g) || []).length, 1, page + " must have exactly one Open Graph title metadata tag");
+    assert.equal((source.match(/<meta property="og:description"/g) || []).length, 1, page + " must have exactly one Open Graph description metadata tag");
+    assert.equal((source.match(/<meta name="twitter:card"/g) || []).length, 1, page + " must have exactly one Twitter card metadata tag");
+    assert.equal((source.match(/<meta name="twitter:title"/g) || []).length, 1, page + " must have exactly one Twitter title metadata tag");
+    assert.equal((source.match(/<meta name="twitter:description"/g) || []).length, 1, page + " must have exactly one Twitter description metadata tag");
     assert.ok(source.includes('<meta property="og:title"'), page + " must have Open Graph title metadata");
     assert.ok(source.includes('<meta property="og:description"'), page + " must have Open Graph description metadata");
     assert.ok(source.includes('<meta name="twitter:card"'), page + " must have Twitter card metadata");
