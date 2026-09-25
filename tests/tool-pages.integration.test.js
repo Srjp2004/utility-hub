@@ -144,5 +144,7 @@ test("percentage change page closes its main content section before Related Tool
   const source = fs.readFileSync(path.join("tools", "percentage-change-calculator.html"), "utf8");
   const related = source.indexOf('<h2>Related tools</h2>');
   assert.ok(related > 0, "percentage change page must have Related Tools");
-  assert.match(source.slice(0, related), /<\/section>\s*$/);
+  const relatedSection = source.lastIndexOf('<section class="content-section">', related);
+  assert.ok(relatedSection > 0, "Related Tools must be inside its own content section");
+  assert.match(source.slice(0, relatedSection), /<\/section>\s*$/);
 });
