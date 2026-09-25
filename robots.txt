@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://utility-hub-ten.vercel.app/sitemap.xml
+Sitemap: https://utility-hub-tau.vercel.app/sitemap.xml
