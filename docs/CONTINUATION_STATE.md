@@ -519,3 +519,23 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Root cause was stale HTML script references, not missing active functionality; the affected tools are backed by `tool-pages.js`.
 - Removed only those six stale references and added an integration invariant scanning all published tool pages for the retired module.
 - PR #149 remains unmerged until fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence passes on the repaired head.
+
+## 2026-09-25 - Current verified main checkpoint
+- Current main commit: `df69d7fed16c9a1963a15dc4ac0cb91a0ea1c2c6`.
+- PR #149 (clean retired-module refactor) is merged into main via this merge commit.
+- Fresh post-merge GitHub evidence on main: UtilityHub Tests, UtilityHub Browser E2E and UtilityHub DevSecOps all completed successfully (runs 36138131500, 36138133320 and 36138131879).
+- Vercel reports a successful deployment status for the merge commit through the Vercel check target. This is deployment-provider evidence; direct HTTP/browser access to the deployment hostname is still an independent verification layer.
+- Historical autonomous-engineering/autonomous-repair workflow runs associated with this merge commit report failure, but the current main branch does not expose those workflow files through the repository contents API and the runs expose no jobs/logs through the available GitHub connector. They are therefore not treated as a diagnosed production defect and are not being blindly modified.
+- The current SDLC position is VERIFY/DELIVER for the merged clean-codebase repair, followed by OBSERVE and the next bounded existing-tool quality wave.
+- The previous statement that PR #140 was unmerged is stale and is superseded by the current GitHub PR state: PR #140 is merged.
+- Revenue remains an objective rather than a guarantee. No revenue, traffic, ad approval, affiliate relationship or conversion result is claimed without direct evidence.
+
+## Next bounded work queue
+1. Continue existing-tool functional correctness audit using concrete defects and missing regression coverage only.
+2. Expand accessibility/responsive/runtime verification where current evidence is incomplete.
+3. Keep the 28-tool inventory stable; do not add tools unless explicitly requested.
+4. Verify live production HTTP behavior independently when an accessible runtime probe is available.
+5. Monetization readiness only after privacy/disclosure and live-runtime evidence; never fabricate or guarantee revenue.
+
+## Continuation rule
+Always re-fetch this file, PROJECT_DOCUMENTATION.md, CHANGELOG.md, README.md, current main and latest Actions state before continuing. Treat GitHub as the source of truth.
