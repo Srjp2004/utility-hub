@@ -513,3 +513,9 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Production logic is unchanged. The integration suite enforces exactly one OG type/title/description and one Twitter card/title/description per published tool page.
 - Fresh PR-head evidence was green: Tests 20.x/22.x, Browser E2E across Chromium/Firefox/WebKit/mobile Chromium/mobile WebKit, DevSecOps, and Quality Gate.
 - Fresh post-merge main evidence is green for Tests and Browser E2E plus DevSecOps. Vercel deployment remains blocked by the provider's free-plan deployment rate limit, so the previous live deployment remains the verified runtime until a new deployment can be created.
+
+## 2026-09-25 - PR #149 stale retired-module reference repair
+- Fresh PR #149 evidence showed the deleted `tool-enhancements.js` was still referenced by six published tool pages, causing browser E2E failures and a DevSecOps browser-check failure.
+- Root cause was stale HTML script references, not missing active functionality; the affected tools are backed by `tool-pages.js`.
+- Removed only those six stale references and added an integration invariant scanning all published tool pages for the retired module.
+- PR #149 remains unmerged until fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence passes on the repaired head.
