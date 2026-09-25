@@ -48,7 +48,7 @@ Detailed project knowledge is maintained in `docs/` so development can continue 
 
 The repository is an active MVP build. The current architecture intentionally uses static HTML/CSS/browser JavaScript. A backend, database, authentication or framework migration is not required for the current tool set.
 
-Before public launch, the remaining work is to complete bounded functional audits, test representative tools on real devices/browsers, finalize the production domain, verify canonical/sitemap URLs, configure legitimate analytics if desired, and then prepare monetization according to the relevant provider requirements.
+Current readiness work is evidence-driven: complete the remaining bounded functional audits, verify representative tools on real devices/browsers, maintain the current deployment configuration, verify live canonical/sitemap/robots/security behavior, and prepare legitimate monetization according to the relevant provider requirements. The production domain may change in future and is treated as deployment configuration.
 
 ### Documentation rule
 
