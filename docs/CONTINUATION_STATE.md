@@ -487,3 +487,8 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - PR #138 was diverged from current main by 3 commits, so it was not merged. A clean branch `fix/date-percentage-validation-clean-20260924` was created directly from current main.
 - The clean branch contains only the remaining validation corrections: shared empty/whitespace numeric-input rejection, strict ISO date validation for Age/Date Difference/Business Days, and Percentage Change empty-new-value handling, with focused regressions.
 - Fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence remains mandatory before merge.
+
+
+## 2026-09-25 - Percentage Change HTML structure regression guard
+- Added an integration regression asserting that the Percentage Change page closes its main content section before the Related Tools heading.
+- This protects the HTML structure correction found during the existing-tool SEO/accessibility audit.
