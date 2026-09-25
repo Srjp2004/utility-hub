@@ -464,3 +464,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 - This is a bounded existing-tool SEO correctness fix; no new tool was created.
 - PR #147 merged to main as `f25279e5a0a580f4919bfaf188f637f757ad2d95`. PR-head Tests, Browser E2E, DevSecOps and Quality Gate were green; post-merge main Tests, Browser E2E and DevSecOps also completed successfully.
 - Vercel currently reports the free-plan deployment rate limit (`api-deployments-free-per-day`), so no new production deployment is claimed from this merge.
+
+## 2026-09-25 - PR #149 CI diagnosis and bounded repair
+- Fresh PR-head Browser E2E and DevSecOps evidence exposed stale references to the deleted `tool-enhancements.js` module in six existing tool pages.
+- Removed only those stale references and added an integration regression guard covering every published tool page.
+- Fresh verification is required before PR #149 can be merged.
