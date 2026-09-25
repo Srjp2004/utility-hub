@@ -450,3 +450,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Verified the repository sitemap contains all 28 tool pages with no missing or extra tool entries, and robots.txt references the absolute sitemap on the same hostname.
 - Closed the earlier incorrect hostname-change PR without merging it.
 - No application runtime logic was changed.
+
+
+## 2026-09-25 - Loan Payment metadata deduplication
+- SEO/integration audit found duplicate Open Graph and Twitter head metadata on three existing tool pages: Loan Payment, Compound Interest and Discount.
+- Removed the duplicate social metadata blocks without changing calculator logic.
+- Strengthened `tests/tool-pages.integration.test.js` so every published tool page must contain exactly one OG type/title/description and exactly one Twitter card/title/description tag.
+- This is a bounded existing-tool SEO correctness fix; no new tool was created.
