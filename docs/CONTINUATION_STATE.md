@@ -487,3 +487,13 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - PR #138 was diverged from current main by 3 commits, so it was not merged. A clean branch `fix/date-percentage-validation-clean-20260924` was created directly from current main.
 - The clean branch contains only the remaining validation corrections: shared empty/whitespace numeric-input rejection, strict ISO date validation for Age/Date Difference/Business Days, and Percentage Change empty-new-value handling, with focused regressions.
 - Fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence remains mandatory before merge.
+
+
+## 2026-09-25 - Current production/SEO continuity checkpoint
+- Authoritative production hostname: `utility-hub-ten.vercel.app`.
+- Current `main` commit: `6cf70dbd79423eccaa76d2ac3fd0aeecfa1ba916`.
+- Repository workflow lookup currently exposes no new workflow runs for this exact merge commit through the available connector, so no fresh exact-HEAD CI claim is made here.
+- Sitemap audit: 39 total URLs, including all 28 published tool pages; no missing or extra tool-page entries were found.
+- robots.txt uses the fully qualified sitemap URL on the authoritative production hostname.
+- The earlier `utility-hub-tau.vercel.app` deployment failure is historical evidence only and is not the production domain.
+- Next bounded gates: fresh exact-HEAD CI/deployment evidence when exposed, broader physical-device/browser QA, live robots/sitemap/canonical/header verification, then monetization readiness.
