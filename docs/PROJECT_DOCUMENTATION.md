@@ -186,3 +186,9 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Remaining functional validation corrections are carried from stale stacked branches onto a clean current-main branch.
 - Scope is limited to shared numeric-input validation, strict ISO calendar dates, and Percentage Change empty-input handling.
 - Already-integrated Unicode and safe-integer hardening is not duplicated.
+
+
+## 2026-09-25 - Production SEO domain consistency correction
+- Audited the current main SEO surface and found `sitemap.xml` and `robots.txt` still referenced the retired `utility-hub-ten.vercel.app` hostname while the current production hostname is `utility-hub-tau.vercel.app`.
+- Updated both files on branch `fix/seo-sitemap-production-domain-20260925` to reference the current production hostname consistently.
+- No tool runtime logic was changed. Fresh CI and deployment verification are required before merge.
