@@ -163,3 +163,12 @@ test("homepage has no retired modal implementation", () => {
   assert.doesNotMatch(fs.readFileSync("app.js", "utf8"), /function\s+(?:tool|closeTool|calcPercentage|calcDiscount|calcLoan)/);
   assert.equal(fs.existsSync("tool-enhancements.js"), false);
 });
+
+test("published tool pages do not reference removed tool-enhancements module", () => {
+  const toolsDir = path.join(process.cwd(), "tools");
+  const pages = fs.readdirSync(toolsDir).filter((name) => name.endsWith(".html")).sort();
+  for (const page of pages) {
+    const source = fs.readFileSync(path.join(toolsDir, page), "utf8");
+    assert.doesNotMatch(source, /tool-enhancements\\.js/, page + " must not reference the deleted tool-enhancements module");
+  }
+});
