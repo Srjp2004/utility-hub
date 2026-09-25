@@ -210,3 +210,8 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Reduced app.js to its active homepage search responsibility and removed the unused tool-enhancements.js module.
 - Removed corresponding dead modal markup and CSS while preserving shared form/result styles used by published tools.
 - Added regression guards so the retired implementation cannot silently return.
+
+## 2026-09-25 - PR #149 verification repair
+- The clean-codebase refactor correctly retired `tool-enhancements.js`, but six existing tool pages retained stale script references to that deleted module.
+- This was a real browser/runtime integration defect exposed by fresh CI, not a reason to restore duplicate code.
+- The bounded repair removes only the stale references and adds a repository-wide integration regression guard.
