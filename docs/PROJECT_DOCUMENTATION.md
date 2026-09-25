@@ -186,3 +186,10 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Remaining functional validation corrections are carried from stale stacked branches onto a clean current-main branch.
 - Scope is limited to shared numeric-input validation, strict ISO calendar dates, and Percentage Change empty-input handling.
 - Already-integrated Unicode and safe-integer hardening is not duplicated.
+
+
+## 2026-09-25 - Production hostname continuity checkpoint
+- The authoritative UtilityHub production hostname is `https://utility-hub-ten.vercel.app`.
+- `sitemap.xml` contains 39 indexable URLs, including all 28 published tool pages, and `robots.txt` points to the absolute sitemap URL on this hostname.
+- `utility-hub-tau.vercel.app` is historical deployment evidence only and must not be used as the production hostname.
+- Physical-device/browser certification and live runtime SEO/security-header verification remain separate release gates.
