@@ -9,7 +9,7 @@ The main branch is the intended integration branch.
 - tools.html: searchable tool directory
 - tools/: dedicated tool pages
 - tool-pages.js: shared tool rendering and browser-side tool logic
-- app.js: site-level JavaScript
+- app.js: homepage search behavior
 - styles.css: global responsive styling
 - manifest.webmanifest: PWA metadata
 - favicon.svg: favicon
