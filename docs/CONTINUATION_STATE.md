@@ -1,3 +1,17 @@
+## 2026-09-25 - PR #140 E2E diagnosis
+- Fresh unit tests passed on PR #140 head d7676aaf5bc019ae38231816a657d0dcb3a2b446.
+- Browser E2E failed in the exhaustive published-tool smoke flow because one tool's #result remained empty; page-load health checks passed across the published tool pages.
+- DevSecOps failed only in its browser security-coverage step, while source security invariants, dependency audit and CodeQL passed. The same exhaustive browser failure is the current root-cause candidate.
+- Added diagnostic context to the exhaustive E2E assertion so the failing tool name is included in the next failure message.
+- PR #140 remains unmerged. Do not weaken the smoke test or merge until the exact tool is diagnosed and repaired.
+
+## 2026-09-25 - Existing-tool quality wave started
+- User requested improvement, updating and testing of every existing tool, specifically citing QuotePulse output/PDF formatting and BMI simplicity.
+- User explicitly instructed: do not create a new tool. This wave modifies existing published tools and shared UI only.
+- Completed first bounded wave: QuotePulse report/print presentation and BMI visualization/interpretation.
+- Next: systematic audit and upgrade of all remaining published tools, followed by full regression, browser E2E, accessibility, responsive and security verification.
+- Completion is not claimed until fresh verification evidence exists for each meaningful wave.
+
 ## 2026-09-23 - PR #97 merged and re-verified
 - PR #97 (QuotePulse duration regression fix) was explicitly approved and merged into main.
 - Merge commit: `296c0c2716ed3e8a2d4bf23cc39521829d985bed`.

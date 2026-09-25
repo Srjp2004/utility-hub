@@ -41,6 +41,8 @@ The current analyzer can detect or estimate:
 
 ## Output
 
+The report UI uses structured metric cards, issue panels, detected-line-item rows and dedicated print CSS so browser Save as PDF produces a report-oriented layout instead of the normal interactive page.
+
 The renderer presents:
 
 - Clarity score.
@@ -119,6 +121,12 @@ QuotePulse must not:
 
 - `docs/CONTINUATION_STATE.md`
   - Durable handoff state and next work queue.
+
+## 2026-09-25 - QuotePulse quality upgrade
+- Upgraded the existing QuotePulse workspace presentation without creating a new tool or backend.
+- Added a reproducible example loader and dedicated print-report styling.
+- Preserved the browser-local, document-only scope and non-market-price claims.
+- Added regression coverage for the example action.
 
 ## Current engineering status
 
