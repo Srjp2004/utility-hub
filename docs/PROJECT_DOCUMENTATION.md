@@ -196,4 +196,4 @@ The current engineering gates are being repaired from fresh failure evidence rat
 
 
 ## 2026-09-25 - SEO metadata integrity
-- Published tool pages are expected to expose one canonical metadata set per social metadata field. The integration suite now guards against duplicate Open Graph and Twitter metadata, preventing accidental head duplication from being treated as valid SEO markup.
+- Published tool pages are expected to expose one canonical metadata set per social metadata field. The integration suite now guards against duplicate Open Graph and Twitter metadata. The 2026-09-25 audit found and removed duplicate social metadata on the Loan Payment, Compound Interest and Discount pages, preventing accidental head duplication from being treated as valid SEO markup.
