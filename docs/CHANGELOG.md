@@ -469,3 +469,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Fresh PR-head Browser E2E and DevSecOps evidence exposed stale references to the deleted `tool-enhancements.js` module in six existing tool pages.
 - Removed only those stale references and added an integration regression guard covering every published tool page.
 - Fresh verification is required before PR #149 can be merged.
+
+## 2026-09-25 - Current main verification checkpoint
+- Merged PR #149 clean-codebase refactor after repairing stale references to the retired `tool-enhancements.js` module.
+- Fresh post-merge Tests, Browser E2E and DevSecOps checks passed on main merge commit `df69d7fed16c9a1963a15dc4ac0cb91a0ea1c2c6`.
+- Updated durable engineering state to distinguish verified GitHub/Vercel evidence from direct live-runtime verification and from historical autonomous workflow failures whose logs are unavailable.
