@@ -519,3 +519,11 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Root cause was stale HTML script references, not missing active functionality; the affected tools are backed by `tool-pages.js`.
 - Removed only those six stale references and added an integration invariant scanning all published tool pages for the retired module.
 - PR #149 remains unmerged until fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence passes on the repaired head.
+
+## 2026-09-26 - Legal/contact UX wave
+- Updated About, Privacy, Terms and Contact pages on branch `ux/legal-pages-20260926` as a bounded existing-platform UX/content improvement.
+- Added the requested support contacts: `utilityhub.help@gmail.com` and `utilityhub.support@gmail.com`.
+- Standardized public-page navigation, metadata, current-date policy markers, support guidance and browser-first privacy disclosures.
+- Added integration regression coverage for required page content, contact channels, canonical metadata and cross-page navigation.
+- No calculator/tool algorithm or dependency changes were made.
+- Fresh branch verification is required before merge.
