@@ -1,3 +1,8 @@
+## 2026-09-26 - Percentage Calculator input hardening
+- Added a bounded browser-input guard for the Percentage Calculator so alphabetic paste/input cannot surface as a stray `e` in numeric fields.
+- Added a browser E2E regression covering alphabetic content pasted into the percentage input.
+- The calculation algorithm is unchanged; merge remains gated on fresh CI verification.
+
 ## 2026-09-25 - Clean-codebase refactor
 - Removed the retired homepage modal calculator implementation after dedicated tool-page navigation made it unreachable.
 - Reduced app.js to its active homepage search responsibility and removed the unused tool-enhancements.js module.
