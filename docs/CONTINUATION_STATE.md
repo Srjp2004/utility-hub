@@ -527,3 +527,11 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Added integration regression coverage for required page content, contact channels, canonical metadata and cross-page navigation.
 - No calculator/tool algorithm or dependency changes were made.
 - Fresh branch verification is required before merge.
+
+
+## 2026-09-26 - Current main release-state checkpoint
+- PR #152 (legal/contact UX and public trust pages) merged into main at `3d24fd1154fc59add1c33361a9c8943889707db8` after fresh Tests, Browser E2E, DevSecOps and Quality Gate success on its exact head.
+- PR #151 was superseded and closed without merging; PR #150 was also closed because its documentation snapshot was based on the previous main and had diverged from the current integrated state.
+- Current open PR count is now limited to none from the superseded documentation/legal waves.
+- Post-merge workflow runs for `3d24fd1` are not exposed by the available GitHub connector yet; therefore no post-merge CI success is claimed until fresh exact-HEAD evidence is available.
+- Remaining launch evidence is physical-device/browser QA and independent live-runtime verification. Revenue remains an objective, not a guaranteed outcome.

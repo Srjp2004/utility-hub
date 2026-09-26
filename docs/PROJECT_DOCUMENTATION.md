@@ -221,3 +221,10 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Contact provides separate help and support email channels: `utilityhub.help@gmail.com` and `utilityhub.support@gmail.com`.
 - Privacy language distinguishes current browser-local core processing from future analytics/advertising/affiliate services and avoids claiming services that are not verified as active.
 - No runtime tool algorithms, backend or dependencies were changed.
+
+
+## 2026-09-26 - Release-state documentation checkpoint
+- Current main includes the public trust/contact page update from PR #152 at `3d24fd1154fc59add1c33361a9c8943889707db8`.
+- The public pages now provide clearer browser-local processing disclosures, acceptable-use/limitations language and separate support/help email channels without adding a backend, dependency or calculator algorithm changes.
+- Stale documentation PRs #150 and #151 were closed rather than merged because their snapshots were based on an older main state.
+- Release readiness still requires fresh post-merge CI evidence and real-device/live-runtime verification; these are not inferred from the successful PR-head gates.
