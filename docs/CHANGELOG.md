@@ -474,3 +474,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Improved About, Privacy, Terms and Contact pages for consistency, accessibility-oriented navigation and clearer product disclosures.
 - Added `utilityhub.help@gmail.com` and `utilityhub.support@gmail.com` to the public support/contact experience.
 - Added regression coverage for required contact details and public-page structure.
+
+
+## 2026-09-26 - PR #152 merged
+- Merged PR #152, `feat: improve legal and contact pages`, into main at `3d24fd1154fc59add1c33361a9c8943889707db8`.
+- The merged change improves About, Privacy, Terms and Contact pages, adds the requested support/help channels, and adds integration regression coverage.
+- PR-head Tests, Browser E2E, DevSecOps and Quality Gate were all successful before merge.
+- PR #150 and PR #151 were closed as superseded/stale documentation paths.
