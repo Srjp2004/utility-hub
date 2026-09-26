@@ -519,3 +519,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Root cause was stale HTML script references, not missing active functionality; the affected tools are backed by `tool-pages.js`.
 - Removed only those six stale references and added an integration invariant scanning all published tool pages for the retired module.
 - PR #149 remains unmerged until fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence passes on the repaired head.
+
+## 2026-09-26 - Public trust/contact surface upgrade
+- Updated About, Privacy, Terms and Contact pages with clearer product purpose, limitations, privacy disclosures, acceptable-use language and support routing.
+- Added requested contact addresses: utilityhub.help@gmail.com and utilityhub.support@gmail.com.
+- Added integration regression coverage for required trust-page content.
+- This is a bounded content/UX change; no calculator algorithms, dependencies or backend architecture changed.
+- Fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence is required before merge.
