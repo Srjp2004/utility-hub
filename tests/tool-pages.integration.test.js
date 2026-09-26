@@ -187,3 +187,8 @@ test("public information pages expose current support contacts", () => {
     assert.match(source, /<link rel="canonical"/, page + " must expose a canonical URL");
   }
 });
+
+test("percentage calculator includes numeric input hardening for pasted text", () => {
+  const source = fs.readFileSync(path.join("tools", "percentage-calculator.html"), "utf8");
+  assert.ok(source.includes('<script src="../numeric-input-hardening.js" defer></script>'));
+});
