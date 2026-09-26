@@ -469,3 +469,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Fresh PR-head Browser E2E and DevSecOps evidence exposed stale references to the deleted `tool-enhancements.js` module in six existing tool pages.
 - Removed only those stale references and added an integration regression guard covering every published tool page.
 - Fresh verification is required before PR #149 can be merged.
+
+## 2026-09-26 - Legal/contact UX update
+- Improved About, Privacy, Terms and Contact pages for consistency, accessibility-oriented navigation and clearer product disclosures.
+- Added `utilityhub.help@gmail.com` and `utilityhub.support@gmail.com` to the public support/contact experience.
+- Added regression coverage for required contact details and public-page structure.
