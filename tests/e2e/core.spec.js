@@ -156,3 +156,11 @@ test.describe("UtilityHub exhaustive interaction smoke",()=>{
     expect(failures,failures.join("\n")).toEqual([]);
   });
 });
+
+test("percentage calculator rejects pasted alphabetic content without leaving a stray exponent marker",async({page})=>{
+  await page.goto("/tools/percentage-calculator.html",{waitUntil:"networkidle"});
+  const input=page.locator("#part");
+  await input.fill("Typingtest");
+  await expect(input).not.toHaveValue("e");
+  await expect(input).not.toHaveValue("Typingtest");
+});
