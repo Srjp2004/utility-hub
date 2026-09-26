@@ -481,3 +481,10 @@ Complete the remaining full functional audit in bounded batches, test representa
 - The merged change improves About, Privacy, Terms and Contact pages, adds the requested support/help channels, and adds integration regression coverage.
 - PR-head Tests, Browser E2E, DevSecOps and Quality Gate were all successful before merge.
 - PR #150 and PR #151 were closed as superseded/stale documentation paths.
+
+
+## 2026-09-26 - SEO content quality wave
+- Expanded the public tool-page copy across all 28 published tools with task-specific explanations, usage guidance, limitations and practical context.
+- Strengthened the Tools directory content with clearer task-oriented discovery copy.
+- Avoided keyword stuffing and artificial word-count padding; content was added where it explains real tool behavior and user intent.
+- No calculator algorithms, dependencies, backend services or monetization claims were changed.
