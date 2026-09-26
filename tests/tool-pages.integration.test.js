@@ -172,3 +172,16 @@ test("published tool pages do not reference removed tool-enhancements module", (
     assert.doesNotMatch(source, /tool-enhancements\\.js/, page + " must not reference the deleted tool-enhancements module");
   }
 });
+
+test("public trust pages expose current contact and policy surfaces", () => {
+  const expectations = {
+    "about.html": ["About UtilityHub", "Privacy-aware", "Contact"],
+    "privacy.html": ["Privacy Policy", "utilityhub.support@gmail.com", "Cookies, analytics and advertising"],
+    "terms.html": ["Terms of Use", "utilityhub.support@gmail.com", "Acceptable use"],
+    "contact.html": ["Contact UtilityHub", "utilityhub.help@gmail.com", "utilityhub.support@gmail.com"]
+  };
+  for (const [page, markers] of Object.entries(expectations)) {
+    const source = fs.readFileSync(path.join(process.cwd(), page), "utf8");
+    for (const marker of markers) assert.ok(source.includes(marker), page + " must contain " + marker);
+  }
+});
