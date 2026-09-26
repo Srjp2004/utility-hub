@@ -215,3 +215,9 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - The clean-codebase refactor correctly retired `tool-enhancements.js`, but six existing tool pages retained stale script references to that deleted module.
 - This was a real browser/runtime integration defect exposed by fresh CI, not a reason to restore duplicate code.
 - The bounded repair removes only the stale references and adds a repository-wide integration regression guard.
+
+## 2026-09-26 - Public information page UX/content update
+- About, Privacy, Terms and Contact are now treated as first-class public product pages with consistent navigation/footer structure and clearer disclosures.
+- Contact provides separate help and support email channels: `utilityhub.help@gmail.com` and `utilityhub.support@gmail.com`.
+- Privacy language distinguishes current browser-local core processing from future analytics/advertising/affiliate services and avoids claiming services that are not verified as active.
+- No runtime tool algorithms, backend or dependencies were changed.
