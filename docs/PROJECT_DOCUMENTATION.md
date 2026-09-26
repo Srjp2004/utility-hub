@@ -215,3 +215,9 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - The clean-codebase refactor correctly retired `tool-enhancements.js`, but six existing tool pages retained stale script references to that deleted module.
 - This was a real browser/runtime integration defect exposed by fresh CI, not a reason to restore duplicate code.
 - The bounded repair removes only the stale references and adds a repository-wide integration regression guard.
+
+## 2026-09-26 - Public trust/contact surface upgrade
+- About, Privacy, Terms and Contact were expanded from skeletal pages into clearer public trust surfaces.
+- Contact now exposes utilityhub.help@gmail.com and utilityhub.support@gmail.com with guidance on what to include in bug reports and what not to send.
+- Privacy language distinguishes current browser-local behavior from future analytics/advertising integrations rather than claiming unverified providers are active.
+- Terms explicitly cover acceptable use, consequential-decision limitations, third-party services and availability.
