@@ -172,3 +172,18 @@ test("published tool pages do not reference removed tool-enhancements module", (
     assert.doesNotMatch(source, /tool-enhancements\\.js/, page + " must not reference the deleted tool-enhancements module");
   }
 });
+
+test("public information pages expose current support contacts", () => {
+  const expectations = {
+    "about.html": ["About UtilityHub", "tools.html", "privacy.html", "terms.html", "contact.html"],
+    "privacy.html": ["Privacy Policy", "utilityhub.support@gmail.com", "terms.html", "contact.html"],
+    "terms.html": ["Terms of Use", "utilityhub.support@gmail.com", "privacy.html", "contact.html"],
+    "contact.html": ["Contact UtilityHub", "utilityhub.help@gmail.com", "utilityhub.support@gmail.com", "privacy.html", "terms.html"]
+  };
+  for (const [page, required] of Object.entries(expectations)) {
+    const source = fs.readFileSync(path.join(process.cwd(), page), "utf8");
+    for (const value of required) assert.ok(source.includes(value), page + " must contain " + value);
+    assert.match(source, /<meta name="description"/, page + " must expose a description");
+    assert.match(source, /<link rel="canonical"/, page + " must expose a canonical URL");
+  }
+});
