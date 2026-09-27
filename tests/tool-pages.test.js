@@ -278,6 +278,24 @@ test("QuotePulse example action populates a reproducible quote", () => {
   assert.match(elements.quoteText.value, /Total \$1150/);
 });
 
+test("QuotePulse renders a structured responsive report and negotiation card", () => {
+  const { context, elements } = loadTools({
+    quoteText: "Site visit $50\nLabour $480\nMaterials $620\nDeposit 60%\nTotal $1150\n12-month warranty",
+    result: "",
+    qpMessage: "",
+    tool: ""
+  });
+  context.analyzeQuote();
+  assert.match(elements.result.innerHTML, /quote-summary/);
+  assert.match(elements.result.innerHTML, /quote-score-card/);
+  assert.match(elements.result.innerHTML, /What needs attention/);
+  assert.match(elements.result.innerHTML, /Detected line items/);
+  assert.match(elements.result.innerHTML, /quote-item-index/);
+  assert.match(elements.qpMessage.innerHTML, /quote-message-head/);
+  assert.match(elements.qpMessage.innerHTML, /Ready to send/);
+  assert.match(elements.qpMessage.innerHTML, /Copy message/);
+});
+
 test("QuotePulse analyzes a quote and detects document issues", () => {
   const { context, elements } = loadTools({
     quoteText: "Site visit $50\nLabour $480\nMaterials $620\nDeposit 60%\nTotal $1150\n12-month warranty",
