@@ -125,6 +125,17 @@ test("ROI handles a loss", () => {
   assert.match(elements.result.innerHTML, /ROI: -25\.00%/);
 });
 
+test("BMI calculator positions and labels the gauge marker", () => {
+  const { context, elements } = loadTools({ kg: "70", cm: "175", result: "" });
+  context.calcBmi();
+  assert.match(elements.result.innerHTML, /id="bmiMarker"/);
+  assert.match(elements.result.innerHTML, /Adult BMI scale/);
+  assert.match(elements.result.innerHTML, /Underweight/);
+  assert.match(elements.result.innerHTML, /Healthy/);
+  assert.match(elements.result.innerHTML, /Overweight/);
+  assert.match(elements.result.innerHTML, /Obesity/);
+});
+
 test("BMI calculator provides category, scale and healthy-range weight", () => {
   const { context, elements } = loadTools({ kg: "70", cm: "175", result: "" });
   context.calcBmi();
