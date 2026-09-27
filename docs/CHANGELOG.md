@@ -1,3 +1,8 @@
+## 2026-09-27 - BMI gauge UX repair
+- Reworked the existing BMI result presentation with a clearer adult BMI scale, visible category zones, legend, and a positioned marker driven after render.
+- Improved result hierarchy, category summary, healthy-range weight card, limitations note, responsive behavior and reduced-motion handling.
+- Added regression coverage for the gauge marker/labels. No BMI calculation thresholds or new tool were introduced.
+
 ## 2026-09-25 - Clean-codebase refactor
 - Removed the retired homepage modal calculator implementation after dedicated tool-page navigation made it unreachable.
 - Reduced app.js to its active homepage search responsibility and removed the unused tool-enhancements.js module.
