@@ -280,7 +280,7 @@ test("QuotePulse example action populates a reproducible quote", () => {
 
 test("QuotePulse renders a structured responsive report and negotiation card", () => {
   const { context, elements } = loadTools({
-    quoteText: "Site visit $50\\nLabour $480\\nMaterials $620\\nDeposit 60%\\nTotal $1150\\n12-month warranty",
+    quoteText: "Site visit $50\nLabour $480\nMaterials $620\nDeposit 60%\nTotal $1150\n12-month warranty",
     result: "",
     qpMessage: "",
     tool: ""
