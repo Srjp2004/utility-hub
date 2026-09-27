@@ -1,7 +1,7 @@
 ## 2026-09-25 - Existing-tool quality direction
 - UtilityHub will improve the existing 28 published tools rather than creating additional tools during this quality wave.
 - Tool quality includes correctness, validation, result formatting, visualization where appropriate, responsive/adaptive UX, accessibility, print/export behavior where applicable, security and regression coverage.
-- QuotePulse uses a browser-local report-oriented UI and dedicated print CSS. BMI uses an adult-category scale and explanatory result details.
+- QuotePulse uses a browser-local report-oriented UI and dedicated print CSS. BMI uses an adult-category scale and explanatory result details. The BMI result UI also uses a segmented visual gauge with an explicit marker, category legend, responsive stacking, and reduced-motion support.
 - No framework, backend, database or paid AI service was introduced.
 
 ### 2026-09-23 - QuotePulse duration regression merged
