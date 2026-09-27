@@ -9,8 +9,10 @@
 - User requested improvement, updating and testing of every existing tool, specifically citing QuotePulse output/PDF formatting and BMI simplicity.
 - User explicitly instructed: do not create a new tool. This wave modifies existing published tools and shared UI only.
 - Completed first bounded wave: QuotePulse report/print presentation and BMI visualization/interpretation.
-- Next: systematic audit and upgrade of all remaining published tools, followed by full regression, browser E2E, accessibility, responsive and security verification.
-- Completion is not claimed until fresh verification evidence exists for each meaningful wave.
+- QuotePulse UX was merged in PR #156 at `5686568d510361a5ef5590bd5500d9c6b7db27b7` after fresh Tests, Browser E2E, DevSecOps and Quality Gate checks passed.
+- BMI gauge/UX was merged in PR #157 at `0a022f250451a75490bd6485a2549ca99a2c3b3e` after fresh Node 20/22, Chromium, Firefox, WebKit, mobile Chromium/WebKit, security, CodeQL, dependency-audit and aggregate quality-gate checks passed.
+- The BMI marker was repaired without weakening CSP by replacing the inline-positioned marker with a CSP-safe SVG marker.
+- Next: systematic audit and upgrade of remaining published tools, followed by fresh live/device verification. Real-device production QA is still a separate release gate.
 
 ## 2026-09-23 - PR #97 merged and re-verified
 - PR #97 (QuotePulse duration regression fix) was explicitly approved and merged into main.
