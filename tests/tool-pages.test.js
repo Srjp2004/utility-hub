@@ -142,7 +142,7 @@ test("BMI calculator provides category, scale and healthy-range weight", () => {
   assert.match(elements.result.innerHTML, /22\.9/);
   assert.match(elements.result.innerHTML, /Healthy weight/);
   assert.match(elements.result.innerHTML, /bmi-track-svg/);
-  assert.match(elements.result.innerHTML, /56\.7-76\.3 kg/);
+  assert.match(elements.result.innerHTML, /56\.7[–-]76\.3 kg/);
 });
 
 test("text counter handles empty text", () => {
