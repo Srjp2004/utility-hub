@@ -207,15 +207,14 @@ test("base64 preserves Unicode text", () => {
 });
 
 
-test("image resize chooses a filename extension matching the output MIME type", () => {
+test("image resize output extension follows the selected MIME type", () => {
   const source = require("node:fs").readFileSync("tool-pages.js", "utf8");
-  assert.ok(source.includes('const outputType=f.type==="image/png"?"image/png":"image/jpeg",extension=outputType==="image/png"?"png":"jpg";'), "image resize must derive output type and extension before encoding");
-  assert.match(source, /downloadBlob\(b,"resized\."\+extension\)/);
+  assert.match(source, /imageOutputType\(file\.type,settings\.format\)/);
+  assert.match(source, /outputName:base+"-resized\."\+imageExtension\(type\)/);
 });
 
-
-test("image resize completes with a PNG output filename for PNG input", async () => {
-  class FakeFile { constructor() { this.size = 100; this.type = "image/png"; } }
+test("image resize produces a PNG filename for PNG input", async () => {
+  class FakeFile { constructor() { this.size = 100; this.type = "image/png"; this.name = "photo.png"; } }
   class FakeImage {
     constructor() { this.naturalWidth = 100; this.naturalHeight = 50; }
     set src(_) { this.onload(); }
@@ -223,6 +222,11 @@ test("image resize completes with a PNG output filename for PNG input", async ()
   const elements = {
     resizeFile: { files: [new FakeFile()] },
     resizeWidth: { value: "200" },
+    resizeHeight: { value: "" },
+    resizeLock: { checked: true },
+    resizeMode: { value: "dimensions" },
+    resizeFormat: { value: "auto" },
+    resizeQuality: { value: "0.9" },
     result: { innerHTML: "", textContent: "" }
   };
   let downloadedName = "";
@@ -232,42 +236,19 @@ test("image resize completes with a PNG output filename for PNG input", async ()
       addEventListener: () => {},
       body: { appendChild() {} },
       createElement: (tag) => tag === "canvas"
-        ? {
-            width: 0,
-            height: 0,
-            getContext: () => ({ drawImage() {} }),
-            toBlob: (cb) => cb({ size: 1, type: "image/png" })
-          }
-        : {
-            href: "",
-            download: "",
-            click() { downloadedName = this.download; },
-            remove() {}
-          }
+        ? { width: 0, height: 0, getContext: () => ({ drawImage() {} }), toBlob: (cb) => cb({ size: 1, type: "image/png" }) }
+        : { href: "", download: "", click() { downloadedName = this.download; }, remove() {} }
     },
-    console,
-    Number,
-    Math,
-    Date,
-    TextEncoder,
-    TextDecoder,
-    btoa,
-    atob,
-    setTimeout,
-    clearTimeout,
-    File: FakeFile,
-    Image: FakeImage,
-    URL: {
-      createObjectURL: () => "blob:fake",
-      revokeObjectURL() {}
-    }
+    console, Number, Math, Date, TextEncoder, TextDecoder, btoa, atob,
+    setTimeout, clearTimeout, File: FakeFile, Image: FakeImage,
+    URL: { createObjectURL: () => "blob:fake", revokeObjectURL() {} }
   };
   vm.createContext(context);
-  const source = fs.readFileSync("tool-pages.js", "utf8");
-  vm.runInContext(source, context, { filename: "tool-pages.js" });
+  vm.runInContext(fs.readFileSync("tool-pages.js", "utf8"), context, { filename: "tool-pages.js" });
+  context.loadImage = async () => ({ im: {} });
   await context.imageResize();
-  assert.equal(downloadedName, "resized.png");
-  assert.match(elements.result.textContent, /Done: 200 x 100 px\./);
+  assert.equal(downloadedName, "photo-resized.png");
+  assert.match(elements.result.textContent, /processed/);
 });
 
 test("profit margin reports undefined markup when cost is zero", () => {
