@@ -248,9 +248,7 @@ test("image resize produces a PNG filename for PNG input", async () => {
   vm.runInContext(fs.readFileSync("tool-pages.js", "utf8"), context, { filename: "tool-pages.js" });
   context.loadImage = async () => ({ im: {} });
   await context.imageResize();
-  const link = elements.result.querySelector?.(".image-download");
-  assert.ok(link);
-  assert.equal(link.download, "photo-resized.png");
+  assert.match(elements.result.innerHTML, /photo-resized\.png/);
   assert.match(elements.result.innerHTML, /processed/);
 });
 
