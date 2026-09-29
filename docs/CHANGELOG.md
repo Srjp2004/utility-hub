@@ -1,3 +1,10 @@
+## 2026-09-29 - Image Resizer and Compressor rebuild
+- Rebuilt the existing Image Resizer and Image Compressor interfaces around local browser processing, drag-and-drop selection, multi-image queues, previews, responsive controls and per-file downloads.
+- Image Resizer now supports exact dimensions or percentage scaling, optional aspect-ratio locking, output format selection and JPEG/WebP quality control.
+- Image Compressor now supports batch compression, quality control, output format selection, JPEG background handling and before/after size reporting.
+- Preserved the existing 25 MB per-file and 16,384 px per-side processing safeguards; no server upload or new dependency was introduced.
+- Added regression coverage for the rebuilt image-tool controls. Fresh browser/runtime verification is required before merge.
+
 ## 2026-09-27 - BMI gauge UX repair
 - Reworked the existing BMI result presentation with a clearer adult BMI scale, visible category zones, legend, and a positioned marker driven after render.
 - Improved result hierarchy, category summary, healthy-range weight card, limitations note, responsive behavior and reduced-motion handling.
