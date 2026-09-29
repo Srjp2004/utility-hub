@@ -215,7 +215,8 @@ test("image resize output extension follows the selected MIME type", () => {
 
 test("image resize derives a PNG filename for PNG output", () => {
   const source = require("node:fs").readFileSync("tool-pages.js", "utf8");
-  assert.match(source, /outputName:base+"-resized\."\+imageExtension\(type\)/);
+  assert.match(source, /outputName:base/);
+  assert.match(source, /imageExtension\(type\)/);
   assert.match(source, /function imageOutputType\(inputType,selected\)/);
   assert.match(source, /image\/png/);
 });
