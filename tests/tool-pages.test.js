@@ -12,6 +12,20 @@ function loadTools(values) {
   return { context, elements };
 }
 
+test("image tool views expose batch controls and local processing UI", () => {
+  const { context } = loadTools({ result: "" });
+  const mount = { innerHTML: "" };
+  context.document.getElementById = (id) => id === "tool" ? mount : null;
+  context.renderTool("image-resizer", "tool");
+  assert.match(mount.innerHTML, /resizeDropzone/);
+  assert.match(mount.innerHTML, /multiple hidden/);
+  assert.match(mount.innerHTML, /resizeMode/);
+  context.renderTool("image-compressor", "tool");
+  assert.match(mount.innerHTML, /compressDropzone/);
+  assert.match(mount.innerHTML, /imgQuality/);
+  assert.match(mount.innerHTML, /imgOutputFormat/);
+});
+
 test("numeric calculators reject empty required inputs", () => {
   const cases = [
     [{ part: "", whole: "200", result: "" }, "calcPercentage", "Enter valid numbers."],
