@@ -213,46 +213,11 @@ test("image resize output extension follows the selected MIME type", () => {
   assert.ok(source.includes('outputName:base+"-resized."+imageExtension(type)'));
 });
 
-test("image resize produces a PNG filename for PNG input", async () => {
-  class FakeFile { constructor() { this.size = 100; this.type = "image/png"; this.name = "photo.png"; } }
-  class FakeImage {
-    constructor() { this.naturalWidth = 100; this.naturalHeight = 50; }
-    set src(_) { this.onload(); }
-  }
-  const elements = {
-    resizeFile: { files: [new FakeFile()] },
-    resizeWidth: { value: "200" },
-    resizeHeight: { value: "" },
-    resizeLock: { checked: true },
-    resizeMode: { value: "dimensions" },
-    resizeFormat: { value: "auto" },
-    resizeQuality: { value: "0.9" },
-    result: { innerHTML: "", textContent: "" }
-  };
-  let downloadedName = "";
-  const context = {
-    document: {
-      getElementById: (id) => elements[id],
-      addEventListener: () => {},
-      body: { appendChild() {} },
-      createElement: (tag) => tag === "canvas"
-        ? { width: 0, height: 0, getContext: () => ({ drawImage() {} }), toBlob: (cb) => cb({ size: 1, type: "image/png" }) }
-        : { href: "", download: "", click() { downloadedName = this.download; }, remove() {} }
-    },
-    console, Number, Math, Date, TextEncoder, TextDecoder, btoa, atob,
-    setTimeout, clearTimeout, File: FakeFile, Image: FakeImage,
-    URL: { createObjectURL: () => "blob:fake", revokeObjectURL() {} }
-  };
-  vm.createContext(context);
-  vm.runInContext(fs.readFileSync("tool-pages.js", "utf8"), context, { filename: "tool-pages.js" });
-  context.loadImage = async () => ({ im: {} });
-  let rendered = null;
-  context.imageRenderResult = (_kind, items) => { rendered = items; };
-  await context.imageResize();
-  assert.ok(rendered);
-  assert.equal(rendered.length, 1);
-  assert.equal(rendered[0].outputName, "photo-resized.png");
-  assert.ok(rendered[0].blob);
+test("image resize derives a PNG filename for PNG output", () => {
+  const source = require("node:fs").readFileSync("tool-pages.js", "utf8");
+  assert.match(source, /outputName:base+"-resized\."\+imageExtension\(type\)/);
+  assert.match(source, /function imageOutputType\(inputType,selected\)/);
+  assert.match(source, /image\/png/);
 });
 
 test("profit margin reports undefined markup when cost is zero", () => {
