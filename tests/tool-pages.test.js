@@ -209,8 +209,8 @@ test("base64 preserves Unicode text", () => {
 
 test("image resize output extension follows the selected MIME type", () => {
   const source = require("node:fs").readFileSync("tool-pages.js", "utf8");
-  assert.match(source, /imageOutputType\(file\.type,settings\.format\)/);
-  assert.match(source, /outputName:base+"-resized\."\+imageExtension\(type\)/);
+  assert.ok(source.includes("imageOutputType(file.type,settings.format)"));
+  assert.ok(source.includes('outputName:base+"-resized."+imageExtension(type)'));
 });
 
 test("image resize produces a PNG filename for PNG input", async () => {
@@ -230,6 +230,7 @@ test("image resize produces a PNG filename for PNG input", async () => {
     result: { innerHTML: "", textContent: "" }
   };
   let downloadedName = "";
+  let resultLinks = [];
   const context = {
     document: {
       getElementById: (id) => elements[id],
@@ -247,8 +248,10 @@ test("image resize produces a PNG filename for PNG input", async () => {
   vm.runInContext(fs.readFileSync("tool-pages.js", "utf8"), context, { filename: "tool-pages.js" });
   context.loadImage = async () => ({ im: {} });
   await context.imageResize();
-  assert.equal(downloadedName, "photo-resized.png");
-  assert.match(elements.result.textContent, /processed/);
+  const link = elements.result.querySelector?.(".image-download");
+  assert.ok(link);
+  assert.equal(link.download, "photo-resized.png");
+  assert.match(elements.result.innerHTML, /processed/);
 });
 
 test("profit margin reports undefined markup when cost is zero", () => {
