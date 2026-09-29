@@ -230,7 +230,6 @@ test("image resize produces a PNG filename for PNG input", async () => {
     result: { innerHTML: "", textContent: "" }
   };
   let downloadedName = "";
-  let resultLinks = [];
   const context = {
     document: {
       getElementById: (id) => elements[id],
@@ -247,9 +246,13 @@ test("image resize produces a PNG filename for PNG input", async () => {
   vm.createContext(context);
   vm.runInContext(fs.readFileSync("tool-pages.js", "utf8"), context, { filename: "tool-pages.js" });
   context.loadImage = async () => ({ im: {} });
+  let rendered = null;
+  context.imageRenderResult = (_kind, items) => { rendered = items; };
   await context.imageResize();
-  assert.match(elements.result.innerHTML, /photo-resized\.png/);
-  assert.match(elements.result.innerHTML, /processed/);
+  assert.ok(rendered);
+  assert.equal(rendered.length, 1);
+  assert.equal(rendered[0].outputName, "photo-resized.png");
+  assert.ok(rendered[0].blob);
 });
 
 test("profit margin reports undefined markup when cost is zero", () => {
