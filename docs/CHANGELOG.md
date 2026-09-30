@@ -1,3 +1,8 @@
+## 2026-09-30 - Image Resizer crop integration
+- Added optional center-to-output-ratio and square cropping to the existing Image Resizer.
+- Cropping occurs before resizing and output encoding, preserving the existing local-processing workflow and safeguards.
+- Added regression coverage for the new crop controls.
+
 ## 2026-09-30 - PR #165 Age Calculator birthday arithmetic follow-up
 - Bounded review after PR #163 merge found a second timezone-related defect: age arithmetic used local getters on a UTC-parsed date-only value.
 - Repaired the calculation to use the already validated UTC birth-year/month/day components for all age arithmetic.
