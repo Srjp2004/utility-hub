@@ -3,7 +3,7 @@
 - Image Resizer now supports exact dimensions or percentage scaling, optional aspect-ratio locking, output format selection and JPEG/WebP quality control.
 - Image Compressor now supports batch compression, quality control, output format selection, JPEG background handling and before/after size reporting.
 - Preserved the existing 25 MB per-file and 16,384 px per-side processing safeguards; no server upload or new dependency was introduced.
-- Added regression coverage for the rebuilt image-tool controls. Fresh browser/runtime verification is required before merge.
+- Added regression coverage for the rebuilt image-tool controls. Exact-head Tests, Browser E2E, DevSecOps and Quality Gate verification passed on commit 488407fd2834e2523de4878b47dddd36bcf0641f; Vercel preview deployment also completed.
 
 ## 2026-09-27 - BMI gauge UX repair
 - Reworked the existing BMI result presentation with a clearer adult BMI scale, visible category zones, legend, and a positioned marker driven after render.
