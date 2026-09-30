@@ -1,3 +1,10 @@
+## 2026-09-30 - Image Converter rebuild
+- Rebuilt the existing Image Converter around the browser-local image-tool workflow used by the Image Resizer and Image Compressor.
+- Added multi-image selection and drag/drop, previews/dimensions, JPEG/PNG/WebP output, JPEG/WebP quality control, per-file results/downloads, and preserved 25 MB input and 16,384 px dimension safeguards.
+- Added focused regression coverage for the converter state/renderer/action pipeline.
+- Fresh exact-head verification on `7bed86a4c0c1ac09ea2f0750b939afb512901c90` passed UtilityHub Tests, Browser E2E, DevSecOps and Quality Gate (runs 36707684173, 36707684118, 36707684184 and 36707684115).
+- The E2E harness required a bounded selector repair so the exhaustive smoke test invokes the converter action rather than the first "Choose images" button. No production algorithm or security control was weakened.
+- PR #160 remains open pending the required merge approval and post-merge verification. Real-device/live-runtime certification remains separate.
 ## 2026-09-29 - Image Resizer and Compressor rebuild
 - Rebuilt the existing Image Resizer and Image Compressor interfaces around local browser processing, drag-and-drop selection, multi-image queues, previews, responsive controls and per-file downloads.
 - Image Resizer now supports exact dimensions or percentage scaling, optional aspect-ratio locking, output format selection and JPEG/WebP quality control.
