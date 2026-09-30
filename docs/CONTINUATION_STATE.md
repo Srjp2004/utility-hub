@@ -1,3 +1,10 @@
+## 2026-09-30 - Image Resizer crop integration
+- Bounded audit determined cropping is a useful existing-tool capability, so it was integrated into Image Resizer rather than creating a separate tool.
+- Added deterministic center crop to output ratio and square crop modes before resize.
+- Existing browser-local processing and 25 MB / 16,384 px safeguards remain in place.
+- Added regression coverage for crop controls. Interactive freeform crop handles were not introduced in this bounded change.
+- Next: fresh Tests, Browser E2E, DevSecOps and Quality Gate verification, then protected delivery if all gates pass.
+
 ## 2026-09-30 - Age Calculator timezone arithmetic follow-up
 - PR #163 fixed future-date comparison by using UTC birth-date components, but bounded review found the subsequent age arithmetic still read the parsed ISO date through local Date getters.
 - In positive-offset timezones, an ISO date parsed at UTC midnight can have the previous local calendar date, so the birthday calculation could be off by one day even after the future-date comparison fix.
