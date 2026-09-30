@@ -1,3 +1,8 @@
+## 2026-09-30 - Age Calculator calendar-day consistency
+- Age Calculator date-only inputs are represented internally as UTC calendar components to avoid timezone drift.
+- Future-date validation and age arithmetic must use the same calendar-day representation; mixing UTC-parsed birth dates with local Date getters can shift the effective birth day in positive-offset timezones.
+- The follow-up regression test locks the expected birthday boundary behavior without changing the public tool contract.
+
 ## 2026-09-25 - Existing-tool quality direction
 - UtilityHub will improve the existing 28 published tools rather than creating additional tools during this quality wave.
 - Tool quality includes correctness, validation, result formatting, visualization where appropriate, responsive/adaptive UX, accessibility, print/export behavior where applicable, security and regression coverage.
