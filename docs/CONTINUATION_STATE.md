@@ -1,3 +1,10 @@
+## 2026-09-30 - Age Calculator timezone arithmetic follow-up
+- PR #163 fixed future-date comparison by using UTC birth-date components, but bounded review found the subsequent age arithmetic still read the parsed ISO date through local Date getters.
+- In positive-offset timezones, an ISO date parsed at UTC midnight can have the previous local calendar date, so the birthday calculation could be off by one day even after the future-date comparison fix.
+- PR #165 uses the already-extracted UTC birth-year/month/day components for all age arithmetic and adds a regression test for a birthday on 2026-09-30 returning 26 years, 0 months and 0 days under an India-offset clock.
+- Scope is limited to existing Age Calculator code/tests; no new tool, dependency, backend, MachineMind or LeaseGuard changes.
+- Next: verify PR #165 with fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence before protected delivery, then continue the bounded functional audit.
+
 ## 2026-09-30 - Post-merge documentation synchronization
 - Current `main` commit is `6ab18eed41f907225a8a02fd36237b6cbfe3dffb`, the merge commit for PR #161 (adaptive/lively UI).
 - PR #160 (Image Converter rebuild) is also merged into `main` at `834167c4c670c8daf741eb94cc7e3d19f9a4b650`. Earlier PR #160-open wording below is historical and superseded by this checkpoint.
