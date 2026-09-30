@@ -1,3 +1,10 @@
+## 2026-09-30 - PR #164 CI runner timeout reliability fix
+- Diagnosed a fresh CI stall where the mobile-Chromium E2E matrix job remained in Playwright browser installation while the job had no timeout; the aggregate Quality Gate subsequently expired waiting for E2E completion.
+- Added a 20-minute job-level timeout to the existing Playwright E2E matrix in `.github/workflows/e2e.yml`.
+- No product runtime code, tests, dependencies, backend, MachineMind or LeaseGuard changes were made.
+- Exact head `00ab4b1f759ce1ba1c5918bc76942b0e22708b3a` passed Tests `36744351913`, Browser E2E `36744351950`, DevSecOps `36744351912` and Quality Gate `36744351922`. All five E2E matrix jobs completed successfully.
+- PR #164 remains pending protected delivery approval.
+
 ## 2026-09-30 - PR #161 merged: adaptive/lively UI
 - Merged PR #161, `feat: make UtilityHub more lively and adaptive`, into `main` at `6ab18eed41f907225a8a02fd36237b6cbfe3dffb`.
 - Added CSS-first visual depth, adaptive surfaces, hover/focus feedback, accessible homepage search status, responsive breakpoints, reduced-motion handling and coarse-pointer safeguards.
