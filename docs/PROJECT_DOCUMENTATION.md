@@ -234,3 +234,11 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - The existing Image Converter now follows the established browser-local image-tool architecture shared with Image Resizer and Image Compressor: bounded file intake, object-URL previews, decoded-dimension validation before canvas allocation, allowlisted output MIME types, quality range validation, and per-file result rendering/downloads.
 - Processing remains entirely client-side for the current tool set; no backend, external image-processing service, new dependency, MachineMind or LeaseGuard change was introduced.
 - Converter E2E coverage uses an explicit primary-action selector because the page intentionally contains a separate file-picker action before conversion. This keeps the exhaustive interaction test aligned with the actual tool contract without weakening the smoke-test requirement.
+
+
+## 2026-09-30 - Adaptive/lively UI architecture decision
+- PR #161 introduced a lightweight CSS-first adaptive interaction layer for the existing UtilityHub interface.
+- The layer adds subtle visual depth, responsive interaction surfaces, accessible homepage search status feedback, reduced-motion support and coarse-pointer safeguards while preserving the static HTML/CSS/browser-JavaScript architecture.
+- Homepage search now uses semantic `hidden` state plus a `role="status"` live region instead of presentation-only inline display mutation, improving feedback for assistive technology and keeping filtering behavior explicit.
+- No new tool, backend, database, framework, dependency, external processing service, MachineMind or LeaseGuard change was introduced.
+- Pre-merge Tests, Browser E2E, DevSecOps and Quality Gate passed on exact PR #161 head `c29d8d3498fedae4b5c162215a903aae44627800`. Post-merge GitHub Actions for merge commit `6ab18eed41f907225a8a02fd36237b6cbfe3dffb` are not exposed by the current connector, so they are not claimed here.
