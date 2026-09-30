@@ -1,3 +1,9 @@
+## 2026-09-30 - PR #165 Age Calculator birthday arithmetic follow-up
+- Bounded review after PR #163 merge found a second timezone-related defect: age arithmetic used local getters on a UTC-parsed date-only value.
+- Repaired the calculation to use the already validated UTC birth-year/month/day components for all age arithmetic.
+- Added regression coverage for a birthday boundary under an India-offset clock.
+- Fresh CI verification is required before delivery.
+
 ## 2026-09-30 - PR #164 CI runner timeout reliability fix
 - Diagnosed a fresh CI stall where the mobile-Chromium E2E matrix job remained in Playwright browser installation while the job had no timeout; the aggregate Quality Gate subsequently expired waiting for E2E completion.
 - Added a 20-minute job-level timeout to the existing Playwright E2E matrix in `.github/workflows/e2e.yml`.
