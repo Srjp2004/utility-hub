@@ -1,3 +1,10 @@
+## 2026-09-30 - Image Converter rebuild verification checkpoint
+- PR #160 rebuilds the existing Image Converter around the same browser-local image workflow used by the rebuilt Image Resizer and Image Compressor: multi-image selection, drag/drop, previews/dimensions, JPEG/PNG/WebP output, quality control for JPEG/WebP, per-file results/downloads, and the existing 25 MB / 16,384 px safeguards.
+- A fresh exact-head verification cycle initially exposed source defects and then an E2E harness defect. The E2E failure was diagnosed as the exhaustive smoke test selecting the first button on the page ("Choose images") instead of the primary "Convert images" action.
+- The bounded repair changed only `tests/e2e/core.spec.js` to target `[data-action="imageConvert"]` for `image-converter.html`. No production converter algorithm or security control was weakened.
+- Exact-head commit `7bed86a4c0c1ac09ea2f0750b939afb512901c90` now has fresh successful GitHub Actions evidence for UtilityHub Tests, UtilityHub Browser E2E, UtilityHub DevSecOps and UtilityHub Quality Gate (runs 36707684173, 36707684118, 36707684184 and 36707684115 respectively).
+- PR #160 remains open at this checkpoint. Physical-device/live-runtime QA remains a separate release gate; CI success alone does not establish full production readiness.
+- Next step: independently verify the PR diff/contracts, then merge only with the required human approval and continue with post-merge main-branch observation.
 ## 2026-09-29 - Image Resizer and Compressor rebuild
 - PR #159 rebuilds the existing Image Resizer and Image Compressor with drag-and-drop, batch selection, previews, responsive settings, local browser processing and per-file downloads.
 - Image Resizer supports dimensions/percentage scaling, aspect-ratio locking, output format selection and JPEG/WebP quality.
