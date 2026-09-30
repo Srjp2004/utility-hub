@@ -371,6 +371,18 @@ test("age calculator rejects a future date", () => {
   assert.equal(elements.result.textContent, "Date of birth cannot be in the future.");
 });
 
+test("age calculator treats a birth date later today as today, not future", () => {
+  const { context, elements } = loadTools({ dob: "2026-09-30", result: "" });
+  const RealDate = Date;
+  class MockDate extends RealDate {
+    constructor(...args) { super(...(args.length ? args : ["2026-09-30T20:18:00+05:30"])); }
+    static now() { return new RealDate("2026-09-30T20:18:00+05:30").getTime(); }
+  }
+  context.Date = MockDate;
+  context.calcAge();
+  assert.equal(elements.result.innerHTML, "<strong>0 years</strong>, 0 months and 0 days.");
+});
+
 test("tip calculator splits the total between people", () => {
   const { context, elements } = loadTools({ bill: "100", tipRate: "20", people: "4", result: "" });
   context.calcTip();
