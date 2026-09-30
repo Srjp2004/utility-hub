@@ -10,7 +10,7 @@ const toolPages = [
 test.describe("UtilityHub page health",()=>{
   test("homepage has no browser errors",async({page})=>{
     const errors=[]; page.on("pageerror",e=>errors.push(String(e))); page.on("console",m=>{if(m.type()==="error")errors.push(m.text())});
-    await page.goto("/index.html",{waitUntil:"networkidle"}); await expect(page.locator("h1")).toContainText("Useful tools"); expect(errors,errors.join("\n")).toEqual([]);
+    await page.goto("/index.html",{waitUntil:"networkidle"}); await expect(page.locator("h1")).toContainText("Useful tools"); await expect(page.locator(".search-status")).toContainText("Showing"); await page.locator("#search").fill("percentage"); await expect(page.locator(".search-status")).toHaveText(/[2-9][0-9]* tools found/); await expect(page.locator("#grid .card").filter({hasText:"Percentage Calculator"})).toBeVisible(); expect(errors,errors.join("\n")).toEqual([]);
   });
   test("directory search and category filters work",async({page})=>{
     await page.goto("/tools.html",{waitUntil:"networkidle"}); const search=page.locator("#toolSearch");
