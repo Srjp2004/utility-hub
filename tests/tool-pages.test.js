@@ -670,3 +670,6 @@ test("age calculator uses the birth date calendar day for birthday arithmetic", 
   context.calcAge();
   assert.equal(elements.result.innerHTML, "<strong>26 years</strong>, 0 months and 0 days.");
 });
+
+
+test("image resizer exposes crop modes", () => { const { context } = loadTools({ result: "" }); const mount = { innerHTML: "" }; context.document.getElementById = (id) => id === "tool" ? mount : null; context.renderTool("image-resizer", "tool"); assert.match(mount.innerHTML, /resizeCropMode/); assert.match(mount.innerHTML, /Center crop to output ratio/); assert.match(mount.innerHTML, /Square crop/); });

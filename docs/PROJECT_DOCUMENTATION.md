@@ -1,3 +1,9 @@
+## 2026-09-30 - Image Resizer crop architecture
+- The existing Image Resizer now supports an optional deterministic crop stage before resizing.
+- Center crop to output ratio removes excess image area symmetrically to match the requested output ratio; Square crop uses the largest centered square.
+- Crop calculations operate on decoded source dimensions and preserve the existing canvas/output safeguards.
+- The feature remains browser-local and dependency-free.
+
 ## 2026-09-30 - Age Calculator calendar-day consistency
 - Age Calculator date-only inputs are represented internally as UTC calendar components to avoid timezone drift.
 - Future-date validation and age arithmetic must use the same calendar-day representation; mixing UTC-parsed birth dates with local Date getters can shift the effective birth day in positive-offset timezones.
