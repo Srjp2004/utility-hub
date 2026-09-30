@@ -657,3 +657,16 @@ test("password generator clamps requested length to supported bounds", () => {
   const generated = elements.result.innerHTML.replace("<strong>", "").replace("</strong>", "").split("<br>")[0];
   assert.equal(generated.length, 128);
 });
+
+
+test("age calculator uses the birth date calendar day for birthday arithmetic", () => {
+  const { context, elements } = loadTools({ dob: "2000-09-30", result: "" });
+  const RealDate = Date;
+  class MockDate extends RealDate {
+    constructor(...args) { super(...(args.length ? args : ["2026-09-30T20:18:00+05:30"])); }
+    static now() { return new RealDate("2026-09-30T20:18:00+05:30").getTime(); }
+  }
+  context.Date = MockDate;
+  context.calcAge();
+  assert.equal(elements.result.innerHTML, "<strong>26 years</strong>, 0 months and 0 days.");
+});
