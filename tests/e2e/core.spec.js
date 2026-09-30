@@ -125,7 +125,9 @@ test.describe("UtilityHub exhaustive interaction smoke",()=>{
       page.on("pageerror",e=>errors.push(String(e)));
       page.on("console",m=>{if(m.type()==="error")errors.push(m.text())});
       await page.goto("/tools/"+pageName,{waitUntil:"networkidle"});
-      const button=page.locator("#tool button").first();
+      let button=page.locator("#tool button").first();
+      if(pageName==="image-compressor.html") button=page.locator('[data-action="imageCompress"]');
+      if(pageName==="image-resizer.html") button=page.locator('[data-action="imageResize"]');
       await expect(button).toBeVisible();
       const fileInput = page.locator('#tool input[type="file"]').first();
       if(await fileInput.count()){

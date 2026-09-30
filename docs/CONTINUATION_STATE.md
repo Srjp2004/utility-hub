@@ -1,3 +1,12 @@
+## 2026-09-29 - Image Resizer and Compressor rebuild
+- PR #159 rebuilds the existing Image Resizer and Image Compressor with drag-and-drop, batch selection, previews, responsive settings, local browser processing and per-file downloads.
+- Image Resizer supports dimensions/percentage scaling, aspect-ratio locking, output format selection and JPEG/WebP quality.
+- Image Compressor supports quality, output format and JPEG background controls plus before/after size reporting.
+- Existing browser-local safety bounds remain: 25 MB input files and 16,384 px maximum output/input dimension.
+- Early PR verification exposed a real E2E selector defect and stale resizer regression expectations; both were diagnosed and repaired without weakening the test coverage.
+- PR #159 exact-head verification completed on commit 488407fd2834e2523de4878b47dddd36bcf0641f: Tests, Browser E2E, DevSecOps and Quality Gate all passed. Vercel also reported the preview deployment completed. Physical-device QA remains a separate release gate. Physical-device QA remains a separate release gate.
+- No backend, external image-processing service, new dependency, MachineMind or LeaseGuard changes were introduced.
+
 ## 2026-09-25 - PR #140 E2E diagnosis
 - Fresh unit tests passed on PR #140 head d7676aaf5bc019ae38231816a657d0dcb3a2b446.
 - Browser E2E failed in the exhaustive published-tool smoke flow because one tool's #result remained empty; page-load health checks passed across the published tool pages.
