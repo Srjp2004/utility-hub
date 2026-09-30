@@ -1,10 +1,18 @@
+## 2026-09-30 - Post-merge documentation synchronization
+- Current `main` commit is `6ab18eed41f907225a8a02fd36237b6cbfe3dffb`, the merge commit for PR #161 (adaptive/lively UI).
+- PR #160 (Image Converter rebuild) is also merged into `main` at `834167c4c670c8daf741eb94cc7e3d19f9a4b650`. Earlier PR #160-open wording below is historical and superseded by this checkpoint.
+- PR #161 adds a CSS-first adaptive interaction layer, accessible homepage search feedback, responsive/coarse-pointer safeguards and reduced-motion handling without adding a tool, backend, dependency, MachineMind change or LeaseGuard change.
+- Pre-merge exact-head verification for PR #161 passed UtilityHub Tests, Browser E2E, DevSecOps and Quality Gate on `c29d8d3498fedae4b5c162215a903aae44627800`; Vercel reported the preview deployment Ready.
+- The GitHub connector currently exposes no post-merge GitHub Actions workflow runs for merge commit `6ab18eed41f907225a8a02fd36237b6cbfe3dffb`. Post-merge GitHub Actions are therefore not claimed as verified. The merge commit currently has a successful Vercel status.
+- Next engineering focus: resume the bounded functional audit of existing published tools, prioritizing concrete defects and missing regression coverage. Real-device/live-runtime QA remains a separate release gate.
+
 ## 2026-09-30 - Image Converter rebuild verification checkpoint
 - PR #160 rebuilds the existing Image Converter around the same browser-local image workflow used by the rebuilt Image Resizer and Image Compressor: multi-image selection, drag/drop, previews/dimensions, JPEG/PNG/WebP output, quality control for JPEG/WebP, per-file results/downloads, and the existing 25 MB / 16,384 px safeguards.
 - A fresh exact-head verification cycle initially exposed source defects and then an E2E harness defect. The E2E failure was diagnosed as the exhaustive smoke test selecting the first button on the page ("Choose images") instead of the primary "Convert images" action.
 - The bounded repair changed only `tests/e2e/core.spec.js` to target `[data-action="imageConvert"]` for `image-converter.html`. No production converter algorithm or security control was weakened.
 - Exact-head commit `7bed86a4c0c1ac09ea2f0750b939afb512901c90` now has fresh successful GitHub Actions evidence for UtilityHub Tests, UtilityHub Browser E2E, UtilityHub DevSecOps and UtilityHub Quality Gate (runs 36707684173, 36707684118, 36707684184 and 36707684115 respectively).
-- PR #160 remains open at this checkpoint. Physical-device/live-runtime QA remains a separate release gate; CI success alone does not establish full production readiness.
-- Next step: independently verify the PR diff/contracts, then merge only with the required human approval and continue with post-merge main-branch observation.
+- PR #160 was subsequently merged into main at `834167c4c670c8daf741eb94cc7e3d19f9a4b650`; this earlier checkpoint is retained as historical context. Physical-device/live-runtime QA remains a separate release gate; CI success alone does not establish full production readiness.
+- This was an earlier pre-merge checkpoint. Post-merge state is recorded at the top of this document.
 ## 2026-09-29 - Image Resizer and Compressor rebuild
 - PR #159 rebuilds the existing Image Resizer and Image Compressor with drag-and-drop, batch selection, previews, responsive settings, local browser processing and per-file downloads.
 - Image Resizer supports dimensions/percentage scaling, aspect-ratio locking, output format selection and JPEG/WebP quality.
