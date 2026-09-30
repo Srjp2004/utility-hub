@@ -4,7 +4,7 @@
 - Image Compressor supports quality, output format and JPEG background controls plus before/after size reporting.
 - Existing browser-local safety bounds remain: 25 MB input files and 16,384 px maximum output/input dimension.
 - Early PR verification exposed a real E2E selector defect and stale resizer regression expectations; both were diagnosed and repaired without weakening the test coverage.
-- PR #159 remains unmerged pending fresh exact-head Tests, Browser E2E, DevSecOps and Quality Gate evidence. Physical-device QA remains a separate release gate.
+- PR #159 exact-head verification completed on commit 488407fd2834e2523de4878b47dddd36bcf0641f: Tests, Browser E2E, DevSecOps and Quality Gate all passed. Vercel also reported the preview deployment completed. Physical-device QA remains a separate release gate. Physical-device QA remains a separate release gate.
 - No backend, external image-processing service, new dependency, MachineMind or LeaseGuard changes were introduced.
 
 ## 2026-09-25 - PR #140 E2E diagnosis
