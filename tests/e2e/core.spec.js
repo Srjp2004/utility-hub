@@ -128,6 +128,7 @@ test.describe("UtilityHub exhaustive interaction smoke",()=>{
       let button=page.locator("#tool button").first();
       if(pageName==="image-compressor.html") button=page.locator('[data-action="imageCompress"]');
       if(pageName==="image-resizer.html") button=page.locator('[data-action="imageResize"]');
+      if(pageName==="image-converter.html") button=page.locator('[data-action="imageConvert"]');
       await expect(button).toBeVisible();
       const fileInput = page.locator('#tool input[type="file"]').first();
       if(await fileInput.count()){
