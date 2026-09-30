@@ -228,3 +228,9 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - The public pages now provide clearer browser-local processing disclosures, acceptable-use/limitations language and separate support/help email channels without adding a backend, dependency or calculator algorithm changes.
 - Stale documentation PRs #150 and #151 were closed rather than merged because their snapshots were based on an older main state.
 - Release readiness still requires fresh post-merge CI evidence and real-device/live-runtime verification; these are not inferred from the successful PR-head gates.
+
+
+## 2026-09-30 - Image Converter architecture decision
+- The existing Image Converter now follows the established browser-local image-tool architecture shared with Image Resizer and Image Compressor: bounded file intake, object-URL previews, decoded-dimension validation before canvas allocation, allowlisted output MIME types, quality range validation, and per-file result rendering/downloads.
+- Processing remains entirely client-side for the current tool set; no backend, external image-processing service, new dependency, MachineMind or LeaseGuard change was introduced.
+- Converter E2E coverage uses an explicit primary-action selector because the page intentionally contains a separate file-picker action before conversion. This keeps the exhaustive interaction test aligned with the actual tool contract without weakening the smoke-test requirement.
