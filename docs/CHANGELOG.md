@@ -1,3 +1,10 @@
+## 2026-09-30 - PR #161 merged: adaptive/lively UI
+- Merged PR #161, `feat: make UtilityHub more lively and adaptive`, into `main` at `6ab18eed41f907225a8a02fd36237b6cbfe3dffb`.
+- Added CSS-first visual depth, adaptive surfaces, hover/focus feedback, accessible homepage search status, responsive breakpoints, reduced-motion handling and coarse-pointer safeguards.
+- Added homepage search E2E coverage. The final PR head `c29d8d3498fedae4b5c162215a903aae44627800` passed UtilityHub Tests, Browser E2E, DevSecOps and Quality Gate; Vercel reported the preview deployment Ready.
+- The current GitHub connector exposes no post-merge Actions runs for merge commit `6ab18eed41f907225a8a02fd36237b6cbfe3dffb`; no post-merge GitHub Actions success is claimed. Vercel currently reports a successful status for the merge commit.
+- No new tool, backend, dependency, MachineMind or LeaseGuard change was introduced.
+
 ## 2026-09-30 - Image Converter rebuild
 - Rebuilt the existing Image Converter around the browser-local image-tool workflow used by the Image Resizer and Image Compressor.
 - Added multi-image selection and drag/drop, previews/dimensions, JPEG/PNG/WebP output, JPEG/WebP quality control, per-file results/downloads, and preserved 25 MB input and 16,384 px dimension safeguards.
