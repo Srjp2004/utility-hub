@@ -277,3 +277,7 @@ The current engineering gates are being repaired from fresh failure evidence rat
 
 ### UI contrast repair — 2026-10-01
 Shared styling now explicitly protects readable foreground/background contrast for primary CTAs, tool-panel buttons, image downloads, result emphasis, and dark command/search inputs. An E2E guard was added so visible shared controls cannot regress to transparent/unreadable surfaces.
+
+
+### Shared tool UI contract — 2026-10-01
+The shared tool workspace now has one presentation contract: light white panel, UtilityHub ink text, readable form controls and consistent primary/secondary actions. Specialized tools can have internal cards, but must not replace the shared workspace with an unrelated page-level theme. Browser coverage protects this contract across representative tools.
