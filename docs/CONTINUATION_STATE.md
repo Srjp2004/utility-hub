@@ -598,3 +598,6 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Current open PR count is now limited to none from the superseded documentation/legal waves.
 - Post-merge workflow runs for `3d24fd1` are not exposed by the available GitHub connector yet; therefore no post-merge CI success is claimed until fresh exact-HEAD evidence is available.
 - Remaining launch evidence is physical-device/browser QA and independent live-runtime verification. Revenue remains an objective, not a guaranteed outcome.
+
+## Active UI verification repair
+- Branch `fix/ui-contrast-visibility-20261001` addresses shared control foreground/background contrast after the October 1 UI redesign. It adds explicit readable foreground colors for primary/secondary controls, download links, result emphasis, and dark command/search inputs, plus an E2E guard against transparent control surfaces.
