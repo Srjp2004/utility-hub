@@ -1,3 +1,10 @@
+## 2026-10-01 - Current delivery checkpoint
+- Current `main` is `bee3200661b533205378ad948e13d0d698300b2f`, the merge commit for PR #166.
+- PR #165 is merged at `8e722401d11db5e725c2d50ad6fccf949be47ea9`; its exact head passed Tests, Browser E2E, DevSecOps and Quality Gate before delivery.
+- PR #166 exact head `a06a177a3ebfaf4885c1d6049229b433728a28a3` passed Tests, Browser E2E, DevSecOps and Quality Gate before delivery; Vercel reported the preview Ready.
+- No post-merge GitHub Actions workflow runs are exposed for the current merge commit, so they are not treated as production evidence. Vercel currently reports a successful status for the merge commit.
+- The next engineering focus remains concrete functional defects/missing regression coverage, followed by live browser/device verification.
+
 ## 2026-09-30 - Image Resizer crop architecture
 - The existing Image Resizer now supports an optional deterministic crop stage before resizing.
 - Center crop to output ratio removes excess image area symmetrically to match the requested output ratio; Square crop uses the largest centered square.
