@@ -274,3 +274,6 @@ The current engineering gates are being repaired from fresh failure evidence rat
 - Homepage search now uses semantic `hidden` state plus a `role="status"` live region instead of presentation-only inline display mutation, improving feedback for assistive technology and keeping filtering behavior explicit.
 - No new tool, backend, database, framework, dependency, external processing service, MachineMind or LeaseGuard change was introduced.
 - Pre-merge Tests, Browser E2E, DevSecOps and Quality Gate passed on exact PR #161 head `c29d8d3498fedae4b5c162215a903aae44627800`. Post-merge GitHub Actions for merge commit `6ab18eed41f907225a8a02fd36237b6cbfe3dffb` are not exposed by the current connector, so they are not claimed here.
+
+### UI contrast repair — 2026-10-01
+Shared styling now explicitly protects readable foreground/background contrast for primary CTAs, tool-panel buttons, image downloads, result emphasis, and dark command/search inputs. An E2E guard was added so visible shared controls cannot regress to transparent/unreadable surfaces.
