@@ -612,6 +612,6 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 ## 2026-10-01 - Image picker accessibility repair
 - Identified a concrete accessibility defect during the functional QA pass: image drop zones were exposed as `role="button"` with `tabindex="0"` while containing a nested native button, but the drop zone itself had no keyboard activation.
 - Bounded repair branch `fix/image-dropzone-keyboard-20261001` removes the nested picker button semantics, keeps the visible picker affordance, and adds Enter/Space activation for the drop zone.
-- Regression coverage verifies keyboard activation through the browser file chooser and asserts no nested button remains.
+- Regression coverage verifies Enter/Space activation reaches the associated file-input picker call across the supported Playwright browser matrix and asserts no nested button remains.
 - No image-processing logic, security controls, backend, dependency, MachineMind or LeaseGuard changes.
 - Next: fresh branch CI verification, then continue the remaining runtime/device QA.
