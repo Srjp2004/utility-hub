@@ -1,9 +1,9 @@
 ## 2026-10-01 - Post-merge state synchronization
-- Current `main` is `bee3200661b533205378ad948e13d0d698300b2f`, the verified GitHub merge commit for PR #166 (Image Resizer optional cropping).
+- PR #167 documentation synchronization is merged at `866c5e3227b1474b13cf7921210707c32d1a2e4d`. The current main SHA is intentionally not hard-coded here because this document is itself part of the main branch; use GitHub branch state as the authoritative current SHA.
 - PR #165 (Age Calculator calendar arithmetic) is merged at `8e722401d11db5e725c2d50ad6fccf949be47ea9`; its exact head `2328a24ea7474c1cb233b75a595e578873cb39db` passed Tests 36751097619, Browser E2E 36751097517, DevSecOps 36751097464 and Quality Gate 36751097330.
 - PR #166 exact head `a06a177a3ebfaf4885c1d6049229b433728a28a3` passed Tests 36755800686, Browser E2E 36755800943, DevSecOps 36755800709 and Quality Gate 36755800920; Vercel reported the preview Ready.
 - The GitHub connector exposes no post-merge Actions workflow runs for `bee3200661b533205378ad948e13d0d698300b2f`; post-merge GitHub Actions success is therefore not claimed. Vercel reports a successful status for the merge commit.
-- Next: continue the bounded functional audit of existing tools, then complete live browser/device verification. No new tool is planned in this quality wave.
+- Next: continue the bounded functional audit of existing tools, then complete live browser/device verification. No new tool is planned in this quality wave. Post-merge Actions for #167 are not yet exposed and Vercel was still pending at the last check.
 
 ## 2026-09-30 - Image Resizer crop integration
 - Bounded audit determined cropping is a useful existing-tool capability, so it was integrated into Image Resizer rather than creating a separate tool.
