@@ -169,15 +169,15 @@ test("image drop zones are keyboard-operable without nested interactive controls
   await expect(zone.locator("button")).toHaveCount(0);
   await page.evaluate(() => {
     const input = document.querySelector("#resizeFile");
-    window.__utilityHubResizePickerClicks = 0;
-    input.addEventListener("click", () => {
-      window.__utilityHubResizePickerClicks += 1;
-    });
+    window.__utilityHubResizePickerCalls = 0;
+    input.click = () => {
+      window.__utilityHubResizePickerCalls += 1;
+    };
   });
   await zone.press("Enter");
-  await expect.poll(async () => page.evaluate(() => window.__utilityHubResizePickerClicks)).toBe(1);
+  await expect.poll(async () => page.evaluate(() => window.__utilityHubResizePickerCalls)).toBe(1);
   await zone.press(" ");
-  await expect.poll(async () => page.evaluate(() => window.__utilityHubResizePickerClicks)).toBe(2);
+  await expect.poll(async () => page.evaluate(() => window.__utilityHubResizePickerCalls)).toBe(2);
 });
 
 test("shared controls keep readable foreground/background contrast", async ({ page }) => {
