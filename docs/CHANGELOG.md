@@ -1,5 +1,8 @@
 ## 2026-10-01 - Image Resizer crop aspect-ratio repair
-- Fixed a concrete crop UX/processing defect where Keep aspect ratio could stretch square/custom crops because output height used the original image ratio.\n- Reused a shared output-dimension calculation for preview and processing; added regression coverage for square/custom locked dimensions.\n\n## 2026-10-01 - Image Resizer custom crop
+- Fixed a concrete crop UX/processing defect where Keep aspect ratio could stretch square/custom crops because output height used the original image ratio.
+- Reused a shared output-dimension calculation for preview and processing; added regression coverage for square/custom locked dimensions.
+
+## 2026-10-01 - Image Resizer custom crop
 - Added a custom crop rectangle mode to the existing Image Resizer with X, Y, width and height source-pixel controls.
 - Added UI regression coverage for the custom crop controls while preserving the existing deterministic crop modes and local-processing safeguards.
 - Verification of the branch is required before delivery; no production-readiness claim is made from source changes alone.
