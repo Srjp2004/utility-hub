@@ -1,3 +1,8 @@
+## 2026-10-01 - Image drop-zone lifecycle hardening
+- Fixed an identified lifecycle defect in the existing Image Resizer, Compressor and Converter: drag/drop listeners are delegated at document level so dynamically rerendered drop zones retain drag/drop behavior.
+- No new tool, dependency, backend, security-policy, MachineMind or LeaseGuard change.
+- PR #176 requires fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence before delivery.
+
 ## 2026-10-01 - Interface system decision
 - UtilityHub now uses an editorial utility-studio visual language: dark/charcoal anchors, a restrained lime action accent, large task-oriented typography, compact metadata, asymmetrical card hierarchy and focused workspace surfaces.
 - The redesign remains CSS/HTML/JavaScript based and does not introduce a framework, backend, AI provider, database or expensive service.
