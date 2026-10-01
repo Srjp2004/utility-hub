@@ -563,3 +563,8 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-10-01
 - Fixed shared UI contrast regressions that could make CTA, download, result, and dark-input text difficult to read after the interface redesign.
 - Added browser regression coverage for shared control foreground/background visibility.
+
+
+## 2026-10-01
+- Standardized the shared tool workspace appearance after identifying inconsistent legacy/redesign styling that could make QuotePulse and other tools look like separate products.
+- Added representative browser regression coverage for cross-tool workspace surface consistency.
