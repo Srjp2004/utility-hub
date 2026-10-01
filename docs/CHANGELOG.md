@@ -1,3 +1,10 @@
+## 2026-10-01 - Post-merge state synchronization
+- Synchronized durable documentation with the actual merged state after PR #165 and PR #166.
+- Current `main` is `bee3200661b533205378ad948e13d0d698300b2f`.
+- PR #165 exact head `2328a24ea7474c1cb233b75a595e578873cb39db` passed Tests 36751097619, Browser E2E 36751097517, DevSecOps 36751097464 and Quality Gate 36751097330 before merge.
+- PR #166 exact head `a06a177a3ebfaf4885c1d6049229b433728a28a3` passed Tests 36755800686, Browser E2E 36755800943, DevSecOps 36755800709 and Quality Gate 36755800920 before merge; Vercel reported the preview Ready.
+- The connector exposes no post-merge GitHub Actions workflow runs for the current merge commit; no post-merge CI success is claimed. Vercel reports a successful status for the merge commit.
+
 ## 2026-09-30 - Image Resizer crop integration
 - Added optional center-to-output-ratio and square cropping to the existing Image Resizer.
 - Cropping occurs before resizing and output encoding, preserving the existing local-processing workflow and safeguards.
@@ -14,7 +21,7 @@
 - Added a 20-minute job-level timeout to the existing Playwright E2E matrix in `.github/workflows/e2e.yml`.
 - No product runtime code, tests, dependencies, backend, MachineMind or LeaseGuard changes were made.
 - Exact head `00ab4b1f759ce1ba1c5918bc76942b0e22708b3a` passed Tests `36744351913`, Browser E2E `36744351950`, DevSecOps `36744351912` and Quality Gate `36744351922`. All five E2E matrix jobs completed successfully.
-- PR #164 remains pending protected delivery approval.
+- PR #164 is merged; the timeout safeguard is part of the current mainline CI configuration.
 
 ## 2026-09-30 - PR #161 merged: adaptive/lively UI
 - Merged PR #161, `feat: make UtilityHub more lively and adaptive`, into `main` at `6ab18eed41f907225a8a02fd36237b6cbfe3dffb`.
@@ -29,7 +36,7 @@
 - Added focused regression coverage for the converter state/renderer/action pipeline.
 - Fresh exact-head verification on `7bed86a4c0c1ac09ea2f0750b939afb512901c90` passed UtilityHub Tests, Browser E2E, DevSecOps and Quality Gate (runs 36707684173, 36707684118, 36707684184 and 36707684115).
 - The E2E harness required a bounded selector repair so the exhaustive smoke test invokes the converter action rather than the first "Choose images" button. No production algorithm or security control was weakened.
-- PR #160 remains open pending the required merge approval and post-merge verification. Real-device/live-runtime certification remains separate.
+- PR #160 is merged into main at `834167c4c670c8daf741eb94cc7e3d19f9a4b650`. Real-device/live-runtime certification remains separate.
 ## 2026-09-29 - Image Resizer and Compressor rebuild
 - Rebuilt the existing Image Resizer and Image Compressor interfaces around local browser processing, drag-and-drop selection, multi-image queues, previews, responsive controls and per-file downloads.
 - Image Resizer now supports exact dimensions or percentage scaling, optional aspect-ratio locking, output format selection and JPEG/WebP quality control.
