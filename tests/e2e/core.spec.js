@@ -172,3 +172,24 @@ test("shared controls keep readable foreground/background contrast", async ({ pa
     expect(item.background).not.toBe("rgba(0, 0, 0, 0)");
   }
 });
+
+
+test("tool pages use the shared light workspace surface", async ({ page }) => {
+  const pages = [
+    "/tools/quote-pulse.html",
+    "/tools/bmi-calculator.html",
+    "/tools/image-resizer.html",
+    "/tools/percentage-calculator.html",
+  ];
+  const surfaces = [];
+  for (const path of pages) {
+    await page.goto(path);
+    surfaces.push(await page.locator("#tool.tool-panel").evaluate(el => {
+      const s = getComputedStyle(el);
+      return { background: s.backgroundColor, color: s.color };
+    }));
+  }
+  expect(new Set(surfaces.map(s => s.background)).size).toBe(1);
+  expect(surfaces.every(s => s.background === "rgb(255, 255, 255)")).toBeTruthy();
+  expect(surfaces.every(s => s.color !== "rgb(0, 0, 0)")).toBeTruthy();
+});
