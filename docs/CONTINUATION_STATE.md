@@ -1,3 +1,8 @@
+## 2026-10-01 - Image Resizer custom crop
+- Extended the existing Image Resizer crop capability with an optional custom crop rectangle using source-image pixel coordinates (X, Y, width, height).
+- The custom rectangle is validated against the decoded source dimensions and applied before resizing; existing center, square, local-processing, batch, 25 MB and 16,384 px safeguards remain unchanged.
+- Added regression coverage for the custom crop controls. No new tool, dependency, backend, MachineMind or LeaseGuard change.
+
 ## 2026-10-01 - Post-merge state synchronization
 - PR #167 documentation synchronization is merged at `866c5e3227b1474b13cf7921210707c32d1a2e4d`. The current main SHA is intentionally not hard-coded here because this document is itself part of the main branch; use GitHub branch state as the authoritative current SHA.
 - PR #165 (Age Calculator calendar arithmetic) is merged at `8e722401d11db5e725c2d50ad6fccf949be47ea9`; its exact head `2328a24ea7474c1cb233b75a595e578873cb39db` passed Tests 36751097619, Browser E2E 36751097517, DevSecOps 36751097464 and Quality Gate 36751097330.

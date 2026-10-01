@@ -1,3 +1,8 @@
+## 2026-10-01 - Image Resizer custom crop architecture
+- The existing Image Resizer now offers four crop modes: none, center-to-output-ratio, square, and custom rectangle.
+- Custom cropping is source-pixel based and bounded to the selected image before the resize canvas is rendered; invalid or out-of-bounds rectangles are rejected.
+- The feature remains browser-local and dependency-free, preserving existing file-size, dimension and batch safeguards.
+
 ## 2026-10-01 - Current delivery checkpoint
 - PR #167 documentation synchronization is merged at `866c5e3227b1474b13cf7921210707c32d1a2e4d`. The GitHub `main` branch remains the authoritative source for the current SHA.
 - PR #165 is merged at `8e722401d11db5e725c2d50ad6fccf949be47ea9`; its exact head passed Tests, Browser E2E, DevSecOps and Quality Gate before delivery.
