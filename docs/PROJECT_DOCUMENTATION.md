@@ -1,4 +1,4 @@
-## 2026-10-01 - Image Resizer custom crop architecture
+## 2026-10-01 - Image Resizer crop sizing consistency\n- Image Resizer output sizing now derives locked dimensions and percentage scaling from the effective crop rectangle when square or custom cropping is selected.\n- The preview and processing paths share the same output-dimension calculation, preventing crop-induced stretching.\n\n## 2026-10-01 - Image Resizer custom crop architecture
 - The existing Image Resizer now offers four crop modes: none, center-to-output-ratio, square, and custom rectangle.
 - Custom cropping is source-pixel based and bounded to the selected image before the resize canvas is rendered; invalid or out-of-bounds rectangles are rejected.
 - The feature remains browser-local and dependency-free, preserving existing file-size, dimension and batch safeguards.
