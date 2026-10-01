@@ -159,3 +159,16 @@ test.describe("UtilityHub exhaustive interaction smoke",()=>{
     expect(failures,failures.join("\n")).toEqual([]);
   });
 });
+
+
+test("shared controls keep readable foreground/background contrast", async ({ page }) => {
+  await page.goto("/");
+  const checks = await page.locator("button, .button, .cta, input, select, textarea, a").evaluateAll(elements => elements.map(el => {
+    const s = getComputedStyle(el);
+    return { tag: el.tagName, text: (el.textContent || el.value || "").trim(), color: s.color, background: s.backgroundColor };
+  }).filter(x => x.text && x.background !== "rgba(0, 0, 0, 0)"));
+  for (const item of checks) {
+    expect(item.color).not.toBe("rgba(0, 0, 0, 0)");
+    expect(item.background).not.toBe("rgba(0, 0, 0, 0)");
+  }
+});
