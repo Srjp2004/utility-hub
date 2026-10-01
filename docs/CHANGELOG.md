@@ -568,3 +568,7 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-10-01
 - Standardized the shared tool workspace appearance after identifying inconsistent legacy/redesign styling that could make QuotePulse and other tools look like separate products.
 - Added representative browser regression coverage for cross-tool workspace surface consistency.
+
+## 2026-10-01
+- Fixed image-tool drop zones so the existing picker affordance is keyboard-operable with Enter/Space without placing a nested button inside a button-role drop zone.
+- Added E2E regression coverage for keyboard activation and nested-control prevention.
