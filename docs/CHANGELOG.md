@@ -1,3 +1,8 @@
+## 2026-10-01 - UtilityHub UI/UX redesign
+- Completely refreshed the public homepage, searchable toolbox and shared tool-page presentation to reduce the generic template/card-grid feel and improve visual hierarchy, interaction, responsiveness and task discovery.
+- Added command-style homepage search, live search feedback, keyboard `/` focus in the directory, featured tool hierarchy and a more distinctive editorial visual system.
+- Kept the existing 28-tool inventory and browser-first architecture; no new tool or external service was introduced.
+- Updated E2E expectations for the intentional markup changes. Fresh CI verification is required before merge.
 ## 2026-10-01 - Image Resizer crop aspect-ratio repair
 - Fixed a concrete crop UX/processing defect where Keep aspect ratio could stretch square/custom crops because output height used the original image ratio.
 - Reused a shared output-dimension calculation for preview and processing; added regression coverage for square/custom locked dimensions.
