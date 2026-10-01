@@ -91,3 +91,16 @@ footer{padding:55px max(5vw,24px);border-top:1px solid var(--line);display:grid;
 /* Directory-specific layout */
 .directory-intro{width:min(1240px,90%);margin:0 auto;border:0!important;background:transparent!important;padding:34px 0 0!important;box-shadow:none!important}.directory-intro h2{font-size:12px!important;letter-spacing:.12em;text-transform:uppercase;margin:0 0 5px!important;color:#737b74}.directory-intro p{font-size:12px!important;margin:0!important;max-width:700px}.directory-hero{width:min(1240px,90%)!important;min-height:auto!important;padding:55px 0 48px!important;margin:auto!important}.directory-hero:before{display:none}.directory-hero h1{font-size:clamp(48px,7vw,82px)!important;line-height:.94!important;letter-spacing:-.075em!important}.directory-hero h1 em{font-style:normal;color:#707870}.directory-hero>p:not(.eyebrow){font-size:18px!important;max-width:650px}.tool-search{margin-top:28px!important;max-width:760px;background:var(--dark);border-radius:16px;padding:13px 15px;display:grid;grid-template-columns:auto 1fr;gap:4px 11px;box-shadow:0 14px 34px rgba(21,24,23,.12)}.tool-search label{grid-column:1/-1;color:#aab0aa!important;font-size:10px!important;text-transform:uppercase;letter-spacing:.12em;font-weight:900!important}.tool-search input{width:100%!important;border:0!important;outline:0!important;background:transparent!important;color:#fff!important;padding:5px 0!important}.tool-search input::placeholder{color:#777e77}.directory-tools{padding-top:35px}.directory-tools .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.directory-tools .card{min-height:225px}.directory-tools .card b{background:var(--soft);color:var(--ink)}.directory-tools .card:hover{transform:translateY(-4px)}.directory-tools .content-section{width:100%;padding:75px 0 20px}.directory-tools .category-links{display:flex;gap:9px;flex-wrap:wrap}.directory-tools .category-links a{display:inline-flex;padding:10px 13px;border:1px solid var(--line);border-radius:9px;color:var(--ink);text-decoration:none;font-size:12px;font-weight:800;background:#fff}.directory-tools .category-links a:hover{background:var(--accent)}
 @media(max-width:900px){.directory-tools .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.directory-intro,.directory-hero{width:92%!important}.directory-hero{padding:40px 0 35px!important}.directory-hero h1{font-size:clamp(43px,14vw,68px)!important}.directory-tools .grid{grid-template-columns:1fr}.tool-search{border-radius:13px}}
+
+/* Accessibility and contrast guardrails: keep text legible across shared and specialized controls. */
+.cta{color:var(--dark)!important}
+button{color:var(--dark)}
+.tool-panel button{color:#fff!important}
+.image-download{color:var(--dark)!important}
+.result strong{color:#4d5f16}
+.command-input input{color:#fff}
+.command-input input::placeholder{color:#aeb5ad}
+.tool-search input{color:#fff!important}
+.tool-search input::placeholder{color:#aeb5ad}
+.directory-tools .category-links a:hover{color:var(--dark)}
+.button-dark{color:var(--dark)!important}
