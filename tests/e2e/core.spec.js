@@ -168,10 +168,14 @@ test("image drop zones are keyboard-operable without nested interactive controls
   await expect(zone).toHaveAttribute("tabindex", "0");
   await expect(zone.locator("button")).toHaveCount(0);
   await page.evaluate(() => {
-    const input = document.querySelector("#resizeFile");
     window.__utilityHubResizePickerCalls = 0;
-    input.click = () => {
-      window.__utilityHubResizePickerCalls += 1;
+    const originalClick = HTMLElement.prototype.click;
+    HTMLElement.prototype.click = function () {
+      if (this.id === "resizeFile") {
+        window.__utilityHubResizePickerCalls += 1;
+        return;
+      }
+      return originalClick.call(this);
     };
   });
   await zone.press("Enter");
