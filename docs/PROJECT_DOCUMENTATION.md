@@ -281,3 +281,6 @@ Shared styling now explicitly protects readable foreground/background contrast f
 
 ### Shared tool UI contract — 2026-10-01
 The shared tool workspace now has one presentation contract: light white panel, UtilityHub ink text, readable form controls and consistent primary/secondary actions. Specialized tools can have internal cards, but must not replace the shared workspace with an unrelated page-level theme. Browser coverage protects this contract across representative tools.
+
+### Image picker accessibility repair - 2026-10-01
+The image Resizer, Compressor and Converter drop zones retain a visible file-picker affordance while exposing one coherent keyboard-operable button-role surface. Enter and Space activate the associated hidden file input, avoiding nested interactive controls. E2E coverage guards this interaction contract.
