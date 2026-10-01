@@ -161,6 +161,29 @@ test.describe("UtilityHub exhaustive interaction smoke",()=>{
 });
 
 
+test("image drop zones are keyboard-operable without nested interactive controls", async ({ page }) => {
+  await page.goto("/tools/image-resizer.html");
+  const zone = page.locator("#resizeDropzone");
+  await expect(zone).toHaveAttribute("role", "button");
+  await expect(zone).toHaveAttribute("tabindex", "0");
+  await expect(zone.locator("button")).toHaveCount(0);
+  await page.evaluate(() => {
+    window.__utilityHubResizePickerCalls = 0;
+    const originalClick = HTMLElement.prototype.click;
+    HTMLElement.prototype.click = function () {
+      if (this.id === "resizeFile") {
+        window.__utilityHubResizePickerCalls += 1;
+        return;
+      }
+      return originalClick.call(this);
+    };
+  });
+  await zone.press("Enter");
+  await expect.poll(async () => page.evaluate(() => window.__utilityHubResizePickerCalls)).toBe(1);
+  await zone.press(" ");
+  await expect.poll(async () => page.evaluate(() => window.__utilityHubResizePickerCalls)).toBe(2);
+});
+
 test("shared controls keep readable foreground/background contrast", async ({ page }) => {
   await page.goto("/");
   const checks = await page.locator("button, .button, .cta, input, select, textarea, a").evaluateAll(elements => elements.map(el => {

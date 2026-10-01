@@ -608,3 +608,24 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Standardized the shared `#tool.tool-panel` shell to a light white workspace with the UtilityHub design-system borders/text, while retaining intentional internal component surfaces and the dark homepage command panel.
 - Added browser regression coverage comparing representative QuotePulse, BMI, Image Resizer and Percentage Calculator workspace surfaces.
 - This repair changes presentation only; calculator/image logic and security policy are untouched. Real-device visual QA remains required.
+
+## 2026-10-01 - Image picker accessibility repair
+- Identified a concrete accessibility defect during the functional QA pass: image drop zones were exposed as `role="button"` with `tabindex="0"` while containing a nested native button, but the drop zone itself had no keyboard activation.
+- Bounded repair branch `fix/image-dropzone-keyboard-20261001` removes the nested picker button semantics, keeps the visible picker affordance, and adds Enter/Space activation for the drop zone.
+- Regression coverage verifies Enter/Space activation reaches the associated file-input picker call across the supported Playwright browser matrix and asserts no nested button remains.
+- No image-processing logic, security controls, backend, dependency, MachineMind or LeaseGuard changes.
+- Next: fresh branch CI verification, then continue the remaining runtime/device QA.
+
+
+### 2026-10-01 - PR #175 browser regression diagnosis
+- Fresh DevSecOps evidence on head 4ee61d2 showed 39/40 Chromium security-browser tests passing; the image-dropzone keyboard regression remained the sole failure.
+- The failure was isolated to the test interception point: overriding the individual file input's click method did not observe the delegated activation in the GitHub browser runner.
+- Bounded repair: intercept HTMLElement.prototype.click only for the target hidden input in the E2E test. Production keyboard/dropzone code remains unchanged.
+- Dependency audit, CodeQL, and source security invariants remained green; Browser E2E and Quality Gate are awaiting fresh evidence after this test-only repair.
+
+
+### 2026-10-01 - PR #175 root-cause repair
+- Fresh Browser E2E evidence showed the keyboard regression failed consistently on mobile Chromium and other browser jobs, with the test observing zero picker calls.
+- Source inspection identified the production keyboard listener was attached directly to drop-zone elements during the page lifecycle. The E2E evidence indicates the rendered tool content can be replaced after the listener setup, leaving the newly inserted drop zone without the direct listener.
+- Bounded production repair: move keyboard handling to delegated document-level handling, matching the existing delegated click/change architecture. Enter/Space now resolve the current image drop zone at event time, including dynamically rendered tool content.
+- No image-processing algorithms, security controls, dependencies, or unrelated tools were changed.
