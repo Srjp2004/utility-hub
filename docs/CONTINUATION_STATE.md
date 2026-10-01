@@ -615,3 +615,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Regression coverage verifies Enter/Space activation reaches the associated file-input picker call across the supported Playwright browser matrix and asserts no nested button remains.
 - No image-processing logic, security controls, backend, dependency, MachineMind or LeaseGuard changes.
 - Next: fresh branch CI verification, then continue the remaining runtime/device QA.
+
+
+### 2026-10-01 - PR #175 browser regression diagnosis
+- Fresh DevSecOps evidence on head 4ee61d2 showed 39/40 Chromium security-browser tests passing; the image-dropzone keyboard regression remained the sole failure.
+- The failure was isolated to the test interception point: overriding the individual file input's click method did not observe the delegated activation in the GitHub browser runner.
+- Bounded repair: intercept HTMLElement.prototype.click only for the target hidden input in the E2E test. Production keyboard/dropzone code remains unchanged.
+- Dependency audit, CodeQL, and source security invariants remained green; Browser E2E and Quality Gate are awaiting fresh evidence after this test-only repair.
