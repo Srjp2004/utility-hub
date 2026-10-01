@@ -622,3 +622,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - The failure was isolated to the test interception point: overriding the individual file input's click method did not observe the delegated activation in the GitHub browser runner.
 - Bounded repair: intercept HTMLElement.prototype.click only for the target hidden input in the E2E test. Production keyboard/dropzone code remains unchanged.
 - Dependency audit, CodeQL, and source security invariants remained green; Browser E2E and Quality Gate are awaiting fresh evidence after this test-only repair.
+
+
+### 2026-10-01 - PR #175 root-cause repair
+- Fresh Browser E2E evidence showed the keyboard regression failed consistently on mobile Chromium and other browser jobs, with the test observing zero picker calls.
+- Source inspection identified the production keyboard listener was attached directly to drop-zone elements during the page lifecycle. The E2E evidence indicates the rendered tool content can be replaced after the listener setup, leaving the newly inserted drop zone without the direct listener.
+- Bounded production repair: move keyboard handling to delegated document-level handling, matching the existing delegated click/change architecture. Enter/Space now resolve the current image drop zone at event time, including dynamically rendered tool content.
+- No image-processing algorithms, security controls, dependencies, or unrelated tools were changed.
