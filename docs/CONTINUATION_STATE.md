@@ -1,3 +1,9 @@
+## 2026-10-01 - UtilityHub interface redesign
+- Reworked the homepage and tool directory into a distinctive editorial utility-studio interface with stronger task hierarchy, command-style search, asymmetrical featured cards, adaptive layouts and a restrained lime/charcoal visual system.
+- Reworked the shared tool workspace presentation so existing calculators/utilities inherit a focused, higher-contrast surface without changing their calculation logic.
+- Improved homepage and directory search feedback, including result counts and `/` keyboard focus for the directory search.
+- Updated homepage E2E assertions for the intentional visual/markup redesign. No new tool, backend, dependency, MachineMind or LeaseGuard change.
+- Tool logic was not broadly rewritten; the next verification gate is the complete existing-tool browser matrix and security/quality checks.
 ## 2026-10-01 - Image Resizer crop aspect-ratio repair
 - Bounded follow-up found that locked output dimensions were still based on the original source-image ratio after square/custom cropping.
 - Updated existing Image Resizer sizing so square/custom crops preserve the selected crop ratio for locked dimensions and percentage scaling, while center/no-crop behavior remains source-ratio based.
