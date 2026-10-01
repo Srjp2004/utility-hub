@@ -1,5 +1,5 @@
 ## 2026-10-01 - Current delivery checkpoint
-- Current `main` is `bee3200661b533205378ad948e13d0d698300b2f`, the merge commit for PR #166.
+- PR #167 documentation synchronization is merged at `866c5e3227b1474b13cf7921210707c32d1a2e4d`. The GitHub `main` branch remains the authoritative source for the current SHA.
 - PR #165 is merged at `8e722401d11db5e725c2d50ad6fccf949be47ea9`; its exact head passed Tests, Browser E2E, DevSecOps and Quality Gate before delivery.
 - PR #166 exact head `a06a177a3ebfaf4885c1d6049229b433728a28a3` passed Tests, Browser E2E, DevSecOps and Quality Gate before delivery; Vercel reported the preview Ready.
 - No post-merge GitHub Actions workflow runs are exposed for the current merge commit, so they are not treated as production evidence. Vercel currently reports a successful status for the merge commit.
