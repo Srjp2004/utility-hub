@@ -104,3 +104,53 @@ button{color:var(--dark)}
 .tool-search input::placeholder{color:#aeb5ad}
 .directory-tools .category-links a:hover{color:var(--dark)}
 .button-dark{color:var(--dark)!important}
+
+
+/* Final shared tool-surface contract: every tool uses the same light workspace shell.
+   Specialized QuotePulse/BMI/image components may vary internally, but never replace the
+   shared page surface with an unrelated dark theme. */
+.tool-page,
+.tool-page > .tool-panel,
+#tool.tool-panel{color:var(--ink)}
+.tool-page > .tool-panel,
+#tool.tool-panel{background:#fff!important;border:1px solid var(--line)!important;color:var(--ink)!important}
+#tool.tool-panel .form{color:var(--ink)}
+#tool.tool-panel .form > label,
+#tool.tool-panel .form > div > label{color:#343a35!important}
+#tool.tool-panel input,
+#tool.tool-panel select,
+#tool.tool-panel textarea{color:var(--ink)!important;background:#fff!important}
+#tool.tool-panel button:not(.secondary){background:var(--dark)!important;color:#fff!important}
+#tool.tool-panel button.secondary,
+#tool.tool-panel .secondary{background:#fff!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+#tool.tool-panel .result{background:#f8fbef!important;color:var(--ink)!important}
+#tool.tool-panel .result strong{color:#3f5110!important}
+#tool.tool-panel .quote-report,
+#tool.tool-panel .image-tool,
+#tool.tool-panel .bmi-result-card{color:var(--ink)}
+#tool.tool-panel .quote-section,
+#tool.tool-panel .quote-input,
+#tool.tool-panel .quote-message-card,
+#tool.tool-panel .quote-metric,
+#tool.tool-panel .quote-score-card,
+#tool.tool-panel .quote-good,
+#tool.tool-panel .quote-flag,
+#tool.tool-panel .image-settings-card,
+#tool.tool-panel .image-file-card,
+#tool.tool-panel .image-result-list,
+#tool.tool-panel .image-file-summary,
+#tool.tool-panel .bmi-result-top > div,
+#tool.tool-panel .bmi-gauge-wrap,
+#tool.tool-panel .bmi-details > div{background:#fff!important;color:var(--ink)}
+#tool.tool-panel .quote-message-head{background:linear-gradient(135deg,var(--soft),#fff)!important;color:var(--ink)}
+#tool.tool-panel .quote-message-actions{background:#fcfcfd!important;color:var(--ink)}
+#tool.tool-panel .image-dropzone{background:linear-gradient(180deg,#fff,#f1f3ec)!important;color:var(--ink)}
+#tool.tool-panel .image-download{background:var(--accent)!important;color:var(--dark)!important}
+#tool.tool-panel .note,
+#tool.tool-panel .image-file-info span,
+#tool.tool-panel .image-result-head > div > span{color:var(--muted)!important}
+@media(max-width:600px){
+  #tool.tool-panel{padding:18px!important}
+  #tool.tool-panel .quote-actions button,
+  #tool.tool-panel .image-action-row button{width:100%}
+}
