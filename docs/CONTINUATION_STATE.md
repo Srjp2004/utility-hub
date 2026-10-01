@@ -608,3 +608,10 @@ When a new chat says "Continue @GitHub @get-fable @Codex Engineering Guardrails"
 - Standardized the shared `#tool.tool-panel` shell to a light white workspace with the UtilityHub design-system borders/text, while retaining intentional internal component surfaces and the dark homepage command panel.
 - Added browser regression coverage comparing representative QuotePulse, BMI, Image Resizer and Percentage Calculator workspace surfaces.
 - This repair changes presentation only; calculator/image logic and security policy are untouched. Real-device visual QA remains required.
+
+## 2026-10-01 - Image picker accessibility repair
+- Identified a concrete accessibility defect during the functional QA pass: image drop zones were exposed as `role="button"` with `tabindex="0"` while containing a nested native button, but the drop zone itself had no keyboard activation.
+- Bounded repair branch `fix/image-dropzone-keyboard-20261001` removes the nested picker button semantics, keeps the visible picker affordance, and adds Enter/Space activation for the drop zone.
+- Regression coverage verifies keyboard activation through the browser file chooser and asserts no nested button remains.
+- No image-processing logic, security controls, backend, dependency, MachineMind or LeaseGuard changes.
+- Next: fresh branch CI verification, then continue the remaining runtime/device QA.
