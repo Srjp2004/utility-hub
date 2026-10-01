@@ -1,4 +1,4 @@
-## 2026-10-01 - Image Resizer custom crop
+## 2026-10-01 - Image Resizer crop aspect-ratio repair\n- Bounded follow-up found that locked output dimensions were still based on the original source-image ratio after square/custom cropping.\n- Updated existing Image Resizer sizing so square/custom crops preserve the selected crop ratio for locked dimensions and percentage scaling, while center/no-crop behavior remains source-ratio based.\n- Updated the dimension preview to use the same sizing logic and added regression coverage for square/custom locked outputs.\n\n## 2026-10-01 - Image Resizer custom crop
 - Extended the existing Image Resizer crop capability with an optional custom crop rectangle using source-image pixel coordinates (X, Y, width, height).
 - The custom rectangle is validated against the decoded source dimensions and applied before resizing; existing center, square, local-processing, batch, 25 MB and 16,384 px safeguards remain unchanged.
 - Added regression coverage for the custom crop controls. No new tool, dependency, backend, MachineMind or LeaseGuard change.
