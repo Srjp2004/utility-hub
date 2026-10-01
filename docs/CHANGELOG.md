@@ -1,3 +1,8 @@
+## 2026-10-01 - Image Resizer custom crop
+- Added a custom crop rectangle mode to the existing Image Resizer with X, Y, width and height source-pixel controls.
+- Added UI regression coverage for the custom crop controls while preserving the existing deterministic crop modes and local-processing safeguards.
+- Verification of the branch is required before delivery; no production-readiness claim is made from source changes alone.
+
 ## 2026-10-01 - PR #167 delivery checkpoint
 - PR #167 documentation synchronization merged at `866c5e3227b1474b13cf7921210707c32d1a2e4d`.
 - The documentation-only change corrected stale post-merge state for PRs #165 and #166.
