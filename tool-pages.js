@@ -78,7 +78,12 @@ function decodeBase64(){const s=el("b64").value.trim(),r=el("result");try{const 
 
 
 function quotePulseExample(){
-  const example = "Site visit $50\nLabour $480\nMaterials $620\nDeposit 60%\nTotal $1150\n12-month warranty";
+  const example = "Site visit $50
+Labour $480
+Materials $620
+Deposit 60%
+Total $1150
+12-month warranty";
   const field = el("quoteText");
   if(field){field.value=example}
 }
@@ -86,7 +91,8 @@ function analyzeQuote(){
   const raw = (el("quoteText")?.value || "").trim();
   const r = el("result"), msg = el("qpMessage");
   if(!raw){r.textContent="Paste a quote or estimate first.";if(msg)msg.hidden=true;return}
-  const lines = raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  const lines = raw.split(/\r?
+/).map(x=>x.trim()).filter(Boolean);
   const amountRe = /(?:[$€£₹]\s*|\b(?:USD|EUR|GBP|INR|CAD|AUD)\s*)?(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)(?!\s*%)/gi;
   const lineItems = [];
   let statedTotal = null, depositPercent = null, depositAmount = null;
@@ -166,7 +172,12 @@ function analyzeQuote(){
     ];
     msg.hidden=false;
     msg.innerHTML='<div class="quote-message-head"><div><span class="quote-section-kicker">Ready to send</span><h3>Negotiation message</h3><p>Ask for the missing details before you approve the quote.</p></div><span class="quote-message-badge">'+questions.length+' questions</span></div><div class="quote-message-body"><p>Hi, thanks for the quote. Before I approve it, could you please confirm the following?</p><ol>'+questions.map((q,i)=>'<li><span>'+(i+1)+'</span><p>'+esc(q)+'</p></li>').join("")+'</ol><p>Once I have those details, I can review the scope and payment terms clearly.</p></div><div class="quote-message-actions"><button type="button" data-action="copyQuoteMessage">Copy message</button><span class="note">Edit the message to match your situation before sending.</span></div>';
-    const messageText="Hi, thanks for the quote. Before I approve it, could you please confirm the following?\n\n"+questions.map((q,i)=>(i+1)+". "+q).join("\n")+"\n\nOnce I have those details, I can review the scope and payment terms clearly.";
+    const messageText="Hi, thanks for the quote. Before I approve it, could you please confirm the following?
+
+"+questions.map((q,i)=>(i+1)+". "+q).join("
+")+"
+
+Once I have those details, I can review the scope and payment terms clearly.";
     if(msg.dataset) msg.dataset.message=messageText;
   }
 }
@@ -183,5 +194,8 @@ const toolActions=Object.freeze({calcPercentage,calcDiscount,calcLoan,calcIntere
 
 document.addEventListener("click",event=>{const button=event.target.closest("[data-action]");if(!button)return;const action=button.dataset.action;const fn=toolActions[action];if(typeof fn==="function")fn();});
 document.addEventListener("change",event=>{const id=event.target.id;if(id==="resizeFile")imageSetFiles("resizer",event.target.files);else if(id==="imgFile")imageSetFiles("compressor",event.target.files);else if(id==="convertFile")imageSetConverterFiles(event.target.files);else if(id==="resizeMode"){imageUpdateResizeMode();imageUpdateResizeEstimate()}else if(id==="resizeCropMode"){imageUpdateResizeMode();imageUpdateResizeEstimate()}else if(["resizeWidth","resizeHeight","resizeScale","resizeLock","resizeCropX","resizeCropY","resizeCropWidth","resizeCropHeight"].includes(id))imageUpdateResizeEstimate();else if(id==="resizeQuality"){const out=$("resizeQualityValue");if(out)out.value=Math.round(Number(event.target.value)*100)+"%"}else if(id==="imgQuality"){const out=$("imgQualityValue");if(out)out.value=Math.round(Number(event.target.value)*100)+"%"}else if(id==="convertQuality"){const out=$("convertQualityValue");if(out)out.value=Math.round(Number(event.target.value)*100)+"%"}});
-document.addEventListener("click",event=>{const zone=event.target.closest(".image-dropzone");if(zone){const input=$(zone.id==="resizeDropzone"?"resizeFile":zone.id==="compressDropzone"?"imgFile":"convertFile");if(input)input.click()}});\ndocument.addEventListener("dragover",event=>{const zone=event.target.closest?.(".image-dropzone");if(!zone)return;event.preventDefault();zone.classList.add("is-dragging")});\ndocument.addEventListener("dragleave",event=>{const zone=event.target.closest?.(".image-dropzone");if(!zone)return;if(event.relatedTarget&&zone.contains(event.relatedTarget))return;zone.classList.remove("is-dragging")});\ndocument.addEventListener("drop",event=>{const zone=event.target.closest?.(".image-dropzone");if(!zone)return;event.preventDefault();zone.classList.remove("is-dragging");const files=event.dataTransfer?.files||[];if(zone.id==="resizeDropzone")imageSetFiles("resizer",files);else if(zone.id==="compressDropzone")imageSetFiles("compressor",files);else if(zone.id==="convertDropzone")imageSetConverterFiles(files)});
+document.addEventListener("click",event=>{const zone=event.target.closest(".image-dropzone");if(zone){const input=$(zone.id==="resizeDropzone"?"resizeFile":zone.id==="compressDropzone"?"imgFile":"convertFile");if(input)input.click()}});
+document.addEventListener("dragover",event=>{const zone=event.target.closest?.(".image-dropzone");if(!zone)return;event.preventDefault();zone.classList.add("is-dragging")});
+document.addEventListener("dragleave",event=>{const zone=event.target.closest?.(".image-dropzone");if(!zone)return;if(event.relatedTarget&&zone.contains(event.relatedTarget))return;zone.classList.remove("is-dragging")});
+document.addEventListener("drop",event=>{const zone=event.target.closest?.(".image-dropzone");if(!zone)return;event.preventDefault();zone.classList.remove("is-dragging");const files=event.dataTransfer?.files||[];if(zone.id==="resizeDropzone")imageSetFiles("resizer",files);else if(zone.id==="compressDropzone")imageSetFiles("compressor",files);else if(zone.id==="convertDropzone")imageSetConverterFiles(files)});
 document.addEventListener("keydown",event=>{if(event.key!=="Enter"&&event.key!==" ")return;const zone=event.target.closest?.(".image-dropzone");if(!zone)return;event.preventDefault();const input=$(zone.id==="resizeDropzone"?"resizeFile":zone.id==="compressDropzone"?"imgFile":"convertFile");if(input)input.click()});
