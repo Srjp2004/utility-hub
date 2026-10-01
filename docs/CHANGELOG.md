@@ -559,3 +559,7 @@ Complete the remaining full functional audit in bounded batches, test representa
 - Strengthened the Tools directory content with clearer task-oriented discovery copy.
 - Avoided keyword stuffing and artificial word-count padding; content was added where it explains real tool behavior and user intent.
 - No calculator algorithms, dependencies, backend services or monetization claims were changed.
+
+## 2026-10-01
+- Fixed shared UI contrast regressions that could make CTA, download, result, and dark-input text difficult to read after the interface redesign.
+- Added browser regression coverage for shared control foreground/background visibility.
