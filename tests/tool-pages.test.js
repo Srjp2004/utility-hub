@@ -673,3 +673,5 @@ test("age calculator uses the birth date calendar day for birthday arithmetic", 
 
 
 test("image resizer exposes crop modes", () => { const { context } = loadTools({ result: "" }); const mount = { innerHTML: "" }; context.document.getElementById = (id) => id === "tool" ? mount : null; context.renderTool("image-resizer", "tool"); assert.match(mount.innerHTML, /resizeCropMode/); assert.match(mount.innerHTML, /Center crop to output ratio/); assert.match(mount.innerHTML, /Square crop/); });
+
+test("image resizer exposes custom crop controls", () => { const { context } = loadTools({ result: "" }); const mount = { innerHTML: "" }; context.document.getElementById = (id) => id === "tool" ? mount : null; context.renderTool("image-resizer", "tool"); assert.match(mount.innerHTML, /value="custom"/); assert.match(mount.innerHTML, /resizeCropX/); assert.match(mount.innerHTML, /resizeCropY/); assert.match(mount.innerHTML, /resizeCropWidth/); assert.match(mount.innerHTML, /resizeCropHeight/); });
