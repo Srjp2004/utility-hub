@@ -1,3 +1,8 @@
+## 2026-10-01 - Image drop-zone lifecycle hardening
+- Fixed an identified lifecycle defect in the existing Image Resizer, Compressor and Converter: drag/drop listeners are delegated at document level so dynamically rerendered drop zones retain drag/drop behavior.
+- No new tool, dependency, backend, security-policy, MachineMind or LeaseGuard change.
+- PR #176 requires fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence before delivery.
+
 ## 2026-10-01 - UtilityHub interface redesign
 - Reworked the homepage and tool directory into a distinctive editorial utility-studio interface with stronger task hierarchy, command-style search, asymmetrical featured cards, adaptive layouts and a restrained lime/charcoal visual system.
 - Reworked the shared tool workspace presentation so existing calculators/utilities inherit a focused, higher-contrast surface without changing their calculation logic.
