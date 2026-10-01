@@ -159,3 +159,37 @@ test.describe("UtilityHub exhaustive interaction smoke",()=>{
     expect(failures,failures.join("\n")).toEqual([]);
   });
 });
+
+
+test("shared controls keep readable foreground/background contrast", async ({ page }) => {
+  await page.goto("/");
+  const checks = await page.locator("button, .button, .cta, input, select, textarea, a").evaluateAll(elements => elements.map(el => {
+    const s = getComputedStyle(el);
+    return { tag: el.tagName, text: (el.textContent || el.value || "").trim(), color: s.color, background: s.backgroundColor };
+  }).filter(x => x.text && x.background !== "rgba(0, 0, 0, 0)"));
+  for (const item of checks) {
+    expect(item.color).not.toBe("rgba(0, 0, 0, 0)");
+    expect(item.background).not.toBe("rgba(0, 0, 0, 0)");
+  }
+});
+
+
+test("tool pages use the shared light workspace surface", async ({ page }) => {
+  const pages = [
+    "/tools/quote-pulse.html",
+    "/tools/bmi-calculator.html",
+    "/tools/image-resizer.html",
+    "/tools/percentage-calculator.html",
+  ];
+  const surfaces = [];
+  for (const path of pages) {
+    await page.goto(path);
+    surfaces.push(await page.locator("#tool.tool-panel").evaluate(el => {
+      const s = getComputedStyle(el);
+      return { background: s.backgroundColor, color: s.color };
+    }));
+  }
+  expect(new Set(surfaces.map(s => s.background)).size).toBe(1);
+  expect(surfaces.every(s => s.background === "rgb(255, 255, 255)")).toBeTruthy();
+  expect(surfaces.every(s => s.color !== "rgb(0, 0, 0)")).toBeTruthy();
+});
