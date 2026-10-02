@@ -1,3 +1,8 @@
+## 2026-10-02 - Category regression contract refinement
+- Removed the brittle fixed numeric assertion from the calculator-category browser test.
+- The regression now asserts semantic membership: expected calculator tools are visible and representative non-calculator tools are hidden.
+- This avoids coupling correctness to incidental category counts while preserving the discovered token-matching regression.
+
 ## 2026-10-02 - Directory category token-matching repair in progress
 - Fresh Browser E2E showed the calculator category regression still exposed JSON Formatter because the classifier used substring matching against each card's full search text.
 - Root cause: category terms such as `date` can match unrelated words such as `validate`.
