@@ -8,13 +8,29 @@ const filters=Object.freeze({
   text:["word","json","case","password","random","aspect","timestamp","base64"],
   all:[]
 });
+
 function updateStatus(count,query){
-  if(status) status.textContent=query?count+" tool"+(count===1?"":"s")+" found":count+" tools in the toolbox";
+  if(status) status.textContent=query
+    ? count+" tool"+(count===1?"":"s")+" found"
+    : count+" tools in the toolbox";
 }
+
+function showMatches(value){
+  const query=String(value||"").trim().toLowerCase();
+  let visible=0;
+  cards.forEach(card=>{
+    const search=(card.dataset.search||"").toLowerCase();
+    const match=!query||search.includes(query);
+    card.hidden=!match;
+    if(match) visible++;
+  });
+  updateStatus(visible,query);
+}
+
 function applyFilter(value){
   const filter=String(value||"all").toLowerCase();
-  if(q) q.value=filter==="all"?"":filter;
   const terms=filters[filter]||[filter];
+  if(q) q.value=filter==="all"?"":filter;
   let visible=0;
   cards.forEach(card=>{
     const search=(card.dataset.search||"").toLowerCase();
@@ -24,22 +40,21 @@ function applyFilter(value){
   });
   updateStatus(visible,filter==="all"?"":filter);
 }
+
 if(q){
-  q.addEventListener("input",()=>{
-    const value=q.value.trim().toLowerCase();
-    let visible=0;
-    cards.forEach(card=>{
-      const match=!value||(card.dataset.search||"").toLowerCase().includes(value);
-      card.hidden=!match;
-      if(match) visible++;
-    });
-    updateStatus(visible,value);
+  q.addEventListener("input",()=>showMatches(q.value));
+  document.addEventListener("keydown",event=>{
+    if(event.key==="/"&&document.activeElement!==q){
+      event.preventDefault();
+      q.focus();
+    }
   });
+  const params=new URLSearchParams(window.location.search);
+  showMatches(params.get("q")||"");
+}else{
+  applyFilter("all");
 }
-document.addEventListener("keydown",event=>{
-  if(event.key==="/"&&document.activeElement!==q&&q){event.preventDefault();q.focus();}
-});
+
 document.querySelectorAll("[data-filter]").forEach(link=>{
   link.addEventListener("click",()=>applyFilter(link.dataset.filter));
 });
-applyFilter("all");
