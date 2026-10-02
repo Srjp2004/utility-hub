@@ -1,3 +1,9 @@
+## 2026-10-02 - PR #178 verification repair in progress
+- Fresh CI caught a real UI behavior defect: the homepage card CSS did not explicitly honor the HTML `hidden` state after the search filtered cards, so QuotePulse remained visually visible despite having `hidden` set.
+- Fresh CI also caught a stale test expectation for the new `2 featured tools found` status wording.
+- Repaired the CSS hidden-state contract and the regression expectation on branch `fix/home-search-and-ui-consistency-20261002`.
+- Do not merge until fresh Tests, Browser E2E, DevSecOps and Quality Gate pass on the repaired exact head.
+
 ## 2026-10-02 - Utility Finder and interface consistency hardening in progress
 - Reproduced the homepage Finder defect: the search implementation filtered only the 12 featured cards and did not submit queries to the full 28-tool directory.
 - Reproduced the visual mismatch in source: QuotePulse intentionally had a dark featured-card treatment while the remaining homepage cards were light, and shared CSS contained multiple historical button/font declarations.
