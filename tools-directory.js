@@ -16,15 +16,17 @@ function updateStatus(count,query){
 }
 
 function showMatches(value){
-  const query=String(value||"").trim().toLowerCase();
+  const query=String(value||"").trim();
+  if(q && q.value!==query) q.value=query;
+  const normalized=query.toLowerCase();
   let visible=0;
   cards.forEach(card=>{
     const search=(card.dataset.search||"").toLowerCase();
-    const match=!query||search.includes(query);
+    const match=!normalized||search.includes(normalized);
     card.hidden=!match;
     if(match) visible++;
   });
-  updateStatus(visible,query);
+  updateStatus(visible,normalized);
 }
 
 function applyFilter(value){
