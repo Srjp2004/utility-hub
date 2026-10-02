@@ -36,7 +36,8 @@ function applyFilter(value){
   let visible=0;
   cards.forEach(card=>{
     const search=(card.dataset.search||"").toLowerCase();
-    const match=filter==="all"||terms.some(term=>search.includes(term));
+    const tokens=search.split(/[^a-z0-9-]+/).filter(Boolean);
+    const match=filter==="all"||terms.some(term=>tokens.includes(term));
     card.hidden=!match;
     if(match) visible++;
   });
