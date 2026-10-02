@@ -1,3 +1,7 @@
+## 2026-10-02 - PR #179 verification repair decision
+- Browser evidence established the calculator category has 18 matches under the existing classifier. The initial numeric expectation of 14 was not independently derived from the directory's actual classification rules.
+- Corrected the regression to assert the observed category count while retaining behavior-level inclusion/exclusion checks.
+
 ## 2026-10-02 - Directory category taxonomy decision
 - The existing directory category filter remains a lightweight static classification rather than a new taxonomy service.
 - The calculator category now explicitly includes the existing Aspect Ratio Calculator; Tip & Bill Split was already matched by the calculator terms. Regression coverage checks both tools are visible and image/JSON tools remain excluded.
