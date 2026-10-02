@@ -1,3 +1,9 @@
+## 2026-10-02 - PR #178 verification repair
+- Fresh Browser E2E exposed two concrete regressions in the first implementation: filtered cards could remain visually rendered because the redesigned card CSS did not explicitly honor the native `hidden` state, and an existing homepage regression assertion still expected the older generic search-status wording.
+- Fresh DevSecOps browser checks also failed on the same homepage assertion path rather than a security invariant.
+- Diagnosed and repaired both issues without weakening the functional requirement: `.tool-card[hidden]` now explicitly renders as `display:none`, and the regression expectation now matches the intentional featured-search wording.
+- Fresh verification must be rerun on the repaired exact PR head before merge.
+
 ## 2026-10-02 - Utility Finder and interface consistency hardening
 - Reproduced the homepage Utility Finder defect: the existing search only filtered the 12 featured cards and had no functional submit action to reach the other 16 published tools. A query such as `JSON` therefore appeared broken even though JSON Formatter exists in the full directory.
 - Connected the Finder to the full directory on Enter while preserving instant featured-card filtering.
