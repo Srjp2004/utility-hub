@@ -1,3 +1,8 @@
+## 2026-10-02 - Directory calculator-category completeness
+- Bounded audit of the existing 28-tool directory found the `Calculators` category omitted Tip & Bill Split and Aspect Ratio Calculator even though both are calculator-style published tools.
+- Added the existing Aspect Ratio tool to the calculator filter and regression coverage for both omitted tools.
+- No new tool, dependency, backend, security-policy or unrelated UI change.
+
 ## 2026-10-02 - PR #178 query-hydration repair
 - Fresh Browser E2E exposed the next concrete Finder integration defect: the directory filtered correctly from `?q=JSON`, but the visible `#toolSearch` input was not hydrated with the transferred query.
 - Repaired `tools-directory.js` so the URL query is normalized, placed into the visible search control, and then used for filtering.
