@@ -1,3 +1,9 @@
+## 2026-10-02 - Directory calculator-category completeness in progress
+- Bounded audit reproduced a directory taxonomy defect: the Calculators category filter omitted Tip & Bill Split and Aspect Ratio Calculator.
+- Created branch `fix/calculator-category-filter-20261002` from main `d21d5c0d37aed23e6988bc361b78f233b3d30618`.
+- Added Aspect Ratio to the existing calculator filter and added browser regression coverage for both omitted calculator pages.
+- Fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence is required before protected delivery.
+
 ## 2026-10-02 - PR #178 query-hydration repair in progress
 - Fresh cross-browser verification showed the homepage-to-directory search transfer reached `tools.html?q=JSON`, but the directory search field remained visually empty even though filtering logic executed.
 - Root cause: `showMatches()` read the URL query but never assigned it to `#toolSearch`.
