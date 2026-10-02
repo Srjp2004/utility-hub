@@ -305,3 +305,5 @@ button,.cta,.button{min-height:44px}
 @media(max-width:760px){
   .command-submit{display:inline-flex;align-items:center;justify-content:center}
 }
+
+.tool-card[hidden]{display:none!important}
