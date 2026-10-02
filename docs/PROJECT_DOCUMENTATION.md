@@ -1,3 +1,8 @@
+## 2026-10-02 - PR #178 verification repair decision
+- Browser verification identified that the new Finder filtering behavior relied on the native `hidden` attribute, while the redesigned homepage card stylesheet needed an explicit `display:none!important` rule for its card class.
+- This was corrected as a concrete, diagnosis-driven repair. The existing test wording was also synchronized with the intentional featured-tool status message.
+- The repair preserves the full-directory Finder behavior and does not weaken tests or security controls.
+
 ## 2026-10-02 - Utility Finder and visual consistency decision
 - The homepage Finder now has two deliberate behaviors: live filtering of the 12 featured tools while typing, and full-directory search on Enter. This preserves instant feedback without limiting discoverability to the featured subset.
 - Query state is transferred through the existing static directory as `tools.html?q=...`, avoiding backend state or a new search service.
