@@ -250,3 +250,36 @@ test.describe("responsive interface guardrails",()=>{
     expect(workspace.scrollWidth).toBeLessThanOrEqual(workspace.clientWidth+1);
   });
 });
+
+
+test.describe("Utility Finder contract",()=>{
+  test("homepage Finder filters featured tools and Enter searches the full directory",async({page})=>{
+    await page.goto("/index.html",{waitUntil:"networkidle"});
+    const search=page.locator("#search");
+    await search.fill("percentage");
+    await expect(page.locator(".search-status")).toHaveText("2 featured tools found");
+    await expect(page.locator("#grid .tool-card").filter({hasText:"Percentage Calculator"})).toBeVisible();
+    await expect(page.locator("#grid .tool-card").filter({hasText:"QuotePulse"})).toBeHidden();
+    await search.fill("JSON");
+    await expect(page.locator(".search-status")).toHaveText("0 featured tools found");
+    await search.press("Enter");
+    await expect(page).toHaveURL(/tools\.html\?q=JSON$/);
+    await expect(page.locator("#toolSearch")).toHaveValue("JSON");
+    await expect(page.locator('a[href="tools/json-formatter.html"]')).toBeVisible();
+    await expect(page.locator('a[href="tools/percentage-calculator.html"]')).toBeHidden();
+  });
+
+  test("homepage tool cards share the same surface and typography contract",async({page})=>{
+    await page.goto("/index.html",{waitUntil:"networkidle"});
+    const cards=await page.locator("#grid .tool-card").evaluateAll(elements=>elements.slice(0,4).map(el=>{
+      const s=getComputedStyle(el);
+      const title=getComputedStyle(el.querySelector("h3"));
+      const action=getComputedStyle(el.querySelector("a"));
+      return {background:s.backgroundColor,color:s.color,titleFont:title.fontFamily,titleSize:title.fontSize,actionSize:action.fontSize};
+    }));
+    expect(new Set(cards.map(c=>c.background)).size).toBe(1);
+    expect(new Set(cards.map(c=>c.color)).size).toBe(1);
+    expect(new Set(cards.map(c=>c.titleFont)).size).toBe(1);
+    expect(new Set(cards.map(c=>c.actionSize)).size).toBe(1);
+  });
+});
