@@ -1,3 +1,10 @@
+## 2026-10-02 - Responsive interface system decision
+- The existing CSS-first architecture is retained. The concrete responsive defect was a breakpoint gap: the four-column homepage grid remained active through a 799px viewport even though that width is commonly tablet/compact-landscape territory.
+- The responsive contract now uses 1100px for desktop-to-tablet restructuring, 760px for phone/small-tablet stacking, and 480px for compact-phone spacing and control sizing.
+- The shared contract applies to homepage cards, directory cards, navigation, tool workspaces, BMI/QuotePulse result layouts, image-tool controls and footer surfaces so individual pages do not drift into separate responsive systems.
+- Regression coverage verifies computed grid structure and viewport containment at 799px and 390px.
+- No framework, backend, dependency, tool algorithm, security-policy, MachineMind or LeaseGuard change was introduced.
+
 ## 2026-10-01 - Image drop-zone lifecycle hardening
 - Fixed an identified lifecycle defect in the existing Image Resizer, Compressor and Converter: drag/drop listeners are delegated at document level so dynamically rerendered drop zones retain drag/drop behavior.
 - No new tool, dependency, backend, security-policy, MachineMind or LeaseGuard change.

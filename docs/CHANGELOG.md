@@ -1,3 +1,10 @@
+## 2026-10-02 - Responsive interface hardening
+- Reproduced the reported narrow-layout defect against the current source: the existing homepage/tool-directory breakpoints did not collapse the four-column layout until 900px, so a 799px-wide viewport could still present desktop density.
+- Added a bounded shared responsive layer covering the homepage, directory, shared tool workspace, image-tool controls, BMI/QuotePulse layouts, navigation and footer at 1100px, 760px and 480px breakpoints.
+- Added E2E regression coverage for 799px two-column behavior, 390px single-column behavior, document overflow and contained BMI workspace bounds.
+- No tool algorithms, security policy, backend, dependency, MachineMind or LeaseGuard changes.
+- Fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence is required before merge.
+
 ## 2026-10-01 - Image drop-zone lifecycle hardening
 - Fixed an identified lifecycle defect in the existing Image Resizer, Compressor and Converter: drag/drop listeners are delegated at document level so dynamically rerendered drop zones retain drag/drop behavior.
 - No new tool, dependency, backend, security-policy, MachineMind or LeaseGuard change.

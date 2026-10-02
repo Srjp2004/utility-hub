@@ -216,3 +216,37 @@ test("tool pages use the shared light workspace surface", async ({ page }) => {
   expect(surfaces.every(s => s.background === "rgb(255, 255, 255)")).toBeTruthy();
   expect(surfaces.every(s => s.color !== "rgb(0, 0, 0)")).toBeTruthy();
 });
+
+
+test.describe("responsive interface guardrails",()=>{
+  test("homepage collapses the featured grid before tablet widths",async({page})=>{
+    await page.setViewportSize({width:799,height:1200});
+    await page.goto("/index.html",{waitUntil:"networkidle"});
+    const layout=await page.locator("#grid").evaluate(el=>{
+      const s=getComputedStyle(el);
+      return {columns:s.gridTemplateColumns,scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth};
+    });
+    expect(layout.columns.split(" ").length).toBe(2);
+    expect(layout.scrollWidth).toBeLessThanOrEqual(layout.clientWidth+1);
+  });
+
+  test("phone layout uses one column and contained tool workspace",async({page})=>{
+    await page.setViewportSize({width:390,height:844});
+    await page.goto("/index.html",{waitUntil:"networkidle"});
+    const home=await page.locator("#grid").evaluate(el=>{
+      const s=getComputedStyle(el);
+      return {columns:s.gridTemplateColumns,scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth};
+    });
+    expect(home.columns.split(" ").length).toBe(1);
+    expect(home.scrollWidth).toBeLessThanOrEqual(home.clientWidth+1);
+
+    await page.goto("/tools/bmi-calculator.html",{waitUntil:"networkidle"});
+    const workspace=await page.locator("#tool.tool-panel").evaluate(el=>{
+      const rect=el.getBoundingClientRect();
+      return {left:rect.left,right:rect.right,viewport:window.innerWidth,scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth};
+    });
+    expect(workspace.left).toBeGreaterThanOrEqual(0);
+    expect(workspace.right).toBeLessThanOrEqual(workspace.viewport+1);
+    expect(workspace.scrollWidth).toBeLessThanOrEqual(workspace.clientWidth+1);
+  });
+});
