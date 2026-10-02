@@ -1,3 +1,8 @@
+## 2026-10-02 - Directory category token-matching repair
+- Browser E2E exposed a second taxonomy defect: substring matching made unrelated cards eligible for a category when a classifier term appeared inside another word.
+- Replaced category substring matching with normalized token matching while preserving the existing static category definitions.
+- This keeps JSON Formatter out of Calculators while allowing Aspect Ratio Calculator to match the explicit `aspect` token.
+
 ## 2026-10-02 - PR #179 verification repair
 - Fresh Browser E2E showed the Calculators category currently contains 18 matching tools, so the newly added regression assertion expecting 14 was incorrect.
 - This was a test expectation defect, not a product behavior defect. The test now asserts the observed 18-tool category while continuing to verify required inclusions and exclusions.
