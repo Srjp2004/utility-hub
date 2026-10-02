@@ -1,3 +1,19 @@
+## 2026-10-02 - PR #178 query-hydration repair decision
+- The Finder handoff uses the existing directory query parameter. Browser verification demonstrated that URL state alone was insufficient because the visible directory search control did not reflect the transferred query.
+- The repair makes URL state and visible input state consistent before filtering, improving both usability and deterministic browser verification.
+
+## 2026-10-02 - PR #178 verification repair decision
+- Browser verification identified that the new Finder filtering behavior relied on the native `hidden` attribute, while the redesigned homepage card stylesheet needed an explicit `display:none!important` rule for its card class.
+- This was corrected as a concrete, diagnosis-driven repair. The existing test wording was also synchronized with the intentional featured-tool status message.
+- The repair preserves the full-directory Finder behavior and does not weaken tests or security controls.
+
+## 2026-10-02 - Utility Finder and visual consistency decision
+- The homepage Finder now has two deliberate behaviors: live filtering of the 12 featured tools while typing, and full-directory search on Enter. This preserves instant feedback without limiting discoverability to the featured subset.
+- Query state is transferred through the existing static directory as `tools.html?q=...`, avoiding backend state or a new search service.
+- The homepage featured card system now uses one light visual surface. QuotePulse remains visually featured through placement/content rather than an unrelated dark theme, reducing cross-card contrast and typography drift.
+- Shared controls use the existing system font stack and a consistent 44px minimum interactive height; specialized tool internals remain unchanged.
+- Regression tests verify Finder handoff, directory query initialization, card surface equality, title font equality and action-size equality.
+
 ## 2026-10-02 - Responsive interface hardening delivery record
 - PR #177 delivered the shared responsive interface layer at main commit `4f357cfa801803342762130468b6b4c2258d98f2`.
 - The exact PR head was independently gated by the repository's Tests, Browser E2E, DevSecOps and Quality Gate workflows before merge.

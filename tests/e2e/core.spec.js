@@ -10,7 +10,7 @@ const toolPages = [
 test.describe("UtilityHub page health",()=>{
   test("homepage has no browser errors",async({page})=>{
     const errors=[]; page.on("pageerror",e=>errors.push(String(e))); page.on("console",m=>{if(m.type()==="error")errors.push(m.text())});
-    await page.goto("/index.html",{waitUntil:"networkidle"}); await expect(page.locator("h1")).toContainText("Get the job done"); await expect(page.locator(".search-status")).toContainText("Showing 12 popular tools"); await page.locator("#search").fill("percentage"); await expect(page.locator(".search-status")).toHaveText("2 tools found"); await expect(page.locator("#grid .tool-card").filter({hasText:"Percentage Calculator"})).toBeVisible(); expect(errors,errors.join("\n")).toEqual([]);
+    await page.goto("/index.html",{waitUntil:"networkidle"}); await expect(page.locator("h1")).toContainText("Get the job done"); await expect(page.locator(".search-status")).toContainText("Showing 12 popular tools"); await page.locator("#search").fill("percentage"); await expect(page.locator(".search-status")).toHaveText("2 featured tools found"); await expect(page.locator("#grid .tool-card").filter({hasText:"Percentage Calculator"})).toBeVisible(); expect(errors,errors.join("\n")).toEqual([]);
   });
   test("directory search and category filters work",async({page})=>{
     await page.goto("/tools.html",{waitUntil:"networkidle"}); const search=page.locator("#toolSearch");
@@ -248,5 +248,38 @@ test.describe("responsive interface guardrails",()=>{
     expect(workspace.left).toBeGreaterThanOrEqual(0);
     expect(workspace.right).toBeLessThanOrEqual(workspace.viewport+1);
     expect(workspace.scrollWidth).toBeLessThanOrEqual(workspace.clientWidth+1);
+  });
+});
+
+
+test.describe("Utility Finder contract",()=>{
+  test("homepage Finder filters featured tools and Enter searches the full directory",async({page})=>{
+    await page.goto("/index.html",{waitUntil:"networkidle"});
+    const search=page.locator("#search");
+    await search.fill("percentage");
+    await expect(page.locator(".search-status")).toHaveText("2 featured tools found");
+    await expect(page.locator("#grid .tool-card").filter({hasText:"Percentage Calculator"})).toBeVisible();
+    await expect(page.locator("#grid .tool-card").filter({hasText:"QuotePulse"})).toBeHidden();
+    await search.fill("JSON");
+    await expect(page.locator(".search-status")).toHaveText("0 featured tools found");
+    await search.press("Enter");
+    await expect(page).toHaveURL(/tools\.html\?q=JSON$/);
+    await expect(page.locator("#toolSearch")).toHaveValue("JSON");
+    await expect(page.locator('a[href="tools/json-formatter.html"]')).toBeVisible();
+    await expect(page.locator('a[href="tools/percentage-calculator.html"]')).toBeHidden();
+  });
+
+  test("homepage tool cards share the same surface and typography contract",async({page})=>{
+    await page.goto("/index.html",{waitUntil:"networkidle"});
+    const cards=await page.locator("#grid .tool-card").evaluateAll(elements=>elements.slice(0,4).map(el=>{
+      const s=getComputedStyle(el);
+      const title=getComputedStyle(el.querySelector("h3"));
+      const action=getComputedStyle(el.querySelector("a"));
+      return {background:s.backgroundColor,color:s.color,titleFont:title.fontFamily,titleSize:title.fontSize,actionSize:action.fontSize};
+    }));
+    expect(new Set(cards.map(c=>c.background)).size).toBe(1);
+    expect(new Set(cards.map(c=>c.color)).size).toBe(1);
+    expect(new Set(cards.map(c=>c.titleFont)).size).toBe(1);
+    expect(new Set(cards.map(c=>c.actionSize)).size).toBe(1);
   });
 });

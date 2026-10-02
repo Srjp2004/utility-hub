@@ -1,3 +1,23 @@
+## 2026-10-02 - PR #178 query-hydration repair
+- Fresh Browser E2E exposed the next concrete Finder integration defect: the directory filtered correctly from `?q=JSON`, but the visible `#toolSearch` input was not hydrated with the transferred query.
+- Repaired `tools-directory.js` so the URL query is normalized, placed into the visible search control, and then used for filtering.
+- This preserves the static query handoff and does not introduce a backend or new search service.
+
+## 2026-10-02 - PR #178 verification repair
+- Fresh Browser E2E exposed two concrete regressions in the first implementation: filtered cards could remain visually rendered because the redesigned card CSS did not explicitly honor the native `hidden` state, and an existing homepage regression assertion still expected the older generic search-status wording.
+- Fresh DevSecOps browser checks also failed on the same homepage assertion path rather than a security invariant.
+- Diagnosed and repaired both issues without weakening the functional requirement: `.tool-card[hidden]` now explicitly renders as `display:none`, and the regression expectation now matches the intentional featured-search wording.
+- Fresh verification must be rerun on the repaired exact PR head before merge.
+
+## 2026-10-02 - Utility Finder and interface consistency hardening
+- Reproduced the homepage Utility Finder defect: the existing search only filtered the 12 featured cards and had no functional submit action to reach the other 16 published tools. A query such as `JSON` therefore appeared broken even though JSON Formatter exists in the full directory.
+- Connected the Finder to the full directory on Enter while preserving instant featured-card filtering.
+- Added query handoff from the homepage to `tools.html?q=...` and directory initialization from that query.
+- Reworked the homepage card surface contract so QuotePulse remains featured by placement but uses the same light card surface, typography and action treatment as the other popular tools.
+- Normalized shared button typography and control sizing to reduce the reported font/button inconsistencies.
+- Added E2E regression coverage for Finder navigation and shared card typography/surface consistency.
+- No tool algorithms, security policy, dependencies, backend, MachineMind or LeaseGuard changes.
+
 ## 2026-10-02 - Responsive interface hardening delivered
 - PR #177 was merged at main commit `4f357cfa801803342762130468b6b4c2258d98f2` after fresh Tests, Browser E2E, DevSecOps and Quality Gate all passed on exact PR head `a3cfc3a3c92dd870d60d16ec0b7b47b60bebc2d5`.
 - Vercel reports a successful production deployment status for the merge commit.

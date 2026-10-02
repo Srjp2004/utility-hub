@@ -1,3 +1,23 @@
+## 2026-10-02 - PR #178 query-hydration repair in progress
+- Fresh cross-browser verification showed the homepage-to-directory search transfer reached `tools.html?q=JSON`, but the directory search field remained visually empty even though filtering logic executed.
+- Root cause: `showMatches()` read the URL query but never assigned it to `#toolSearch`.
+- Repaired by hydrating the input before filtering and retaining normalized query handling.
+- Fresh Tests, Browser E2E, DevSecOps and Quality Gate are required again on the repaired exact head.
+
+## 2026-10-02 - PR #178 verification repair in progress
+- Fresh CI caught a real UI behavior defect: the homepage card CSS did not explicitly honor the HTML `hidden` state after the search filtered cards, so QuotePulse remained visually visible despite having `hidden` set.
+- Fresh CI also caught a stale test expectation for the new `2 featured tools found` status wording.
+- Repaired the CSS hidden-state contract and the regression expectation on branch `fix/home-search-and-ui-consistency-20261002`.
+- Do not merge until fresh Tests, Browser E2E, DevSecOps and Quality Gate pass on the repaired exact head.
+
+## 2026-10-02 - Utility Finder and interface consistency hardening in progress
+- Reproduced the homepage Finder defect: the search implementation filtered only the 12 featured cards and did not submit queries to the full 28-tool directory.
+- Reproduced the visual mismatch in source: QuotePulse intentionally had a dark featured-card treatment while the remaining homepage cards were light, and shared CSS contained multiple historical button/font declarations.
+- Created branch `fix/home-search-and-ui-consistency-20261002` from main `6f845e41ebf5cb81f63d9f9afa64e25434639c5f`.
+- Connected Enter submission to `tools.html?q=...`, preserved instant featured filtering, normalized the directory query handoff, and added a shared light card/typography contract.
+- Added E2E coverage for Finder navigation and visual consistency invariants.
+- Branch is not yet verified or merged. Do not claim production readiness from source changes alone.
+
 ## 2026-10-02 - Responsive interface hardening delivered
 - PR #177 merged into `main` at `4f357cfa801803342762130468b6b4c2258d98f2`.
 - Exact PR head `a3cfc3a3c92dd870d60d16ec0b7b47b60bebc2d5` passed fresh UtilityHub Tests, Browser E2E, DevSecOps and Quality Gate before protected squash merge.
