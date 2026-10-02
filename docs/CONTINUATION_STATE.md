@@ -1,3 +1,9 @@
+## 2026-10-02 - Directory category token-matching repair in progress
+- Fresh Browser E2E showed the calculator category regression still exposed JSON Formatter because the classifier used substring matching against each card's full search text.
+- Root cause: category terms such as `date` can match unrelated words such as `validate`.
+- Repaired category matching to use normalized whole-word tokens instead of arbitrary substrings.
+- Fresh full verification is required on exact head `c16c7d6304c07b21d23c71bd742ecd0b9cf3e3bb` before merge.
+
 ## 2026-10-02 - PR #179 verification repair in progress
 - Fresh cross-browser E2E consistently observed `18 tools found` after selecting Calculators. The initial test incorrectly expected 14.
 - Root cause is test expectation drift, not calculator filter logic. Corrected the assertion to 18 and retained explicit inclusion/exclusion checks.
