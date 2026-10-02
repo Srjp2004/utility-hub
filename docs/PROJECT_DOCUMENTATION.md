@@ -1,3 +1,7 @@
+## 2026-10-02 - PR #178 query-hydration repair decision
+- The Finder handoff uses the existing directory query parameter. Browser verification demonstrated that URL state alone was insufficient because the visible directory search control did not reflect the transferred query.
+- The repair makes URL state and visible input state consistent before filtering, improving both usability and deterministic browser verification.
+
 ## 2026-10-02 - PR #178 verification repair decision
 - Browser verification identified that the new Finder filtering behavior relied on the native `hidden` attribute, while the redesigned homepage card stylesheet needed an explicit `display:none!important` rule for its card class.
 - This was corrected as a concrete, diagnosis-driven repair. The existing test wording was also synchronized with the intentional featured-tool status message.
