@@ -1,3 +1,11 @@
+## 2026-10-02 - Utility Finder and interface consistency hardening in progress
+- Reproduced the homepage Finder defect: the search implementation filtered only the 12 featured cards and did not submit queries to the full 28-tool directory.
+- Reproduced the visual mismatch in source: QuotePulse intentionally had a dark featured-card treatment while the remaining homepage cards were light, and shared CSS contained multiple historical button/font declarations.
+- Created branch `fix/home-search-and-ui-consistency-20261002` from main `6f845e41ebf5cb81f63d9f9afa64e25434639c5f`.
+- Connected Enter submission to `tools.html?q=...`, preserved instant featured filtering, normalized the directory query handoff, and added a shared light card/typography contract.
+- Added E2E coverage for Finder navigation and visual consistency invariants.
+- Branch is not yet verified or merged. Do not claim production readiness from source changes alone.
+
 ## 2026-10-02 - Responsive interface hardening delivered
 - PR #177 merged into `main` at `4f357cfa801803342762130468b6b4c2258d98f2`.
 - Exact PR head `a3cfc3a3c92dd870d60d16ec0b7b47b60bebc2d5` passed fresh UtilityHub Tests, Browser E2E, DevSecOps and Quality Gate before protected squash merge.
