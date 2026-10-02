@@ -1,3 +1,8 @@
+## 2026-10-02 - PR #178 query-hydration repair
+- Fresh Browser E2E exposed the next concrete Finder integration defect: the directory filtered correctly from `?q=JSON`, but the visible `#toolSearch` input was not hydrated with the transferred query.
+- Repaired `tools-directory.js` so the URL query is normalized, placed into the visible search control, and then used for filtering.
+- This preserves the static query handoff and does not introduce a backend or new search service.
+
 ## 2026-10-02 - PR #178 verification repair
 - Fresh Browser E2E exposed two concrete regressions in the first implementation: filtered cards could remain visually rendered because the redesigned card CSS did not explicitly honor the native `hidden` state, and an existing homepage regression assertion still expected the older generic search-status wording.
 - Fresh DevSecOps browser checks also failed on the same homepage assertion path rather than a security invariant.
