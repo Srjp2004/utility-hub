@@ -1,3 +1,8 @@
+## 2026-10-02 - PR #179 verification repair in progress
+- Fresh cross-browser E2E consistently observed `18 tools found` after selecting Calculators. The initial test incorrectly expected 14.
+- Root cause is test expectation drift, not calculator filter logic. Corrected the assertion to 18 and retained explicit inclusion/exclusion checks.
+- Fresh verification is required again on the repaired exact head.
+
 ## 2026-10-02 - Directory calculator-category completeness in progress
 - Bounded audit reproduced a directory taxonomy defect: the Calculators category filter omitted Tip & Bill Split and Aspect Ratio Calculator.
 - Created branch `fix/calculator-category-filter-20261002` from main `d21d5c0d37aed23e6988bc361b78f233b3d30618`.
