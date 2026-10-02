@@ -3,7 +3,7 @@ const q=document.getElementById("toolSearch");
 const cards=[...document.querySelectorAll(".link-card")];
 const status=document.getElementById("directoryStatus");
 const filters=Object.freeze({
-  calculator:["calculator","change","interest","margin","roi","break-even","tip","bmi","date","business","loan","compound","discount","percentage"],
+  calculator:["calculator","change","interest","margin","roi","break-even","tip","bmi","date","business","loan","compound","discount","percentage","aspect"],
   image:["image"],
   text:["word","json","case","password","random","aspect","timestamp","base64"],
   all:[]
