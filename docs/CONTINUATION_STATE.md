@@ -1,3 +1,9 @@
+## 2026-10-02 - PR #178 query-hydration repair in progress
+- Fresh cross-browser verification showed the homepage-to-directory search transfer reached `tools.html?q=JSON`, but the directory search field remained visually empty even though filtering logic executed.
+- Root cause: `showMatches()` read the URL query but never assigned it to `#toolSearch`.
+- Repaired by hydrating the input before filtering and retaining normalized query handling.
+- Fresh Tests, Browser E2E, DevSecOps and Quality Gate are required again on the repaired exact head.
+
 ## 2026-10-02 - PR #178 verification repair in progress
 - Fresh CI caught a real UI behavior defect: the homepage card CSS did not explicitly honor the HTML `hidden` state after the search filtered cards, so QuotePulse remained visually visible despite having `hidden` set.
 - Fresh CI also caught a stale test expectation for the new `2 featured tools found` status wording.
