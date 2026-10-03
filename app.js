@@ -27,7 +27,7 @@ function updateSearch(){
   if(status){
     if(!query) status.textContent="Showing "+cards.length+" popular tools";
     else if(matches.length) status.textContent=matches.length+" featured tool"+(matches.length===1?"":"s")+" found";
-    else status.textContent="No featured tools found - press Enter to search all 28 tools";
+    else status.textContent="0 featured tools found";
   }
 }
 
