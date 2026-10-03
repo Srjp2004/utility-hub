@@ -2,8 +2,8 @@
 - Category filters now use whole normalized tokens rather than substring matching. This reduces false-positive category membership while retaining the existing static taxonomy and explicit terms.
 
 ## 2026-10-02 - PR #179 verification repair decision
-- Browser evidence established the calculator category has 18 matches under the existing classifier. The initial numeric expectation of 14 was not independently derived from the directory's actual classification rules.
-- Corrected the regression to assert the observed category count while retaining behavior-level inclusion/exclusion checks.
+- Browser evidence initially exposed a count expectation mismatch during verification; the fixed numeric assertion was removed rather than retaining an incidental category count as a contract.
+- The final regression uses semantic inclusion/exclusion checks so the test verifies calculator membership without coupling correctness to the current number of matches.
 
 ## 2026-10-02 - Directory category taxonomy decision
 - The existing directory category filter remains a lightweight static classification rather than a new taxonomy service.
@@ -330,3 +330,10 @@ The shared tool workspace now has one presentation contract: light white panel, 
 
 ### Image picker accessibility repair - 2026-10-01
 The image Resizer, Compressor and Converter drop zones retain a visible file-picker affordance while exposing one coherent keyboard-operable button-role surface. Enter and Space activate the associated hidden file input, avoiding nested interactive controls. E2E coverage guards this interaction contract across the supported Playwright browser matrix.
+## 2026-10-03 - PR #179 delivery record
+- PR #179 was squash-merged at `c12ee40cc7b1a8b66f92aecaf2ee28387740f47f` from exact head `4187be76574c39495cd3ec0b5c21fe580a56abd6`.
+- Exact-head Tests, Browser E2E, DevSecOps and Quality Gate passed before protected delivery.
+- Vercel production deployment for the merge SHA is READY.
+- Post-merge GitHub Actions runs are not exposed by the connector and are not treated as verified evidence.
+- No new tool, backend, dependency, security-policy, MachineMind or LeaseGuard change was introduced.
+
