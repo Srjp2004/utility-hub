@@ -220,7 +220,7 @@ test("base64 preserves Unicode text", () => {
 
 test("image converter uses the shared MIME output and renderer pipeline", () => {
   const source = require("node:fs").readFileSync("tool-pages.js", "utf8");
-  assert.ok(source.includes('imageToolState={resizer:{files:[],previewUrls:[]},compressor:{files:[],previewUrls:[]},converter:{files:[],previewUrls:[]}}'));
+  assert.ok(source.includes('imageToolState={resizer:{files:[],previewUrls:[],rejected:0},compressor:{files:[],previewUrls:[],rejected:0},converter:{files:[],previewUrls:[],rejected:0}}'));
   assert.ok(source.includes('function imageSetConverterFiles(files)'));
   assert.ok(source.includes('imageRenderResult("converter",results,totalBefore)'));
   assert.ok(source.includes('pickConverterFiles'));
