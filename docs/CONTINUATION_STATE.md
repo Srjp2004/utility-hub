@@ -1,3 +1,11 @@
+## 2026-10-03 - PR #179 delivery checkpoint
+- PR #179 was squash-merged into `main` at `c12ee40cc7b1a8b66f92aecaf2ee28387740f47f` after fresh exact-head Tests, Browser E2E, DevSecOps and Quality Gate evidence passed on `4187be76574c39495cd3ec0b5c21fe580a56abd6`.
+- The delivered fix adds the Aspect Ratio Calculator to the Calculators taxonomy and changes category matching from substring checks to normalized whole-token matching.
+- The final browser regression is semantic: calculator examples are visible and representative image/JSON tools are hidden. The intermediate fixed count assertion was removed before delivery.
+- Open PRs: 0. Vercel production deployment for the merge SHA is READY.
+- GitHub post-merge workflow runs for the merge SHA are not exposed by the connector, so post-merge Actions success is not claimed.
+- Current next gate: continue the bounded 28-tool functional/UI audit and live browser/device verification, prioritizing reproducible defects rather than speculative refactors.
+
 ## 2026-10-02 - Category regression contract refinement
 - Removed the brittle fixed numeric assertion from the calculator-category browser test.
 - The regression now asserts semantic membership: expected calculator tools are visible and representative non-calculator tools are hidden.
