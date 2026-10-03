@@ -1,3 +1,10 @@
+## 2026-10-03 - Effective tool search hardening
+- Improved the existing homepage Finder and tool directory search with shared normalization, token-aware matching, prefix matching, limited typo tolerance and relevance ordering.
+- Search remains fully browser-local and static; no backend or external search service was introduced.
+- Preserved the existing 28-tool directory, homepage-to-directory query handoff and calculator/image/text category filters.
+- Added integration regression coverage for the shared search utility and its page wiring.
+- Fresh CI/browser/security/quality verification is required before merge.
+
 ## 2026-10-02 - Directory category token-matching repair
 - Browser E2E exposed a second taxonomy defect: substring matching made unrelated cards eligible for a category when a classifier term appeared inside another word.
 - Replaced category substring matching with normalized token matching while preserving the existing static category definitions.
