@@ -342,4 +342,7 @@ The image Resizer, Compressor and Converter drop zones retain a visible file-pic
 - Vercel production deployment for the merge SHA is READY.
 - Post-merge GitHub Actions runs are not exposed by the connector and are not treated as verified evidence.
 - No new tool, backend, dependency, security-policy, MachineMind or LeaseGuard change was introduced.
-
+## 2026-10-03 - Unicode Case Converter contract
+- The existing Case Converter keeps browser-local processing and now uses Unicode-aware letter matching for title case.
+- Sentence case capitalizes only the first Unicode letter of the full input, matching the established tool contract and regression coverage.
+- No new dependency, backend, tool, or unrelated project scope is introduced.
