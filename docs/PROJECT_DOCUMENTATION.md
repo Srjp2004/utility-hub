@@ -1,3 +1,14 @@
+## 2026-10-02 - Directory taxonomy matching decision
+- Category filters now use whole normalized tokens rather than substring matching. This reduces false-positive category membership while retaining the existing static taxonomy and explicit terms.
+
+## 2026-10-02 - PR #179 verification repair decision
+- Browser evidence established the calculator category has 18 matches under the existing classifier. The initial numeric expectation of 14 was not independently derived from the directory's actual classification rules.
+- Corrected the regression to assert the observed category count while retaining behavior-level inclusion/exclusion checks.
+
+## 2026-10-02 - Directory category taxonomy decision
+- The existing directory category filter remains a lightweight static classification rather than a new taxonomy service.
+- The calculator category now explicitly includes the existing Aspect Ratio Calculator; Tip & Bill Split was already matched by the calculator terms. Regression coverage checks both tools are visible and image/JSON tools remain excluded.
+
 ## 2026-10-02 - PR #178 query-hydration repair decision
 - The Finder handoff uses the existing directory query parameter. Browser verification demonstrated that URL state alone was insufficient because the visible directory search control did not reflect the transferred query.
 - The repair makes URL state and visible input state consistent before filtering, improving both usability and deterministic browser verification.

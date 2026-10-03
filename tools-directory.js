@@ -3,7 +3,7 @@ const q=document.getElementById("toolSearch");
 const cards=[...document.querySelectorAll(".link-card")];
 const status=document.getElementById("directoryStatus");
 const filters=Object.freeze({
-  calculator:["calculator","change","interest","margin","roi","break-even","tip","bmi","date","business","loan","compound","discount","percentage"],
+  calculator:["calculator","change","interest","margin","roi","break-even","tip","bmi","date","business","loan","compound","discount","percentage","aspect"],
   image:["image"],
   text:["word","json","case","password","random","aspect","timestamp","base64"],
   all:[]
@@ -36,7 +36,8 @@ function applyFilter(value){
   let visible=0;
   cards.forEach(card=>{
     const search=(card.dataset.search||"").toLowerCase();
-    const match=filter==="all"||terms.some(term=>search.includes(term));
+    const tokens=search.split(/[^a-z0-9-]+/).filter(Boolean);
+    const match=filter==="all"||terms.some(term=>tokens.includes(term));
     card.hidden=!match;
     if(match) visible++;
   });

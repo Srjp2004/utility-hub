@@ -283,3 +283,15 @@ test.describe("Utility Finder contract",()=>{
     expect(new Set(cards.map(c=>c.actionSize)).size).toBe(1);
   });
 });
+
+
+test.describe("directory category coverage",()=>{
+  test("Calculators category includes calculator pages across the directory",async({page})=>{
+    await page.goto("/tools.html",{waitUntil:"networkidle"});
+    await page.locator('[data-filter="calculator"]').click();
+    await expect(page.locator('a[href="tools/tip-calculator.html"]')).toBeVisible();
+    await expect(page.locator('a[href="tools/aspect-ratio-calculator.html"]')).toBeVisible();
+    await expect(page.locator('a[href="tools/image-compressor.html"]')).toBeHidden();
+    await expect(page.locator('a[href="tools/json-formatter.html"]')).toBeHidden();
+  });
+});

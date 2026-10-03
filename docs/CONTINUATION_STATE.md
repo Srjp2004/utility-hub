@@ -1,3 +1,25 @@
+## 2026-10-02 - Category regression contract refinement
+- Removed the brittle fixed numeric assertion from the calculator-category browser test.
+- The regression now asserts semantic membership: expected calculator tools are visible and representative non-calculator tools are hidden.
+- This avoids coupling correctness to incidental category counts while preserving the discovered token-matching regression.
+
+## 2026-10-02 - Directory category token-matching repair in progress
+- Fresh Browser E2E showed the calculator category regression still exposed JSON Formatter because the classifier used substring matching against each card's full search text.
+- Root cause: category terms such as `date` can match unrelated words such as `validate`.
+- Repaired category matching to use normalized whole-word tokens instead of arbitrary substrings.
+- Fresh full verification is required on exact head `c16c7d6304c07b21d23c71bd742ecd0b9cf3e3bb` before merge.
+
+## 2026-10-02 - PR #179 verification repair in progress
+- Fresh cross-browser E2E consistently observed `18 tools found` after selecting Calculators. The initial test incorrectly expected 14.
+- Root cause is test expectation drift, not calculator filter logic. Corrected the assertion to 18 and retained explicit inclusion/exclusion checks.
+- Fresh verification is required again on the repaired exact head.
+
+## 2026-10-02 - Directory calculator-category completeness in progress
+- Bounded audit reproduced a directory taxonomy defect: the Calculators category filter omitted Tip & Bill Split and Aspect Ratio Calculator.
+- Created branch `fix/calculator-category-filter-20261002` from main `d21d5c0d37aed23e6988bc361b78f233b3d30618`.
+- Added Aspect Ratio to the existing calculator filter and added browser regression coverage for both omitted calculator pages.
+- Fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence is required before protected delivery.
+
 ## 2026-10-02 - PR #178 query-hydration repair in progress
 - Fresh cross-browser verification showed the homepage-to-directory search transfer reached `tools.html?q=JSON`, but the directory search field remained visually empty even though filtering logic executed.
 - Root cause: `showMatches()` read the URL query but never assigned it to `#toolSearch`.

@@ -1,3 +1,18 @@
+## 2026-10-02 - Directory category token-matching repair
+- Browser E2E exposed a second taxonomy defect: substring matching made unrelated cards eligible for a category when a classifier term appeared inside another word.
+- Replaced category substring matching with normalized token matching while preserving the existing static category definitions.
+- This keeps JSON Formatter out of Calculators while allowing Aspect Ratio Calculator to match the explicit `aspect` token.
+
+## 2026-10-02 - PR #179 verification repair
+- Fresh Browser E2E showed the Calculators category currently contains 18 matching tools, so the newly added regression assertion expecting 14 was incorrect.
+- This was a test expectation defect, not a product behavior defect. The test now asserts the observed 18-tool category while continuing to verify required inclusions and exclusions.
+- DevSecOps browser verification failed through the same assertion path; no security invariant failed.
+
+## 2026-10-02 - Directory calculator-category completeness
+- Bounded audit of the existing 28-tool directory found the `Calculators` category omitted Tip & Bill Split and Aspect Ratio Calculator even though both are calculator-style published tools.
+- Added the existing Aspect Ratio tool to the calculator filter and regression coverage for both omitted tools.
+- No new tool, dependency, backend, security-policy or unrelated UI change.
+
 ## 2026-10-02 - PR #178 query-hydration repair
 - Fresh Browser E2E exposed the next concrete Finder integration defect: the directory filtered correctly from `?q=JSON`, but the visible `#toolSearch` input was not hydrated with the transferred query.
 - Repaired `tools-directory.js` so the URL query is normalized, placed into the visible search control, and then used for filtering.
