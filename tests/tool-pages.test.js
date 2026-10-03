@@ -688,3 +688,13 @@ test("image resizer exposes crop modes", () => { const { context } = loadTools({
 
 test("image resizer derives locked output dimensions from the selected crop", () => { const { context } = loadTools({ result: "" }); const custom = context.imageResizeOutputDimensions({ mode: "dimensions", lock: true, width: 1200, height: 600, crop: "custom", cropWidth: 400, cropHeight: 200 }, { width: 2000, height: 1000 }); assert.equal(custom.width, 1200); assert.equal(custom.height, 600); const square = context.imageResizeOutputDimensions({ mode: "dimensions", lock: true, width: 1200, height: 600, crop: "square" }, { width: 2000, height: 1000 }); assert.equal(square.width, 1200); assert.equal(square.height, 1200); });
 test("image resizer exposes custom crop controls", () => { const { context } = loadTools({ result: "" }); const mount = { innerHTML: "" }; context.document.getElementById = (id) => id === "tool" ? mount : null; context.renderTool("image-resizer", "tool"); assert.match(mount.innerHTML, /value="custom"/); assert.match(mount.innerHTML, /resizeCropX/); assert.match(mount.innerHTML, /resizeCropY/); assert.match(mount.innerHTML, /resizeCropWidth/); assert.match(mount.innerHTML, /resizeCropHeight/); });
+
+
+test("image selection reports skipped unsupported and over-batch files", () => {
+  const { context } = loadTools({ result: "" });
+  const accepted = { type: "image/png", size: 100 };
+  const skipped = [{ type: "text/plain", size: 10 }, ...Array.from({ length: 21 }, () => accepted)];
+  context.imageSetFiles("resizer", skipped);
+  assert.equal(context.imageToolState.resizer.files.length, 20);
+  assert.equal(context.imageToolState.resizer.rejected, 2);
+});
