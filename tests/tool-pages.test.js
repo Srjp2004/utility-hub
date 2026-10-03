@@ -5,7 +5,7 @@ const vm = require("node:vm");
 
 function loadTools(values) {
   const elements = Object.fromEntries(Object.entries(values).map(([id, value]) => [id, { value, innerHTML: "", textContent: "" }]));
-  const context = { document: { getElementById: (id) => elements[id], addEventListener: () => {} }, console, Number, Math, Date, TextEncoder, TextDecoder, btoa, atob, setTimeout, clearTimeout };
+  const context = { document: { getElementById: (id) => elements[id], addEventListener: () => {} }, console, Number, Math, Date, TextEncoder, TextDecoder, btoa, atob, setTimeout, clearTimeout, URL: { createObjectURL: () => "blob:test", revokeObjectURL: () => {} } };
   vm.createContext(context);
   const source = fs.readFileSync("tool-pages.js", "utf8");
   vm.runInContext(source, context, { filename: "tool-pages.js" });
