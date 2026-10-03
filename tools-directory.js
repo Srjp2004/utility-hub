@@ -1,47 +1,70 @@
 "use strict";
+
 const q=document.getElementById("toolSearch");
 const cards=[...document.querySelectorAll(".link-card")];
 const status=document.getElementById("directoryStatus");
+const searchEngine=window.UtilityHubSearch;
+const originalOrder=new Map(cards.map((card,index)=>[card,index]));
 const filters=Object.freeze({
-  calculator:["calculator","change","interest","margin","roi","break-even","tip","bmi","date","business","loan","compound","discount","percentage","aspect"],
+  calculator:["calculator"],
   image:["image"],
-  text:["word","json","case","password","random","aspect","timestamp","base64"],
+  text:["word","json","case","password","random","timestamp","base64"],
   all:[]
 });
 
+function cardContent(card){
+  return [
+    card.dataset.search || "",
+    card.textContent || "",
+    card.getAttribute("href") || ""
+  ].join(" ");
+}
+
 function updateStatus(count,query){
-  if(status) status.textContent=query
+  if(!status) return;
+  if(query && count===0) {
+    status.textContent="No tools found for “"+query+"”. Try a broader task or keyword.";
+    return;
+  }
+  status.textContent=query
     ? count+" tool"+(count===1?"":"s")+" found"
     : count+" tools in the toolbox";
+}
+
+function renderMatches(matches,query){
+  const matched=new Set(matches.map(item=>item.element));
+  matches.forEach(item=>document.getElementById("toolGrid").appendChild(item.element));
+  cards.forEach(card=>{card.hidden=!matched.has(card);});
+  if(!query) {
+    cards.slice().sort((a,b)=>originalOrder.get(a)-originalOrder.get(b)).forEach(card=>{
+      document.getElementById("toolGrid").appendChild(card);
+    });
+  }
+  updateStatus(matches.length,query);
 }
 
 function showMatches(value){
   const query=String(value||"").trim();
   if(q && q.value!==query) q.value=query;
-  const normalized=query.toLowerCase();
-  let visible=0;
-  cards.forEach(card=>{
-    const search=(card.dataset.search||"").toLowerCase();
-    const match=!normalized||search.includes(normalized);
-    card.hidden=!match;
-    if(match) visible++;
-  });
-  updateStatus(visible,normalized);
+  const matches=searchEngine
+    ? searchEngine.search(cards,query,cardContent)
+    : [];
+  renderMatches(matches,query);
 }
 
 function applyFilter(value){
   const filter=String(value||"all").toLowerCase();
-  const terms=filters[filter]||[filter];
+  const terms=filters[filter]||searchEngine.tokens(filter);
+  const matches=cards.map((card,index)=>({
+    element:card,
+    index:originalOrder.get(card),
+    score:terms.some(term=>searchEngine.tokens(cardContent(card)).includes(term)) ? 1 : 0
+  })).filter(item=>item.score).sort((a,b)=>a.index-b.index);
   if(q) q.value=filter==="all"?"":filter;
-  let visible=0;
-  cards.forEach(card=>{
-    const search=(card.dataset.search||"").toLowerCase();
-    const tokens=search.split(/[^a-z0-9-]+/).filter(Boolean);
-    const match=filter==="all"||terms.some(term=>tokens.includes(term));
-    card.hidden=!match;
-    if(match) visible++;
-  });
-  updateStatus(visible,filter==="all"?"":filter);
+  renderMatches(filter==="all"
+    ? cards.map((card)=>({element:card,index:originalOrder.get(card),score:0}))
+    : matches,
+    filter==="all"?"":filter);
 }
 
 if(q){
@@ -59,5 +82,7 @@ if(q){
 }
 
 document.querySelectorAll("[data-filter]").forEach(link=>{
-  link.addEventListener("click",()=>applyFilter(link.dataset.filter));
+  link.addEventListener("click",()=>{
+    applyFilter(link.dataset.filter);
+  });
 });
