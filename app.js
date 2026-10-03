@@ -1,20 +1,34 @@
+"use strict";
+
 const search=document.getElementById("search");
 const finderForm=document.getElementById("utilityFinderForm");
 const cards=[...document.querySelectorAll("#grid .tool-card[data-search]")];
 const status=document.querySelector(".search-status");
+const searchEngine=window.UtilityHubSearch;
+
+function cardContent(card){
+  return [
+    card.dataset.search || "",
+    card.textContent || "",
+    card.querySelector("a")?.getAttribute("href") || ""
+  ].join(" ");
+}
 
 function updateSearch(){
-  if(!search) return;
-  const query=search.value.trim().toLowerCase();
-  let visible=0;
+  if(!search || !searchEngine) return;
+  const query=search.value.trim();
+  const matches=searchEngine.search(cards,query,cardContent);
+  const matched=new Set(matches.map(item=>item.element));
+
   cards.forEach(card=>{
-    const match=!query||(card.dataset.search||"").toLowerCase().includes(query);
-    card.hidden=!match;
-    if(match) visible++;
+    card.hidden=!matched.has(card);
   });
-  if(status) status.textContent=query
-    ? visible+" featured tool"+(visible===1?"":"s")+" found"
-    : "Showing "+visible+" popular tools";
+
+  if(status){
+    if(!query) status.textContent="Showing "+cards.length+" popular tools";
+    else if(matches.length) status.textContent=matches.length+" featured tool"+(matches.length===1?"":"s")+" found";
+    else status.textContent="0 featured tools found";
+  }
 }
 
 if(search){

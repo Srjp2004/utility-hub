@@ -187,3 +187,20 @@ test("public information pages expose current support contacts", () => {
     assert.match(source, /<link rel="canonical"/, page + " must expose a canonical URL");
   }
 });
+
+
+test("shared search utility normalizes and matches common user search variations", () => {
+  const source = fs.readFileSync("search-utils.js", "utf8");
+  assert.match(source, /normalize\(/);
+  assert.match(source, /editDistance/);
+  assert.match(source, /startsWith\(queryToken\)/);
+  assert.match(source, /window\.UtilityHubSearch/);
+});
+
+test("homepage and directory load the shared search engine", () => {
+  const home = fs.readFileSync("index.html", "utf8");
+  const directory = fs.readFileSync("tools.html", "utf8");
+  assert.ok(home.includes('<script src="search-utils.js"></script>'));
+  assert.ok(directory.includes('<script src="search-utils.js"></script>'));
+  assert.ok(fs.existsSync("search-utils.js"));
+});

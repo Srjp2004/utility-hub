@@ -1,3 +1,11 @@
+## 2026-10-03 - Effective tool search hardening in progress
+- Reworked the existing homepage Finder and /tools.html directory search around a shared browser-local search utility.
+- Search now normalizes case/diacritics/punctuation, matches complete query tokens, supports useful prefix and small spelling-error tolerance, ranks stronger matches first, and searches visible card metadata/content rather than relying only on exact substring matches.
+- Homepage Enter navigation still hands the query to the full 28-tool directory; the directory hydrates the visible search field and preserves existing category filtering.
+- Added regression coverage for the shared search contract and script wiring.
+- No new tool, backend, dependency, external search service, MachineMind or LeaseGuard change.
+- This branch requires fresh Tests, Browser E2E, DevSecOps and Quality Gate evidence before delivery.
+
 ## 2026-10-03 - PR #179 delivery checkpoint
 - PR #179 was squash-merged into `main` at `c12ee40cc7b1a8b66f92aecaf2ee28387740f47f` after fresh exact-head Tests, Browser E2E, DevSecOps and Quality Gate evidence passed on `4187be76574c39495cd3ec0b5c21fe580a56abd6`.
 - The delivered fix adds the Aspect Ratio Calculator to the Calculators taxonomy and changes category matching from substring checks to normalized whole-token matching.
