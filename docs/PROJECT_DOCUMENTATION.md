@@ -1,3 +1,8 @@
+## 2026-10-03 - Image selection feedback architecture decision
+- Existing browser-local image tools retain their current 20-file and 25 MB safeguards, but now preserve a per-tool rejected-file count so selection feedback reflects what the user actually supplied.
+- Unsupported MIME types, files above the size limit and files beyond the batch limit are counted as skipped after filtering; accepted files continue through the existing local preview/processing pipeline.
+- The change is intentionally incremental and does not introduce uploads, server-side processing, dependencies or a new image service.
+
 ## 2026-10-03 - Effective tool search architecture decision
 - The existing homepage Finder and tool directory share a browser-local search utility rather than introducing a backend, third-party search provider or new dependency.
 - Search normalization removes case/diacritic/punctuation differences, token scoring supports exact and prefix matches plus bounded typo tolerance, and relevance ordering keeps stronger matches first.

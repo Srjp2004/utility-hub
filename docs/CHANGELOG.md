@@ -1,3 +1,9 @@
+## 2026-10-03 - PR #185 delivered: image selection feedback
+- Merged PR #185 at `97e9d8a6156f2adc36acecb4163d9d6b53f962dc` after exact-head Tests, Browser E2E, DevSecOps and Quality Gate all passed on `70eb4ff7e77c26526b03a791a15904e1bb4213c5`.
+- Image Resizer, Compressor and Converter now report skipped unsupported, oversized and over-batch selections instead of silently hiding them.
+- Regression coverage verifies the existing 20-file batch limit together with unsupported input.
+- No new tool, dependency, backend, upload service, MachineMind or LeaseGuard change was introduced.
+
 ## 2026-10-03 - Unicode Case Converter defect repair
 - Reproduced a real Case Converter defect where the existing ASCII \\b/\\w title/sentence regex split Unicode words and produced results such as \`éClair DéJà Vu\`.
 - Updated the existing title-case and sentence-case transformations to recognize Unicode letters with property escapes while preserving the current browser-local implementation and ASCII behavior.

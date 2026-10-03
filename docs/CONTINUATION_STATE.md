@@ -1,3 +1,10 @@
+## 2026-10-03 - PR #185 delivery and next audit gate
+- PR #185 was merged into `main` at `97e9d8a6156f2adc36acecb4163d9d6b53f962dc` after exact-head Tests #513, Browser E2E #373, DevSecOps #352 and Quality Gate #235 all passed on `70eb4ff7e77c26526b03a791a15904e1bb4213c5`.
+- The delivered fix makes skipped unsupported, oversized and over-batch selections visible in the existing Image Resizer, Compressor and Converter selection summaries while preserving the 20-file and 25 MB safeguards.
+- No new tool, dependency, backend, upload service, MachineMind or LeaseGuard change was introduced.
+- The GitHub connector does not expose post-merge workflow runs for merge commit `97e9d8a6156f2adc36acecb4163d9d6b53f962dc`; post-merge Actions success is therefore not claimed.
+- Next gate: continue the bounded functional/UI audit with concrete interaction coverage and live browser/device verification. Do not treat pre-merge CI alone as complete production certification.
+
 ## 2026-10-03 - PR #181 delivery and production verification
 - PR #181 was squash-merged into main at 99accfb1fa0f6812736ebae3de1baaaa6de0e66f after exact-head Tests, Browser E2E, DevSecOps and Quality Gate evidence passed on dadbe0037f73c4720fc97a1e12fa10a8deb61f16.
 - The delivered search hardening keeps the existing 28-tool browser-local architecture and improves normalization, token matching, prefix matching, bounded typo tolerance and relevance ordering for the homepage Finder and tool directory.
