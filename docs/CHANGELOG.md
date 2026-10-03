@@ -3,7 +3,6 @@
 - Updated the existing title-case and sentence-case transformations to recognize Unicode letters with property escapes while preserving the current browser-local implementation and ASCII behavior.
 - Added regression coverage for Unicode title and sentence casing.
 - Clarified sentence-case behavior so only the first Unicode letter of the full input is capitalized, matching the existing tool contract and regression expectation.
-
 - No new tool, dependency, backend, security-policy, MachineMind or LeaseGuard change.
 
 ## 2026-10-03 - PR #181 delivered
