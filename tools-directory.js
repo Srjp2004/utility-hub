@@ -6,7 +6,7 @@ const status=document.getElementById("directoryStatus");
 const searchEngine=window.UtilityHubSearch;
 const originalOrder=new Map(cards.map((card,index)=>[card,index]));
 const filters=Object.freeze({
-  calculator:["calculator"],
+  calculator:["calculator","change","interest","margin","roi","break-even","tip","bmi","date","business","loan","compound","discount","percentage","aspect"],
   image:["image"],
   text:["word","json","case","password","random","timestamp","base64"],
   all:[]
