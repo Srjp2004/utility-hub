@@ -1,3 +1,9 @@
+## 2026-10-03 - Unicode Case Converter defect repair
+- Reproduced a real Case Converter defect where the existing ASCII \\b/\\w title/sentence regex split Unicode words and produced results such as \`éClair DéJà Vu\`.
+- Updated the existing title-case and sentence-case transformations to recognize Unicode letters with property escapes while preserving the current browser-local implementation and ASCII behavior.
+- Added regression coverage for Unicode title and sentence casing.
+- No new tool, dependency, backend, security-policy, MachineMind or LeaseGuard change.
+
 ## 2026-10-03 - PR #181 delivered
 - PR #181 was squash-merged at 99accfb1fa0f6812736ebae3de1baaaa6de0e66f after exact-head Tests, Browser E2E, DevSecOps and Quality Gate passed on dadbe0037f73c4720fc97a1e12fa10a8deb61f16.
 - The existing homepage Finder and tool-directory search now use shared browser-local normalization, token-aware matching, prefix matching, bounded typo tolerance and relevance ordering.
