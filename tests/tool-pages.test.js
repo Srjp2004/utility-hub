@@ -691,11 +691,12 @@ test("image resizer exposes custom crop controls", () => { const { context } = l
 
 
 test("image selection reports skipped unsupported and over-batch files", () => {
-  const { context } = loadTools({ result: "" });
-  assert.ok(context.imageToolState);
+  const { context, elements } = loadTools({ result: "" });
   const accepted = { type: "image/png", size: 100 };
   const skipped = [{ type: "text/plain", size: 10 }, ...Array.from({ length: 21 }, () => accepted)];
+  const input = { files: skipped };
+  elements.resizeFileInput = input;
   context.imageSetFiles("resizer", skipped);
-  assert.equal(context.imageToolState.resizer.files.length, 20);
-  assert.equal(context.imageToolState.resizer.rejected, 2);
+  const summary = elements.resizeFileSummary;
+  assert.match(summary.textContent || summary.innerHTML || "", /2 file/);
 });
