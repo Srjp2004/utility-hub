@@ -1,9 +1,16 @@
+## 2026-10-03 - PR #181 delivered
+- PR #181 was squash-merged at 99accfb1fa0f6812736ebae3de1baaaa6de0e66f after exact-head Tests, Browser E2E, DevSecOps and Quality Gate passed on dadbe0037f73c4720fc97a1e12fa10a8deb61f16.
+- The existing homepage Finder and tool-directory search now use shared browser-local normalization, token-aware matching, prefix matching, bounded typo tolerance and relevance ordering.
+- The existing 28-tool directory and category filters remain intact; no new tool, dependency, backend or external search service was introduced.
+- Vercel reports the exact merge SHA deployed to production with status READY.
+- Post-merge exact-SHA Tests, Browser E2E and DevSecOps runs completed successfully. A separate post-merge Quality Gate run was not exposed by the connector.
+
 ## 2026-10-03 - Effective tool search hardening
 - Improved the existing homepage Finder and tool directory search with shared normalization, token-aware matching, prefix matching, limited typo tolerance and relevance ordering.
 - Search remains fully browser-local and static; no backend or external search service was introduced.
 - Preserved the existing 28-tool directory, homepage-to-directory query handoff and calculator/image/text category filters.
 - Added integration regression coverage for the shared search utility and its page wiring.
-- Fresh CI/browser/security/quality verification is required before merge.
+- Fresh exact-head CI/browser/security/quality verification passed before protected delivery.
 
 ## 2026-10-02 - Directory category token-matching repair
 - Browser E2E exposed a second taxonomy defect: substring matching made unrelated cards eligible for a category when a classifier term appeared inside another word.

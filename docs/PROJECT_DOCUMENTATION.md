@@ -1,3 +1,9 @@
+## 2026-10-03 - Effective tool search architecture decision
+- The existing homepage Finder and tool directory share a browser-local search utility rather than introducing a backend, third-party search provider or new dependency.
+- Search normalization removes case/diacritic/punctuation differences, token scoring supports exact and prefix matches plus bounded typo tolerance, and relevance ordering keeps stronger matches first.
+- Homepage live filtering remains limited to the featured cards while Enter transfers the query to the existing 28-tool directory through the static tools.html?q=... route.
+- This is an incremental capability within the current static HTML/CSS/JavaScript architecture and does not change tool algorithms or the product backend-free boundary.
+
 ## 2026-10-02 - Directory taxonomy matching decision
 - Category filters now use whole normalized tokens rather than substring matching. This reduces false-positive category membership while retaining the existing static taxonomy and explicit terms.
 

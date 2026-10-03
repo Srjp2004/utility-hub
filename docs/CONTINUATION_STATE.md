@@ -1,3 +1,11 @@
+## 2026-10-03 - PR #181 delivery and production verification
+- PR #181 was squash-merged into main at 99accfb1fa0f6812736ebae3de1baaaa6de0e66f after exact-head Tests, Browser E2E, DevSecOps and Quality Gate evidence passed on dadbe0037f73c4720fc97a1e12fa10a8deb61f16.
+- The delivered search hardening keeps the existing 28-tool browser-local architecture and improves normalization, token matching, prefix matching, bounded typo tolerance and relevance ordering for the homepage Finder and tool directory.
+- Vercel production deployment for the exact merge SHA is READY.
+- Post-merge exact-SHA GitHub evidence: UtilityHub Tests, Browser E2E and DevSecOps all completed successfully. The connector did not expose a separate post-merge Quality Gate run for the push-triggered merge.
+- A production route sweep confirmed all 28 published /tools/*.html routes respond successfully.
+- Current next gate: continue bounded functional/UI audit and live browser/device verification. Do not treat route HTTP success or CI alone as complete production certification.
+
 ## 2026-10-03 - Effective tool search hardening in progress
 - Reworked the existing homepage Finder and /tools.html directory search around a shared browser-local search utility.
 - Search now normalizes case/diacritics/punctuation, matches complete query tokens, supports useful prefix and small spelling-error tolerance, ranks stronger matches first, and searches visible card metadata/content rather than relying only on exact substring matches.
