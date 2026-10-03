@@ -4,9 +4,9 @@
 - This keeps JSON Formatter out of Calculators while allowing Aspect Ratio Calculator to match the explicit `aspect` token.
 
 ## 2026-10-02 - PR #179 verification repair
-- Fresh Browser E2E showed the Calculators category currently contains 18 matching tools, so the newly added regression assertion expecting 14 was incorrect.
-- This was a test expectation defect, not a product behavior defect. The test now asserts the observed 18-tool category while continuing to verify required inclusions and exclusions.
-- DevSecOps browser verification failed through the same assertion path; no security invariant failed.
+- Fresh Browser E2E exposed an incorrect intermediate fixed-count assertion during verification.
+- The fixed numeric assertion was removed rather than retaining an incidental category count as a regression contract.
+- The final regression keeps semantic inclusion/exclusion checks; DevSecOps browser verification reached the same regression path during the failed intermediate attempt, with no security invariant failure.
 
 ## 2026-10-02 - Directory calculator-category completeness
 - Bounded audit of the existing 28-tool directory found the `Calculators` category omitted Tip & Bill Split and Aspect Ratio Calculator even though both are calculator-style published tools.
@@ -626,3 +626,9 @@ Complete the remaining full functional audit in bounded batches, test representa
 ## 2026-10-01
 - Fixed image-tool drop zones so the existing picker affordance is keyboard-operable with Enter/Space without placing a nested button inside a button-role drop zone.
 - Added E2E regression coverage for keyboard activation and nested-control prevention.
+## 2026-10-03 - PR #179 delivered
+- PR #179 was squash-merged at `c12ee40cc7b1a8b66f92aecaf2ee28387740f47f` after exact-head Tests, Browser E2E, DevSecOps and Quality Gate passed on `4187be76574c39495cd3ec0b5c21fe580a56abd6`.
+- The delivered category repair adds Aspect Ratio to Calculators and replaces substring matching with normalized whole-token matching.
+- The final browser regression asserts semantic membership rather than a fixed category count.
+- Vercel production deployment for the merge SHA is READY. Post-merge GitHub Actions runs are not exposed by the connector and are not claimed as verified.
+
