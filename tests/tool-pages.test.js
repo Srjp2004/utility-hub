@@ -185,6 +185,17 @@ test("invalid JSON is reported instead of throwing", () => {
 });
 
 
+test("case converter preserves Unicode word boundaries in title and sentence case", () => {
+  const { context, elements } = loadTools({ caseInput: "éclair déjà vu", caseType: "title", result: "" });
+  context.convertCase();
+  assert.equal(elements.caseInput.value, "Éclair Déjà Vu");
+
+  elements.caseInput.value = "éclair. déjà vu";
+  elements.caseType.value = "sentence";
+  context.convertCase();
+  assert.equal(elements.caseInput.value, "Éclair. déjà vu");
+});
+
 test("percentage change rejects zero original value", () => {
   const { context, elements } = loadTools({ oldv: "0", newv: "10", result: "" });
   context.calcChange();
