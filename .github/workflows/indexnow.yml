@@ -1,0 +1,60 @@
+name: UtilityHub IndexNow Notification
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify-indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify IndexNow of published URLs
+        env:
+          INDEXNOW_KEY: 241a6560199785bd4583585051f09ab8
+          SITE_URL: https://utility-hub-ten.vercel.app
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.request
+          import xml.etree.ElementTree as ET
+
+          site = os.environ["SITE_URL"].rstrip("/")
+          key = os.environ["INDEXNOW_KEY"]
+          sitemap_url = f"{site}/sitemap.xml"
+
+          with urllib.request.urlopen(sitemap_url, timeout=20) as response:
+              root = ET.fromstring(response.read())
+
+          ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+          urls = [node.text.strip() for node in root.findall(".//sm:loc", ns) if node.text]
+
+          if not urls:
+              raise SystemExit("No URLs found in sitemap.xml")
+
+          payload = json.dumps({
+              "host": site.removeprefix("https://").removeprefix("http://"),
+              "key": key,
+              "keyLocation": f"{site}/{key}.txt",
+              "urlList": urls
+          }).encode()
+
+          request = urllib.request.Request(
+              "https://api.indexnow.org/indexnow",
+              data=payload,
+              headers={"Content-Type": "application/json; charset=utf-8"},
+              method="POST",
+          )
+
+          with urllib.request.urlopen(request, timeout=30) as response:
+              status = response.status
+              body = response.read().decode("utf-8", errors="replace")
+              print(f"IndexNow response: HTTP {status}")
+              print(body[:2000])
+              if status not in (200, 202):
+                  raise SystemExit(f"IndexNow submission failed with HTTP {status}")
+          PY
