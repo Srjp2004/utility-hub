@@ -1,3 +1,7 @@
+## 2026-10-05 - Google Search Console ownership verification
+- Added the user-provided Google Search Console HTML verification tag to the public homepage so the URL-prefix property can be verified after deployment.
+- No tool logic, dependencies, backend, security policy or deployment configuration was changed.
+
 ## 2026-10-03 - PR #185 delivered: image selection feedback
 - Merged PR #185 at `97e9d8a6156f2adc36acecb4163d9d6b53f962dc` after exact-head Tests, Browser E2E, DevSecOps and Quality Gate all passed on `70eb4ff7e77c26526b03a791a15904e1bb4213c5`.
 - Image Resizer, Compressor and Converter now report skipped unsupported, oversized and over-batch selections instead of silently hiding them.
