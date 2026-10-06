@@ -1,3 +1,9 @@
+## 2026-10-06 - Evidence-first Google indexing and autonomous workflow decision
+- Search Console is now connected to the production UtilityHub URL-prefix property. Sitemap submission and homepage priority-crawl request are externally confirmed by Google; these are indexing signals, not guarantees of indexing.
+- The autonomous engineering and repair workflows are intentionally event-bounded rather than push-driven in the current repository configuration. Their intended triggers are workflow dispatch/issues and workflow_run/workflow dispatch respectively.
+- Historical push-triggered zero-job failures were investigated against the exact merge SHA and parent workflow revisions. Because the repository source does not contain the reported push trigger and the failed runs expose no jobs or step evidence, changing workflow logic would be speculative.
+- The project therefore records the anomaly as unverified infrastructure/event history rather than silently modifying or weakening the autonomous control plane.
+
 ## 2026-10-03 - Image selection feedback architecture decision
 - Existing browser-local image tools retain their current 20-file and 25 MB safeguards, but now preserve a per-tool rejected-file count so selection feedback reflects what the user actually supplied.
 - Unsupported MIME types, files above the size limit and files beyond the batch limit are counted as skipped after filtering; accepted files continue through the existing local preview/processing pipeline.
