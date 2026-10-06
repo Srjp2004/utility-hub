@@ -1,3 +1,10 @@
+
+## 2026-10-06 - PR #194 exhaustive 28-tool audit gate
+- Merged PR #194 at `5ed7bcf60e55bceec2a31b7f43d51df35bceca6e`.
+- Increased only the exhaustive 28-tool browser interaction test timeout from the global 30-second budget to 120 seconds after fresh cross-browser evidence showed the serial audit exceeded the prior budget.
+- Corrected an intermediate test-file syntax error before delivery; the final exact head passed Tests, Browser E2E, DevSecOps and Quality Gate.
+- No production application code or security configuration changed.
+
 ## 2026-10-06 - Production deployment verification for PR #193
 - Verified Vercel Production is READY for exact `main` merge SHA `efddc01348a7c15514a0d35c5bef260861e38433`.
 - Confirmed production HTTP 200, deployed `utilityhub-logo.svg`, `favicon.svg`, final shared-logo CSS integration, PWA manifest and security headers.
