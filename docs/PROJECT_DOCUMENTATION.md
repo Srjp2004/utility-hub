@@ -1,3 +1,8 @@
+## 2026-10-06 - Production brand deployment verification
+- Vercel production is serving the PR #193 merge commit `efddc01348a7c15514a0d35c5bef260861e38433`.
+- Production source inspection confirms the favicon, primary SVG wordmark and final CSS integration are deployed. The final CSS disables the earlier pseudo-element brand implementation so the approved SVG is the sole shared logo rendering.
+- This is a source/deployment verification result, not a pixel-level browser visual certification.
+
 ## 2026-10-06 - Brand implementation completion decision
 - The primary brand SVG must be consumed by the existing shared `.logo` component rather than merely existing as an unused repository asset.
 - CSS integration was selected as the smallest coherent change because the repository already uses the same `.logo` markup across header/footer surfaces. It preserves accessible link text, avoids duplicating SVG markup across pages, and keeps the static architecture intact.
