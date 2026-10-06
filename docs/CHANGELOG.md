@@ -1,3 +1,10 @@
+## 2026-10-06 - UtilityHub brand identity
+- Added `utilityhub-logo.svg` as the primary reusable UtilityHub brand asset.
+- Refreshed `favicon.svg` with a distinctive connected-hub symbol designed to remain recognizable at small sizes.
+- Integrated the mark into the shared header/footer and aligned the PWA manifest theme color with the brand palette.
+- No tool logic, dependencies, backend services, security policy, MachineMind or LeaseGuard changes.
+- Fresh Tests, Browser E2E, DevSecOps and independent visual verification are required before merge.
+
 ## 2026-10-06 - 28-tool verification checkpoint
 - Verified the current 28-tool production surface through the repository's exhaustive E2E smoke coverage.
 - Confirmed latest Tests, Browser E2E and DevSecOps workflow jobs succeeded for `main`.
