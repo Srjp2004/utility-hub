@@ -1,3 +1,8 @@
+## 2026-10-06 - PR #189 merged
+- PR #189 was merged into `main` at `ee08f53cfe0d54aa94b5cdf828143195d4b75e4f`.
+- Vercel production reports the exact merge SHA READY.
+- The documentation checkpoint records Search Console verification/indexing state and the autonomous workflow anomaly without speculative workflow changes.
+
 ## 2026-10-06 - Google indexing and autonomous workflow checkpoint
 - Search Console ownership verified, sitemap submitted successfully, and the production homepage was accepted into Google's priority crawl queue.
 - Current `main` is `a0abeb4b1b46ed6fc2044f42a68f0facb02a2727`.
