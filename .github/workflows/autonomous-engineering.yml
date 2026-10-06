@@ -1,6 +1,10 @@
 name: UtilityHub Autonomous Engineering
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/autonomous-engineering.yml'
   workflow_dispatch:
     inputs:
       task:
@@ -20,6 +24,13 @@ permissions:
   issues: write
 
 jobs:
+  push-boundary:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm push is outside autonomous delegation scope
+        run: echo "Autonomous engineering push boundary observed; no delegation performed."
+
   prepare:
     if: github.event_name == 'workflow_dispatch' || (github.event_name == 'issues' && github.event.action == 'labeled' && github.event.label.name == 'autonomous-engineering')
     runs-on: ubuntu-latest
