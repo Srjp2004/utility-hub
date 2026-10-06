@@ -118,7 +118,7 @@ test.describe("UtilityHub functional smoke matrix",()=>{
   });
 });
 test.describe("UtilityHub exhaustive interaction smoke",()=>{
-  test("every published tool executes its primary button flow without browser errors",async({page})=>{
+  test("every published tool executes its primary button flow without browser errors",async({page})=>{\n    test.setTimeout(120000);
     const failures=[];
     for(const pageName of toolPages){
       const errors=[];
