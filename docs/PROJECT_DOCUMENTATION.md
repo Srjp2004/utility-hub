@@ -1,3 +1,8 @@
+## 2026-10-06 - Brand implementation completion decision
+- The primary brand SVG must be consumed by the existing shared `.logo` component rather than merely existing as an unused repository asset.
+- CSS integration was selected as the smallest coherent change because the repository already uses the same `.logo` markup across header/footer surfaces. It preserves accessible link text, avoids duplicating SVG markup across pages, and keeps the static architecture intact.
+- The favicon remains a standalone SVG for browser/PWA use, and the existing manifest remains the source of PWA icon metadata.
+
 ## 2026-10-06 - Final 28-tool verification checkpoint
 - The current production baseline is `ee08f53cfe0d54aa94b5cdf828143195d4b75e4f`.
 - Fresh GitHub evidence establishes successful regression tests on Node 20/22, five-browser-profile E2E coverage, and DevSecOps coverage including dependency audit, SBOM, security browser checks, CodeQL and source invariants.

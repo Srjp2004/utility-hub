@@ -341,3 +341,11 @@ footer .logo::after{font-size:20px}
   .site-header .logo::before, header .logo::before{width:31px;height:31px;flex-basis:31px;background-size:auto 31px}
   .site-header .logo::after, header .logo::after{font-size:20px}
 }
+
+
+/* Brand identity completion: render the approved SVG as the complete shared brand mark. */
+.logo{display:inline-block;width:180px;height:40px;background:url("utilityhub-logo.svg") left center/contain no-repeat;font-size:0;line-height:0;color:transparent;vertical-align:middle;flex:0 0 auto}
+.logo::before,.logo::after{content:none!important}
+.logo span{display:none}
+@media(max-width:420px){.logo{width:150px;height:34px}}
+@media(prefers-reduced-motion:reduce){.logo{transition:none!important}}
