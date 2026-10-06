@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" role="img" aria-labelledby="title desc">
+  <title id="title">UtilityHub</title>
+  <desc id="desc">UtilityHub logo with a connected utility hub mark and wordmark</desc>
+  <defs>
+    <linearGradient id="hub" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c8f05a"/>
+      <stop offset="1" stop-color="#9fca42"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(8 8)">
+    <rect width="64" height="64" rx="18" fill="#151917"/>
+    <path d="M32 18v28M18 32h28M22.1 22.1l19.8 19.8M41.9 22.1 22.1 41.9" stroke="#c8f05a" stroke-width="4.5" stroke-linecap="round" opacity=".92"/>
+    <circle cx="32" cy="32" r="9.5" fill="#151917" stroke="url(#hub)" stroke-width="4.5"/>
+    <circle cx="32" cy="18" r="3.5" fill="#fff"/>
+    <circle cx="46" cy="32" r="3.5" fill="#fff"/>
+    <circle cx="32" cy="46" r="3.5" fill="#fff"/>
+    <circle cx="18" cy="32" r="3.5" fill="#fff"/>
+  </g>
+  <text x="86" y="51" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="42" font-weight="850" letter-spacing="-2.2">
+    <tspan fill="#101512">Utility</tspan><tspan fill="#8daa48">Hub</tspan>
+  </text>
+</svg>

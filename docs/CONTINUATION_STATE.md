@@ -1,3 +1,10 @@
+## 2026-10-06 - UtilityHub brand identity in progress
+- Added a dedicated UtilityHub logo SVG and refreshed the favicon with a distinctive connected-hub mark aligned to the existing charcoal/lime visual language.
+- Integrated the brand mark into the shared header/footer through CSS so existing page markup and navigation remain unchanged.
+- Aligned the PWA manifest theme color with the new brand palette.
+- Scope is visual identity only: no calculator logic, tool behavior, backend, dependency, security policy, MachineMind or LeaseGuard changes.
+- Fresh Tests, Browser E2E, DevSecOps and visual verification are required before protected delivery.
+
 ## 2026-10-06 - 28-tool verification checkpoint
 - Current `main`: `ee08f53cfe0d54aa94b5cdf828143195d4b75e4f`.
 - Latest post-merge UtilityHub Tests passed on Node 20 and 22.

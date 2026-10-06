@@ -307,3 +307,37 @@ button,.cta,.button{min-height:44px}
 }
 
 .tool-card[hidden]{display:none!important}
+
+/* UtilityHub brand identity - 2026-10-06 */
+.site-header .logo, header .logo, footer .logo{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  color:var(--ink);
+  font-size:0;
+  font-weight:850;
+  letter-spacing:-.045em;
+}
+.site-header .logo::before, header .logo::before, footer .logo::before{
+  content:"";
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  display:block;
+  background:url("utilityhub-logo.svg") left center / auto 34px no-repeat;
+}
+.site-header .logo::after, header .logo::after, footer .logo::after{
+  content:"UtilityHub";
+  font-size:22px;
+  line-height:1;
+  font-weight:850;
+  color:var(--ink);
+  letter-spacing:-.055em;
+}
+.site-header .logo span, header .logo span, footer .logo span{display:none}
+footer .logo::before{width:30px;height:30px;flex-basis:30px;background-size:auto 30px}
+footer .logo::after{font-size:20px}
+@media(max-width:480px){
+  .site-header .logo::before, header .logo::before{width:31px;height:31px;flex-basis:31px;background-size:auto 31px}
+  .site-header .logo::after, header .logo::after{font-size:20px}
+}
