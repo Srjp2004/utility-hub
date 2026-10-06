@@ -1,3 +1,9 @@
+## 2026-10-06 - PR #192 merged: UtilityHub brand identity
+- Merged PR #192 at `7c504dc997dedf160438fce53614c995147037c2`.
+- Added the reusable UtilityHub primary logo, refreshed connected-hub favicon, shared header/footer branding, and PWA theme-color alignment.
+- Scope remained visual identity only; no calculator logic, tool behavior, backend, dependency, security policy, MachineMind or LeaseGuard changes.
+- Source/design review found the visual direction coherent; live desktop/mobile visual verification remains a follow-up gate because the available browser path could not render the Vercel preview directly.
+
 ## 2026-10-06 - UtilityHub brand identity
 - Added `utilityhub-logo.svg` as the primary reusable UtilityHub brand asset.
 - Refreshed `favicon.svg` with a distinctive connected-hub symbol designed to remain recognizable at small sizes.
