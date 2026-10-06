@@ -1,3 +1,10 @@
+
+## 2026-10-06 - Exhaustive 28-tool browser verification budget
+- The exhaustive primary-action smoke test is intentionally serial because it exercises all 28 published tool pages in one browser context and captures page/console errors across the complete surface.
+- A fresh full cross-browser run established that the previous 30-second per-test budget was insufficient for Firefox/WebKit/mobile-WebKit on the serial 28-tool flow. The failure was a test-budget timeout, not a reproduced application defect.
+- PR #194 increased only that test's timeout to 120 seconds. No production runtime, dependency, security policy or deployment configuration changed.
+- Exact-head Tests, Browser E2E, DevSecOps and Quality Gate all passed before protected squash merge.
+
 ## 2026-10-06 - Production brand deployment verification
 - Vercel production is serving the PR #193 merge commit `efddc01348a7c15514a0d35c5bef260861e38433`.
 - Production source inspection confirms the favicon, primary SVG wordmark and final CSS integration are deployed. The final CSS disables the earlier pseudo-element brand implementation so the approved SVG is the sole shared logo rendering.
